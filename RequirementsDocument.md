@@ -1,4 +1,3 @@
-
  #Requirements Document 
 
 Date: 22 march 2022
@@ -50,7 +49,22 @@ EZWH (EaSy WareHouse) is a software application to support the management of a w
 
 | Stakeholder name  | Description | 
 | ----------------- |:-----------:|
-|   Stakeholder x..     |             | 
+|   Manager     |  Supervises the availability of items, free/occupied space inside the warehouse, manages orders to suppliers   |
+| Warehouse designers			|	Design the structure and the organization of the warehouse		|
+| Supplier		|	Suppliers interact with the warehouse by providing items requested by managers|
+| Retailers | They usually own small shops with a limited storage space   |
+| System administrators |	They maintain the EzWH software and also check orders, they keep the SW updated and operating 		|
+| Programmers |	Programmers are responsible for implementing the general structure of the SW together with all its features; in addition, they are in charge of developing SW updates of any kind and to test them before they can be issued|
+| Quality Office |	Responsible for testing items, evaluate them and then decide if they can be stored inside the warehouse. They are also in charge of writing down reports about evaluated items|
+| OU(Organizational Units)|	They can ask for items in a warehouse and order them, can report issues with shippings/orders to/from the warehouse		|
+| Delivery companies| Responsible for delivering items from suppliers to warehouse and from warehouse to customers/resellers|
+| Warehouse employee |	They are responsible of collecting/packaging all the requested items in an order. They are also in charge of relocating items inside the same warehouse|
+| Company | It owns one (or more) large warehouse and buys the SW|
+| Customer|	They can buy items from a company|
+|Online sale portal| It allows customers to buy items which are available in the warehouse. Through the portal the customer can choose one (or more) items and issue an order|
+| Security managers | They prevent unwanted accesses to the warehouse (they are also responsible for handling security messages coming from the SW)	|
+| Competitors| Other warehouse management systems|
+| Investors| They provide funds to support the development of the SW| 
 
 # Context Diagram and interfaces
 
@@ -69,12 +83,18 @@ EZWH (EaSy WareHouse) is a software application to support the management of a w
 |   Actor x..     |  |  |
 
 # Stories and personas
-\<A Persona is a realistic impersonation of an actor. Define here a few personas and describe in plain text how a persona interacts with the system>
 
-\<Persona is-an-instance-of actor>
+Mark is 70 and he is the owner of a __small, old shop__ in the city centre. The shop has a small warehouse on the back but Mark likes to keep things organized in a very
+precise inventory, with each item traced in a unique way; to do so, he needs a simple application which can keeps the inventory up-to-date and possibly send out 
+notifications about orders, quality checks etc...
 
-\<stories will be formalized later as scenarios in use cases>
+Adam is 40 and it is the main responsible for a __big warehouse__, owned by a multinational company. The company is organized into many departments, based
+worldwide, so he needs to manage orders coming from internal departments but also from other private customers; in addition, since the warehouse is resupplied by
+many suppliers, he must coordinate with a variety of external figures, as well as with quality offices.
 
+Jillian is 30 and she is the manager of a __small shop, part of a big department store chain.__ The organization of the shop is not difficult for her but in some cases it has to
+manage a lot of orders coming from the central office of the company and also resupply the shop by using a list of suppliers associated with the company, so she needs to process
+orders and check the status of the inventory very quickly.
 
 # Functional and non functional requirements
 
