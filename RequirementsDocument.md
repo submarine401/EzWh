@@ -148,7 +148,9 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Exception | ID number already exists |
 
 ### Use case 3, UC3 - Delete a user 
- Precondition | User U exists, User A is logged in as admin |
+|Actors involved | Administrator |
+| ------------- |:-------------:| 
+| Precondition | User U exists, User A is logged in as admin |
 | Postcondition | User U is deleted from the system |
 | Nominal scenario | Admin selects a user to be deleted |
 | Variants |  |
