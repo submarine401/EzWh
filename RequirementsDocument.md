@@ -103,9 +103,31 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 | ID        | Description  |
 | ------------- |:-------------:| 
-|  FR1     |  |
-|  FR2     |  |
-| FRx..    |  | 
+|  FR1     | Manage authentication |
+|  FR1-1     | Log in |
+|  FR1-2     | Log out |
+|  FR1-3     | Manage employees |
+|  FR1-3-1  | Create, delete employee (admin)|
+|  FR1-3-2  | Modify password |
+|  FR1-4   | Search for an employee (Only for admin) |
+|  FR2     | Manage suppliers |
+|  FR2-1     | CRUD suppliers (admin) |
+|  FR2-2     | Show the list of suppliers for a product (manager) |
+|  FR3     | Product Managment |
+|  FR3-1     | Relocate items |
+|  FR3-2     | Retrive position of a certain item |
+|  FR3-3     | Place of an item  |
+|  FR4     |  Manage quality check |
+|  FR4-1     |  Select product to be checked  |
+|  FR4-2     |  Report the outcome of the test |
+|  FR4-3     |  Retrive specific tests for specific item |
+|  FR4-4   |  Accept/Refuse an item (only the item with defect) |
+|  FR5     | Search |
+|  FR5-1     | Check availability of a certain product  |
+|  FR5-2     | Retrive product from location  |
+|  FR5-3   |  Search for free space in WH |
+|  FR5-4     | Issue an order if one or more than one product are running out of space  |
+|  FR6    |  Create warehouse |
 
 ## Non Functional Requirements
 
