@@ -199,7 +199,8 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4 |  System checks for the correctness of username and password |
 | 5 | Invalid user and/or password; the system displays an error message and returns to the “Log in” interface |
 
-| Scenario 2.1|  | 
+| Scenario 2.1 |  | 
+| ------------- |:-------------:| 
 | Precondition | User U does not exist in the database |
 | postcondition | User is added into the database |
 | Step | Description |
@@ -210,7 +211,8 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 5a | System sends out an error message if there are some exceptions |
 | 5b | System registers new user |
 
-| Scenario 3.1 |
+| Scenario 3.1 |  |
+| ------------- |:-------------:| 
 | Precondition | User U exists |
 | Postcondition | User U is deleted from the system |
 | Step | Description |
