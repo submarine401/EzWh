@@ -127,7 +127,36 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 \<next describe here each use case in the UCD>
-### Use case 1, UC1
+
+### Use case 1, UC1 - Log in
+| Actors Involved        | Manager, system administrator, Employees |
+| ------------- |:-------------:| 
+|  Precondition     | User exists in the system’s database but is not logged in |
+|  Post condition     | User is authenticated and logged into the right area based on his/her specific role |
+|  Nominal Scenario     | User U is logged in|
+|  Variants     | User can be a manager, an admin, a warehouse employee or a OU employee |
+| | User must modify the password at first login |
+|  Exceptions     | User does not exist|
+|  | User inserts wrong username and/or password |
+
+### Use case 2, UC2 - Insert user in the system
+| Actors Involved        | Administrator |
+| ------------- |:-------------:| 
+| Precondition | User U does not exist in the database; user A is logged in as admin |
+| postcondition | User is added into the database |
+| Nominal scenario | Admin inserts a new user into the database |
+| Exception | ID number already exists |
+
+### Use case 3, UC3 - Delete a user 
+ Precondition | User U exists, User A is logged in as admin |
+| Postcondition | User U is deleted from the system |
+| Nominal scenario | Admin selects a user to be deleted |
+| Variants |  |
+| Exception | User does not exist |
+|  | User is the admin |
+
+
+### Use case x, UCx
 | Actors Involved        |  |
 | ------------- |:-------------:| 
 |  Precondition     | \<Boolean expression, must evaluate to true before the UC can start> |
@@ -147,6 +176,50 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 \<only relevant scenarios should be described>
 
 | Scenario 1.1 | |
+| ------------- |:-------------:| 
+| PRECONDITION | User exists in the system’s database but is not logged in |
+| POSTCONDITION | User is authenticated and logged into the right area based on his/her specific role |
+| Step | Description |
+| 1 | User connects to the log in interface of the EZ Warehouse SW |
+| 2 | User inserts username |
+| 3 | User inserts password and presses the “Log In” button |
+| 4 |  System checks for the correctness of username and password |
+| 5 | System authenticates user |
+
+| Scenario 1.2 | |
+| ------------- |:-------------:| 
+ | PRECONDITION | User exists in the system’s database but is not logged in |
+| POSTCONDITION | User is asked to repeat the “log in “ procedure again ||
+| Step | Description |
+| 1 | User connects to the log in interface of the EZ Warehouse SW |
+| 2 | User inserts username |
+| 3 | User inserts password and presses the “Log In” button |
+| 4 |  System checks for the correctness of username and password |
+| 5 | Invalid user and/or password; the system displays an error message and returns to the “Log in” interface |
+
+| Scenario 2.1|  | 
+| Precondition | User U does not exist in the database |
+| postcondition | User is added into the database |
+| Step | Description |
+| 1 | User is associated with a unique username |
+| 2 | User is associated with a password |
+| 3 | Admin authorizes the operation |
+| 4 |  System checks for exceptions (i.e.: username already exists) |
+| 5a | System sends out an error message if there are some exceptions |
+| 5b | System registers new user |
+
+| Scenario 3.1 |
+| Precondition | User U exists |
+| Postcondition | User U is deleted from the system |
+| Step | Description |
+| 1 | Admin inserts username |
+| 2a | If username does not exist, display an error message |
+| 2b | If username exists admin authorizes the operation |
+| 3 | System deletes the user’s profile |
+
+
+
+| Scenario x.x | |
 | ------------- |:-------------:| 
 |  Precondition     | \<Boolean expression, must evaluate to true before the scenario can start> |
 |  Post condition     | \<Boolean expression, must evaluate to true after scenario is finished> |
