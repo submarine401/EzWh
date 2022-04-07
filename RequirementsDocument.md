@@ -181,7 +181,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 ### Use case 4, UC4 - Modify password
-| Actors Involved        |  |
+| Actors Involved        | Manager, admin, warehouse employee, OU employee |
 | ------------- |:-------------:| 
 | Precondition | User U exists |
 | Postcondition | User’s password has been modified |
@@ -297,6 +297,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 | Scenario 4.1 | |
+| ------------- |:-------------:| 
 |  Precondition 	| User U exists |
 |  Post condition 	| User’s password has been modified|
 | Step | Description |
