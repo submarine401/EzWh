@@ -180,14 +180,65 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |  | User is the admin |
 
 
-### Use case x, UCx
+### Use case 4, UC4 - Modify password
 | Actors Involved        |  |
 | ------------- |:-------------:| 
-|  Precondition     | \<Boolean expression, must evaluate to true before the UC can start> |
-|  Post condition     | \<Boolean expression, must evaluate to true after UC is finished> |
-|  Nominal Scenario     | \<Textual description of actions executed by the UC> |
-|  Variants     | \<other normal executions> |
-|  Exceptions     | \<exceptions, errors > |
+| Precondition | User U exists |
+| Postcondition | User’s password has been modified |
+| Nominal scenario | user modifies his/her password |
+| Variants |  User can be a manager, an administrator, a warehouse employee or OU employee |
+| Exception | inserted string for password must meet specific requirements in terms of security  |
+
+
+### Use case 6, UC6 - Insert a supplier into the system
+
+| Actors Involved        | Admin |
+| ------------- |:-------------:| 
+| Precondition | User U must be logged-in as an admin |
+| Postcondition | New supplier is added to the system  |
+| Nominal scenario |  completing a form which asks for information about supplier  |
+| Variants  | leaving out some optional fields during filling up the form|
+| Exception | inserted id for supplier is already taken |
+| Exception | supplier was defined to system before  |
+
+
+
+### Use case 7, UC7 -  Delete supplier from the system
+| Actors Involved        | Admin, supplier |
+| ------------- |:-------------:| 
+| Precondition | Supplier S exists and User is logged-in as admin |
+| Postcondition | Supplier S is deleted from the system |
+| Nominal scenario | Admin selects a supplier which wants to delete based on supplier id |
+| Variants | Admin selects a supplier which wants to delete based on supplier name |
+| Exception | Supplier does not exist |
+
+
+
+
+### Use case 8, UC8 - Modify supplier's data
+| Actors Involved        | Supplier, admin |
+| ------------- |:-------------:| 
+| Precondition | Supplier S exists and User is logged-in as admin for deleting the S |
+| Postcondition | Supplier S is modified  |
+| Nominal scenario | Admin selects a supplier which wants to modify based on supplier id |
+| Variants | Admin selects a supplier which wants to modify based on supplier name | |
+| Exception | Supplier does not exist |
+
+
+
+
+### Use case 9, UC9 - Add product to catalog (manage free space)
+| Actors Involved        | Admin |
+| Precondition | The product is not in the catalog, user is logged in as admin |
+| Postcondition | The product is in the catalog|
+| Nominal scenario | The admin add a new product into the catalog and assigns a unique ID to the product|
+| Variants | |
+| Exception | The product is already present|
+
+
+
+
+
 
 ##### Scenario 1.1 
 
@@ -242,6 +293,68 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 2a | If username does not exist, display an error message |
 | 2b | If username exists admin authorizes the operation |
 | 3 | System deletes the user’s profile |
+
+
+
+| Scenario 4.1 | |
+|  Precondition 	| User U exists |
+|  Post condition 	| User’s password has been modified|
+| Step | Description |
+| 1 | User connects to the “modify password” interface |
+| 2 | User inserts current password |
+| 3 | User inserts new password |
+| 4 |  User inserts again new password (for safety purposes) |
+| 5a | If there are exceptions the system returns an error message |
+| 5b | If the new password meets the standards the system implements the modification |
+
+
+
+
+| Scenario 5.1 | |
+| ------------- |:-------------:| 
+|  Precondition 	| User U must logged in as an admin |
+|  Post condition 	|Information about that specific user is fetched |
+| Step | Description |
+| 1 | Admin connects to the “search user” interface |
+| 2 | Admin inserts the username and starts the operation |
+| 3a |System returns information about that user |
+| 3b | If the target user does not exist the system displays a notification message |
+
+
+
+| Scenario 6.1 | |
+| ------------- |:-------------:| 
+|  Precondition 	|  User U must logged-in as an admin |
+|  Post condition 	| New supplier S is added to the system|
+| Step | Description |
+| 1 | Admin checks informations provided by the supplier |
+| 2 | Admin checks the list of goods which can be provided by the supplier |
+| 3 | Operation is approved and Supplier S is inserted into the system |
+
+
+
+| Scenario 6.2 | |
+| ------------- |:-------------:| 
+|  Precondition 	|  Supplier is already listed into the system |
+|  Post condition 	| A notification message is shown |
+| Step | Description |
+| 1 | Admin checks the informations provided by the supplier |
+| 2 | Admin checks the list of goods which can be provided by the supplier |
+| 3 |Admin approves the operation |
+| 4 | System shows a message, notifying that the supplier is already listed in the system |
+
+
+
+| Scenario 7.1 | |
+| ------------- |:-------------:| 
+|  Precondition 	|  Supplier S exists and user is logged-in as admin |
+|  Post condition 	| Supplier S is deleted from the system |
+| Step | Description |
+| 1 | Admin searches for a supplier (company name or e-mail) |
+| 2 | Admin starts the deletion procedure |
+| 3 |System shows a confirmation message|
+| 4 | The operation is approved and supplier S is deleted |
+
 
 
 
