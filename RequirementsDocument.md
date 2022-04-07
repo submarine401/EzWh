@@ -229,6 +229,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 ### Use case 9, UC9 - Add product to catalog (manage free space)
 | Actors Involved        | Admin |
+| ------------- |:-------------:| 
 | Precondition | The product is not in the catalog, user is logged in as admin |
 | Postcondition | The product is in the catalog|
 | Nominal scenario | The admin add a new product into the catalog and assigns a unique ID to the product|
