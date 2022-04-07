@@ -329,9 +329,12 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |  Precondition 	|  User U must logged-in as an admin |
 |  Post condition 	| New supplier S is added to the system|
 | Step | Description |
-| 1 | Admin checks informations provided by the supplier |
-| 2 | Admin checks the list of goods which can be provided by the supplier |
-| 3 | Operation is approved and Supplier S is inserted into the system |
+| 1 | Admin inserts name of the supplier/company |
+| 2 | Admin inserts e-mail, address |
+| 3 | Admin inserts list of products which can be provided by te supplier |
+| 4 | Admin confirms operation |
+| 5 | Supplier is registered into the system |
+
 
 
 
