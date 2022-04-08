@@ -95,3 +95,4 @@ Insert here Gantt chart with above activities
 |design performing QC |20|
 |module 8: Performing QC calss|20|
 |module 8-1: Database of ISOs and certificates|5|
+![The Gannt's chart](./est2.jpg "The Gannt's chart")
