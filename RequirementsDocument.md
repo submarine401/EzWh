@@ -253,8 +253,8 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 | Scenario 1.1 | |
 | ------------- |:-------------:| 
-| PRECONDITION | User exists in the system’s database but is not logged in |
-| POSTCONDITION | User is authenticated and logged into the right area based on his/her specific role |
+| Precondition | User exists in the system’s database but is not logged in |
+| Postcondition | User is authenticated and logged into the right area based on his/her specific role |
 | Step | Description |
 | 1 | User connects to the log in interface of the EZ Warehouse SW |
 | 2 | User inserts username |
@@ -276,14 +276,16 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Scenario 2.1 |  | 
 | ------------- |:-------------:| 
 | Precondition | User U does not exist in the database |
-| postcondition | User is added into the database |
+| Postcondition | User is added into the database |
 | Step | Description |
-| 1 | User is associated with a unique username |
-| 2 | User is associated with a password |
-| 3 | Admin authorizes the operation |
-| 4 |  System checks for exceptions (i.e.: username already exists) |
-| 5a | System sends out an error message if there are some exceptions |
-| 5b | System registers new user |
+| 1 | Admin inserts new user’s personal informations (name, surname, e-mail) |
+| 2 | User is associated with a unique username |
+| 3 | User is associated with a password |
+| 4 | Admin authorizes the operation |
+| 5 |  System checks for exceptions (i.e.: username already exists) |
+| 6a | System sends out an error message if there are some exceptions |
+| 6b | System registers new user |
+
 
 | Scenario 3.1 |  |
 | ------------- |:-------------:| 
