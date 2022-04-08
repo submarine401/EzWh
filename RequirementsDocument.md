@@ -392,6 +392,8 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 \<concepts are used consistently all over the document, ex in use cases, requirements etc>
 
+![Use Case Diagram](./ClassDiagram.jpg)
+
 # System Design
 \<describe here system design>
 
