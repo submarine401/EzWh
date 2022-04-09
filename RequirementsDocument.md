@@ -388,7 +388,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 ..
 
 
-![Use Case Diagram](./UseCaseDiagram1.jpg)
+![Usecase](./UseCaseDiagram1.jpg)
 # Glossary
 
 \<use UML class diagram to define important terms, or concepts in the domain of the system, and their relationships> 
