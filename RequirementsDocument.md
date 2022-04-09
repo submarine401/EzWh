@@ -38,6 +38,12 @@ Version: 0.0
 		- [Use case 7, UC7 -  Delete supplier from the system](#use-case-7-uc7----delete-supplier-from-the-system)
 		- [Use case 8, UC8 - Modify supplier's data](#use-case-8-uc8---modify-suppliers-data)
 		- [Use case 9, UC9 - Add product to catalog (manage free space)](#use-case-9-uc9---add-product-to-catalog-manage-free-space)
+		- [Use case 10, UC10 - Delete product from catalog](#use-case-10-uc10---delete-product-from-catalog)
+		- [Use case 11, UC11 - Issue an internal order](#use-case-11-uc11---issue-an-internal-order)
+		- [Use case 12, UC12 - Issue a supply order](#use-case-12-uc12---issue-a-supply-order)
+		- [Use case 13, UC13 - Perform quality check](#use-case-13-uc13---perform-quality-check)
+		- [Use case 14, UC14 - Insert new item into warehouse](#use-case-14-uc14---insert-new-item-into-warehouse)
+		- [Use case 15, UC15 - Remove item form inventory](#use-case-15-uc15---remove-item-form-inventory)
 - [Scenarios](#scenarios)
 - [Use case Diagram](#use-case-diagram-1)
 - [Glossary](#glossary)
@@ -250,8 +256,62 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Precondition | The product is not in the catalog, user is logged in as admin |
 | Postcondition | The product is in the catalog|
 | Nominal scenario | The admin add a new product into the catalog and assigns a unique ID to the product|
-| Variants | |
 | Exception | The product is already present|
+
+### Use case 10, UC10 - Delete product from catalog 
+| Actors Involved        | Admin |
+| ------------- |:-------------:| 
+| Precondition | The product is in the catalog, user logged in as admin |
+| Postcondition | The product is deleted from the catalog|
+| Nominal scenario | The admin deletes a product from the catalog |
+| Exception | There are still items of that product in the warehouse |
+
+
+### Use case 11, UC11 - Issue an internal order 
+| Actors Involved        | Admin, OU employee |
+| ------------- |:-------------:| 
+| Precondition | User U logged in as OU employee or Manager |
+| Postcondition | Internal order is issued|
+| Nominal scenario | User U issues internal order |
+| Exception | An ordered product is not available |
+
+
+### Use case 12, UC12 - Issue a supply order 
+| Actors Involved        | Admin|
+| ------------- |:-------------:| 
+(ALSO CHECK FOR AVAILABILITY HERE)
+| Precondition | User U logged in as Manager |
+| Postcondition | Supply order is issued |
+| Nominal scenario |User U issues supply order |
+| Exception | There isn’t enough available space to accommodate the ordered quantity|
+
+
+### Use case 13, UC13 - Perform quality check
+| Actors Involved        | Quality office employee|
+| ------------- |:-------------:| 
+| Precondition | User U logged in as Quality office employee, item I has been selected for quality check|
+| Postcondition | Checked item is rejected or not |
+| Nominal scenario | Item passes all tests and is accepted |
+| Variants | Item doesn’t pass a test and is sent back  |
+
+
+### Use case 14, UC14 - Insert new item into warehouse
+| Actors Involved        | WH Employee|
+| ------------- |:-------------:| 
+| Precondition | User U logged in as WH Employee, new batch of items has arrived |
+| Postcondition | Item is accepted into WH or selected for quality check|
+| Nominal scenario | U inserts new item into warehouse |
+| Variants | New item is selected for quality check |
+| Exception | Product doesn’t exist in WH |
+
+### Use case 15, UC15 - Remove item form inventory
+| Actors Involved        | WH Employee, Manager|
+| ------------- |:-------------:| 
+| Precondition | User U logged in as WH Employee or Manager |
+| Postcondition | Item I is removed from inventory |
+| Nominal scenario | User U removes item I from inventory |
+
+| Exception | Item doesn’t exist in inventory |
 
 
 
