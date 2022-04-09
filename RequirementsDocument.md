@@ -135,10 +135,10 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 | ID        | Type (efficiency, reliability, ..)           | Description  | Refers to |
 | ------------- |:-------------:| :-----:| -----:|
-|  NFR1     |   |  | |
-|  NFR2     | |  | |
-|  NFR3     | | | |
-| NFRx .. | | | | 
+|  NFR1     |  Usability | It requires little Knowledge to use the WH |All FR|
+|  NFR2     |Performace| all functions should complete less than 0.5 second | All FR |
+|  NFR3     | Portability| The application should work on many kind of OS(Windows,Linux,....) and different browsers|All FR |
+| NFR4 |Reliability |the rate of failure should be acceptable |All FR specialy related to orders |
 
 
 # Use case diagram and use cases
