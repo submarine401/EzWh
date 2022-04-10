@@ -117,8 +117,9 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |  FR3-1     | Relocate items |
 |  FR3-2     | Retrive position of a certain item |
 |  FR3-3     | Place of an item  |
+|  FR3-4     | Add and remove product from catalogue |
 |  FR4     |  Manage quality check |
-|  FR4-1     |  Select product to be checked  |
+|  FR4-1     |  Select item to be checked  |
 |  FR4-2     |  Report the outcome of the test |
 |  FR4-3     |  Retrive specific tests for specific item |
 |  FR4-4   |  Accept/Refuse an item (only the item with defect) |
