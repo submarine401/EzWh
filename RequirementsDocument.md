@@ -18,17 +18,37 @@ Version: 0.0
 	+ [Context Diagram](#context-diagram)
 	+ [Interfaces](#interfaces) 
 	
+- [Contents](#contents)
+- [Informal description](#informal-description)
+- [Stakeholders](#stakeholders)
+- [Context Diagram and interfaces](#context-diagram-and-interfaces)
+	- [Context Diagram](#context-diagram)
+	- [Interfaces](#interfaces)
 - [Stories and personas](#stories-and-personas)
 - [Functional and non functional requirements](#functional-and-non-functional-requirements)
-	+ [Functional Requirements](#functional-requirements)
-	+ [Non functional requirements](#non-functional-requirements)
+	- [Functional Requirements](#functional-requirements)
+	- [Non Functional Requirements](#non-functional-requirements)
 - [Use case diagram and use cases](#use-case-diagram-and-use-cases)
-	+ [Use case diagram](#use-case-diagram)
-	+ [Use cases](#use-cases)
-    	+ [Relevant scenarios](#relevant-scenarios)
+	- [Use case diagram](#use-case-diagram)
+		- [Use case 1, UC1 - Log in](#use-case-1-uc1---log-in)
+		- [Use case 2, UC2 - Insert user in the system](#use-case-2-uc2---insert-user-in-the-system)
+		- [Use case 3, UC3 - Delete a user](#use-case-3-uc3---delete-a-user)
+		- [Use case 4, UC4 - Modify password](#use-case-4-uc4---modify-password)
+		- [Use case 6, UC6 - Insert a supplier into the system](#use-case-6-uc6---insert-a-supplier-into-the-system)
+		- [Use case 7, UC7 -  Delete supplier from the system](#use-case-7-uc7----delete-supplier-from-the-system)
+		- [Use case 8, UC8 - Modify supplier's data](#use-case-8-uc8---modify-suppliers-data)
+		- [Use case 9, UC9 - Add product to catalog (manage free space)](#use-case-9-uc9---add-product-to-catalog-manage-free-space)
+		- [Use case 10, UC10 - Delete product from catalog](#use-case-10-uc10---delete-product-from-catalog)
+		- [Use case 11, UC11 - Issue an internal order](#use-case-11-uc11---issue-an-internal-order)
+		- [Use case 12, UC12 - Issue a supply order](#use-case-12-uc12---issue-a-supply-order)
+		- [Use case 13, UC13 - Perform quality check](#use-case-13-uc13---perform-quality-check)
+		- [Use case 14, UC14 - Insert new item into warehouse](#use-case-14-uc14---insert-new-item-into-warehouse)
+		- [Use case 15, UC15 - Remove item form inventory](#use-case-15-uc15---remove-item-form-inventory)
+- [Scenarios](#scenarios)
+- [Use case Diagram](#use-case-diagram-1)
 - [Glossary](#glossary)
-- [System design](#system-design)
-- [Deployment diagram](#deployment-diagram)
+- [System Design](#system-design)
+- [Deployment Diagram](#deployment-diagram)
 
 # Informal description
 Medium companies and retailers need a simple application to manage the relationship with suppliers and the inventory of physical items stocked in a physical warehouse. 
@@ -65,6 +85,9 @@ EZWH (EaSy WareHouse) is a software application to support the management of a w
 # Context Diagram and interfaces
 
 ## Context Diagram
+
+![Context Diagram](./EZ_Wh_context_diagram.png)
+
 \<Define here Context diagram using UML use case diagram>
 
 \<actors are a subset of stakeholders>
@@ -234,25 +257,72 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Precondition | The product is not in the catalog, user is logged in as admin |
 | Postcondition | The product is in the catalog|
 | Nominal scenario | The admin add a new product into the catalog and assigns a unique ID to the product|
-| Variants | |
 | Exception | The product is already present|
 
+### Use case 10, UC10 - Delete product from catalog 
+| Actors Involved        | Admin |
+| ------------- |:-------------:| 
+| Precondition | The product is in the catalog, user logged in as admin |
+| Postcondition | The product is deleted from the catalog|
+| Nominal scenario | The admin deletes a product from the catalog |
+| Exception | There are still items of that product in the warehouse |
+
+
+### Use case 11, UC11 - Issue an internal order 
+| Actors Involved        | Admin, OU employee |
+| ------------- |:-------------:| 
+| Precondition | User U logged in as OU employee or Manager |
+| Postcondition | Internal order is issued|
+| Nominal scenario | User U issues internal order |
+| Exception | An ordered product is not available |
+
+
+### Use case 12, UC12 - Issue a supply order 
+| Actors Involved        | Admin|
+| ------------- |:-------------:| 
+(ALSO CHECK FOR AVAILABILITY HERE)
+| Precondition | User U logged in as Manager |
+| Postcondition | Supply order is issued |
+| Nominal scenario |User U issues supply order |
+| Exception | There isn’t enough available space to accommodate the ordered quantity|
+
+
+### Use case 13, UC13 - Perform quality check
+| Actors Involved        | Quality office employee|
+| ------------- |:-------------:| 
+| Precondition | User U logged in as Quality office employee, item I has been selected for quality check|
+| Postcondition | Checked item is rejected or not |
+| Nominal scenario | Item passes all tests and is accepted |
+| Variants | Item doesn’t pass a test and is sent back  |
+
+
+### Use case 14, UC14 - Insert new item into warehouse
+| Actors Involved        | WH Employee|
+| ------------- |:-------------:| 
+| Precondition | User U logged in as WH Employee, new batch of items has arrived |
+| Postcondition | Item is accepted into WH or selected for quality check|
+| Nominal scenario | U inserts new item into warehouse |
+| Variants | New item is selected for quality check |
+| Exception | Product doesn’t exist in WH |
+
+### Use case 15, UC15 - Remove item form inventory
+| Actors Involved        | WH Employee, Manager|
+| ------------- |:-------------:| 
+| Precondition | User U logged in as WH Employee or Manager |
+| Postcondition | Item I is removed from inventory |
+| Nominal scenario | User U removes item I from inventory |
+
+| Exception | Item doesn’t exist in inventory |
 
 
 
 
 
-##### Scenario 1.1 
 
-\<describe here scenarios instances of UC1>
+# Scenarios
 
-\<a scenario is a sequence of steps that corresponds to a particular execution of one use case>
 
-\<a scenario is a more formal description of a story>
-
-\<only relevant scenarios should be described>
-
-| Scenario 1.1 | |
+| Scenario 1.1 |Log in user (correct username and password)|
 | ------------- |:-------------:| 
 | Precondition | User exists in the system’s database but is not logged in |
 | Postcondition | User is authenticated and logged into the right area based on his/her specific role |
@@ -263,7 +333,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4 |  System checks for the correctness of username and password |
 | 5 | System authenticates user |
 
-| Scenario 1.2 | |
+| Scenario 1.2 |Log in user (wrong username and/or password)|
 | ------------- |:-------------:| 
  | PRECONDITION | User exists in the system’s database but is not logged in |
 | POSTCONDITION | User is asked to repeat the “log in “ procedure again ||
@@ -274,7 +344,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4 |  System checks for the correctness of username and password |
 | 5 | Invalid user and/or password; the system displays an error message and returns to the “Log in” interface |
 
-| Scenario 2.1 |  | 
+| Scenario 2.1 | Insert user in the system | 
 | ------------- |:-------------:| 
 | Precondition | User U does not exist in the database |
 | Postcondition | User is added into the database |
@@ -287,8 +357,19 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 6a | System sends out an error message if there are some exceptions |
 | 6b | System registers new user |
 
+|Scenario 2.2 | Insert user in the system (user already registered in the database)|
+| ------------- |:-------------:| 
+| Precondition | User U exists in the database |
+| postcondition | An error message is displayed by the system|
+| Step | Description |
+| 1 | User is associated with a unique username |
+| 2 | User is associated with a password |
+| 3 | Admin authorizes the operation|
+| 4 |  System checks for exceptions (i.e.: username already exists) |
+| 5 | Username already exists; the system issues an error message to the admin |
 
-| Scenario 3.1 |  |
+
+| Scenario 3.1 | Delete a user in the system |
 | ------------- |:-------------:| 
 | Precondition | User U exists |
 | Postcondition | User U is deleted from the system |
@@ -300,7 +381,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 
-| Scenario 4.1 | |
+| Scenario 4.1 | Modify Password|
 | ------------- |:-------------:| 
 |  Precondition 	| User U exists |
 |  Post condition 	| User’s password has been modified|
@@ -315,7 +396,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 
-| Scenario 5.1 | |
+| Scenario 5.1 |Search for a user |
 | ------------- |:-------------:| 
 |  Precondition 	| User U must logged in as an admin |
 |  Post condition 	|Information about that specific user is fetched |
@@ -327,7 +408,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 
-| Scenario 6.1 | |
+| Scenario 6.1 |INSERT A SUPPLIER INTO THE SYSTEM |
 | ------------- |:-------------:| 
 |  Precondition 	|  User U must logged-in as an admin |
 |  Post condition 	| New supplier S is added to the system|
@@ -341,7 +422,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 
-| Scenario 6.2 | |
+| Scenario 6.2 |SUPPLIER IS ALREADY LISTED IN THE SYSTEM |
 | ------------- |:-------------:| 
 |  Precondition 	|  Supplier is already listed into the system |
 |  Post condition 	| A notification message is shown |
@@ -353,7 +434,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 
-| Scenario 7.1 | |
+| Scenario 7.1 |DELETE SUPPLIER FROM THE SYSTEM |
 | ------------- |:-------------:| 
 |  Precondition 	|  Supplier S exists and user is logged-in as admin |
 |  Post condition 	| Supplier S is deleted from the system |
@@ -363,30 +444,146 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 3 |System shows a confirmation message|
 | 4 | The operation is approved and supplier S is deleted |
 
-
-
-
-| Scenario x.x | |
+|Scenario 8.1|MODIFY SUPPLIER’S DATA|
 | ------------- |:-------------:| 
-|  Precondition     | \<Boolean expression, must evaluate to true before the scenario can start> |
-|  Post condition     | \<Boolean expression, must evaluate to true after scenario is finished> |
-| Step#        | Description  |
-|  1     |  |  
-|  2     |  |
-|  ...     |  |
+|  Precondition 	|  Supplier S exists and user is logged-in as admin |
+|  Post condition 	| Supplier’s S data are modified |
+| Step | Description |
+| 1 | Admin searches for a supplier (company name or e-mail) |
+| 2 | Admin starts the modification procedure |
+| 3 |Admin selects the field(s) to be modified|
+| 4 | Admin writes the new values to be associated to the supplier |
+| 5 | Systems shows a confirmation message |
+| 6 | The operation is approved by the admin and data are modified |
 
-##### Scenario 1.2
+|Scenario 9.1 | ADD PRODUCT TO CATALOG|
+| ------------- |:-------------:| 
+|  Precondition 	| Product is not in the catalog, user is logged-in as admin |
+|  Post condition 	| Product is added to the catalog |
+| Step | Description |
+| 1 | Admin connects to the “add product” interface |
+| 2 | Admin inserts name of the product |
+| 3 | Admin inserts type of the product |
+| 4 |A description is added for the product |
+| 5 | Operation is approved and product is listed in the catalog |
 
-##### Scenario 1.x
+|Scenario 9.2 | ADD PRODUCT TO CATALOG (NO FREE SPACE IN THE WAREHOUSE)|
+| ------------- |:-------------:| 
+|  Precondition 	|  Product is not in the catalog, user is logged-in as admin, no free space left |
+|  Post condition 	| Product is not added; error message is displayed |
+| Step | Description |
+| 1 | Admin inserts name of the product |
+| 2 | Admin inserts type of the product |
+| 3 |A description is added for the product |
+| 4 | Operation is confirmed |
+| 5 | System return an error because the warehouse is full and no new products can be added |
 
-### Use case 2, UC2
-..
+|Scenario 10.1 | DELETE PRODUCT FROM CATALOG|
+| ------------- |:-------------:| 
+|  Precondition 	|  Product is in the catalog, user is logged-in as admin |
+|  Post condition 	|Product is removed from the catalog|
+| Step | Description |
+| 1 | Admin searches for the target product to be removed |
+| 2 | Admin starts the deletion procedure |
+| 3 |system shows a confirmation message |
+| 4 | Operation is confirmed and product is removed from the catalog |
+| 4b | If product is not in the catalog, the system returns an error message |
 
-### Use case x, UCx
-..
+|Scenario 11.1 | SEARCH FOR A PRODUCT|
+| ------------- |:-------------:| 
+| Precondition | User is logged in as manager |
+| Postcondition | The product is found |
+| Step | Description |
+|1| User M connects to the “search for a product” interface |
+|2| User M selects the product he is looking for|
+|3| The system displays the n. of items in the WH and their position in the WH|
+|4| If the product is not available in the warehouse, the system returns an error message |
 
 
-![Use Case Diagram](./UseCaseDiagram1.jpg)
+|Scenario 12.1 | ISSUE AN INTERNAL ORDER|
+| ------------- |:-------------:| 
+ |  Precondition 	|  User U is logged in as OU employee or manager |
+|  Post condition 	| Internal order is issued |
+| Step | Description |
+| 1 | User U connects to the “Issue order” interface |
+| 2 | User U selects the warehouse |
+| 3 | User U selects the product(s) to be ordered from the warehouse |
+| 4 | User U specifies the n. of items to be included in the order |
+| 5 | User U confirms the order |
+| 6a | The system displays a confirmation message and prints/saves on a file the summary of the order |
+| 6b | If the product is not available in the target warehouse, the system returns an error message |
+
+|Scenario 13.1 | ISSUE A SUPPLY ORDER|
+| ------------- |:-------------:| 
+ |  Precondition 	| User U is logged in as manager |
+|  Post condition 	| Supply order is issued |
+| Step | Description |
+| 1 | User U selects the target product (to be ordered) |
+| 2 | User U selects a supplier  among the ones which can provide the target product|
+| 3 | User U specifies the n. of items to be included in the order |
+| 4 | User U confirms the order |
+| 5a | The system displays a confirmation message and prints/saves on a file the summary of the order |
+| 5b | If there’s not enough space to accommodate the items, the system returns a message and the order is discarded |
+
+|Scenario 14.1 | PERFORM QUALITY CHECK|
+| ------------- |:-------------:| 
+ |  Precondition 	|  User U is logged in as Quality office employee, item I has been selected for quality check |
+|  Post condition 	| Item is evaluated (rejected/accepted) |
+| Step | Description |
+| 1 | User U analyzes item I depending on specific metrics (durability, usability etc…)|
+| 2 | User U writes a report specifying the main characteristics of the item |
+| 3 | User U approves/rejects the product |
+| 4 | Report is sent to the system|
+| 5a | If the product is accepted it is stored in the warehouse |
+| 5b | If the product is rejected the system notifies the warehouse and the supplier |
+
+|Scenario 15.1 | INSERT NEW ITEM INTO WAREHOUSE|
+| ------------- |:-------------:| 
+| Precondition | User U logged in as WH Employee, new batch of items has arrived |
+| Postcondition | Item is accepted into WH or selected for quality check|
+| Step | Description |
+|1| User U connects to the “insert new items” interface |
+|2| User U selects the product he is looking for|
+|3| User U selects the n. of items he has to add|
+|4| The system displays the total n. of items in the WH and their position in the WH|
+|5| If the product is not already present in the database, the system guide the user to the section “add new product to the catalog|
+
+|Scenario 16.1 | CREATE WAREHOUSE|
+| ------------- |:-------------:| 
+ |  Precondition 	|  User  is logged in as Admin A, warehouse does not exist in the system |
+|  Post condition 	| Warehouse is created |
+| Step | Description |
+| 1 | Admin connects to the “create warehouse“ interface |
+| 2 | Admin inserts name and address of the new warehouse |
+| 3 | Admin specifies area of the warehouse |
+| 4 | Admin specifies available space (i.e.: number of shelves) |
+| 5 | Admin confirms the operation|
+| 6a | New warehouse in memorized into the system |
+| 6b | If the name has already been used the system notifies the admin and the operation is aborted |
+| 6c | If the address has already been used the system notifies the admin and the operation is aborted |
+
+|Scenario 17.1 | REMOVE ITEM FROM INVENTORY|
+| ------------- |:-------------:| 
+ |  Precondition 	|  User U is logged in as WH employee or manager |
+|  Post condition 	| Item(s) I is removed from the inventory |
+| Step | Description |
+| 1 | U connects to the “remove item” interface |
+| 2 | Target item(s) is searched and selected |
+| 2a | if the target item is not stored in the warehouse (unavailable) the system shows an error message and restarts the procedure |
+| 3 | U specifies the number of copies to be removed |
+| 3a | If the number selected by U is not consistent with the total n. of stored copies the system displays an error message and restarts the procedure |
+| 4 | U confirms the operation |
+| 5 | Item(s) is removed from the inventory; inventory is updated | 
+
+
+
+
+
+
+
+
+# Use case Diagram
+![Usecase](./UseCaseDiagram1.jpg)
 # Glossary
 
 \<use UML class diagram to define important terms, or concepts in the domain of the system, and their relationships> 
