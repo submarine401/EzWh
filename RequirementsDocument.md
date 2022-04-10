@@ -584,13 +584,15 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 # Use case Diagram
 ![Usecase](./UseCaseDiagram1.jpg)
+
+
 # Glossary
 
 \<use UML class diagram to define important terms, or concepts in the domain of the system, and their relationships> 
 
 \<concepts are used consistently all over the document, ex in use cases, requirements etc>
 
-![Use Case Diagram](./ClassDiagram.jpg)
+![Class Diagram](./ClassDiagram.jpg)
 
 # System Design
 \<describe here system design>
@@ -599,7 +601,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 # Deployment Diagram 
 
-\<describe here deployment diagram >
+![Deployment Diagram](./DeploymentDiagram.JPG)
 
 
 
