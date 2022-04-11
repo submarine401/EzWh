@@ -547,20 +547,6 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |4| The system displays the total n. of items in the WH and their position in the WH|
 |5| If the product is not already present in the database, the system guide the user to the section “add new product to the catalog|
 
-|Scenario 16.1 | CREATE WAREHOUSE|
-| ------------- |:-------------:| 
- |  Precondition 	|  User  is logged in as Admin A, warehouse does not exist in the system |
-|  Post condition 	| Warehouse is created |
-| Step | Description |
-| 1 | Admin connects to the “create warehouse“ interface |
-| 2 | Admin inserts name and address of the new warehouse |
-| 3 | Admin specifies area of the warehouse |
-| 4 | Admin specifies available space (i.e.: number of shelves) |
-| 5 | Admin confirms the operation|
-| 6a | New warehouse in memorized into the system |
-| 6b | If the name has already been used the system notifies the admin and the operation is aborted |
-| 6c | If the address has already been used the system notifies the admin and the operation is aborted |
-
 |Scenario 17.1 | REMOVE ITEM FROM INVENTORY|
 | ------------- |:-------------:| 
  |  Precondition 	|  User U is logged in as WH employee or manager |
