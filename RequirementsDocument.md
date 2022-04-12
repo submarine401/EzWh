@@ -129,28 +129,34 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |  FR1     | Manage authentication |
 |  FR1-1     | Log in |
 |  FR1-2     | Log out |
-|  FR1-3     | Manage employees |
-|  FR1-3-1  | Create, delete employee (admin)|
-|  FR1-3-2  | Modify password |
-|  FR1-4   | Search for an employee (Only for admin) |
+|  FR1-3  | Create, delete employee (admin)|
+|  FR1-4  | Modify password |
+|  FR1-5   | Search for an employee (Only for admin) |
 |  FR2     | Manage suppliers |
 |  FR2-1     | CRUD suppliers (admin) |
 |  FR2-2     | Show the list of suppliers for a product (manager) |
 |  FR3     | Product Management |
-|  FR3-1     | Relocate items |
-|  FR3-2     | Retrieve position of a certain item |
-|  FR3-3     | Place of an item  |
-|  FR3-4     | Add and remove product from catalogue |
+|  FR3-1     | Retrieve position of a certain item |
+|  FR3-2     | Add and remove product from catalogue (admin) |
+|  FR3-3     | Add and remove item from inventory |
+|  FR3-4     | Retrieve product id from item id |
 |  FR4     |  Manage quality check |
-|  FR4-1     |  Select item to be checked  |
+|  FR4-1     |  Select item to be checked |
 |  FR4-2     |  Report the outcome of the test |
-|  FR4-3     |  Retrieve specific tests for specific item |
-|  FR4-4   |  Accept/Refuse an item (only the item with defect) |
-|  FR5     | Search |
+|  FR4-3     |  Retrieve specific tests for specific product |
+|  FR4-4   |  Accept/Refuse an item |
+|  FR5     | Search product |
 |  FR5-1     | Check availability of a certain product  |
-|  FR5-2     | Retrieve product from location  |
-|  FR5-3   |  Search for free space in WH |
-|  FR5-4     | Issue an order if one or more than one product are running out of space  |
+|  FR5-2     | Retrieve product location  |
+|  FR5-3   |  Find for free space in WH |
+| FR6 | Mange supply orders |
+| FR6-1 | Create supply order (manger) |
+| FR6-2 | View supply orders |
+| FR6-3 | View and modify order staus |
+|FR7 | Mange internal order |
+| FR7-1 | Create internal order (OU employee) |
+| FR7-2 | View internal order depending on the role|
+| FR7-3 | View and modify order staus |
 
 ## Non Functional Requirements
 
@@ -174,13 +180,12 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 \<next describe here each use case in the UCD>
 
 ### Use case 1, UC1 - Log in
-| Actors Involved        | Manager, system administrator, Employees |
+| Actors Involved        | Manager, administrator, warehouse employee, OU employee |
 | ------------- |:-------------:| 
 |  Precondition     | User exists in the system’s database but is not logged in |
 |  Post condition     | User is authenticated and logged into the right area based on his/her specific role |
 |  Nominal Scenario     | User U is logged in|
 |  Variants     | User can be a manager, an admin, a warehouse employee or a OU employee |
-| | User must modify the password at first login |
 |  Exceptions     | User does not exist|
 |  | User inserts wrong username and/or password |
 
@@ -198,12 +203,21 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Precondition | User U exists, User A is logged in as admin |
 | Postcondition | User U is deleted from the system |
 | Nominal scenario | Admin selects a user to be deleted |
+| Exception | User does not exist |
+|  | User is the admin |
+
+### Use case 4, UC4 - Modify a user ///// to complete 
+|Actors involved | Administrator |
+| ------------- |:-------------:| 
+| Precondition | User U exists, User A is logged in as admin |
+| Postcondition | User U is modified |
+| Nominal scenario | Admin selects a user to be deleted |
 | Variants |  |
 | Exception | User does not exist |
 |  | User is the admin |
 
 
-### Use case 4, UC4 - Modify password
+### Use case 5, UC5 - Modify password
 | Actors Involved        | Manager, admin, warehouse employee, OU employee |
 | ------------- |:-------------:| 
 | Precondition | User U exists |
@@ -219,43 +233,40 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | ------------- |:-------------:| 
 | Precondition | User U must be logged-in as an admin |
 | Postcondition | New supplier is added to the system  |
-| Nominal scenario |  completing a form which asks for information about supplier  |
-| Variants  | leaving out some optional fields during filling up the form|
-| Exception | inserted id for supplier is already taken |
+| Nominal scenario |  user U adds new supplier  |
+| Variants  | leaving out some optional fields during filling out the form|
 | Exception | supplier was defined to system before  |
 
 
 
 ### Use case 7, UC7 -  Delete supplier from the system
-| Actors Involved        | Admin, supplier |
+| Actors Involved        | Admin |
 | ------------- |:-------------:| 
 | Precondition | Supplier S exists and User is logged-in as admin |
 | Postcondition | Supplier S is deleted from the system |
-| Nominal scenario | Admin selects a supplier which wants to delete based on supplier id |
-| Variants | Admin selects a supplier which wants to delete based on supplier name |
+| Nominal scenario | Admin deletes a supplier |
 | Exception | Supplier does not exist |
 
 
 
 
 ### Use case 8, UC8 - Modify supplier's data
-| Actors Involved        | Supplier, admin |
+| Actors Involved        | Admin |
 | ------------- |:-------------:| 
-| Precondition | Supplier S exists and User is logged-in as admin for deleting the S |
+| Precondition | Supplier S exists and User is logged-in as admin |
 | Postcondition | Supplier S is modified  |
-| Nominal scenario | Admin selects a supplier which wants to modify based on supplier id |
-| Variants | Admin selects a supplier which wants to modify based on supplier name | |
+| Nominal scenario | Admin modifies a supplier|
 | Exception | Supplier does not exist |
 
 
 
 
-### Use case 9, UC9 - Add product to catalog (manage free space)
+### Use case 9, UC9 - Add product to catalog
 | Actors Involved        | Admin |
 | ------------- |:-------------:| 
 | Precondition | The product is not in the catalog, user is logged in as admin |
 | Postcondition | The product is in the catalog|
-| Nominal scenario | The admin add a new product into the catalog and assigns a unique ID to the product|
+| Nominal scenario | The admin add a new product into the catalog|
 | Exception | The product is already present|
 
 ### Use case 10, UC10 - Delete product from catalog 
@@ -268,54 +279,65 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 ### Use case 11, UC11 - Issue an internal order 
-| Actors Involved        | Admin, OU employee |
+| Actors Involved        | OU employee |
 | ------------- |:-------------:| 
-| Precondition | User U logged in as OU employee or Manager |
+| Precondition | User U logged in as OU employee |
+| Postcondition | Internal order is issued|
+| Nominal scenario | User U issues internal order |
+| Exception | An ordered product is not available |
+
+### Use case 12, UC12 - Complete internal order /////// to do
+| Actors Involved        | OU employee |
+| ------------- |:-------------:| 
+| Precondition | User U logged in as OU employee |
 | Postcondition | Internal order is issued|
 | Nominal scenario | User U issues internal order |
 | Exception | An ordered product is not available |
 
 
-### Use case 12, UC12 - Issue a supply order 
-| Actors Involved        | Admin|
+### Use case 13, UC13 - Issue a supply order 
+| Actors Involved        | Manager|
+| ------------- |:-------------:|
+| Precondition | User U logged in as Manager |
+| Postcondition | Supply order is issued |
+| Nominal scenario |User U issues supply order from low availability list |
+| Variant | User U manually creates order|
+| Exception | There isn’t enough available space to accommodate the ordered quantity|
+
+### Use case 14, UC14 - Search product ///////// da fare 
+| Actors Involved        | Manager|
 | ------------- |:-------------:| 
 (ALSO CHECK FOR AVAILABILITY HERE)
 | Precondition | User U logged in as Manager |
 | Postcondition | Supply order is issued |
 | Nominal scenario |User U issues supply order |
 | Exception | There isn’t enough available space to accommodate the ordered quantity|
+ 
+
+### Use case 15, UC15 - Insert new item into warehouse // unpack
+| Actors Involved        | WH Employee, Manager|
+| ------------- |:-------------:|
+| Precondition | User U logged in as WH Employee or Manager, new batch of items has arrived |
+| Postcondition | Item is accepted into WH|
+| Nominal scenario | U inserts new item into warehouse |
+| Exception | Product doesn’t exist in WH |
+
+### Use case 16, UC16 - Remove item form inventory // pack
+| Actors Involved        | WH Employee, Manager|
+| ------------- |:-------------:| 
+| Precondition | User U logged in as WH Employee or Manager |
+| Postcondition | Item I is removed from inventory |
+| Nominal scenario | User U removes item I from inventory |
+| Exception | Item doesn’t exist in inventory |
 
 
-### Use case 13, UC13 - Perform quality check
+### Use case 17, UC17 - Perform quality check
 | Actors Involved        | Quality office employee|
 | ------------- |:-------------:| 
 | Precondition | User U logged in as Quality office employee, item I has been selected for quality check|
 | Postcondition | Checked item is rejected or not |
 | Nominal scenario | Item passes all tests and is accepted |
 | Variants | Item doesn’t pass a test and is sent back  |
-
-
-### Use case 14, UC14 - Insert new item into warehouse
-| Actors Involved        | WH Employee|
-| ------------- |:-------------:| 
-| Precondition | User U logged in as WH Employee, new batch of items has arrived |
-| Postcondition | Item is accepted into WH or selected for quality check|
-| Nominal scenario | U inserts new item into warehouse |
-| Variants | New item is selected for quality check |
-| Exception | Product doesn’t exist in WH |
-
-### Use case 15, UC15 - Remove item form inventory
-| Actors Involved        | WH Employee, Manager|
-| ------------- |:-------------:| 
-| Precondition | User U logged in as WH Employee or Manager |
-| Postcondition | Item I is removed from inventory |
-| Nominal scenario | User U removes item I from inventory |
-
-| Exception | Item doesn’t exist in inventory |
-
-
-
-
 
 
 # Scenarios
@@ -463,8 +485,10 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 1 | Admin connects to the “add product” interface |
 | 2 | Admin inserts name of the product |
 | 3 | Admin inserts type of the product |
-| 4 |A description is added for the product |
-| 5 | Operation is approved and product is listed in the catalog |
+| 4 | Admin inserts id of the product |
+| 5 |A description is added for the product |
+| 6 | Admin selects a location among the available ones |
+| 7 | Operation is approved and product is listed in the catalog |
 
 |Scenario 9.2 | ADD PRODUCT TO CATALOG (NO FREE SPACE IN THE WAREHOUSE)|
 | ------------- |:-------------:| 
