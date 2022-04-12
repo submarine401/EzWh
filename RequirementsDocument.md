@@ -136,22 +136,21 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |  FR2     | Manage suppliers |
 |  FR2-1     | CRUD suppliers (admin) |
 |  FR2-2     | Show the list of suppliers for a product (manager) |
-|  FR3     | Product Managment |
+|  FR3     | Product Management |
 |  FR3-1     | Relocate items |
-|  FR3-2     | Retrive position of a certain item |
+|  FR3-2     | Retrieve position of a certain item |
 |  FR3-3     | Place of an item  |
 |  FR3-4     | Add and remove product from catalogue |
 |  FR4     |  Manage quality check |
 |  FR4-1     |  Select item to be checked  |
 |  FR4-2     |  Report the outcome of the test |
-|  FR4-3     |  Retrive specific tests for specific item |
+|  FR4-3     |  Retrieve specific tests for specific item |
 |  FR4-4   |  Accept/Refuse an item (only the item with defect) |
 |  FR5     | Search |
 |  FR5-1     | Check availability of a certain product  |
-|  FR5-2     | Retrive product from location  |
+|  FR5-2     | Retrieve product from location  |
 |  FR5-3   |  Search for free space in WH |
 |  FR5-4     | Issue an order if one or more than one product are running out of space  |
-|  FR6    |  Create warehouse |
 
 ## Non Functional Requirements
 
@@ -160,9 +159,9 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | ID        | Type (efficiency, reliability, ..)           | Description  | Refers to |
 | ------------- |:-------------:| :-----:| -----:|
 |  NFR1     |  Usability | It requires little Knowledge to use the WH |All FR|
-|  NFR2     |Performace| all functions should complete less than 0.5 second | All FR |
+|  NFR2     |Performance| all functions should complete less than 0.5 second | All FR |
 |  NFR3     | Portability| The application should work on many kind of OS(Windows,Linux,....) and different browsers|All FR |
-| NFR4 |Reliability |the rate of failure should be acceptable |All FR specialy related to orders |
+| NFR4 |Reliability |the rate of failure should be acceptable |All FR especially related to orders |
 
 
 # Use case diagram and use cases
@@ -547,20 +546,6 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |3| User U selects the n. of items he has to add|
 |4| The system displays the total n. of items in the WH and their position in the WH|
 |5| If the product is not already present in the database, the system guide the user to the section “add new product to the catalog|
-
-|Scenario 16.1 | CREATE WAREHOUSE|
-| ------------- |:-------------:| 
- |  Precondition 	|  User  is logged in as Admin A, warehouse does not exist in the system |
-|  Post condition 	| Warehouse is created |
-| Step | Description |
-| 1 | Admin connects to the “create warehouse“ interface |
-| 2 | Admin inserts name and address of the new warehouse |
-| 3 | Admin specifies area of the warehouse |
-| 4 | Admin specifies available space (i.e.: number of shelves) |
-| 5 | Admin confirms the operation|
-| 6a | New warehouse in memorized into the system |
-| 6b | If the name has already been used the system notifies the admin and the operation is aborted |
-| 6c | If the address has already been used the system notifies the admin and the operation is aborted |
 
 |Scenario 17.1 | REMOVE ITEM FROM INVENTORY|
 | ------------- |:-------------:| 
