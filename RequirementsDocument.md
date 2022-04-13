@@ -137,7 +137,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |  FR2-2     | Show the list of suppliers for a product (manager) |
 |  FR3     | Product Management |
 |  FR3-1     | Retrieve position of a certain item |
-|  FR3-2     | Add and remove product from catalogue (admin) |
+|  FR3-2     | Add and remove product from catalog (admin) |
 |  FR3-3     | Add and remove item from inventory |
 |  FR3-4     | Retrieve product id from item id |
 |  FR4     |  Manage quality check |
@@ -205,7 +205,6 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Postcondition | User U is deleted from the system |
 | Nominal scenario | Admin selects a user to be deleted |
 | Exception | User does not exist |
-|  | User is the admin |
 
 ### Use case 4, UC4 - Modify a user 
 |Actors involved | Administrator |
@@ -230,13 +229,11 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 | Actors Involved        | Admin |
 | ------------- |:-------------:| 
-| Precondition | User U must be logged-in as an admin |
+| Precondition | User U logged-in as an admin |
 | Postcondition | New supplier is added to the system  |
 | Nominal scenario |  user U adds new supplier  |
-| Variants  | leaving out some optional fields during filling out the form|
+| Variants  | leaving out some optional fields during filling out the form |
 | Exception | supplier was defined to system before  |
-
-
 
 ### Use case 7, UC7 -  Delete supplier from the system
 | Actors Involved        | Admin |
@@ -246,18 +243,14 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Nominal scenario | Admin deletes a supplier |
 | Exception | Supplier does not exist |
 
-
-
-
 ### Use case 8, UC8 - Modify supplier's data
 | Actors Involved        | Admin |
 | ------------- |:-------------:| 
 | Precondition | Supplier S exists and User is logged-in as admin |
 | Postcondition | Supplier S is modified  |
 | Nominal scenario | Admin modifies a supplier|
+| Variant | Admin removes a supplied product and adds a new one |
 | Exception | Supplier does not exist |
-
-
 
 
 ### Use case 9, UC9 - Add product to catalog
@@ -277,13 +270,12 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Exception | There are still items of that product in the warehouse |
 
 
-### Use case 11, UC11 - Issue an internal order 
+### Use case 11, UC11 - Issue an internal order
 | Actors Involved        | OU employee |
 | ------------- |:-------------:| 
 | Precondition | User U logged in as OU employee |
 | Postcondition | Internal order is issued|
 | Nominal scenario | User U issues internal order |
-| Exception | An ordered product is not available |
 
 
 ### Use case 12, UC12 - Complete internal order
@@ -391,9 +383,6 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 6 |  System checks for exceptions (i.e.: username already exists); username is found to already exist |
 | 5 | The system shows an error message to the admin |
 
-
-## //////// check against GUI Maybe add  username-role mismatch exception
-
 | Scenario 3.1 - Nominal | Delete a user from the system |
 | ------------- |:-------------:| 
 | Precondition | User U exists |
@@ -416,98 +405,154 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4 | An error message is displayed |
 
 
-## ////////// to do
+| Scenario 4.1 - Nominal| Modify User |
+| ------------- |:-------------:| 
+|  Precondition 	| User U exists, user A is logged in as admin |
+|  Postcondition 	| User’s information has been modified|
+| Step | Description |
+| 1 | A navigates to search user page |
+| 2 | A inserts U's information in search bars |
+| 3 | The list of users matching the search criteria is displayed |
+| 4 | A selects U's record and is taken to the user detail page|
+| 5 | A presses the modidfy button and edits the user information fields |
+| 6 | A presses the confirm button |
+| 7 | A confirmation message is displayed |
 
-| Scenario 4.1 | Modify User |
+| Scenario 4.2 - Exception| Modify User (inexistent user) |
+| ------------- |:-------------:| 
+|  Precondition 	| User U exists, user A is logged in as admin |
+|  Postcondition 	| User’s information has not been modified|
+| Step | Description |
+| 1 | A navigates to search user page |
+| 2 | A inserts U's information in search bars |
+| 3 | No user matches the search criteria |
+| 4 | An error message is displayed and the user is prompted to enter different information|
+
+| Scenario 5.1 - Nominal | Modify Password|
 | ------------- |:-------------:| 
 |  Precondition 	| User U exists |
-|  Post condition 	| User’s password has been modified|
+|  Postcondition 	| User’s password has been modified|
 | Step | Description |
 | 1 | User connects to the “modify password” interface |
 | 2 | User inserts current password |
 | 3 | User inserts new password |
 | 4 |  User inserts again new password (for safety purposes) |
-| 5a | If there are exceptions the system returns an error message |
-| 5b | If the new password meets the standards the system implements the modification |
+| 5 | System checks if new password fields match; they do |
+| 6 | System checks if new password satisfies security parameters; it does |
+| 7 | User submits the modification |
+| 8 | A confirmation message is displayed |
 
-| Scenario 6.1 |Search for a user //// merge up |
-| ------------- |:-------------:| 
-|  Precondition 	| User U must logged in as an admin |
-|  Post condition 	|Information about that specific user is fetched |
-| Step | Description |
-| 1 | Admin connects to the “search user” interface |
-| 2 | Admin inserts the username and starts the operation |
-| 3a |System returns information about that user |
-| 3b | If the target user does not exist the system displays a notification message |
-
-
-
-| Scenario 5.1 | Modify Password|
+| Scenario 5.2 - Exception | Modify Password (new password fields don't match)|
 | ------------- |:-------------:| 
 |  Precondition 	| User U exists |
-|  Post condition 	| User’s password has been modified|
+|  Postcondition 	| User’s password is not modified|
 | Step | Description |
 | 1 | User connects to the “modify password” interface |
 | 2 | User inserts current password |
 | 3 | User inserts new password |
 | 4 |  User inserts again new password (for safety purposes) |
-| 5a | If there are exceptions the system returns an error message |
-| 5b | If the new password meets the standards the system implements the modification |
+| 5 | System checks if new password fields match; they do not |
+| 6 | An error message is shown prompting to correct the error |
 
 
-
-| Scenario 6.1 |INSERT A SUPPLIER INTO THE SYSTEM |
+| Scenario 6.1 - Nominal| Insert a suplier into the system |
 | ------------- |:-------------:| 
-|  Precondition 	|  User U must logged-in as an admin |
-|  Post condition 	| New supplier S is added to the system|
+|  Precondition 	|  User U logged-in as an admin |
+|  Postcondition 	| New supplier S is added to the system|
 | Step | Description |
-| 1 | Admin inserts name of the supplier/company |
-| 2 | Admin inserts e-mail, address |
-| 3 | Admin inserts list of products which can be provided by te supplier |
-| 4 | Admin confirms operation |
-| 5 | Supplier is registered into the system |
+| 1 | Admin navigates to supplier insertion page |
+| 2 | Admin inserts name of the supplier/company |
+| 4 | Admin inserts e-mail, address |
+| 5 | Admin inserts list of products provided by the supplier |
+| 6 | Admin confirms operation |
+| 7 | System checks that the supplier doesn't already exist; it doesn't |
+| 8 | Supplier is registered into the system |
 
 
-
-
-| Scenario 6.2 |SUPPLIER IS ALREADY LISTED IN THE SYSTEM |
+| Scenario 6.2 - Exception | Supplier is already listed in the system |
 | ------------- |:-------------:| 
 |  Precondition 	|  Supplier is already listed into the system |
-|  Post condition 	| A notification message is shown |
+|  Postcondition 	| Supplier is not added in the system |
 | Step | Description |
-| 1 | Admin checks the informations provided by the supplier |
-| 2 | Admin checks the list of goods which can be provided by the supplier |
-| 3 |Admin approves the operation |
-| 4 | System shows a message, notifying that the supplier is already listed in the system |
+| 1 | Admin navigates to supplier insertion page |
+| 2 | Admin inserts name of the supplier/company |
+| 4 | Admin inserts e-mail, address |
+| 5 | Admin inserts list of products provided by the supplier |
+| 6 | Admin confirms operation |
+| 7 | System checks that the supplier doesn't already exist; it does |
+| 8 | An error message is shown |
 
 
 
-| Scenario 7.1 |DELETE SUPPLIER FROM THE SYSTEM |
+| Scenario 7.1 - Nominal | Delete supplier from the system |
 | ------------- |:-------------:| 
-|  Precondition 	|  Supplier S exists and user is logged-in as admin |
-|  Post condition 	| Supplier S is deleted from the system |
+|  Precondition 	|  Supplier S exists and user is logged in as admin |
+|  Postcondition 	| Supplier S is deleted from the system |
 | Step | Description |
-| 1 | Admin searches for a supplier (company name or e-mail) |
-| 2 | Admin starts the deletion procedure |
-| 3 |System shows a confirmation message|
-| 4 | The operation is approved and supplier S is deleted |
+| 1 | Admin navigates to supplier insertion page |
+| 2 | Admin searches for a supplier |
+| 3 | Admin starts the deletion procedure |
+| 4 | System shows a confirmation message|
 
-|Scenario 8.1|MODIFY SUPPLIER’S DATA|
+
+| Scenario 7.2 - Exception | Delete supplier from the system (supplier doesn't exist) |
 | ------------- |:-------------:| 
-|  Precondition 	|  Supplier S exists and user is logged-in as admin |
-|  Post condition 	| Supplier’s S data are modified |
+|  Precondition 	|  Supplier S exists and user is logged in as admin |
+|  Postcondition 	| Supplier S is not found |
 | Step | Description |
-| 1 | Admin searches for a supplier (company name or e-mail) |
-| 2 | Admin starts the modification procedure |
-| 3 |Admin selects the field(s) to be modified|
-| 4 | Admin writes the new values to be associated to the supplier |
-| 5 | Systems shows a confirmation message |
-| 6 | The operation is approved by the admin and data are modified |
+| 1 | Admin navigates to supplier insertion page |
+| 2 | Admin searches for a supplier |
+| 3 | No supplier is found matching the search criteria |
+| 4 | System shows an error message prompting to insert different information|
+
+|Scenario 8.1 - Nominal | Modify supplier's data|
+| ------------- |:-------------:| 
+|  Precondition 	|  Supplier S exists and user A is logged-in as admin |
+|  Postcondition 	| Supplier’s data are modified |
+| Step | Description |
+| 1 | A navigates to search supplier page |
+| 2 | A inserts S's information in search bars |
+| 3 | The list of suppliers matching the search criteria is displayed |
+| 4 | A selects S's record and is taken to the supplier information page|
+| 5 | A presses the modidfy button and edits the supplier information fields |
+| 6 | A presses the confirm button |
+| 7 | A confirmation message is displayed |
+
+|Scenario 8.2 - Variant | Modify products supplied by a supplier|
+| ------------- |:-------------:| 
+|  Precondition 	|  Supplier S exists,  user A is logged-in as admin, product P is in S's supplied products list and product Q is not, Q exists in the catalog |
+|  Postcondition 	| Product P is removed from the supplied products and product Q is added |
+| Step | Description |
+| 1 | A navigates to search supplier page |
+| 2 | A inserts S's information in search bars |
+| 3 | The list of suppliers matching the search criteria is displayed |
+| 4 | A selects S's record and is taken to the supplier information page|
+| 5 | A clicks the modidfy button|
+| 6 | In the list of supplied products A clicks the delete button on P's record |
+| 7 | P is removed |
+| 8 | A clicks the add product button|
+| 9 | A selects Q from the products in the catalog |
+| 10 | Q is added |
+| 11 | A presses the confirm button |
+| 12 | A confirmation message is displayed |
+
+
+| Scenario 8.3 - Exception| Modify Supplier (inexistent supplier) |
+| ------------- |:-------------:| 
+|  Precondition 	|  Supplier S exists and user A is logged-in as admin |
+|  Postcondition 	| Supplier’s data are modified |
+| Step | Description |
+| 1 | A navigates to search supplier page |
+| 2 | A inserts S's information in search bars |
+| 3 | The list of suppliers matching the search criteria is displayed |
+| 3 | No supplier matches the search criteria |
+| 4 | An error message is displayed and the user is prompted to enter different information|
+
 
 |Scenario 9.1 | ADD PRODUCT TO CATALOG|
 | ------------- |:-------------:| 
 |  Precondition 	| Product is not in the catalog, user is logged-in as admin |
-|  Post condition 	| Product is added to the catalog |
+|  Postcondition 	| Product is added to the catalog |
 | Step | Description |
 | 1 | Admin connects to the “add product” interface |
 | 2 | Admin inserts name of the product |
@@ -520,7 +565,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |Scenario 9.2 | ADD PRODUCT TO CATALOG (NO FREE SPACE IN THE WAREHOUSE)|
 | ------------- |:-------------:| 
 |  Precondition 	|  Product is not in the catalog, user is logged-in as admin, no free space left |
-|  Post condition 	| Product is not added; error message is displayed |
+|  Postcondition 	| Product is not added; error message is displayed |
 | Step | Description |
 | 1 | Admin inserts name of the product |
 | 2 | Admin inserts type of the product |
@@ -531,7 +576,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |Scenario 10.1 | DELETE PRODUCT FROM CATALOG|
 | ------------- |:-------------:| 
 |  Precondition 	|  Product is in the catalog, user is logged-in as admin |
-|  Post condition 	|Product is removed from the catalog|
+|  Postcondition 	|Product is removed from the catalog|
 | Step | Description |
 | 1 | Admin searches for the target product to be removed |
 | 2 | Admin starts the deletion procedure |
@@ -540,23 +585,22 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4b | If product is not in the catalog, the system returns an error message |
 
 
-|Scenario 11.1 | ISSUE AN INTERNAL ORDER|
+|Scenario 11.1 - Nominal| Issue internal order|
 | ------------- |:-------------:| 
- |  Precondition 	|  User U is logged in as OU employee or manager |
-|  Post condition 	| Internal order is issued |
+ |  Precondition 	|  User U is logged in as OU employee |
+|  Postcondition 	| Internal order is issued |
 | Step | Description |
 | 1 | User U connects to the “Issue order” interface |
-| 2 | User U selects the warehouse |
-| 3 | User U selects the product(s) to be ordered from the warehouse |
-| 4 | User U specifies the n. of items to be included in the order |
-| 5 | User U confirms the order |
-| 6a | The system displays a confirmation message and prints/saves on a file the summary of the order |
-| 6b | If the product is not available in the target warehouse, the system returns an error message |
+| 2 | User U selects the product(s) to be ordered and their quantities |
+| 3 | User U selects the warehouse from which he/she wants to order |
+| 4 | User U confirms the order |
+| 5 | The system displays a confirmation message |
+
 
 |Scenario 12.1 | COMPLETE INTERNAL ORDER|
 | ------------- |:-------------:| 
  |  Precondition 	|  User U is logged in as OU employee or manager |
-|  Post condition 	| Internal order is issued |
+|  Postcondition 	| Internal order is issued |
 | Step | Description |
 | 1 | User U connects to the “Issue order” interface |
 | 2 | User U selects the warehouse |
@@ -591,13 +635,13 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 ## //// to do
 
-|Scenario 15.1 | UNPACK SUPPLY PACKAGE |
+|Scenario 15.1 | Unpack supply package |
 | ------------- |:-------------:| 
 | Precondition | User U logged in as WH Employee, new batch of items has arrived |
-| Postcondition | Item is accepted into WH or selected for quality check|
+| Postcondition | Items are inserted into WH|
 | Step | Description |
-|1| User U connects to the “insert new items” interface |
-|2| User U selects the product he is looking for|
+|1| User U connects to the “view supply orders” interface |
+|2| User U marks order O as delivered|
 |3| User U selects the n. of items he has to add|
 |4| The system displays the total n. of items in the WH and their position in the WH|
 |5| If the product is not already present in the database, the system guide the user to the section “add new product to the catalog|
