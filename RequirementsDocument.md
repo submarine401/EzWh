@@ -341,66 +341,84 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 # Scenarios
 
 
-| Scenario 1.1 |Log in user (correct username and password)|
+| Scenario 1.1 - Nominal |Log in user (correct username and password)|
 | ------------- |:-------------:| 
 | Precondition | User exists in the system’s database but is not logged in |
-| Postcondition | User is authenticated and logged into the right area based on his/her specific role |
+| Postcondition | User is authenticated and logged in |
 | Step | Description |
 | 1 | User connects to the log in interface of the EZ Warehouse SW |
 | 2 | User inserts username |
 | 3 | User inserts password and presses the “Log In” button |
 | 4 |  System checks for the correctness of username and password |
-| 5 | System authenticates user |
+| 5 | System retieves user role |
+| 6 | User is taken to the role's main page |
 
-| Scenario 1.2 |Log in user (wrong username and/or password)|
+| Scenario 1.2 - Exception |Log in user (wrong username and/or password)|
 | ------------- |:-------------:| 
- | PRECONDITION | User exists in the system’s database but is not logged in |
-| POSTCONDITION | User is asked to repeat the “log in “ procedure again ||
+ | Precondition | User exists in the system’s database but is not logged in |
+| Postcondition | User is asked to repeat the “log in “ procedure again ||
 | Step | Description |
 | 1 | User connects to the log in interface of the EZ Warehouse SW |
 | 2 | User inserts username |
 | 3 | User inserts password and presses the “Log In” button |
 | 4 |  System checks for the correctness of username and password |
-| 5 | Invalid user and/or password; the system displays an error message and returns to the “Log in” interface |
+| 5 | Username and/or password are found invalid |
+| 6 | The system displays an error message and returns to the “Log in” interface |
 
-| Scenario 2.1 | Insert user in the system | 
+| Scenario 2.1 - Nominal | Insert user in the system | 
 | ------------- |:-------------:| 
 | Precondition | User U does not exist in the database |
 | Postcondition | User is added into the database |
 | Step | Description |
-| 1 | Admin inserts new user’s personal informations (name, surname, e-mail) |
-| 2 | User is associated with a unique username |
-| 3 | User is associated with a password |
-| 4 | Admin authorizes the operation |
-| 5 |  System checks for exceptions (i.e.: username already exists) |
-| 6a | System sends out an error message if there are some exceptions |
-| 6b | System registers new user |
+| 1 | Admin navigates to user insertion page |
+| 2 | Admin inserts new user’s personal informations (name, surname, e-mail) |
+| 3 | Admin assign a unique username and a password |
+| 4 | Admin selects the new user's role|
+| 5 | Admin authorizes the operation |
+| 6 |  System checks for exceptions (i.e.: username already exists); everything is found to be corect |
+| 7 | System registers new user |
 
-|Scenario 2.2 | Insert user in the system (user already registered in the database)|
+|Scenario 2.2 - Exception | Insert user in the system (user already registered in the database)|
 | ------------- |:-------------:| 
 | Precondition | User U exists in the database |
-| postcondition | An error message is displayed by the system|
+| Postcondition | An error message is displayed by the system|
 | Step | Description |
-| 1 | User is associated with a unique username |
-| 2 | User is associated with a password |
-| 3 | Admin authorizes the operation|
-| 4 |  System checks for exceptions (i.e.: username already exists) |
-| 5 | Username already exists; the system issues an error message to the admin |
+| 1 | Admin navigates to user insertion page |
+| 2 | Admin inserts new user’s personal informations (name, surname, e-mail) |
+| 3 | Admin assign a unique username and a password |
+| 4 | Admin selects the new user's role|
+| 5 | Admin authorizes the operation |
+| 6 |  System checks for exceptions (i.e.: username already exists); username is found to already exist |
+| 5 | The system shows an error message to the admin |
 
 
-| Scenario 3.1 | Delete a user in the system |
+## //////// check against GUI Maybe add  username-role mismatch exception
+
+| Scenario 3.1 - Nominal | Delete a user from the system |
 | ------------- |:-------------:| 
 | Precondition | User U exists |
 | Postcondition | User U is deleted from the system |
 | Step | Description |
-| 1 | Admin inserts username |
-| 2a | If username does not exist, display an error message |
-| 2b | If username exists admin authorizes the operation |
-| 3 | System deletes the user’s profile |
+| 1 | Admin navigates to user deletion page |
+| 2 | Admin inserts username |
+| 3 | System checks for username in the database; username is found |
+| 4 | Admin authorizes the operation |
+| 5 | System deletes the user’s profile |
+
+| Scenario 3.2 - Exception | Delete a user from the system |
+| ------------- |:-------------:| 
+| Precondition | User U doesn't exist |
+| Postcondition | An error messge is displayed |
+| Step | Description |
+| 1 | Admin navigates to user deletion page |
+| 2 | Admin inserts username |
+| 3 | System checks for username in the database; username is not found |
+| 4 | An error message is displayed |
 
 
+## ////////// to do
 
-| Scenario 4.1 | Modify Password|
+| Scenario 4.1 | Modify User |
 | ------------- |:-------------:| 
 |  Precondition 	| User U exists |
 |  Post condition 	| User’s password has been modified|
@@ -412,10 +430,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 5a | If there are exceptions the system returns an error message |
 | 5b | If the new password meets the standards the system implements the modification |
 
-
-
-
-| Scenario 5.1 |Search for a user |
+| Scenario 6.1 |Search for a user //// merge up |
 | ------------- |:-------------:| 
 |  Precondition 	| User U must logged in as an admin |
 |  Post condition 	|Information about that specific user is fetched |
@@ -424,6 +439,20 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 2 | Admin inserts the username and starts the operation |
 | 3a |System returns information about that user |
 | 3b | If the target user does not exist the system displays a notification message |
+
+
+
+| Scenario 5.1 | Modify Password|
+| ------------- |:-------------:| 
+|  Precondition 	| User U exists |
+|  Post condition 	| User’s password has been modified|
+| Step | Description |
+| 1 | User connects to the “modify password” interface |
+| 2 | User inserts current password |
+| 3 | User inserts new password |
+| 4 |  User inserts again new password (for safety purposes) |
+| 5a | If there are exceptions the system returns an error message |
+| 5b | If the new password meets the standards the system implements the modification |
 
 
 
@@ -510,18 +539,21 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4 | Operation is confirmed and product is removed from the catalog |
 | 4b | If product is not in the catalog, the system returns an error message |
 
-|Scenario 11.1 | SEARCH FOR A PRODUCT|
+
+|Scenario 11.1 | ISSUE AN INTERNAL ORDER|
 | ------------- |:-------------:| 
-| Precondition | User is logged in as manager |
-| Postcondition | The product is found |
+ |  Precondition 	|  User U is logged in as OU employee or manager |
+|  Post condition 	| Internal order is issued |
 | Step | Description |
-|1| User M connects to the “search for a product” interface |
-|2| User M selects the product he is looking for|
-|3| The system displays the n. of items in the WH and their position in the WH|
-|4| If the product is not available in the warehouse, the system returns an error message |
+| 1 | User U connects to the “Issue order” interface |
+| 2 | User U selects the warehouse |
+| 3 | User U selects the product(s) to be ordered from the warehouse |
+| 4 | User U specifies the n. of items to be included in the order |
+| 5 | User U confirms the order |
+| 6a | The system displays a confirmation message and prints/saves on a file the summary of the order |
+| 6b | If the product is not available in the target warehouse, the system returns an error message |
 
-
-|Scenario 12.1 | ISSUE AN INTERNAL ORDER|
+|Scenario 12.1 | COMPLETE INTERNAL ORDER|
 | ------------- |:-------------:| 
  |  Precondition 	|  User U is logged in as OU employee or manager |
 |  Post condition 	| Internal order is issued |
@@ -546,19 +578,20 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 5a | The system displays a confirmation message and prints/saves on a file the summary of the order |
 | 5b | If there’s not enough space to accommodate the items, the system returns a message and the order is discarded |
 
-|Scenario 14.1 | PERFORM QUALITY CHECK|
+|Scenario 14.1 | SEARCH FOR A PRODUCT|
 | ------------- |:-------------:| 
- |  Precondition 	|  User U is logged in as Quality office employee, item I has been selected for quality check |
-|  Post condition 	| Item is evaluated (rejected/accepted) |
+| Precondition | User is logged in as manager |
+| Postcondition | The product is found |
 | Step | Description |
-| 1 | User U analyzes item I depending on specific metrics (durability, usability etc…)|
-| 2 | User U writes a report specifying the main characteristics of the item |
-| 3 | User U approves/rejects the product |
-| 4 | Report is sent to the system|
-| 5a | If the product is accepted it is stored in the warehouse |
-| 5b | If the product is rejected the system notifies the warehouse and the supplier |
+|1| User M connects to the “search for a product” interface |
+|2| User M selects the product he is looking for|
+|3| The system displays the n. of items in the WH and their position in the WH|
+|4| If the product is not available in the warehouse, the system returns an error message |
 
-|Scenario 15.1 | INSERT NEW ITEM INTO WAREHOUSE|
+
+## //// to do
+
+|Scenario 15.1 | UNPACK SUPPLY PACKAGE |
 | ------------- |:-------------:| 
 | Precondition | User U logged in as WH Employee, new batch of items has arrived |
 | Postcondition | Item is accepted into WH or selected for quality check|
@@ -569,7 +602,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |4| The system displays the total n. of items in the WH and their position in the WH|
 |5| If the product is not already present in the database, the system guide the user to the section “add new product to the catalog|
 
-|Scenario 17.1 | REMOVE ITEM FROM INVENTORY|
+|Scenario 16.1 | PACKAGE INTERNAL ORDER|
 | ------------- |:-------------:| 
  |  Precondition 	|  User U is logged in as WH employee or manager |
 |  Post condition 	| Item(s) I is removed from the inventory |
@@ -581,6 +614,19 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 3a | If the number selected by U is not consistent with the total n. of stored copies the system displays an error message and restarts the procedure |
 | 4 | U confirms the operation |
 | 5 | Item(s) is removed from the inventory; inventory is updated | 
+
+
+|Scenario 17.1 | PERFORM QUALITY CHECK|
+| ------------- |:-------------:| 
+ |  Precondition 	|  User U is logged in as Quality office employee, item I has been selected for quality check |
+|  Post condition 	| Item is evaluated (rejected/accepted) |
+| Step | Description |
+| 1 | User U analyzes item I depending on specific metrics (durability, usability etc…)|
+| 2 | User U writes a report specifying the main characteristics of the item |
+| 3 | User U approves/rejects the product |
+| 4 | Report is sent to the system|
+| 5a | If the product is accepted it is stored in the warehouse |
+| 5b | If the product is rejected the system notifies the warehouse and the supplier |
 
 
 
