@@ -55,29 +55,29 @@ Desktop graphical use interface: this GUI was created for administrator, manager
 The following images refer to the implementation of the desktop interface.
 
 
-![log in](Desktop_GUI_screenshots/login_page_1.png)
+![log in](./Desktop_GUI_sceenshots/login_page_1.png)
 
-![log in error](Desktop_GUI_screenshots/login_page_error_message.png)
+![log in error](./Desktop_GUI_sceenshots/login_page_error_message.png)
+
+![modify password](./Desktop_GUI_sceenshots/modify_password(generic).png)
 
 ![modify password](Desktop_GUI_screenshots/modify_password(generic).png)
 
-![modify password](Desktop_GUI_screenshots/modify_password(generic).png)
+![confirmation modify password](./Desktop_GUI_sceenshots/Confirmation_Modify_password.png)
 
-![confirmation modify password](Desktop_GUI_screenshots/ConfirmationModify_password.png)
+![admin menu](./Desktop_GUI_sceenshots/Admin_menu.png)
 
-![admin menu](Desktop_GUI_screenshots/Admin_menu.png)
+![admin menu 2](./Desktop_GUI_sceenshots/Admin_menu_2.png)
 
-![admin menu 2](Desktop_GUI_screenshots/Admin_menu_2.png)
+![insert new supplier (ADMIN)](./Desktop_GUI_sceenshots/Insert_new_supplier(ADMIN).png)
 
-![insert new supplier (ADMIN)](Desktop_GUI_screenshots/Insert_new_supplier(ADMIN).png)
+![new supplier prod added(ADMIN)](./Desktop_GUI_sceenshots/new_supplier_prod_added(ADMIN).png)
 
-![new supplier prod added(ADMIN)](Desktop_GUI_screenshots/new_supplier_prod_added(ADMIN).png)
+![Confirmation Modify supplier data](./Desktop_GUI_sceenshots/Confirmation_Modify_supplier_data.png)
 
-![Confirmation Modify supplier data](Desktop_GUI_screenshots/Confirmation_Modify_supplier_data.png)
+![Confirmation insert supplier](./Desktop_GUI_sceenshots/Insert_new_supplier(ADMIN).png)
 
-![Confirmation insert supplier](Desktop_GUI_screenshots/Confirmation_insert_supplier.png)
-
-![Delete supplier](Desktop_GUI_screenshots/Delete_supplier_in_the_system(ADMIN).png)
+![Delete supplier](./Desktop_GUI_sceenshots/Delete_supplier_in_the_system(ADMIN).png)
 
 ![Confirmation delete supplier](Desktop_GUI_screenshots/Confirmation_delete_supplier_1.png)
 
