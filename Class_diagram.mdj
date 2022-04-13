@@ -4179,7 +4179,7 @@
 											"top": 398,
 											"width": 65.39990234375,
 											"height": 13,
-											"text": "+username",
+											"text": "+id",
 											"horizontalAlignment": 0
 										},
 										{
@@ -14904,7 +14904,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF/+on9L+gBiWE="
 							},
-							"name": "username"
+							"name": "id"
 						},
 						{
 							"_type": "UMLAttribute",
