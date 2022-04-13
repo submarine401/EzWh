@@ -117,11 +117,11 @@ The following images refer to the implementation of the desktop interface.
 
 ![Confirm 2 delete product](./Desktop_GUI_sceenshots/Confirmation_delete_product_from_catalog_2.png)
 
-![Manager menu](./Desktop_GUI_screenshots/Manager_menu.png)
+![Manager menu](./Desktop_GUI_sceenshots/Manager_menu.png)
 
 ![Manager menu 2](./Desktop_GUI_sceenshots/Manager_menu2.png)
 
-![Issue supply order for products with low availaibility](./Desktop_GUI_screenshots/lowAvail_Issue_supply_order.png)
+![Issue supply order for products with low availaibility](./Desktop_GUI_sceenshots/lowAvail_Issue_supply_order.png)
 
 ![Issue supply order](./Desktop_GUI_sceenshots/Issue_supply_order.png)
 
