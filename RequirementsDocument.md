@@ -48,7 +48,6 @@ Version: 0.0
 		- [Use case 16, UC16 - Package Internal order](#use-case-16-uc16---package-internal-order)
 		- [Use case 17, UC17 - Perform quality check](#use-case-17-uc17---perform-quality-check)
 - [Scenarios](#scenarios)
-	- [////////](#)
 - [Glossary](#glossary)
 - [Deployment Diagram](#deployment-diagram)
 
@@ -591,7 +590,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Step | Description |
 | 1 | User U connects to the “Issue order” interface |
 | 2 | User U selects the product(s) to be ordered and their quantities |
-| 3 | User U selects the warehouse from which he/she wants to order |
+| 3 | User U selects the supplier from which he/she wants to order |
 | 4 | User U confirms the order |
 | 5 | The system displays a confirmation message |
 
@@ -607,7 +606,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 
-|Scenario 13.1 | ISSUE A SUPPLY ORDER|
+|Scenario 13.1 - Nominal| ISSUE A SUPPLY ORDER|
 | ------------- |:-------------:| 
  |  Precondition 	| User U is logged in as manager |
 |  Post condition 	| Supply order is issued |
@@ -619,7 +618,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 5 | The system displays a confirmation message and prints/saves on a file the summary of the order |
 
 
-|Scenario 13.2 | ISSUE A SUPPLY ORDER|
+|Scenario 13.2 - Exception| ISSUE A SUPPLY ORDER|
 | ------------- |:-------------:| 
  |  Precondition 	| User U is logged in as manager |
 |  Post condition 	| Supply order is issued |
@@ -630,7 +629,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4 | User U confirms the order |
 | 5 | If there’s not enough space to accommodate the items, the system returns a message and the order is discarded |
 
-|Scenario 14.1 | SEARCH FOR A PRODUCT|
+|Scenario 14.1 - Nominal | SEARCH FOR A PRODUCT|
 | ------------- |:-------------:| 
 | Precondition | User is logged in as manager |
 | Postcondition | The product is found |
@@ -642,7 +641,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 
-|Scenario 15.1 | Unpack supply package |
+|Scenario 15.1 - Nominal| Unpack supply package |
 | ------------- |:-------------:| 
 | Precondition | User U logged in as WH Employee or manager, supply package has been delivered |
 | Postcondition | Items are inserted into WH|
@@ -657,13 +656,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |8| U Clicks the "complete" button |
 |9| A confirmation message is displayed|
 
-
-## ////////
-|3| User U selects the n. of items he has to add|
-|4| The system displays the total n. of items in the WH and their position in the WH|
-|5| If the product is not already present in the database, the system guide the user to the section “add new product to the catalog|
-
-|Scenario 16.1 | Package internal order|
+|Scenario 16.1 - Nominal| Package internal order|
 | ------------- |:-------------:| 
  |  Precondition 	|  User U logged in as WH Employee or Manager, internal order has been issued |
 | Postcondition | Items are removed from inventory and order status is updated |
@@ -679,7 +672,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |9| A confirmation message is displayed|
 
 
-|Scenario 17.1 | PERFORM QUALITY CHECK|
+|Scenario 17.1 - Nominal | PERFORM QUALITY CHECK|
 | ------------- |:-------------:| 
  |  Precondition 	|  User U is logged in as Quality office employee, item I has been selected for quality check |
 |  Post condition 	| Item is evaluated (rejected/accepted) |
@@ -691,10 +684,10 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 5 | If the product is accepted it is stored in the warehouse |
 
 
-|Scenario 17.2 | PERFORM QUALITY CHECK|
+|Scenario 17.2 - Variant| PERFORM QUALITY CHECK|
 | ------------- |:-------------:| 
  |  Precondition 	|  User U is logged in as Quality office employee, item I has been selected for quality check |
-|  Post condition 	| Item is evaluated (rejected/accepted) |
+|  Post condition 	| Item is rejected |
 | Step | Description |
 | 1 | User U analyzes item I depending on specific metrics (durability, usability etc…)|
 | 2 | User U writes a report specifying the main characteristics of the item |
