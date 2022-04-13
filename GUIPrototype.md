@@ -140,7 +140,7 @@ The following images refer to the implementation of the desktop interface.
 
 ![Issue internal order (OU)](./Desktop_GUI_sceenshots/Issue_internal_order(OU_EMPLOYEE).png)
 
-![Internal_order_prod_added](./Desktop_GUI_sceenshots/internal_order_ prod_added(OU_EMPLOYEE).png)
+![Internal_order_prod_added](./Desktop_GUI_sceenshots/internal_order_prod_added(OU_EMPLOYEE).png)
 
 ![Display_product_info](./Desktop_GUI_sceenshots/Display_product_info.png)
 
@@ -158,7 +158,7 @@ The following images refer to the implementation of the desktop interface.
 
 ![Item_added](./Desktop_GUI_sceenshots/item_added.png)
 
-![view_internal_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/(View_internal orders(WH_EMPLOYEE).png)
+![view_internal_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/(View_internal_orders(WH_EMPLOYEE).png)
 
 ![view_details](./Desktop_GUI_sceenshots/View_details.png)
 
