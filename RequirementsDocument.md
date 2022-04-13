@@ -304,7 +304,6 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Nominal scenario |User U searches and finds P's details |
 | Exception | There is no product matching the search criteria|
  
-
 ### Use case 15, UC15 - Unpack Supply package
 | Actors Involved        | WH Employee, Manager|
 | ------------- |:-------------:|
@@ -633,31 +632,42 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 |4| If the product is not available in the warehouse, the system returns an error message |
 
 
-## //// to do
 
 |Scenario 15.1 | Unpack supply package |
 | ------------- |:-------------:| 
-| Precondition | User U logged in as WH Employee, new batch of items has arrived |
+| Precondition | User U logged in as WH Employee or manager, supply package has been delivered |
 | Postcondition | Items are inserted into WH|
 | Step | Description |
 |1| User U connects to the “view supply orders” interface |
-|2| User U marks order O as delivered|
+|2|  U marks order O as delivered |
+|3| U Selects order O and is taken to the order details page |
+|4|  U selects a product and clicks the plus icon|
+|5|  U inserts an item's id|
+|6|The item is added to the inventory|
+|7| Steps 3 - 6 are repeated for every item in the order|
+|8| U Clicks the "complete" button |
+|9| A confirmation message is displayed|
+
+
+## ////////
 |3| User U selects the n. of items he has to add|
 |4| The system displays the total n. of items in the WH and their position in the WH|
 |5| If the product is not already present in the database, the system guide the user to the section “add new product to the catalog|
 
-|Scenario 16.1 | PACKAGE INTERNAL ORDER|
+|Scenario 16.1 | Package internal order|
 | ------------- |:-------------:| 
- |  Precondition 	|  User U is logged in as WH employee or manager |
-|  Post condition 	| Item(s) I is removed from the inventory |
+ |  Precondition 	|  User U logged in as WH Employee or Manager, internal order has been issued |
+| Postcondition | Items are removed from inventory and order status is updated |
 | Step | Description |
-| 1 | U connects to the “remove item” interface |
-| 2 | Target item(s) is searched and selected |
-| 2a | if the target item is not stored in the warehouse (unavailable) the system shows an error message and restarts the procedure |
-| 3 | U specifies the number of copies to be removed |
-| 3a | If the number selected by U is not consistent with the total n. of stored copies the system displays an error message and restarts the procedure |
-| 4 | U confirms the operation |
-| 5 | Item(s) is removed from the inventory; inventory is updated | 
+|1| User U connects to the “view internal orders” interface |
+|2|  U Selects order O and is taken to the order details page |
+|3| U sets order staus to "in preparation"|
+|4|  U selects a product and clicks the plus icon|
+|5|  U inserts an item's id|
+|6| The item is added to the package and removed from the inventory|
+|7| Steps 3 - 6 are repeated for every item in the order|
+|8| U sets order staus to "in pick up area" and clicks the "complete" button |
+|9| A confirmation message is displayed|
 
 
 |Scenario 17.1 | PERFORM QUALITY CHECK|
