@@ -33,19 +33,22 @@ Version: 0.0
 		- [Use case 1, UC1 - Log in](#use-case-1-uc1---log-in)
 		- [Use case 2, UC2 - Insert user in the system](#use-case-2-uc2---insert-user-in-the-system)
 		- [Use case 3, UC3 - Delete a user](#use-case-3-uc3---delete-a-user)
-		- [Use case 4, UC4 - Modify password](#use-case-4-uc4---modify-password)
+		- [Use case 4, UC4 - Modify a user](#use-case-4-uc4---modify-a-user)
+		- [Use case 5, UC5 - Modify password](#use-case-5-uc5---modify-password)
 		- [Use case 6, UC6 - Insert a supplier into the system](#use-case-6-uc6---insert-a-supplier-into-the-system)
 		- [Use case 7, UC7 -  Delete supplier from the system](#use-case-7-uc7----delete-supplier-from-the-system)
 		- [Use case 8, UC8 - Modify supplier's data](#use-case-8-uc8---modify-suppliers-data)
-		- [Use case 9, UC9 - Add product to catalog (manage free space)](#use-case-9-uc9---add-product-to-catalog-manage-free-space)
+		- [Use case 9, UC9 - Add product to catalog](#use-case-9-uc9---add-product-to-catalog)
 		- [Use case 10, UC10 - Delete product from catalog](#use-case-10-uc10---delete-product-from-catalog)
 		- [Use case 11, UC11 - Issue an internal order](#use-case-11-uc11---issue-an-internal-order)
-		- [Use case 12, UC12 - Issue a supply order](#use-case-12-uc12---issue-a-supply-order)
-		- [Use case 13, UC13 - Perform quality check](#use-case-13-uc13---perform-quality-check)
-		- [Use case 14, UC14 - Insert new item into warehouse](#use-case-14-uc14---insert-new-item-into-warehouse)
-		- [Use case 15, UC15 - Remove item form inventory](#use-case-15-uc15---remove-item-form-inventory)
+		- [Use case 12, UC12 - Complete internal order](#use-case-12-uc12---complete-internal-order)
+		- [Use case 13, UC13 - Issue a supply order](#use-case-13-uc13---issue-a-supply-order)
+		- [Use case 14, UC14 - Search product](#use-case-14-uc14---search-product)
+		- [Use case 15, UC15 - Unpack Supply package](#use-case-15-uc15---unpack-supply-package)
+		- [Use case 16, UC16 - Package Internal order](#use-case-16-uc16---package-internal-order)
+		- [Use case 17, UC17 - Perform quality check](#use-case-17-uc17---perform-quality-check)
 - [Scenarios](#scenarios)
-- [Use case Diagram](#use-case-diagram-1)
+	- [//// to do](#-to-do)
 - [Glossary](#glossary)
 - [System Design](#system-design)
 - [Deployment Diagram](#deployment-diagram)
@@ -606,8 +609,22 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 3 | User U selects the product(s) to be ordered from the warehouse |
 | 4 | User U specifies the n. of items to be included in the order |
 | 5 | User U confirms the order |
-| 6a | The system displays a confirmation message and prints/saves on a file the summary of the order |
-| 6b | If the product is not available in the target warehouse, the system returns an error message |
+| 6 | The system displays a confirmation message and prints/saves on a file the summary of the order |
+
+
+|Scenario 12.2 | COMPLETE INTERNAL ORDER|
+| ------------- |:-------------:| 
+ |  Precondition 	|  User U is logged in as OU employee or manager |
+|  Postcondition 	| Internal order is issued |
+| Step | Description |
+| 1 | User U connects to the “Issue order” interface |
+| 2 | User U selects the warehouse |
+| 3 | User U selects the product(s) to be ordered from the warehouse |
+| 4 | User U specifies the n. of items to be included in the order |
+| 5 | User U confirms the order |
+| 6 | If the product is not available in the target warehouse, the system returns an error message |
+
+
 
 |Scenario 13.1 | ISSUE A SUPPLY ORDER|
 | ------------- |:-------------:| 
@@ -679,8 +696,19 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 2 | User U writes a report specifying the main characteristics of the item |
 | 3 | User U approves/rejects the product |
 | 4 | Report is sent to the system|
-| 5a | If the product is accepted it is stored in the warehouse |
-| 5b | If the product is rejected the system notifies the warehouse and the supplier |
+| 5 | If the product is accepted it is stored in the warehouse |
+
+
+|Scenario 17.2 | PERFORM QUALITY CHECK|
+| ------------- |:-------------:| 
+ |  Precondition 	|  User U is logged in as Quality office employee, item I has been selected for quality check |
+|  Post condition 	| Item is evaluated (rejected/accepted) |
+| Step | Description |
+| 1 | User U analyzes item I depending on specific metrics (durability, usability etc…)|
+| 2 | User U writes a report specifying the main characteristics of the item |
+| 3 | User U approves/rejects the product |
+| 4 | Report is sent to the system|
+| 5 | If the product is rejected the system notifies the warehouse and the supplier |
 
 
 
