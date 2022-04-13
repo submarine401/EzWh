@@ -61,8 +61,6 @@ The following images refer to the implementation of the desktop interface.
 
 ![modify password](./Desktop_GUI_sceenshots/modify_password(generic).png)
 
-![modify password](Desktop_GUI_screenshots/modify_password(generic).png)
-
 ![confirmation modify password](./Desktop_GUI_sceenshots/Confirmation_Modify_password.png)
 
 ![admin menu](./Desktop_GUI_sceenshots/Admin_menu.png)
@@ -83,94 +81,94 @@ The following images refer to the implementation of the desktop interface.
 
 ![Confirmation 2 delete supplier](Desktop_GUI_screenshots/Confirmation_delete_supplier_2.png)
 
-![Modify supplier data](Desktop_GUI_screenshots/Modify_supplier_data.png)
+![Modify supplier data](./Desktop_GUI_screenshots/Modify_supplier_data.png)
 
-![Search for supplier](Desktop_GUI_screenshots/Search_for_supplier.png)
+![Search for supplier](./Desktop_GUI_screenshots/Search_for_supplier.png)
 
-![Modify supplier data](Desktop_GUI_screenshots/Modifying_supplier_data.png)
+![Modify supplier data](./Desktop_GUI_screenshots/Modifying_supplier_data.png)
 
-![add product supplier](Desktop_GUI_screenshots/add_prod_supplier_data.png)
+![add product supplier](./Desktop_GUI_screenshots/add_prod_supplier_data.png)
 
-![product added](Desktop_GUI_screenshots/prod_added_supplier.png)
+![product added](./Desktop_GUI_screenshots/prod_added_supplier.png)
 
-![Insert user(ADMIN)](Desktop_GUI_screenshots/Insert_user_in_the_system(ADMIN).png)
+![Insert user(ADMIN)](./Desktop_GUI_screenshots/Insert_user_in_the_system(ADMIN).png)
 
-![Confirmation insert user](Desktop_GUI_screenshots/Confirmation_insert_user.png)
+![Confirmation insert user](./Desktop_GUI_screenshots/Confirmation_insert_user.png)
 
-![Delete user](Desktop_GUI_screenshots/Delete_user_in_the_system(ADMIN).png)
+![Delete user](./Desktop_GUI_screenshots/Delete_user_in_the_system(ADMIN).png)
 
-![Confirmation1 delete user](Desktop_GUI_screenshots/Confirmation_delete_user_1.png)
+![Confirmation1 delete user](./Desktop_GUI_screenshots/Confirmation_delete_user_1.png)
 
-![Confirmation2 delete user](Desktop_GUI_screenshots/Confirmation_delete_user_2.png)
+![Confirmation2 delete user](./Desktop_GUI_screenshots/Confirmation_delete_user_2.png)
 
-![Search user](Desktop_GUI_screenshots/Search_user(ADMIN).png)
+![Search user](./Desktop_GUI_screenshots/Search_user(ADMIN).png)
 
-![Display user info](Desktop_GUI_screenshots/Display_user_info(ADMIN).png)
+![Display user info](./Desktop_GUI_screenshots/Display_user_info(ADMIN).png)
 
-![Modify user info](Desktop_GUI_screenshots/Modify_user_info(ADMIN).png)
+![Modify user info](./Desktop_GUI_screenshots/Modify_user_info(ADMIN).png)
 
-![Add product](Desktop_GUI_screenshots/Add_product(ADMIN).png)
+![Add product](./Desktop_GUI_screenshots/Add_product(ADMIN).png)
 
-![confirm add product](Desktop_GUI_screenshots/Confirmation_add_product_to_catalog.png)
+![confirm add product](./Desktop_GUI_screenshots/Confirmation_add_product_to_catalog.png)
 
-![Delete product](Desktop_GUI_screenshots/Delete_product(ADMIN).png)
+![Delete product](./Desktop_GUI_screenshots/Delete_product(ADMIN).png)
 
-![Confirm 1 delete product](Desktop_GUI_screenshots/Confirmation_delete_product_from_catalog_1.png)
+![Confirm 1 delete product](./Desktop_GUI_screenshots/Confirmation_delete_product_from_catalog_1.png)
 
-![Confirm 2 delete product](Desktop_GUI_screenshots/Confirmation_delete_product_from_catalog_2.png)
+![Confirm 2 delete product](./Desktop_GUI_screenshots/Confirmation_delete_product_from_catalog_2.png)
 
-![Manager menu](Desktop_GUI_screenshots/Manager_menu.png)
+![Manager menu](./Desktop_GUI_screenshots/Manager_menu.png)
 
-![Manager menu 2](Desktop_GUI_screenshots/Manager_menu2.png)
+![Manager menu 2](./Desktop_GUI_screenshots/Manager_menu2.png)
 
-![Issue supply order for products with low availaibility](Desktop_GUI_screenshots/lowAvail_Issue_supply_order.png)
+![Issue supply order for products with low availaibility](./Desktop_GUI_screenshots/lowAvail_Issue_supply_order.png)
 
-![Issue supply order](Desktop_GUI_screenshots/Issue_supply_order.png)
+![Issue supply order](./Desktop_GUI_screenshots/Issue_supply_order.png)
 
-![Product added into supply order](Desktop_GUI_screenshots/supply_order_prod_added(MANAGER).png)
+![Product added into supply order](./Desktop_GUI_screenshots/supply_order_prod_added(MANAGER).png)
 
 
-![Confirmation_order](Desktop_GUI_screenshots/Confirmation_order.png)
+![Confirmation_order](./Desktop_GUI_screenshots/Confirmation_order.png)
 
-![Search product info](Desktop_GUI_screenshots/Search_product_info(MANAGER).png)
+![Search product info](./Desktop_GUI_screenshots/Search_product_info(MANAGER).png)
 
-![Display product info](Desktop_GUI_screenshots/Display_product_info.png)
+![Display product info](./Desktop_GUI_screenshots/Display_product_info.png)
 
-![OU employee menu](OU_EMPLOYEE_MENU.png)
+![OU employee menu](./Desktop_GUI_sceenshots/OU_EMPLOYEE_MENU.png)
 
-![OU employee menu_2](OU_EMPLOYEE_MENU_2.png)
+![OU employee menu_2](./Desktop_GUI_sceenshots/OU_EMPLOYEE_MENU_2.png)
 
-![Issue internal order (OU)](Issue_internal_order(OU_EMPLOYEE).png)
+![Issue internal order (OU)](./Desktop_GUI_sceenshots/Issue_internal_order(OU_EMPLOYEE).png)
 
-![Internal_order_prod_added](internal_order_ prod added(OU_EMPLOYEE).png)
+![Internal_order_prod_added](./Desktop_GUI_sceenshots/internal_order_ prod added(OU_EMPLOYEE).png)
 
-![Display_product_info](Display_product_info.png)
+![Display_product_info](./Desktop_GUI_sceenshots/Display_product_info.png)
 
-![View_internal_order(OU_EMPLOYEE)](View_internal_order(OU_EMPLOYEE).png)
+![View_internal_order(OU_EMPLOYEE)](./Desktop_GUI_sceenshots/View_internal_order(OU_EMPLOYEE).png)
 
-![WH employee menu](WH_EMPLOYEE_MENU.png)
+![WH employee menu](./Desktop_GUI_sceenshots/WH_EMPLOYEE_MENU.png)
 
-![WH employee menu_2](WH_EMPLOYEE_MENU_2.png)
+![WH employee menu_2](./Desktop_GUI_sceenshots/WH_EMPLOYEE_MENU_2.png)
 
-![View_supply_orders(WH_EMPLOYEE)](View_supply_orders(WH_EMPLOYEE).png)
+![View_supply_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/View_supply_orders(WH_EMPLOYEE).png)
 
-![VIEW_DETAILS_SO](View_details SO.png)
+![VIEW_DETAILS_SO](./Desktop_GUI_sceenshots/View_details SO.png)
 
-![Add_item](Add_item.png)
+![Add_item](./Desktop_GUI_sceenshots/Add_item.png)
 
-![Item_added](item_added.png)
+![Item_added](./item_added.png)
 
-![view_internal_orders(WH_EMPLOYEE)](view_internal_orders(WH_EMPLOYEE).png)
+![view_internal_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/view_internal_orders(WH_EMPLOYEE).png)
 
-![view_details](view_internal_orders(View_details.png)
+![view_details](./Desktop_GUI_sceenshots/View_details.png)
 
-![remove_item](view_internal_orders(Remove_item.png)
+![remove_item](./Desktop_GUI_sceenshots/Remove_item.png)
 
-![item_removed](view_internal_orders(item_removed.png)
+![item_removed](./Desktop_GUI_sceenshots/Item_removed.png)
 
-![remove_item](view_internal_orders(Remove item.png)
+![remove_item](./Desktop_GUI_sceenshots/Remove_item.png)
 
-![Quality_office_employee_interface](Quality_office_employee_interface.png)
+![Quality_office_employee_interface](./Desktop_GUI_sceenshots/Quality_office_employee_interface.png)
 
 
 
