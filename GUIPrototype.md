@@ -40,7 +40,7 @@ The following images refer to the implementation of the mobile interface
 
 ![Add item](Mobile_GUI_screenshots/Add_item.png)
 
-![Item added](Mobile_GUI_screenshots/Item_added.png)
+![Item added](Mobile_GUI_screenshots/item_added.png)
 
 ![View Internal orders (WH)](Mobile_GUI_screenshots/View_internal_orders_WH.png)
 
@@ -77,9 +77,9 @@ The following images refer to the implementation of the desktop interface.
 
 ![Delete supplier](./Desktop_GUI_sceenshots/Delete_supplier_in_the_system(ADMIN).png)
 
-![Confirmation delete supplier](Desktop_GUI_screenshots/Confirmation_delete_supplier_1.png)
+![Confirmation delete supplier](./Desktop_GUI_screenshots/Confirmation_delete_supplier_1.png)
 
-![Confirmation 2 delete supplier](Desktop_GUI_screenshots/Confirmation_delete_supplier_2.png)
+![Confirmation 2 delete supplier](./Desktop_GUI_screenshots/Confirmation_delete_supplier_2.png)
 
 ![Modify supplier data](./Desktop_GUI_screenshots/Modify_supplier_data.png)
 
@@ -150,7 +150,7 @@ The following images refer to the implementation of the desktop interface.
 
 ![WH employee menu_2](./Desktop_GUI_sceenshots/WH_EMPLOYEE_MENU_2.png)
 
-![View_supply_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/View_supply_orders(WH_EMPLOYEE).png)
+![View_supply_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/View supply orders(WH_EMPLOYEE).png)
 
 ![VIEW_DETAILS_SO](./Desktop_GUI_sceenshots/View_details SO.png)
 
@@ -158,13 +158,13 @@ The following images refer to the implementation of the desktop interface.
 
 ![Item_added](./item_added.png)
 
-![view_internal_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/view_internal_orders(WH_EMPLOYEE).png)
+![view_internal_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/(View internal orders(WH_EMPLOYEE).png)
 
 ![view_details](./Desktop_GUI_sceenshots/View_details.png)
 
 ![remove_item](./Desktop_GUI_sceenshots/Remove_item.png)
 
-![item_removed](./Desktop_GUI_sceenshots/Item_removed.png)
+![item_removed](./Desktop_GUI_sceenshots/item_removed.png)
 
 ![remove_item](./Desktop_GUI_sceenshots/Remove_item.png)
 
