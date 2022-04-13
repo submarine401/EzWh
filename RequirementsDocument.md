@@ -48,7 +48,7 @@ Version: 0.0
 		- [Use case 16, UC16 - Package Internal order](#use-case-16-uc16---package-internal-order)
 		- [Use case 17, UC17 - Perform quality check](#use-case-17-uc17---perform-quality-check)
 - [Scenarios](#scenarios)
-	- [//// to do](#-to-do)
+	- [////////](#)
 - [Glossary](#glossary)
 - [Deployment Diagram](#deployment-diagram)
 
@@ -583,6 +583,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4b | If product is not in the catalog, the system returns an error message |
 
 
+
 |Scenario 11.1 - Nominal| Issue internal order|
 | ------------- |:-------------:| 
  |  Precondition 	|  User U is logged in as OU employee |
@@ -615,8 +616,19 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 2 | User U selects a supplier  among the ones which can provide the target product|
 | 3 | User U specifies the n. of items to be included in the order |
 | 4 | User U confirms the order |
-| 5a | The system displays a confirmation message and prints/saves on a file the summary of the order |
-| 5b | If there’s not enough space to accommodate the items, the system returns a message and the order is discarded |
+| 5 | The system displays a confirmation message and prints/saves on a file the summary of the order |
+
+
+|Scenario 13.2 | ISSUE A SUPPLY ORDER|
+| ------------- |:-------------:| 
+ |  Precondition 	| User U is logged in as manager |
+|  Post condition 	| Supply order is issued |
+| Step | Description |
+| 1 | User U selects the target product (to be ordered) |
+| 2 | User U selects a supplier  among the ones which can provide the target product|
+| 3 | User U specifies the n. of items to be included in the order |
+| 4 | User U confirms the order |
+| 5 | If there’s not enough space to accommodate the items, the system returns a message and the order is discarded |
 
 |Scenario 14.1 | SEARCH FOR A PRODUCT|
 | ------------- |:-------------:| 
