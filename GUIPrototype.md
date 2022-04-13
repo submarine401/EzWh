@@ -79,6 +79,84 @@ The following images refer to the implementation of the desktop interface.
 
 ![Delete supplier](Desktop_GUI_screenshots/Delete_supplier_in_the_system(ADMIN).png)
 
+![Confirmation delete supplier](Desktop_GUI_screenshots/Confirmation_delete_supplier_1.png)
+
+![Confirmation 2 delete supplier](Desktop_GUI_screenshots/Confirmation_delete_supplier_2.png)
+
+![Modify supplier data](Desktop_GUI_screenshots/Modify_supplier_data.png)
+
+![Search for supplier](Desktop_GUI_screenshots/Search_for_supplier.png)
+
+![Modify supplier data](Desktop_GUI_screenshots/Modifying_supplier_data.png)
+
+![add product supplier](Desktop_GUI_screenshots/add_prod_supplier_data.png)
+
+![product added](Desktop_GUI_screenshots/prod_added_supplier.png)
+
+![Insert user(ADMIN)](Desktop_GUI_screenshots/Insert_user_in_the_system(ADMIN).png)
+
+![Confirmation insert user](Desktop_GUI_screenshots/Confirmation_insert_user.png)
+
+![Delete user](Desktop_GUI_screenshots/Delete_user_in_the_system(ADMIN).png)
+
+![Confirmation1 delete user](Desktop_GUI_screenshots/Confirmation_delete_user_1.png)
+
+![Confirmation2 delete user](Desktop_GUI_screenshots/Confirmation_delete_user_2.png)
+
+![Search user](Desktop_GUI_screenshots/Search_user(ADMIN).png)
+
+![Display user info](Desktop_GUI_screenshots/Display_user_info(ADMIN).png)
+
+![Modify user info](Desktop_GUI_screenshots/Modify_user_info(ADMIN).png)
+
+![Add product](Desktop_GUI_screenshots/Add_product(ADMIN).png)
+
+![confirm add product](Desktop_GUI_screenshots/Confirmation_add_product_to_catalog.png)
+
+![Delete product](Desktop_GUI_screenshots/Delete_product(ADMIN).png)
+
+![Confirm 1 delete product](Desktop_GUI_screenshots/Confirmation_delete_product_from_catalog_1.png)
+
+![Confirm 2 delete product](Desktop_GUI_screenshots/Confirmation_delete_product_from_catalog_2.png)
+
+![Manager menu](Desktop_GUI_screenshots/Manager_menu.png)
+
+![Manager menu 2](Desktop_GUI_screenshots/Manager_menu2.png)
+
+![Issue supply order for products with low availaibility](Desktop_GUI_screenshots/lowAvail_Issue_supply_order.png)
+
+![Issue supply order](Desktop_GUI_screenshots/Issue_supply_order.png)
+
+![Product added into supply order](Desktop_GUI_screenshots/supply_order_prod_added(MANAGER).png)
+
+
+![Confirmation_order](Desktop_GUI_screenshots/Confirmation_order.png)
+
+![Search product info](Desktop_GUI_screenshots/Search_product_info(MANAGER).png)
+
+![Display product info](Desktop_GUI_screenshots/Display_product_info.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
