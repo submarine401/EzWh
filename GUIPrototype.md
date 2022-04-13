@@ -40,7 +40,7 @@ The following images refer to the implementation of the mobile interface
 
 ![Add item](Mobile_GUI_screenshots/Add_item.png)
 
-![Item added](Mobile_GUI_screenshots/item_added.png)
+![Item added](Mobile_GUI_screenshots/Item_added.png)
 
 ![View Internal orders (WH)](Mobile_GUI_screenshots/View_internal_orders_WH.png)
 
