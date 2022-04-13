@@ -150,9 +150,9 @@ The following images refer to the implementation of the desktop interface.
 
 ![WH employee menu_2](./Desktop_GUI_sceenshots/WH_EMPLOYEE_MENU_2.png)
 
-![View_supply_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/View supply orders(WH_EMPLOYEE).png)
+![View_supply_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/View_supply_orders(WH_EMPLOYEE).png)
 
-![VIEW_DETAILS_SO](./Desktop_GUI_sceenshots/View_details SO.png)
+![VIEW_DETAILS_SO](./Desktop_GUI_sceenshots/View_details_SO.png)
 
 ![Add_item](./Desktop_GUI_sceenshots/Add_item.png)
 
