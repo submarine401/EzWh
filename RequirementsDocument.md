@@ -551,7 +551,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 4 | An error message is displayed and the user is prompted to enter different information|
 
 
-|Scenario 9.1 | ADD PRODUCT TO CATALOG|
+|Scenario 9.1 - Nominal| ADD PRODUCT TO CATALOG|
 | ------------- |:-------------:| 
 |  Precondition 	| Product is not in the catalog, user is logged-in as admin |
 |  Postcondition 	| Product is added to the catalog |
@@ -564,18 +564,15 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 6 | Admin selects a location among the available ones |
 | 7 | Operation is approved and product is listed in the catalog |
 
-|Scenario 9.2 | ADD PRODUCT TO CATALOG (NO FREE SPACE IN THE WAREHOUSE)|
+|Scenario 9.2 - Exception| ADD PRODUCT TO CATALOG (NO FREE SPACE IN THE WAREHOUSE)|
 | ------------- |:-------------:| 
 |  Precondition 	|  Product is not in the catalog, user is logged-in as admin, no free space left |
 |  Postcondition 	| Product is not added; error message is displayed |
 | Step | Description |
-| 1 | Admin inserts name of the product |
-| 2 | Admin inserts type of the product |
-| 3 |A description is added for the product |
-| 4 | Operation is confirmed |
-| 5 | System return an error because the warehouse is full and no new products can be added |
+| 1 | Admin connects to the “add product” interface |
+| 2 | An error message is displayed indicating that there is no available space |
 
-|Scenario 10.1 | DELETE PRODUCT FROM CATALOG|
+|Scenario 10.1 - Nominal| DELETE PRODUCT FROM CATALOG|
 | ------------- |:-------------:| 
 |  Precondition 	|  Product is in the catalog, user is logged-in as admin |
 |  Postcondition 	|Product is removed from the catalog|
@@ -599,30 +596,14 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 5 | The system displays a confirmation message |
 
 
-|Scenario 12.1 | COMPLETE INTERNAL ORDER|
+|Scenario 12.1 - Nominal | Complete internal order|
 | ------------- |:-------------:| 
- |  Precondition 	|  User U is logged in as OU employee or manager |
-|  Postcondition 	| Internal order is issued |
+| Precondition | User U logged in as OU employee, Internal order O is in pick-up area |
+| Postcondition | Internal order status is set to completed|
 | Step | Description |
-| 1 | User U connects to the “Issue order” interface |
-| 2 | User U selects the warehouse |
-| 3 | User U selects the product(s) to be ordered from the warehouse |
-| 4 | User U specifies the n. of items to be included in the order |
-| 5 | User U confirms the order |
-| 6 | The system displays a confirmation message and prints/saves on a file the summary of the order |
-
-
-|Scenario 12.2 | COMPLETE INTERNAL ORDER|
-| ------------- |:-------------:| 
- |  Precondition 	|  User U is logged in as OU employee or manager |
-|  Postcondition 	| Internal order is issued |
-| Step | Description |
-| 1 | User U connects to the “Issue order” interface |
-| 2 | User U selects the warehouse |
-| 3 | User U selects the product(s) to be ordered from the warehouse |
-| 4 | User U specifies the n. of items to be included in the order |
-| 5 | User U confirms the order |
-| 6 | If the product is not available in the target warehouse, the system returns an error message |
+| 1 | User U connects to the “view internal orders” interface |
+| 2 | U checks the completed box in O's record|
+| 3 | O is set as completed |
 
 
 
