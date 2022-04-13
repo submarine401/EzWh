@@ -686,8 +686,19 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | 2 | User U writes a report specifying the main characteristics of the item |
 | 3 | User U approves/rejects the product |
 | 4 | Report is sent to the system|
-| 5a | If the product is accepted it is stored in the warehouse |
-| 5b | If the product is rejected the system notifies the warehouse and the supplier |
+| 5 | If the product is accepted it is stored in the warehouse |
+
+
+|Scenario 17.2 | PERFORM QUALITY CHECK|
+| ------------- |:-------------:| 
+ |  Precondition 	|  User U is logged in as Quality office employee, item I has been selected for quality check |
+|  Post condition 	| Item is evaluated (rejected/accepted) |
+| Step | Description |
+| 1 | User U analyzes item I depending on specific metrics (durability, usability etc…)|
+| 2 | User U writes a report specifying the main characteristics of the item |
+| 3 | User U approves/rejects the product |
+| 4 | Report is sent to the system|
+| 5 | If the product is rejected the system notifies the warehouse and the supplier |
 
 
 
