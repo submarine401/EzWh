@@ -158,7 +158,7 @@ The following images refer to the implementation of the desktop interface.
 
 ![Item_added](./Desktop_GUI_sceenshots/item_added.png)
 
-![view_internal_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/(View_internal_orders(WH_EMPLOYEE).png)
+![view_internal_orders(WH_EMPLOYEE)](./Desktop_GUI_sceenshots/View_internal_orders(WH_EMPLOYEE).png)
 
 ![view_details](./Desktop_GUI_sceenshots/View_details.png)
 
