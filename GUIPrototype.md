@@ -24,7 +24,7 @@ The following images refer to the implementation of the mobile interface
 
 ![view details](Mobile_GUI_screenshots/view_details.png)
 
-![Issue internal order](Mobile_GUI_screenshots/Issue_internal_orders.png)
+![Issue internal order](Mobile_GUI_screenshots/Issue_Internal_orders.png)
 
 ![click product](Mobile_GUI_screenshots/click_product.png)
 
