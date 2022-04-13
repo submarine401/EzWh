@@ -136,6 +136,42 @@ The following images refer to the implementation of the desktop interface.
 
 ![Display product info](Desktop_GUI_screenshots/Display_product_info.png)
 
+![OU employee menu](OU_EMPLOYEE_MENU.png)
+
+![OU employee menu_2](OU_EMPLOYEE_MENU_2.png)
+
+![Issue internal order (OU)](Issue_internal_order(OU_EMPLOYEE).png)
+
+![Internal_order_prod_added](internal_order_ prod added(OU_EMPLOYEE).png)
+
+![Display_product_info](Display_product_info.png)
+
+![View_internal_order(OU_EMPLOYEE)](View_internal_order(OU_EMPLOYEE).png)
+
+![WH employee menu](WH_EMPLOYEE_MENU.png)
+
+![WH employee menu_2](WH_EMPLOYEE_MENU_2.png)
+
+![View_supply_orders(WH_EMPLOYEE)](View_supply_orders(WH_EMPLOYEE).png)
+
+![VIEW_DETAILS_SO](View details SO.png)
+
+![Add_item](add item.png)
+
+![Item_added](item added.png)
+
+![view_internal_orders(WH_EMPLOYEE)](view_internal_orders(WH_EMPLOYEE).png)
+
+![view_details](view_internal_orders(View details.png)
+
+![remove_item](view_internal_orders(Remove item.png)
+
+![item_removed](view_internal_orders(item removed.png)
+
+![remove_item](view_internal_orders(Remove item.png)
+
+![Quality_office_employee_interface](Quality_office_employee_interface.png)
+
 
 
 
