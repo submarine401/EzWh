@@ -590,7 +590,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Step | Description |
 | 1 | User U connects to the “Issue order” interface |
 | 2 | User U selects the product(s) to be ordered and their quantities |
-| 3 | User U selects the warehouse from which he/she wants to order |
+| 3 | User U selects the supplier from which he/she wants to order |
 | 4 | User U confirms the order |
 | 5 | The system displays a confirmation message |
 
