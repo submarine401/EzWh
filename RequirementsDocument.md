@@ -50,7 +50,6 @@ Version: 0.0
 - [Scenarios](#scenarios)
 	- [//// to do](#-to-do)
 - [Glossary](#glossary)
-- [System Design](#system-design)
 - [Deployment Diagram](#deployment-diagram)
 
 # Informal description
@@ -709,10 +708,9 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 ![Class Diagram](./ClassDiagram.JPG)
 
-# System Design
-\<describe here system design>
 
-\<must be consistent with Context diagram>
+
+
 
 # Deployment Diagram 
 
