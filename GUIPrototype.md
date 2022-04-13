@@ -20,7 +20,7 @@ The following images refer to the implementation of the mobile interface
 
 ![modify password](Mobile_GUI_screenshots/modify_password.png)
 
-![view internal orders OU](Mobile_GUI_screenshots/View_internal_orders_OU.png)
+![view_internal_orders_OU](Mobile_GUI_screenshots/View_Internal_orders_OU.png)
 
 ![view details](Mobile_GUI_screenshots/view_details.png)
 
@@ -154,19 +154,19 @@ The following images refer to the implementation of the desktop interface.
 
 ![View_supply_orders(WH_EMPLOYEE)](View_supply_orders(WH_EMPLOYEE).png)
 
-![VIEW_DETAILS_SO](View details SO.png)
+![VIEW_DETAILS_SO](View_details SO.png)
 
-![Add_item](add item.png)
+![Add_item](Add_item.png)
 
-![Item_added](item added.png)
+![Item_added](item_added.png)
 
 ![view_internal_orders(WH_EMPLOYEE)](view_internal_orders(WH_EMPLOYEE).png)
 
-![view_details](view_internal_orders(View details.png)
+![view_details](view_internal_orders(View_details.png)
 
-![remove_item](view_internal_orders(Remove item.png)
+![remove_item](view_internal_orders(Remove_item.png)
 
-![item_removed](view_internal_orders(item removed.png)
+![item_removed](view_internal_orders(item_removed.png)
 
 ![remove_item](view_internal_orders(Remove item.png)
 
