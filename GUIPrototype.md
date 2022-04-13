@@ -38,7 +38,7 @@ The following images refer to the implementation of the mobile interface
 
 ![View Detail (Supply Order)](Mobile_GUI_screenshots/view_details_SO.png)
 
-![Add item(Mobile_GUI_screenshots/Add_item.png)
+![Add item](Mobile_GUI_screenshots/Add_item.png)
 
 ![Item added](Mobile_GUI_screenshots/Item_added.png)
 
@@ -49,4 +49,42 @@ The following images refer to the implementation of the mobile interface
 ![Remove item](Mobile_GUI_screenshots/remove_item.png)
 
 ![Item removed](Mobile_GUI_screenshots/item_removed.png)
+
+Desktop graphical use interface: this GUI was created for administrator, manager, warehouse, organisational unit and quality check employees.
+
+The following images refer to the implementation of the desktop interface.
+
+
+![log in](Desktop_GUI_screenshots/login_page_1.png)
+
+![log in error](Desktop_GUI_screenshots/login_page_error_message.png)
+
+![modify password](Desktop_GUI_screenshots/modify_password(generic).png)
+
+![modify password](Desktop_GUI_screenshots/modify_password(generic).png)
+
+![confirmation modify password](Desktop_GUI_screenshots/ConfirmationModify_password.png)
+
+![admin menu](Desktop_GUI_screenshots/Admin_menu.png)
+
+![admin menu 2](Desktop_GUI_screenshots/Admin_menu_2.png)
+
+![insert new supplier (ADMIN)](Desktop_GUI_screenshots/Insert_new_supplier(ADMIN).png)
+
+![new supplier prod added(ADMIN)](Desktop_GUI_screenshots/new_supplier_prod_added(ADMIN).png)
+
+![Confirmation Modify supplier data](Desktop_GUI_screenshots/Confirmation_Modify_supplier_data.png)
+
+![Confirmation insert supplier](Desktop_GUI_screenshots/Confirmation_insert_supplier.png)
+
+![Delete supplier](Desktop_GUI_screenshots/Delete_supplier_in_the_system(ADMIN).png)
+
+
+
+
+
+
+
+
+
 
