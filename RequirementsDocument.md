@@ -174,6 +174,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 ## Use case diagram
+![Usecase](./UseCaseDiagram1.jpg)
 \<define here UML Use case diagram UCD summarizing all use cases, and their relationships>
 
 
@@ -206,15 +207,13 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Exception | User does not exist |
 |  | User is the admin |
 
-### Use case 4, UC4 - Modify a user ///// to complete 
+### Use case 4, UC4 - Modify a user 
 |Actors involved | Administrator |
 | ------------- |:-------------:| 
 | Precondition | User U exists, User A is logged in as admin |
 | Postcondition | User U is modified |
-| Nominal scenario | Admin selects a user to be deleted |
-| Variants |  |
+| Nominal scenario | Admin selects a user to be modified |
 | Exception | User does not exist |
-|  | User is the admin |
 
 
 ### Use case 5, UC5 - Modify password
@@ -286,13 +285,14 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Nominal scenario | User U issues internal order |
 | Exception | An ordered product is not available |
 
-### Use case 12, UC12 - Complete internal order /////// to do
+
+### Use case 12, UC12 - Complete internal order
 | Actors Involved        | OU employee |
 | ------------- |:-------------:| 
-| Precondition | User U logged in as OU employee |
-| Postcondition | Internal order is issued|
-| Nominal scenario | User U issues internal order |
-| Exception | An ordered product is not available |
+| Precondition | User U logged in as OU employee, Internal order is in pick-up area |
+| Postcondition | Internal order status is set to completed|
+| Nominal scenario | User U sets internal order status as completed |
+| Exception | Order status is different from "in pick-up area" |
 
 
 ### Use case 13, UC13 - Issue a supply order 
@@ -304,31 +304,29 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 | Variant | User U manually creates order|
 | Exception | There isn’t enough available space to accommodate the ordered quantity|
 
-### Use case 14, UC14 - Search product ///////// da fare 
+### Use case 14, UC14 - Search product 
 | Actors Involved        | Manager|
-| ------------- |:-------------:| 
-(ALSO CHECK FOR AVAILABILITY HERE)
+| ------------- |:-------------:|
 | Precondition | User U logged in as Manager |
-| Postcondition | Supply order is issued |
-| Nominal scenario |User U issues supply order |
-| Exception | There isn’t enough available space to accommodate the ordered quantity|
+| Postcondition | Product P's details are shown |
+| Nominal scenario |User U searches and finds P's details |
+| Exception | There is no product matching the search criteria|
  
 
-### Use case 15, UC15 - Insert new item into warehouse // unpack
+### Use case 15, UC15 - Unpack Supply package
 | Actors Involved        | WH Employee, Manager|
 | ------------- |:-------------:|
-| Precondition | User U logged in as WH Employee or Manager, new batch of items has arrived |
-| Postcondition | Item is accepted into WH|
-| Nominal scenario | U inserts new item into warehouse |
-| Exception | Product doesn’t exist in WH |
+| Precondition | User U logged in as WH Employee or Manager, supply package has been delivered |
+| Postcondition | Items are inserted into WH|
+| Nominal scenario | U inserts a set of new items into warehouse |
 
-### Use case 16, UC16 - Remove item form inventory // pack
+### Use case 16, UC16 - Package Internal order
 | Actors Involved        | WH Employee, Manager|
 | ------------- |:-------------:| 
-| Precondition | User U logged in as WH Employee or Manager |
-| Postcondition | Item I is removed from inventory |
+| Precondition | User U logged in as WH Employee or Manager, internal order has been issued |
+| Postcondition | Items are removed from inventory and order status is updated |
 | Nominal scenario | User U removes item I from inventory |
-| Exception | Item doesn’t exist in inventory |
+| Exception | No items available for a product |
 
 
 ### Use case 17, UC17 - Perform quality check
@@ -591,8 +589,7 @@ Jillian is 30 and she is the manager of a __small shop, part of a big department
 
 
 
-# Use case Diagram
-![Usecase](./UseCaseDiagram1.jpg)
+
 
 
 # Glossary
