@@ -3437,11 +3437,64 @@
 									"model": {
 										"$ref": "AAAAAAF/+n6jUI6oS7Y="
 									},
+									"subViews": [
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGAIu249X5y6Wc=",
+											"_parent": {
+												"$ref": "AAAAAAF/+n6jUI6wLKE="
+											},
+											"model": {
+												"$ref": "AAAAAAGAIu241H5apds="
+											},
+											"font": "Arial;13;0",
+											"left": 1061,
+											"top": 558,
+											"width": 79,
+											"height": 13,
+											"text": "+Name",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGAIu3NzYMyolU=",
+											"_parent": {
+												"$ref": "AAAAAAF/+n6jUI6wLKE="
+											},
+											"model": {
+												"$ref": "AAAAAAGAIu3Nt4MaEzE="
+											},
+											"font": "Arial;13;0",
+											"left": 1061,
+											"top": 573,
+											"width": 79,
+											"height": 13,
+											"text": "+Address",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGAIu35Cofy4dY=",
+											"_parent": {
+												"$ref": "AAAAAAF/+n6jUI6wLKE="
+											},
+											"model": {
+												"$ref": "AAAAAAGAIu34/Yfa9EQ="
+											},
+											"font": "Arial;13;0",
+											"left": 1061,
+											"top": 588,
+											"width": 79,
+											"height": 13,
+											"text": "+E-mail",
+											"horizontalAlignment": 0
+										}
+									],
 									"font": "Arial;13;0",
 									"left": 1056,
 									"top": 553,
 									"width": 89,
-									"height": 10
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -3454,7 +3507,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 1056,
-									"top": 563,
+									"top": 606,
 									"width": 89,
 									"height": 10
 								},
@@ -14887,6 +14940,32 @@
 								},
 								"multiplicity": "0..*"
 							}
+						}
+					],
+					"attributes": [
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGAIu241H5apds=",
+							"_parent": {
+								"$ref": "AAAAAAF/+n6jUI6oS7Y="
+							},
+							"name": "Name"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGAIu3Nt4MaEzE=",
+							"_parent": {
+								"$ref": "AAAAAAF/+n6jUI6oS7Y="
+							},
+							"name": "Address"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGAIu34/Yfa9EQ=",
+							"_parent": {
+								"$ref": "AAAAAAF/+n6jUI6oS7Y="
+							},
+							"name": "E-mail"
 						}
 					]
 				},
