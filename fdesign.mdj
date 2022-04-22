@@ -3274,6 +3274,28 @@
 							"subViews": [
 								{
 									"_type": "EdgeLabelView",
+									"_id": "AAAAAAGAUDxyyf6esh4=",
+									"_parent": {
+										"$ref": "AAAAAAGATTCc6IOUwWk="
+									},
+									"model": {
+										"$ref": "AAAAAAGATTCc54ORrUw="
+									},
+									"font": "Arial;13;0",
+									"left": 1988,
+									"top": 1151,
+									"width": 14.82177734375,
+									"height": 13,
+									"alpha": 0.5235987755982988,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAGATTCc6IOUwWk="
+									},
+									"edgePosition": 2,
+									"text": "+d"
+								},
+								{
+									"_type": "EdgeLabelView",
 									"_id": "AAAAAAGATTCc6IOVEAM=",
 									"_parent": {
 										"$ref": "AAAAAAGATTCc6IOUwWk="
@@ -3484,6 +3506,9 @@
 							},
 							"propertyLabel": {
 								"$ref": "AAAAAAGATTCc6IOX2FY="
+							},
+							"tailRoleNameLabel": {
+								"$ref": "AAAAAAGAUDxyyf6esh4="
 							},
 							"tailPropertyLabel": {
 								"$ref": "AAAAAAGATTCc6IOZO7Y="
@@ -6854,10 +6879,10 @@
 							},
 							"font": "Arial;13;0",
 							"left": 2232,
-							"top": 1208,
-							"width": 100,
-							"height": 168,
-							"text": "Confilict : UC says admin inchargeof position but API says manager is in charge. Also confilict UC2-5 for deleting action(i select UC 5-2)"
+							"top": 1152,
+							"width": 101.62451171875,
+							"height": 246,
+							"text": "Confilict : UC says admin inchargeof position but API says manager is in charge. Also confilict UC2-5 for deleting action(i select UC 5-2). STICK TO API LIKE PROFESSOR SAID IN LAST LESSON"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -6873,7 +6898,7 @@
 								"$ref": "AAAAAAGATXr/0mBnFEs="
 							},
 							"lineStyle": 1,
-							"points": "2000:1509;2000:1256;2231:1285"
+							"points": "2000:1509;2000:1256;2231:1271"
 						},
 						{
 							"_type": "UMLAssociationView",
@@ -7422,9 +7447,9 @@
 							"font": "Arial;13;0",
 							"left": 1344,
 							"top": 2192,
-							"width": 100,
-							"height": 233,
-							"text": "confilict: API doc says manager does test but UC diag says  Admin i chose manager. Also confilict in creating TD(in API there is idSKU instead of TDid but class diag says it has ID"
+							"width": 101.62451171875,
+							"height": 298,
+							"text": "confilict: API doc says manager does test but UC diag says  Admin i chose manager. Also confilict in creating TD(in API there is idSKU instead of TDid but class diag says it has ID. THIS MAY BE DISCUSSED WITH PROFESSOR "
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -7440,7 +7465,7 @@
 								"$ref": "AAAAAAGATY+S0QO97UA="
 							},
 							"lineStyle": 1,
-							"points": "1403:1352;1394:2191"
+							"points": "1403:1352;1395:2191"
 						},
 						{
 							"_type": "UMLAssociationView",
@@ -19360,7 +19385,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "int id"
+							"name": "int id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19368,7 +19394,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "string descriptor"
+							"name": "string descriptor",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19376,7 +19403,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "double price"
+							"name": "double price",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19384,7 +19412,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "double volume"
+							"name": "double volume",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19392,7 +19421,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "double weight"
+							"name": "double weight",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19400,7 +19430,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "string note"
+							"name": "string note",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19408,7 +19439,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "double available_quantity"
+							"name": "double available_quantity",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19416,7 +19448,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "double quantity"
+							"name": "double quantity",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -19606,7 +19639,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "int id"
+							"name": "int id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19614,7 +19648,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "int aisle"
+							"name": "int aisle",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19622,7 +19657,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "int row"
+							"name": "int row",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19630,7 +19666,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "int col"
+							"name": "int col",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19638,7 +19675,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "double MAX_weight"
+							"name": "double MAX_weight",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19646,7 +19684,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "double MAX_volume"
+							"name": "double MAX_volume",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19654,7 +19693,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "double occupied_weight"
+							"name": "double occupied_weight",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19662,7 +19702,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "double occupied_volume"
+							"name": "double occupied_volume",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -19782,7 +19823,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATYIJ9/biE1E="
 									},
-									"name": "Pid"
+									"name": "Pid",
+									"type": ""
 								}
 							]
 						}
@@ -19860,7 +19902,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTOuVInJRPI="
 							},
-							"name": "int id"
+							"name": "int id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19868,7 +19911,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTOuVInJRPI="
 							},
-							"name": "string name"
+							"name": "string name",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19876,7 +19920,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTOuVInJRPI="
 							},
-							"name": "string procedure_description"
+							"name": "string procedure_description",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -19941,7 +19986,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATZs9GDmW4lI="
 									},
-									"name": "TDid"
+									"name": "TDid",
+									"type": ""
 								}
 							]
 						},
@@ -20046,7 +20092,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTqjeJ1ayXc="
 							},
-							"name": "long int RFID"
+							"name": "long int RFID",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20054,7 +20101,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTqjeJ1ayXc="
 							},
-							"name": "boolean available"
+							"name": "boolean available",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20062,7 +20110,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTqjeJ1ayXc="
 							},
-							"name": "Date date_of_stock"
+							"name": "Date date_of_stock",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -20080,7 +20129,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATUb36rTb2vo="
 									},
-									"name": "JSON{RFID"
+									"name": "JSON{RFID",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20088,7 +20138,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATUb36rTb2vo="
 									},
-									"name": "SKUId"
+									"name": "SKUId",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20096,7 +20147,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATUb36rTb2vo="
 									},
-									"name": "date_of_stock"
+									"name": "date_of_stock",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20105,6 +20157,7 @@
 										"$ref": "AAAAAAGATUb36rTb2vo="
 									},
 									"name": "avaiability ",
+									"type": "",
 									"defaultValue": "0}"
 								}
 							]
@@ -20123,7 +20176,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATUidh7dZ5yw="
 									},
-									"name": "JSON {new RFID"
+									"name": "JSON {new RFID",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20131,7 +20185,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATUidh7dZ5yw="
 									},
-									"name": "newAvailability"
+									"name": "newAvailability",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20139,7 +20194,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATUidh7dZ5yw="
 									},
-									"name": "newDateOfStock}"
+									"name": "newDateOfStock}",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20147,7 +20203,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATUidh7dZ5yw="
 									},
-									"name": "RFid"
+									"name": "RFid",
+									"type": ""
 								}
 							]
 						},
@@ -20200,7 +20257,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATWXzADj0bCI="
 									},
-									"name": "RFid"
+									"name": "RFid",
+									"type": ""
 								}
 							]
 						}
@@ -20278,7 +20336,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATaUV3bKSC1U="
 							},
-							"name": "int id"
+							"name": "int id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20286,7 +20345,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATaUV3bKSC1U="
 							},
-							"name": "Date date"
+							"name": "Date date",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20294,7 +20354,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATaUV3bKSC1U="
 							},
-							"name": "boolean result"
+							"name": "boolean result",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -20312,7 +20373,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATatnqSnrnRY="
 									},
-									"name": "JSontest_Descriptor"
+									"name": "JSontest_Descriptor",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20413,7 +20475,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATbPDjGweV5I="
 									},
-									"name": "RFid"
+									"name": "RFid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20603,7 +20666,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATd60xaKV5nI="
 							},
-							"name": "int id"
+							"name": "int id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20611,7 +20675,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATd60xaKV5nI="
 							},
-							"name": "Date Issue_date"
+							"name": "Date Issue_date",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20619,7 +20684,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATd60xaKV5nI="
 							},
-							"name": "string state"
+							"name": "string state",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -20637,7 +20703,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATejdtOkC0sM="
 									},
-									"name": "Restock_Order"
+									"name": "Restock_Order",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20646,6 +20713,7 @@
 										"$ref": "AAAAAAGATejdtOkC0sM="
 									},
 									"name": "SKU_Item  ",
+									"type": "",
 									"defaultValue": "[]"
 								}
 							]
@@ -20664,7 +20732,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATfH0Us2qee8="
 									},
-									"name": "ROid"
+									"name": "ROid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20691,7 +20760,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATfPJJNMObdc="
 									},
-									"name": "ROid"
+									"name": "ROid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20718,7 +20788,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATfh6CTghTEg="
 									},
-									"name": "ORid"
+									"name": "ORid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20726,7 +20797,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATfh6CTghTEg="
 									},
-									"name": "Transport_Note"
+									"name": "Transport_Note",
+									"type": ""
 								}
 							]
 						},
@@ -20763,7 +20835,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATf7mG1h0J48="
 									},
-									"name": "ROid"
+									"name": "ROid",
+									"type": ""
 								}
 							]
 						},
@@ -20818,7 +20891,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATfml/jtlcrs="
 							},
-							"name": "Date shipment_date"
+							"name": "Date shipment_date",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -20932,7 +21006,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATgO61fIBplg="
 							},
-							"name": "int id"
+							"name": "int id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20940,7 +21015,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATgO61fIBplg="
 							},
-							"name": "Date return_date"
+							"name": "Date return_date",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -20958,7 +21034,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAThrMzR6fWww="
 									},
-									"name": "ROid"
+									"name": "ROid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -21022,7 +21099,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATiTDZXl/LCA="
 									},
-									"name": "returnOid"
+									"name": "returnOid",
+									"type": ""
 								}
 							]
 						},
@@ -21136,7 +21214,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATkUXjI/BlFw="
 							},
-							"name": "int id"
+							"name": "int id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21144,7 +21223,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATkUXjI/BlFw="
 							},
-							"name": "Date date"
+							"name": "Date date",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21152,7 +21232,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATkUXjI/BlFw="
 							},
-							"name": "string state"
+							"name": "string state",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21160,7 +21241,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATkUXjI/BlFw="
 							},
-							"name": "User from"
+							"name": "User from",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -21186,7 +21268,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATmliRA4CUEk="
 									},
-									"name": "IOid"
+									"name": "IOid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -21194,7 +21277,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATmliRA4CUEk="
 									},
-									"name": "new_state"
+									"name": "new_state",
+									"type": ""
 								}
 							]
 						},
@@ -21306,7 +21390,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATnuBu99SEO0="
 							},
-							"name": "int id"
+							"name": "int id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21314,7 +21399,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATnuBu99SEO0="
 							},
-							"name": "double price"
+							"name": "double price",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21322,7 +21408,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATnuBu99SEO0="
 							},
-							"name": "string description"
+							"name": "string description",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -21462,7 +21549,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATo9dKXbQdU4="
 							},
-							"name": "string name"
+							"name": "string name",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21470,7 +21558,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATo9dKXbQdU4="
 							},
-							"name": "string surname"
+							"name": "string surname",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21478,7 +21567,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATo9dKXbQdU4="
 							},
-							"name": "string password"
+							"name": "string password",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21486,7 +21576,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATo9dKXbQdU4="
 							},
-							"name": "string type"
+							"name": "string type",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21494,7 +21585,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATo9dKXbQdU4="
 							},
-							"name": "string username"
+							"name": "string username",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -21547,7 +21639,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATpbDPB5tjPM="
 									},
-									"name": "username"
+									"name": "username",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -21555,7 +21648,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATpbDPB5tjPM="
 									},
-									"name": "new_values"
+									"name": "new_values",
+									"type": ""
 								}
 							]
 						},
