@@ -17331,7 +17331,7 @@
 											"font": "Arial;13;1",
 											"left": 1549,
 											"top": 575,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "User"
 										},
@@ -17366,7 +17366,7 @@
 									"font": "Arial;13;0",
 									"left": 1544,
 									"top": 568,
-									"width": 282.06689453125,
+									"width": 300.8369140625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGATo9dK3bU2lQ="
@@ -17403,7 +17403,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 598,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+string name",
 											"horizontalAlignment": 0
@@ -17420,7 +17420,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 613,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+string surname",
 											"horizontalAlignment": 0
@@ -17437,7 +17437,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 628,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+string password",
 											"horizontalAlignment": 0
@@ -17454,7 +17454,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 643,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+string type",
 											"horizontalAlignment": 0
@@ -17471,7 +17471,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 658,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+string username",
 											"horizontalAlignment": 0
@@ -17480,7 +17480,7 @@
 									"font": "Arial;13;0",
 									"left": 1544,
 									"top": 593,
-									"width": 282.06689453125,
+									"width": 300.8369140625,
 									"height": 83
 								},
 								{
@@ -17505,9 +17505,9 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 681,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
-											"text": "+Boolean log-in()",
+											"text": "+Boolean log-in(string username, string password)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -17522,7 +17522,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 696,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+Boolean log-out()",
 											"horizontalAlignment": 0
@@ -17539,7 +17539,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 711,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+Boolean create_user(User)",
 											"horizontalAlignment": 0
@@ -17556,7 +17556,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 726,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+Boolean modify_user(username, new_values)",
 											"horizontalAlignment": 0
@@ -17573,7 +17573,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 741,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+Boolean delete_user(username)",
 											"horizontalAlignment": 0
@@ -17590,9 +17590,9 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 756,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
-											"text": "+array[User] get_all_user_excpt_manaager()",
+											"text": "+array[User] get_all_user_excpt_manager()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -17607,7 +17607,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 771,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+array[Supplier] get_all_suppliers()",
 											"horizontalAlignment": 0
@@ -17624,7 +17624,7 @@
 											"font": "Arial;13;0",
 											"left": 1549,
 											"top": 786,
-											"width": 272.06689453125,
+											"width": 290.8369140625,
 											"height": 13,
 											"text": "+User return_logged_in_user_info()",
 											"horizontalAlignment": 0
@@ -17633,7 +17633,7 @@
 									"font": "Arial;13;0",
 									"left": 1544,
 									"top": 676,
-									"width": 282.06689453125,
+									"width": 300.8369140625,
 									"height": 128
 								},
 								{
@@ -17673,7 +17673,7 @@
 							"containerChangeable": true,
 							"left": 1544,
 							"top": 568,
-							"width": 282.06689453125,
+							"width": 300.8369140625,
 							"height": 236,
 							"nameCompartment": {
 								"$ref": "AAAAAAGATo9dK3bTw1Q="
@@ -25777,7 +25777,27 @@
 							"_parent": {
 								"$ref": "AAAAAAGATo9dKXbQdU4="
 							},
-							"name": "Boolean log-in"
+							"name": "Boolean log-in",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAYC7rORTbAHQ=",
+									"_parent": {
+										"$ref": "AAAAAAGATpKFx/B67n8="
+									},
+									"name": "string username",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAYC7rOhTc10g=",
+									"_parent": {
+										"$ref": "AAAAAAGATpKFx/B67n8="
+									},
+									"name": "string password",
+									"type": ""
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -25859,7 +25879,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATo9dKXbQdU4="
 							},
-							"name": "array[User] get_all_user_excpt_manaager"
+							"name": "array[User] get_all_user_excpt_manager"
 						},
 						{
 							"_type": "UMLOperation",

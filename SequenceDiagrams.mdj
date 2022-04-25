@@ -14796,45 +14796,11 @@
 													"model": {
 														"$ref": "AAAAAAGAX9j5/ocwwiQ="
 													},
-													"subViews": [
-														{
-															"_type": "UMLInteractionOperandView",
-															"_id": "AAAAAAGAX9j6DIdBoIU=",
-															"_parent": {
-																"$ref": "AAAAAAGAX9j5/4c1NYc="
-															},
-															"model": {
-																"$ref": "AAAAAAGAX9j5/ocxIsY="
-															},
-															"subViews": [
-																{
-																	"_type": "LabelView",
-																	"_id": "AAAAAAGAX9j6DYdCKIE=",
-																	"_parent": {
-																		"$ref": "AAAAAAGAX9j6DIdBoIU="
-																	},
-																	"visible": false,
-																	"font": "Arial;13;0",
-																	"left": 196,
-																	"top": 542,
-																	"height": 13
-																}
-															],
-															"font": "Arial;13;0",
-															"left": 176,
-															"top": 527,
-															"width": 800,
-															"height": 43,
-															"guardLabel": {
-																"$ref": "AAAAAAGAX9j6DYdCKIE="
-															}
-														}
-													],
+													"visible": false,
 													"font": "Arial;13;0",
 													"left": 176,
 													"top": 527,
-													"width": 800,
-													"height": 43
+													"width": 800
 												}
 											],
 											"font": "Arial;13;0",
@@ -15544,17 +15510,7 @@
 										"$ref": "AAAAAAGAX6wL/oO1nhk="
 									},
 									"name": "Scenario12-3",
-									"interactionOperator": "seq",
-									"operands": [
-										{
-											"_type": "UMLInteractionOperand",
-											"_id": "AAAAAAGAX9j5/ocxIsY=",
-											"_parent": {
-												"$ref": "AAAAAAGAX9j5/ocwwiQ="
-											},
-											"name": "Operand1"
-										}
-									]
+									"interactionOperator": "seq"
 								}
 							]
 						}
