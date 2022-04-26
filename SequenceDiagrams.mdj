@@ -11745,13 +11745,8 @@
 														"$ref": "AAAAAAGAXRFTbHsY2rE="
 													},
 													"font": "Arial;13;0",
-<<<<<<< HEAD
-													"left": 24.72998046875,
-													"top": 13,
-=======
 													"left": 136.72998046875,
 													"top": 117,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 307.36962890625,
 													"height": 13,
 													"text": "Use case 10, UC10 - Manage internal orders delivery"
@@ -11763,13 +11758,8 @@
 														"$ref": "AAAAAAGAXRFTbHsY2rE="
 													},
 													"font": "Arial;13;1",
-<<<<<<< HEAD
-													"left": 5,
-													"top": 13,
-=======
 													"left": 117,
 													"top": 117,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 14.72998046875,
 													"height": 13,
 													"text": "sd"
@@ -13019,13 +13009,8 @@
 														"$ref": "AAAAAAGAX6wL/oO3jnM="
 													},
 													"font": "Arial;13;0",
-<<<<<<< HEAD
-													"left": 200.72998046875,
-													"top": 189,
-=======
 													"left": 464.72998046875,
 													"top": 173,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 78.3271484375,
 													"height": 13,
 													"text": "Scenario12-1"
@@ -13037,13 +13022,8 @@
 														"$ref": "AAAAAAGAX6wL/oO3jnM="
 													},
 													"font": "Arial;13;1",
-<<<<<<< HEAD
-													"left": 181,
-													"top": 189,
-=======
 													"left": 445,
 													"top": 173,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 14.72998046875,
 													"height": 13,
 													"text": "sd"
@@ -13536,13 +13516,8 @@
 														"$ref": "AAAAAAGAX9N14IaTDyE="
 													},
 													"font": "Arial;13;0",
-<<<<<<< HEAD
-													"left": 207.9599609375,
-													"top": 341,
-=======
 													"left": 471.9599609375,
 													"top": 325,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 78.3271484375,
 													"height": 13,
 													"text": "Scenario12-2"
@@ -13554,13 +13529,8 @@
 														"$ref": "AAAAAAGAX9N14IaTDyE="
 													},
 													"font": "Arial;13;1",
-<<<<<<< HEAD
-													"left": 181,
-													"top": 341,
-=======
 													"left": 445,
 													"top": 325,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 21.9599609375,
 													"height": 13,
 													"text": "seq"
@@ -13647,13 +13617,8 @@
 														"$ref": "AAAAAAGAX9j5/ocy4TA="
 													},
 													"font": "Arial;13;0",
-<<<<<<< HEAD
-													"left": 207.9599609375,
-													"top": 525,
-=======
 													"left": 471.9599609375,
 													"top": 509,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 78.3271484375,
 													"height": 13,
 													"text": "Scenario12-3"
@@ -13665,13 +13630,8 @@
 														"$ref": "AAAAAAGAX9j5/ocy4TA="
 													},
 													"font": "Arial;13;1",
-<<<<<<< HEAD
-													"left": 181,
-													"top": 525,
-=======
 													"left": 445,
 													"top": 509,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 21.9599609375,
 													"height": 13,
 													"text": "seq"
@@ -14386,13 +14346,8 @@
 														"$ref": "AAAAAAGAYYCclpJXQhw="
 													},
 													"font": "Arial;13;0",
-<<<<<<< HEAD
-													"left": 176.72998046875,
-													"top": 117,
-=======
 													"left": 536.72998046875,
 													"top": 101,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 84.59228515625,
 													"height": 13,
 													"text": "Scenario_11-1"
@@ -14404,13 +14359,8 @@
 														"$ref": "AAAAAAGAYYCclpJXQhw="
 													},
 													"font": "Arial;13;1",
-<<<<<<< HEAD
-													"left": 157,
-													"top": 117,
-=======
 													"left": 517,
 													"top": 101,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 14.72998046875,
 													"height": 13,
 													"text": "sd"
@@ -14906,13 +14856,8 @@
 														"$ref": "AAAAAAGAYYvPDpP41SU="
 													},
 													"font": "Arial;13;0",
-<<<<<<< HEAD
-													"left": 183.9599609375,
-													"top": 317,
-=======
 													"left": 543.9599609375,
 													"top": 253,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 84.59228515625,
 													"height": 13,
 													"text": "Scenario_11-2"
@@ -14924,13 +14869,8 @@
 														"$ref": "AAAAAAGAYYvPDpP41SU="
 													},
 													"font": "Arial;13;1",
-<<<<<<< HEAD
-													"left": 157,
-													"top": 317,
-=======
 													"left": 517,
 													"top": 253,
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 													"width": 21.9599609375,
 													"height": 13,
 													"text": "seq"
@@ -20009,7 +19949,6 @@
 							},
 							"name": "Role4",
 							"type": ""
-<<<<<<< HEAD
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20055,8 +19994,6 @@
 							},
 							"name": "Role9",
 							"type": ""
-=======
->>>>>>> 2ed10a570737294bc4caf6f3ff863222777fa406
 						}
 					]
 				},
