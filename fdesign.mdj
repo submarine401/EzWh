@@ -2039,7 +2039,7 @@
 											"top": 1326,
 											"width": 337.84130859375,
 											"height": 13,
-											"text": "+int id",
+											"text": "+int SKUid",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2996,7 +2996,7 @@
 											"top": 1422,
 											"width": 433.27197265625,
 											"height": 13,
-											"text": "+int id",
+											"text": "+int Pid",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9588,7 +9588,7 @@
 											"top": 1710,
 											"width": 475.07763671875,
 											"height": 13,
-											"text": "+int id",
+											"text": "+int ROid",
 											"horizontalAlignment": 0
 										},
 										{
@@ -23898,8 +23898,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "int id",
-							"type": ""
+							"name": "int SKUid"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -24159,8 +24158,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "int id",
-							"type": ""
+							"name": "int Pid"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -25176,8 +25174,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATd60xaKV5nI="
 							},
-							"name": "int id",
-							"type": ""
+							"name": "int ROid"
 						},
 						{
 							"_type": "UMLAttribute",
