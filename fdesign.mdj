@@ -3720,13 +3720,30 @@
 											"height": 13,
 											"text": "+string procedure_description",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGAZbWf/yOqi4s=",
+											"_parent": {
+												"$ref": "AAAAAAGATTOuVYnRotI="
+											},
+											"model": {
+												"$ref": "AAAAAAGAZbWf5COeZ4c="
+											},
+											"font": "Arial;13;0",
+											"left": 861,
+											"top": 1387,
+											"width": 324.771484375,
+											"height": 13,
+											"text": "+int SKUid",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 856,
 									"top": 1337,
 									"width": 334.771484375,
-									"height": 53
+									"height": 68
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -3749,7 +3766,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 861,
-											"top": 1395,
+											"top": 1410,
 											"width": 324.771484375,
 											"height": 13,
 											"text": "+Boolean create_test_descriptor(Test_Descriptor)",
@@ -3766,7 +3783,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 861,
-											"top": 1410,
+											"top": 1425,
 											"width": 324.771484375,
 											"height": 13,
 											"text": "+Boolean modify_test_Descriptor(Test_Descriptor, TDid)",
@@ -3783,7 +3800,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 861,
-											"top": 1425,
+											"top": 1440,
 											"width": 324.771484375,
 											"height": 13,
 											"text": "+Boolean delete_test_Descriptor(TDid)",
@@ -3800,7 +3817,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 861,
-											"top": 1440,
+											"top": 1455,
 											"width": 324.771484375,
 											"height": 13,
 											"text": "+array[JSON{Test_Descriptor;SKUid}] get_TD()",
@@ -3817,7 +3834,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 861,
-											"top": 1455,
+											"top": 1470,
 											"width": 324.771484375,
 											"height": 13,
 											"text": "+array[JSON{Test_Descriptor;SKUid}] get_TD(TDid)",
@@ -3826,7 +3843,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 856,
-									"top": 1390,
+									"top": 1405,
 									"width": 334.771484375,
 									"height": 83
 								},
@@ -3868,7 +3885,7 @@
 							"left": 856,
 							"top": 1312,
 							"width": 334.771484375,
-							"height": 161,
+							"height": 176,
 							"nameCompartment": {
 								"$ref": "AAAAAAGATTOuVInMuJw="
 							},
@@ -7895,7 +7912,7 @@
 											"top": 1102,
 											"width": 412.93408203125,
 											"height": 13,
-											"text": "+int id",
+											"text": "+int TRid",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7963,7 +7980,7 @@
 											"top": 1155,
 											"width": 412.93408203125,
 											"height": 13,
-											"text": "+Booleaan creat_TR(JSontest_Descriptor, RFid, TDid)",
+											"text": "+Booleaan create_TR(TRid, JSontest_Descriptor, RFid, TDid)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -24438,6 +24455,14 @@
 							},
 							"name": "string procedure_description",
 							"type": ""
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGAZbWf5COeZ4c=",
+							"_parent": {
+								"$ref": "AAAAAAGATTOuVInJRPI="
+							},
+							"name": "int SKUid"
 						}
 					],
 					"operations": [
@@ -24849,8 +24874,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATaUV3bKSC1U="
 							},
-							"name": "int id",
-							"type": ""
+							"name": "int TRid"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -24878,7 +24902,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATaUV3bKSC1U="
 							},
-							"name": "Booleaan creat_TR",
+							"name": "Booleaan create_TR",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -24886,8 +24910,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGATatnqSnrnRY="
 									},
-									"name": "JSontest_Descriptor",
-									"type": ""
+									"name": "TRid"
 								},
 								{
 									"_type": "UMLParameter",
@@ -24895,8 +24918,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGATatnqSnrnRY="
 									},
-									"name": "RFid",
-									"type": ""
+									"name": "JSontest_Descriptor"
 								},
 								{
 									"_type": "UMLParameter",
@@ -24904,8 +24926,15 @@
 									"_parent": {
 										"$ref": "AAAAAAGATatnqSnrnRY="
 									},
-									"name": "TDid",
-									"type": ""
+									"name": "RFid"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAZbeOyDGuz/g=",
+									"_parent": {
+										"$ref": "AAAAAAGATatnqSnrnRY="
+									},
+									"name": "TDid"
 								}
 							]
 						},
