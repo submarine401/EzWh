@@ -58,9 +58,6 @@ possible a parallel implementation and maintenance of the various services. The 
 
 ![TM3](./TM3.png)
 
-<for each functional requirement from the requirement document, list which classes concur to implement it>
-
-<select key scenarios from the requirement document. For each of them define a sequence diagram showing that the scenario can be implemented by the classes and methods in the design>
 
 
 
