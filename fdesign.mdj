@@ -3082,7 +3082,7 @@
 											"top": 2446,
 											"width": 433.27197265625,
 											"height": 13,
-											"text": "+int id",
+											"text": "+long int id",
 											"horizontalAlignment": 0
 										},
 										{
@@ -26008,8 +26008,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATSuefoD3gLg="
 							},
-							"name": "int id",
-							"type": ""
+							"name": "long int id"
 						},
 						{
 							"_type": "UMLAttribute",
