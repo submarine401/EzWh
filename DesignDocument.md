@@ -52,7 +52,11 @@ possible a parallel implementation and maintenance of the various services. The 
 
 #verification-traceability-matrix
 
+![TM1](./TM1.png)
 
+![TM2](./TM2.png)
+
+![TM3](./TM3.png)
 
 <for each functional requirement from the requirement document, list which classes concur to implement it>
 
