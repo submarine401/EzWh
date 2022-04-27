@@ -47,6 +47,12 @@ possible a parallel implementation and maintenance of the various services. The 
 
 ![design_diagram](./calssdesign.jpg)
 
+
+# Verification traceability matrix
+
+<for each functional requirement from the requirement document, list which classes concur to implement it>
+
+
 #verification-traceability-matrix
 
 ![TM1](./TM1.png)
@@ -63,10 +69,6 @@ possible a parallel implementation and maintenance of the various services. The 
 
 
 
-
-# Verification traceability matrix
-
-<for each functional requirement from the requirement document, list which classes concur to implement it>
 
 
 
