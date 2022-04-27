@@ -48,16 +48,13 @@ possible a parallel implementation and maintenance of the various services. The 
 
 # Low level design
 
-<for each package, report class diagram>
+![design_diagram](./design_diagram.jpg)
 
 #verification-traceability-matrix
 
-<object data="trac.pdf" type="application/pdf" width="100%"> 
-</object>
+
 
 <for each functional requirement from the requirement document, list which classes concur to implement it>
-
-#verification-sequence-diagrams
 
 <select key scenarios from the requirement document. For each of them define a sequence diagram showing that the scenario can be implemented by the classes and methods in the design>
 
