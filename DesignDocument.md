@@ -24,9 +24,6 @@ The design must satisfy the Official Requirements document
 
 # High level design 
 
-<discuss architectural styles used, if any>
-
-#Proposed architecture
 
 For our design, a 3-tier architectural model was chosen. This kind of architecture offers several advantages, such as the capability to split the software in 3 layers, thus making 
 possible a parallel implementation and maintenance of the various services. The 3 layers of a 3-tier architecture are described in the following:
@@ -41,7 +38,7 @@ possible a parallel implementation and maintenance of the various services. The 
 </ul>
 <report package diagram>
 
-
+![architectural_design](./architectural_design.png)
 
 
 
