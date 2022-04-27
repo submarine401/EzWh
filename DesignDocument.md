@@ -45,7 +45,7 @@ possible a parallel implementation and maintenance of the various services. The 
 
 # Low level design
 
-![design_diagram](./calssdesign.jpg)
+![design_diagram](./design_diagram.jpg)
 
 
 # Verification traceability matrix
