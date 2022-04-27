@@ -83,17 +83,16 @@ possible a parallel implementation and maintenance of the various services. The 
 # Verification sequence diagrams 
 <select key scenarios from the requirement document. For each of them define a sequence diagram showing that the scenario can be implemented by the classes and methods in the design>
 
-![sequence_diagram_UC10_](./sequence%20diagrams/sequence_diagram_UC10_SCE_10-1.jpg)
-
-![sequence_diagram_UC11_SCE_11-1_and_11-2](./sequence%20diagrams/sequence_diagram_UC11_SCE_11-1_and_11-2.jpg)
-
-![sequence_diagram_UC12_SCE_12-1_to_12-3](./sequence%20diagrams/sequence_diagram_UC12_SCE_12-1_to_12-3.jpg)
-
 ![sequence_diagram_UC1_SCE_1-1_and_1-2](./sequence%20diagrams/sequence_diagram_UC1_SCE_1-1_and_1-2.jpg)
+
+
 
 ![sequence_diagram_UC2_SCE_2-1](./sequence%20diagrams/sequence_diagram_UC2_SCE_2-1.jpg)
 
 ![sequence_diagram_UC3_SCE_3-2](./sequence%20diagrams/sequence_diagram_UC3_SCE_3-2.jpg.jpg)
+
+
+
 
 ![sequence_diagram_UC5_SCE_5-1](./sequence%20diagrams/sequence_diagram_UC5_SCE_5-1.jpg)
 
@@ -104,3 +103,13 @@ possible a parallel implementation and maintenance of the various services. The 
 ![sequence_diagram_UC6_SCE_6-1_and_6-2](./sequence%20diagrams/sequence_diagram_UC6_SCE_6-1_and_6-2.jpg)
 
 ![sequence_diagram_UC9_SCE_9-1_to_9-3.jpg](./sequence%20diagrams/sequence_diagram_UC9_SCE_9-1_to_9-3.jpg)
+
+
+
+![sequence_diagram_UC10_](./sequence%20diagrams/sequence_diagram_UC10_SCE_10-1.jpg)
+
+![sequence_diagram_UC11_SCE_11-1_and_11-2](./sequence%20diagrams/sequence_diagram_UC11_SCE_11-1_and_11-2.jpg)
+
+![sequence_diagram_UC12_SCE_12-1_to_12-3](./sequence%20diagrams/sequence_diagram_UC12_SCE_12-1_to_12-3.jpg)
+
+
