@@ -2327,13 +2327,30 @@
 											"height": 13,
 											"text": "+Boolean decrease_av_quantity(quantity)",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGAahmSctkMbVI=",
+											"_parent": {
+												"$ref": "AAAAAAGATR3jCH3cwg0="
+											},
+											"model": {
+												"$ref": "AAAAAAGAahmSXdkJTWA="
+											},
+											"font": "Arial;13;0",
+											"left": 1613,
+											"top": 1565,
+											"width": 726.36865234375,
+											"height": 13,
+											"text": "+Boolean increase_av_quantity(quantity)",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1608,
 									"top": 1440,
 									"width": 736.36865234375,
-									"height": 128
+									"height": 143
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -3265,13 +3282,30 @@
 											"height": 13,
 											"text": "+Boolean increase_free_space(freed_weight, freed_volume)",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGAahnYSgJblYA=",
+											"_parent": {
+												"$ref": "AAAAAAGATSuegIEAw4o="
+											},
+											"model": {
+												"$ref": "AAAAAAGAahnYNAJSknw="
+											},
+											"font": "Arial;13;0",
+											"left": 2517,
+											"top": 1697,
+											"width": 433.27197265625,
+											"height": 13,
+											"text": "+Boolean decrease_free_space(added_weight, added_volume)",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 2512,
 									"top": 1617,
 									"width": 443.27197265625,
-									"height": 83
+									"height": 98
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -5174,7 +5208,7 @@
 											"top": 1594,
 											"width": 706.1005859375,
 											"height": 13,
-											"text": "+SKU sku",
+											"text": "+int SKUid",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5225,7 +5259,7 @@
 											"top": 1632,
 											"width": 706.1005859375,
 											"height": 13,
-											"text": "+Boolean modify_RFID_availability_dateOfStock(JSON {new RFID, newAvailability, newDateOfStock}, RFid)",
+											"text": "+void set_available(newAvailability)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -18743,7 +18777,7 @@
 											"font": "Arial;13;1",
 											"left": 45,
 											"top": 815,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "Data_interface"
 										},
@@ -18778,7 +18812,7 @@
 									"font": "Arial;13;0",
 									"left": 40,
 									"top": 808,
-									"width": 376.69775390625,
+									"width": 634.86962890625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGAW6Xv7XMnOLo="
@@ -18805,7 +18839,7 @@
 									"font": "Arial;13;0",
 									"left": 40,
 									"top": 833,
-									"width": 376.69775390625,
+									"width": 634.86962890625,
 									"height": 10
 								},
 								{
@@ -18830,7 +18864,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 848,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[USER] get_Users()",
 											"horizontalAlignment": 0
@@ -18847,7 +18881,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 863,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Test_Descriptor] get_test_descriptors()",
 											"horizontalAlignment": 0
@@ -18864,7 +18898,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 878,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[SKU_Item] get_SKU_Items()",
 											"horizontalAlignment": 0
@@ -18881,7 +18915,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 893,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Restock_Order] get_restock_order()",
 											"horizontalAlignment": 0
@@ -18898,7 +18932,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 908,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Internal_orders] get_internal_orders()",
 											"horizontalAlignment": 0
@@ -18915,7 +18949,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 923,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Return_Order] get_retured_orders()",
 											"horizontalAlignment": 0
@@ -18932,7 +18966,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 938,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Test_Result] get_test_results(RFid)",
 											"horizontalAlignment": 0
@@ -18949,7 +18983,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 953,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Item] get_item()",
 											"horizontalAlignment": 0
@@ -18966,7 +19000,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 968,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Test_Descriptor] get_test_descriptor()",
 											"horizontalAlignment": 0
@@ -18983,7 +19017,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 983,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+void get_item(Item)",
 											"horizontalAlignment": 0
@@ -19000,7 +19034,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 998,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+SKU_Item get_SKUitem(RFID)",
 											"horizontalAlignment": 0
@@ -19017,7 +19051,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1013,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Position]get_fitting_position(SKU)",
 											"horizontalAlignment": 0
@@ -19034,7 +19068,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1028,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Position get_free_position()",
 											"horizontalAlignment": 0
@@ -19051,7 +19085,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1043,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+SKU get_SKU(SKUid)",
 											"horizontalAlignment": 0
@@ -19068,7 +19102,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1058,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[json{Position}] get_all_position()",
 											"horizontalAlignment": 0
@@ -19085,7 +19119,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1073,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean modify_position(json position, int pid)",
 											"horizontalAlignment": 0
@@ -19102,7 +19136,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1088,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean modify_positionID(newPid, oldPid)",
 											"horizontalAlignment": 0
@@ -19119,7 +19153,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1103,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean modify_SKU(SKU, SKUId)",
 											"horizontalAlignment": 0
@@ -19136,7 +19170,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1118,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean create_SKU(json SKU)",
 											"horizontalAlignment": 0
@@ -19153,7 +19187,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1133,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[JSON{SKU}] return_SKU()",
 											"horizontalAlignment": 0
@@ -19170,7 +19204,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1148,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Position get_position(int Pid)",
 											"horizontalAlignment": 0
@@ -19187,7 +19221,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1163,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+delete_position(int pid)",
 											"horizontalAlignment": 0
@@ -19204,7 +19238,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1178,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[User] get_all_user_excpt_manager()",
 											"horizontalAlignment": 0
@@ -19221,7 +19255,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1193,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Supplier] get_all_suppliers()",
 											"horizontalAlignment": 0
@@ -19238,7 +19272,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1208,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean modify_state_of_restock order(ROid, newState)",
 											"horizontalAlignment": 0
@@ -19255,7 +19289,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1223,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Restock_Order get_restock order(ROid)",
 											"horizontalAlignment": 0
@@ -19272,7 +19306,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1238,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean delete_SKUitem(RFid)",
 											"horizontalAlignment": 0
@@ -19289,7 +19323,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1253,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[SKU_Item] return_sku_items_failed_tests(ROid)",
 											"horizontalAlignment": 0
@@ -19306,7 +19340,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1268,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean modify_state_of_internal_order(IOid, new_state)",
 											"horizontalAlignment": 0
@@ -19323,7 +19357,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1283,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean delete_internal_order(IOid)",
 											"horizontalAlignment": 0
@@ -19340,7 +19374,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1298,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Internal_Order] get_accepted_internal_orders()",
 											"horizontalAlignment": 0
@@ -19357,7 +19391,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1313,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Internal_Order] get_issued_internal_orders()",
 											"horizontalAlignment": 0
@@ -19374,7 +19408,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1328,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Internal_Order] get_all_internal_orders()",
 											"horizontalAlignment": 0
@@ -19391,7 +19425,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1343,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Internal_Order get_IO(IOid)",
 											"horizontalAlignment": 0
@@ -19408,7 +19442,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1358,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array<SKU_Items> get_SKU_Items_By_SKU(SKUid)()",
 											"horizontalAlignment": 0
@@ -19425,7 +19459,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1373,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean modify_item(Iid, json Item)",
 											"horizontalAlignment": 0
@@ -19442,7 +19476,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1388,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean delete_item(Iid)",
 											"horizontalAlignment": 0
@@ -19459,7 +19493,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1403,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+array[Item] get_all_Items()",
 											"horizontalAlignment": 0
@@ -19476,7 +19510,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1418,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Item get_item(int id)",
 											"horizontalAlignment": 0
@@ -19493,7 +19527,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1433,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean modify_test_descriptor(Test_Descriptor, TDid)",
 											"horizontalAlignment": 0
@@ -19510,17 +19544,34 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 1448,
-											"width": 366.69775390625,
+											"width": 624.86962890625,
 											"height": 13,
 											"text": "+Boolean delete_test_descriptor(TDid)",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGAahPV4amHuF8=",
+											"_parent": {
+												"$ref": "AAAAAAGAW6Xv7nMs1iI="
+											},
+											"model": {
+												"$ref": "AAAAAAGAahPVnqj6hcg="
+											},
+											"font": "Arial;13;0",
+											"left": 45,
+											"top": 1463,
+											"width": 624.86962890625,
+											"height": 13,
+											"text": "+Boolean modify_RFID_availability_dateOfStock(JSON {new RFID, newAvailability, newDateOfStock}, RFid)",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 40,
 									"top": 843,
-									"width": 376.69775390625,
-									"height": 623
+									"width": 634.86962890625,
+									"height": 638
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -19559,8 +19610,8 @@
 							"containerChangeable": true,
 							"left": 40,
 							"top": 808,
-							"width": 376.69775390625,
-							"height": 658,
+							"width": 634.86962890625,
+							"height": 673,
 							"nameCompartment": {
 								"$ref": "AAAAAAGAW6Xv7XMmq/c="
 							},
@@ -20979,8 +21030,8 @@
 										"$ref": "AAAAAAGAW/RPw5C4u48="
 									},
 									"font": "Arial;13;0",
-									"left": 219,
-									"top": 1492,
+									"left": 242,
+									"top": 1486,
 									"width": 74.05810546875,
 									"height": 13,
 									"alpha": 1.1898363055261112,
@@ -21002,7 +21053,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 281,
+									"left": 300,
 									"top": 1508,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -21023,8 +21074,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 325,
-									"top": 1498,
+									"left": 344,
+									"top": 1510,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -21042,7 +21093,7 @@
 								"$ref": "AAAAAAGAWG/W2MpqZtE="
 							},
 							"lineStyle": 1,
-							"points": "321:1551;302:1466",
+							"points": "328:1551;332:1481",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGAW/RPw5C7OOA="
@@ -22701,7 +22752,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 636,
+									"left": 765,
 									"top": 1299,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -22722,7 +22773,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 636,
+									"left": 765,
 									"top": 1284,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -22743,7 +22794,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 636,
+									"left": 765,
 									"top": 1329,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -22764,7 +22815,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 441,
+									"left": 699,
 									"top": 1299,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -22785,7 +22836,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 444,
+									"left": 702,
 									"top": 1285,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -22806,7 +22857,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 437,
+									"left": 695,
 									"top": 1326,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -22914,7 +22965,7 @@
 								"$ref": "AAAAAAGAW6Xv7XMl4B8="
 							},
 							"lineStyle": 2,
-							"points": "416:1320;856:1320",
+							"points": "674:1320;856:1320",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGAXARlxkCkB3I="
@@ -26258,7 +26309,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "int available_quantity"
+							"name": "int available_quantity",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -26266,7 +26318,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATR3jBH3T6gQ="
 							},
-							"name": "Position position"
+							"name": "Position position",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -26293,7 +26346,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATXRIPwn0Lds="
 									},
-									"name": "json position"
+									"name": "json position",
+									"type": ""
 								}
 							]
 						},
@@ -26311,7 +26365,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATSVHIX9aSsk="
 									},
-									"name": "string description"
+									"name": "string description",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -26319,7 +26374,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATSVHIX9aSsk="
 									},
-									"name": "double weight"
+									"name": "double weight",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -26327,7 +26383,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATSVHIX9aSsk="
 									},
-									"name": "double volume"
+									"name": "double volume",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -26335,7 +26392,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATSVHIX9aSsk="
 									},
-									"name": "string note"
+									"name": "string note",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -26343,7 +26401,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATSVHIX9aSsk="
 									},
-									"name": "double price"
+									"name": "double price",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -26351,7 +26410,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATSVHIX9aSsk="
 									},
-									"name": "int available_quantity"
+									"name": "int available_quantity",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -26359,7 +26419,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATSVHIX9aSsk="
 									},
-									"name": "Position position"
+									"name": "Position position",
+									"type": ""
 								}
 							]
 						},
@@ -26377,7 +26438,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATSkRW4AK/Ac="
 									},
-									"name": "json SKU"
+									"name": "json SKU",
+									"type": ""
 								}
 							]
 						},
@@ -26438,7 +26500,27 @@
 									"_parent": {
 										"$ref": "AAAAAAGAZquDm9Kvv8I="
 									},
-									"name": "quantity"
+									"name": "quantity",
+									"type": ""
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGAahmSXdkJTWA=",
+							"_parent": {
+								"$ref": "AAAAAAGATR3jBH3T6gQ="
+							},
+							"name": "Boolean increase_av_quantity",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAahmqdd/Q24w=",
+									"_parent": {
+										"$ref": "AAAAAAGAahmSXdkJTWA="
+									},
+									"name": "quantity",
+									"type": ""
 								}
 							]
 						}
@@ -26596,7 +26678,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATWmV7ngOLm0="
 									},
-									"name": "json position"
+									"name": "json position",
+									"type": ""
 								}
 							]
 						},
@@ -26614,7 +26697,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATWusPY+TKrA="
 									},
-									"name": "json position"
+									"name": "json position",
+									"type": ""
 								}
 							]
 						},
@@ -26632,7 +26716,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATW1h4+aG2ZQ="
 									},
-									"name": "newPid"
+									"name": "newPid",
+									"type": ""
 								}
 							]
 						},
@@ -26680,6 +26765,32 @@
 									},
 									"name": "freed_volume",
 									"type": ""
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGAahnYNAJSknw=",
+							"_parent": {
+								"$ref": "AAAAAAGATSuefoD3gLg="
+							},
+							"name": "Boolean decrease_free_space",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAahnpTQkZyLs=",
+									"_parent": {
+										"$ref": "AAAAAAGAahnYNAJSknw="
+									},
+									"name": "added_weight"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAahnpTQkaMAE=",
+									"_parent": {
+										"$ref": "AAAAAAGAahnYNAJSknw="
+									},
+									"name": "added_volume"
 								}
 							]
 						}
@@ -26811,7 +26922,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATZmiETUa0BY="
 									},
-									"name": "Test_Descriptor"
+									"name": "Test_Descriptor",
+									"type": ""
 								}
 							]
 						},
@@ -26949,7 +27061,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTqjeJ1ayXc="
 							},
-							"name": "array<Test_Result> results"
+							"name": "array<Test_Result> results",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -26957,7 +27070,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTqjeJ1ayXc="
 							},
-							"name": "SKU sku"
+							"name": "int SKUid"
 						}
 					],
 					"operations": [
@@ -27014,7 +27127,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATTqjeJ1ayXc="
 							},
-							"name": "Boolean modify_RFID_availability_dateOfStock",
+							"name": "void set_available",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -27022,35 +27135,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGATUidh7dZ5yw="
 									},
-									"name": "JSON {new RFID",
-									"type": ""
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGATVAdmNtrGv8=",
-									"_parent": {
-										"$ref": "AAAAAAGATUidh7dZ5yw="
-									},
-									"name": "newAvailability",
-									"type": ""
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGATVFfkezqX2U=",
-									"_parent": {
-										"$ref": "AAAAAAGATUidh7dZ5yw="
-									},
-									"name": "newDateOfStock}",
-									"type": ""
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGATVFfkuzrKPo=",
-									"_parent": {
-										"$ref": "AAAAAAGATUidh7dZ5yw="
-									},
-									"name": "RFid",
-									"type": ""
+									"name": "newAvailability"
 								}
 							]
 						},
@@ -27226,7 +27311,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATatnqSnrnRY="
 									},
-									"name": "JSontest_Descriptor"
+									"name": "JSontest_Descriptor",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -27234,7 +27320,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATatnqSnrnRY="
 									},
-									"name": "RFid"
+									"name": "RFid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -27242,7 +27329,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATatnqSnrnRY="
 									},
-									"name": "TDid"
+									"name": "TDid",
+									"type": ""
 								}
 							]
 						},
@@ -27555,7 +27643,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGATd60xaKV5nI="
 							},
-							"name": "array<SKU_items>"
+							"name": "array<SKU_items>",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -27573,7 +27662,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATejdtOkC0sM="
 									},
-									"name": "jason Restock_Order"
+									"name": "jason Restock_Order",
+									"type": ""
 								}
 							]
 						},
@@ -28192,7 +28282,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGATmliRA4CUEk="
 									},
-									"name": "new_state"
+									"name": "new_state",
+									"type": ""
 								}
 							]
 						},
@@ -28344,7 +28435,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAToSU/8XMPvw="
 									},
-									"name": "json Item"
+									"name": "json Item",
+									"type": ""
 								}
 							]
 						}
@@ -28985,7 +29077,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAX8jC88yp/C4="
 									},
-									"name": "RFID"
+									"name": "RFID",
+									"type": ""
 								}
 							]
 						},
@@ -29057,7 +29150,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAZ4Z7NxemGG8="
 									},
-									"name": "json position"
+									"name": "json position",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -29065,7 +29159,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAZ4Z7NxemGG8="
 									},
-									"name": "int pid"
+									"name": "int pid",
+									"type": ""
 								}
 							]
 						},
@@ -29185,7 +29280,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAZ+bGYS2pE28="
 									},
-									"name": "int pid"
+									"name": "int pid",
+									"type": ""
 								}
 							]
 						},
@@ -29219,7 +29315,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAaATz9xEepfI="
 									},
-									"name": "ROid"
+									"name": "ROid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -29227,7 +29324,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAaATz9xEepfI="
 									},
-									"name": "newState"
+									"name": "newState",
+									"type": ""
 								}
 							]
 						},
@@ -29400,7 +29498,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAaKRpMX2Xfpw="
 									},
-									"name": "Iid"
+									"name": "Iid",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -29408,7 +29507,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAaKRpMX2Xfpw="
 									},
-									"name": "json Item"
+									"name": "json Item",
+									"type": ""
 								}
 							]
 						},
@@ -29472,7 +29572,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAaK8aX+V3cIA="
 									},
-									"name": "Test_Descriptor"
+									"name": "Test_Descriptor",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -29480,7 +29581,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAaK8aX+V3cIA="
 									},
-									"name": "TDid"
+									"name": "TDid",
+									"type": ""
 								}
 							]
 						},
@@ -29498,7 +29600,54 @@
 									"_parent": {
 										"$ref": "AAAAAAGAaLGj15xYorQ="
 									},
-									"name": "TDid"
+									"name": "TDid",
+									"type": ""
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGAahPVnqj6hcg=",
+							"_parent": {
+								"$ref": "AAAAAAGAW6Xv7HMjNkM="
+							},
+							"name": "Boolean modify_RFID_availability_dateOfStock",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAahPme6/BRQ4=",
+									"_parent": {
+										"$ref": "AAAAAAGAahPVnqj6hcg="
+									},
+									"name": "JSON {new RFID",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAahPme6/CWDg=",
+									"_parent": {
+										"$ref": "AAAAAAGAahPVnqj6hcg="
+									},
+									"name": "newAvailability",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAahPme6/Db1k=",
+									"_parent": {
+										"$ref": "AAAAAAGAahPVnqj6hcg="
+									},
+									"name": "newDateOfStock}",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGAahPmfK/EPqY=",
+									"_parent": {
+										"$ref": "AAAAAAGAahPVnqj6hcg="
+									},
+									"name": "RFid",
+									"type": ""
 								}
 							]
 						}
@@ -29718,7 +29867,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGAW6ixAnnGQ9I="
 							},
-							"name": "Connection connection"
+							"name": "Connection connection",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -29779,7 +29929,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAZ6GH26PLswA="
 									},
-									"name": "Position"
+									"name": "Position",
+									"type": ""
 								}
 							]
 						},
@@ -29816,7 +29967,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAZ+YiGgxvR4M="
 									},
-									"name": "int pid"
+									"name": "int pid",
+									"type": ""
 								}
 							]
 						},
@@ -30070,7 +30222,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGAaLHS9bOhadY="
 									},
-									"name": "TDid"
+									"name": "TDid",
+									"type": ""
 								}
 							]
 						}
