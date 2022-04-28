@@ -1,39 +1,24 @@
 # Design Document 
 
 
-<<<<<<< HEAD
-Authors: 
-
-Date:
-
-Version:
-=======
 Authors: Alessio Salta, Giulia Mannaioli, Masoud Karimi, Gabriele di Bartolomei
 
 Date:21/04/2022
 
 Version:1.0
->>>>>>> milestone2
 
 
 # Contents
-
-<<<<<<< HEAD
-- [High level design](#package-diagram)
-- [Low level design](#class-diagram)
-=======
 - [Design Document](#design-document)
 - [Contents](#contents)
 - [Instructions](#instructions)
 - [High level design](#high-level-design)
 - [Low level design](#low-level-design)
->>>>>>> milestone2
 - [Verification traceability matrix](#verification-traceability-matrix)
 - [Verification sequence diagrams](#verification-sequence-diagrams)
 
 # Instructions
 
-<<<<<<< HEAD
 The design must satisfy the Official Requirements document 
 
 # High level design 
