@@ -79,7 +79,6 @@ possible a parallel implementation and maintenance of the various services. The 
 
 
 # Verification sequence diagrams 
-<select key scenarios from the requirement document. For each of them define a sequence diagram showing that the scenario can be implemented by the classes and methods in the design>
 
 ![sequence_diagram_UC1_SCE_1-1_and_1-2](./sequence%20diagrams/sequence_diagram_UC1_SCE_1-1_and_1-2.jpg)
 
