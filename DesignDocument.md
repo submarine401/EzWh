@@ -9,7 +9,6 @@ Version:1.0
 
 
 # Contents
-
 - [Design Document](#design-document)
 - [Contents](#contents)
 - [Instructions](#instructions)
@@ -58,7 +57,6 @@ possible a parallel implementation and maintenance of the various services. The 
 ![TM2](./TM2.png)
 
 ![TM3](./TM3.png)
-
 
 
 
