@@ -2,14 +2,13 @@
 class InternalOrder{
     dayjs = require('dayjs');
 
- constructor(db){
-    this.db = db;
+     constructor(db){
+        this.db = db;
 
-    
     db.create_internal_orders_table().then(function(response) {
-        console.log("IO Table created Successfully", response);
+        console.log(response);
       }, function(error) {
-        console.error("Failed To Creating IO Table !!", error);
+        console.error( error);
       });
 }
 
@@ -109,8 +108,6 @@ get_issued_internalOrders(){
                         state : io.state,
                         customerid : io.customerid,
                         products : JSON.parse(io.products)
-
-                        
                     }));
                     resolve(internalorders);
                 });
@@ -132,13 +129,13 @@ insert_internal_order(nio){
             });
         //console.log(prods);
         
-        const sql = 'INSERT INTO internalorders (id,date,state,customerId,products) VALUES(?,?,?,?,?)';
-        this.db.db.run(sql,[nio.id,this.dayjs().format('YYYY-MM-DD HH:mm:ss') ,"ISSUED",nio.customerId,prods],(err)=>{
+        const sql = 'INSERT INTO internalorders (date,state,customerId,products) VALUES(?,?,?,?)';
+        this.db.db.run(sql,[this.dayjs().format('YYYY-MM-DD HH:mm:ss') ,"ISSUED",nio.customerId,prods],(err)=>{
             if(err){
                 reject(err);
                 return;
             }
-            resolve("Inserted successfully");
+            resolve("Inserted new IO successfully");
 
         });
     });

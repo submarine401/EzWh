@@ -7,20 +7,47 @@ class DBhelper{
     });
     }
 /*
-                                            CREATE INTERNAL ORDERS TABLE
+*******************************************CREATE INTERNAL ORDERS TABLE********************************************
 */
     create_internal_orders_table (){
         return new Promise((resolve,reject)=>{
         const sql = 'CREATE TABLE IF NOT EXISTS internalorders (id integer PRIMARY KEY,date text,state text, customerid text, products text)';
-        //const sql = 'CREATE TABLE groups (group_id integer PRIMARY KEY,name text NOT NULL)';
         this.db.run(sql, (err)=>{
             if(err){
                 reject(err);
                 return}
-            resolve(this.lastID);
+            resolve("IO Table -> OK");
         });
         });
     }
+/*
+*****************************************************CREATE ITEM TABLE********************************************
+*/
+create_item_table (){
+    return new Promise((resolve,reject)=>{
+    const sql = 'CREATE TABLE IF NOT EXISTS item (id integer PRIMARY KEY,description text,price integer, skuid integer, supplierid integer)';
+    this.db.run(sql, (err)=>{
+        if(err){
+            reject(err);
+            return}
+        resolve("Item Table -> OK");
+    });
+    });
+}
+/*
+*****************************************************CREATE RETURN ORDER TABLE********************************************
+*/
+create_return_order_table (){
+    return new Promise((resolve,reject)=>{
+    const sql = 'CREATE TABLE IF NOT EXISTS returnorder (id integer PRIMARY KEY,date text,products text, restockorderid integer )';
+    this.db.run(sql, (err)=>{
+        if(err){
+            reject(err);
+            return}
+        resolve("Return-Order Table -> OK");
+    });
+    });
+}
 
     
 }
