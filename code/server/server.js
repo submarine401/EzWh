@@ -4,6 +4,7 @@ const DBhelper = require('./DBhelper');
 const InternalOrder = require('./InternalOrder');
 const Item = require('./Item')
 const ReturnOrder = require('./ReturnOrder');
+const SKU = require('./SKU');
 /*
 Connect to DB
 */
@@ -361,6 +362,43 @@ app.get('/api/returnOrders/:id',async (req,res)=>{
     return res.status(500).end();
   }
 });
+
+/*
+***************************************** SKU API ****************************************************
+*/
+
+/*
+INSERT NEW SKU
+*/
+
+app.post('/api/sku', async (req,res)=>{
+  try{
+
+    if(Object.keys(req.body).length === 0){
+      return res.status(422).json({error : "Unprocessable Entity"});
+    }
+
+    const newSku = req.body;
+    if( typeof newSku.description !== 'string' || 
+        typeof newSku.weight !== 'number' || 
+        typeof newSku.volume !== 'number' || 
+        typeof newSku.notes !== 'string' || 
+        typeof newSku.price !== 'number' || 
+        typeof newSku.availableQuantity !== 'number' ){
+      return res.status(422).json({error : "Unprocessable Entityy"});
+    }
+  
+    const results = await RO.insert_return_order_table(nro);
+    return res.status(200).json(results);
+  
+  }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(503).end();
+  }
+});
+
 
 
 // activate the server
