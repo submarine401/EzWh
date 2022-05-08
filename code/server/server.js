@@ -379,7 +379,7 @@ app.get('/api/suppliers', async (req,res) =>{
   }
 });
 
-app.get('api/users', async (req,res) => {
+app.get('/api/users', async (req,res) => {
   try{
     const result = await U.getUsers();
     return res.status(200).json(result);
@@ -391,13 +391,13 @@ app.get('api/users', async (req,res) => {
   }
 });
 
-app.post('api/newUser', async (req,res) => {
+app.post('/api/newUser', async (req,res) => {
   
   try {
     
     const new_u = req.body.u;
     
-    if(new_u.id === undefined || new_u.username === undefined ||  new_u.password === undefined ||  new_u.name === undefined || new_u.surname === undefined || new_u.type === undefined){
+    if( new_u.username === undefined ||  new_u.password === undefined ||  new_u.name === undefined || new_u.surname === undefined || new_u.type === undefined){
       return res.status(522).end("Unprocessable entity");
     }
     
@@ -449,7 +449,7 @@ app.put('/api/users/:username', async (req,res) =>{
 });
 
 
-app.delete('api/users/:username/:type', async (req,res) => {
+app.delete('/api/users/:username/:type', async (req,res) => {
   const type = req.params.type;
   const username = req.params.username
   try {

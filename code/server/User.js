@@ -79,9 +79,9 @@ class User {
         reject("Password must be at least 8 characters long!\n");
         return;
       }
-      const sql_query = 'INSERT INTO users VALUES = ?, ?, ?, ?, ?, ?';
+      const sql_query = 'INSERT INTO users(username, passowrd, name, surname, type) VALUES = ?, ?, ?, ?, ?';
       //insert into 'users' table the parameters defining in the following constant
-      const parameters=[u.id,u.username, u.password, u.name, u.surname, u.type];
+      const parameters=[u.username, u.password, u.name, u.surname, u.type];
       this.db.db.run(sql_query, parameters, function(err){
         if (err) {
           reject(err);
