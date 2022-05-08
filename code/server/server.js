@@ -446,6 +446,25 @@ app.put('/api/users/:username', async (req,res) =>{
   } catch (err) {
     console.log(err);
     res.status(503).end();
+  }  
+});
+
+
+app.delete('api/users/:username/:type', async (req,res) => {
+  const type = req.params.type;
+  const username = req.params.username
+  try {
+    if(username === undefined || type === undefined || type === "administrator" || type === "administrator"){
+      console.log("Unprocessable entity\n");
+      res.status(422).end();
+    }
+    
+    const result = await U.deleteUser(username,type);
+    res.status(204).end();
+    
+  } catch (err) {
+    console.log(err);
+    res.status(503).end();
   }
   
 });

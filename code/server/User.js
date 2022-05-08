@@ -16,6 +16,8 @@ class User {
     );
   }
   
+  
+  
   //method which returns user informations if logged in
   getSuppliers(){
     return new Promise((resolve,reject) => {
@@ -42,7 +44,7 @@ class User {
     });
   }
   
-  
+  //method returning the list of all users except managers
   getUsers(){
     return new Promise((resolve,reject) =>{
       const sql_query = 'SELECT * FROM users WHERE NOT type = manager';
@@ -97,7 +99,8 @@ class User {
   given its username as parameter*/
   modify_user_rights(username){
     return new Promise((resolve,reject) => {
-      const sql_query ='INSERT INTO users(type) VALUES (?)';
+      const sql_query1 = 'SELECT * FROM users'
+      const sql_query2 ='INSERT INTO users(type) VALUES (?)';
       this.db.db.run(sql_query,[username], function(err){
       
       if(err){
@@ -111,17 +114,15 @@ class User {
     });
   }
   
-  
-  deleteUser(username){
+  //method to delete a user given its username
+  deleteUser(username,type){
     return new Promise((resolve,reject) =>{
-      const sql_query = 'DELETE FROM users WHERE username= ?';
-      this.db.db.run(sql_query, [username], function(err) {
-        
+      const sql_query = 'DELETE FROM users WHERE username= ? AND type = ?';
+      this.db.db.run(sql_query, [username, type], function(err) {
         if(err){
           reject(err);
           return;
         }
-        
         resolve(`user with username: ${username} has been correcly deleted.\n`);
         
       });
