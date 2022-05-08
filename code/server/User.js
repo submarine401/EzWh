@@ -30,10 +30,10 @@ class User {
         
         const suppliers_array = rows.map(supplier => ({  //here an array of objects is built
           
-          id=supplier.id;
-          username=supplier.username";   //must be an email
-          name=supplier.name;
-          surname=supplier.surname;
+          id:supplier.id,
+          username:supplier.username,   //must be an email
+          name:supplier.name,
+          surname:supplier.surname
             
         }));
         
@@ -58,11 +58,11 @@ class User {
         //if the query executes correctly create an array of 'User' objects
         const users_not_manager = rows.map(u => ({
           
-          "id" = u.id;
-          "username" = "u.username"; 
-          "name" = "u.name";
-          "surname" = "u.surname";
-          "type" = "u.type";
+          id : u.id,
+          username : u.username,
+          name : u.name,
+          surname : u.surname,
+          type : u.type
           
         }));
         
@@ -130,5 +130,5 @@ class User {
   }
   
   
-  module.exports = User;
 }
+module.exports = User;

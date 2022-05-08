@@ -49,10 +49,23 @@ create_return_order_table (){
     });
 }
 
+
+/*
+***************************************************CREATE USER TABLE***********************************
+*/
+
+create_user_table(){
+  return new Promise((resolve,reject) =>{
+    const sql_query='CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY, username text, password text, name text, surname text, type text);';
+    this.db.run(sql_query,[], function(err){
+      if(err){
+        reject(err);
+        return;
+      }
+      resolve("Users Table -> OK");
+    });
+  });
+}
     
 }
 module.exports = DBhelper;
-
-
-
-
