@@ -467,7 +467,6 @@ app.put('/api/users/:username', async (req,res) =>{
   } catch (err) {
     console.log(err);
     return res.status(503).end();
-  }
   }  
 });
 
