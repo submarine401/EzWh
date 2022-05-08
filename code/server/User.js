@@ -30,10 +30,10 @@ class User {
         
         const suppliers_array = rows.map(supplier => ({  //here an array of objects is built
           
-          "id"=supplier.id;
-          "username"="supplier.username";   //must be an email
-          "name"="supplier.name";
-          "surname"="supplier.surname";
+          id=supplier.id;
+          username=supplier.username";   //must be an email
+          name=supplier.name;
+          surname=supplier.surname;
             
         }));
         
