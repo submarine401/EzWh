@@ -439,7 +439,7 @@ app.post('/api/newUser', async (req,res) => {
     
     const result = await U.newUser(new_u);
     //console.log(typeof(result));
-    return res.status(200).end();
+    return res.status(200).end("User inserted!");
 
   } catch (err) {
     console.log(err);
@@ -460,7 +460,7 @@ app.put('/api/users/:username', async (req,res) =>{
       return res.status(422).end();
     }
     
-    const result = await U.modify_user_rights(username);
+    const result = await U.modify_user_rights(username,body.newType);
     return res.status(200).end();
     
     

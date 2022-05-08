@@ -81,22 +81,10 @@ class User {
       }
       const email = u.username;
       const type = u.type;
-      const sql_query1 = 'SELECT * FROM users WHERE (username = ? AND type = ?)';
       const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = ? AND type = ?)';
       //insert into 'users' table the parameters defining in the following constant
       const parameters=[u.username, u.password, u.name, u.surname, u.type, email, type];
-      
-      /*this.db.db.all(sql_query1, [email,type], function(err,rows){
-        if(err){
-          reject(err);
-          return;
-        }
-        else if(rows.length !== 0){ //user  exist, return error message
-          console.log("User already existent\n");
-          reject(-1);
-          return;
-        }
-      });*/
+    
       
       //if user does not exist insert it into DB
       this.db.db.all(sql_query2, parameters, function(err,rows){
@@ -104,14 +92,11 @@ class User {
           reject(err);
           return;
         }
-        if(rows.length === 0){
-          return reject(err);
+        //if(rows.length === 0){
+        //  return reject(err);
           
-        }
-        else{
-          resolve("User successfully added!\n");
-        }
-        
+        //}
+        resolve("User successfully added!\n");
       });
       
     });
@@ -120,36 +105,26 @@ class User {
   
   /*API function which modifies access rights of a user, 
   given its username as parameter*/
-  modify_user_rights(username){
+  modify_user_rights(username,u_new_type){
     return new Promise((resolve,reject) => {
-      const sql_query1 = 'SELECT * FROM users WHERE username = ?'
-      const sql_query2 ='INSERT INTO users (type) VALUES (?)';
+      const sql_query = 'UPDATE users set type = ? WHERE username = ?'
       
       //check if username exists
-      this.db.db.run(sql_query1,[username], function(err,rows){
+      this.db.db.run(sql_query,[u_new_type,username], function(err,rows){
       
       if(err){
         reject(err);
         return;
       }
       
-      if(rows.length===0){//username does not exists
-        reject("User does not exists\n");
-        return;
-      }
-      else{
-          this.db.db.run(sql_query2,[username], function(err){
-            if(err){
-              reject(err);
-              return;
-            }
-          
-            resolve(`User ${username} successfully modified\n`);
-          
-          });
-        }
+      //if(rows.length===0){//username does not exists
+      //  reject("User does not exists\n");
+      //  return;
+      //}
       });
-    
+      
+      resolve("Operation completed successfully\n");
+      
     });
   }
   
