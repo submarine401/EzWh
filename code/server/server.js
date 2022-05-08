@@ -6,6 +6,7 @@ const Item = require('./Item')
 const ReturnOrder = require('./ReturnOrder');
 const SKU = require('./SKU');
 const DataInterface = require('./DataInterface');
+const User = require('./User');
 /*
 Connect to DB
 */
@@ -17,6 +18,7 @@ const dataInterface = new DataInterface(db);
 const IO = new InternalOrder(db);
 const I = new Item(db);
 const RO = new ReturnOrder(db);
+const U = new User(db);
 
 // init express
 const app = new express();
@@ -397,10 +399,103 @@ app.post('/api/sku', async (req,res)=>{
   catch(err)
   {
     console.log(err);
+  }
+});
+/****************************USER API******************************/
+
+app.get('/api/suppliers', async (req,res) =>{
+  try {
+    
+    const result= await U.getSuppliers();
+    return res.status(200).json(results);
+    
+  } catch (err) {
+    //MISSING ERROR 401 (NOT AUTHENTICATED)
+    console.log(err);
+    return res.status(500).end();
+  }
+});
+
+app.get('/api/users', async (req,res) => {
+  try{
+    const result = await U.getUsers();
+    return res.status(200).json(result);
+  }
+  catch(err){
+    //MISSING ERROR 401 (NOT AUTHENTICATED)
+    console.log(err);
+    return res.status(500).end();
+  }
+});
+
+app.post('/api/newUser', async (req,res) => {
+  try {
+    
+    const new_u = req.body;
+    
+    if( new_u.username === undefined ||  new_u.password === undefined ||  new_u.name === undefined || new_u.surname === undefined || new_u.type === undefined){
+      return res.status(522).end("Unprocessable entity");
+    }
+    
+    const result = await U.newUser(new_u);
+    result.catch(function(){
+      return res.status(409).end();
+    });
+    
+    result.then(function(){
+      return res.status(200).end();
+    });
+    
+  } catch (err) {
+    console.log(err);
+    if(err === -1){
+      return res.status(409).end();
+    }
     return res.status(503).end();
   }
 });
 
+
+app.put('/api/users/:username', async (req,res) =>{
+  
+  try {
+    const body = req.body;
+    const username = req.params.username;
+    if (body.oldType === body.newType){
+      return res.status(422).end();
+    }
+    if(req.params.username === undefined || req.body.oldType === undefined || req.body.newType === undefined){
+      return res.status(422).end();
+    }
+    
+    const result = await U.modify_user_rights(username);
+    return res.status(200).end();
+    
+  } catch (err) {
+    console.log(err);
+    return res.status(503).end();
+  }  
+});
+
+
+app.delete('/api/users/:username/:type', async (req,res) => {
+  const type = req.params.type;
+  const username = req.params.username
+  try {
+    if(username === undefined || type === undefined || type === "administrator" || type === "administrator"){
+      console.log("Unprocessable entity\n");
+      return res.status(422).end();
+    }
+    
+    const result = await U.deleteUser(username,type);
+    return res.status(204).end();
+    
+  } catch (err) {
+    console.log(err);
+    return res.status(503).end();
+  }
+  
+});
 
 
 // activate the server
