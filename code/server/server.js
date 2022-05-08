@@ -438,19 +438,11 @@ app.post('/api/newUser', async (req,res) => {
     }
     
     const result = await U.newUser(new_u);
-    result.catch(function(){
-      return res.status(409).end();
-    });
-    
-    result.then(function(){
-      return res.status(200).end();
-    });
-    
+    //console.log(typeof(result));
+    return res.status(200).end();
+
   } catch (err) {
     console.log(err);
-    if(err === -1){
-      return res.status(409).end();
-    }
     return res.status(503).end();
   }
 });
@@ -471,9 +463,11 @@ app.put('/api/users/:username', async (req,res) =>{
     const result = await U.modify_user_rights(username);
     return res.status(200).end();
     
+    
   } catch (err) {
     console.log(err);
     return res.status(503).end();
+  }
   }  
 });
 

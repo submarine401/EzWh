@@ -82,30 +82,35 @@ class User {
       const email = u.username;
       const type = u.type;
       const sql_query1 = 'SELECT * FROM users WHERE (username = ? AND type = ?)';
-      const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) VALUES (?, ?, ?, ?, ?)';
+      const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = ? AND type = ?)';
       //insert into 'users' table the parameters defining in the following constant
-      const parameters=[u.username, u.password, u.name, u.surname, u.type];
+      const parameters=[u.username, u.password, u.name, u.surname, u.type, email, type];
       
-      this.db.db.all(sql_query1, [email,type], function(err,rows){
+      /*this.db.db.all(sql_query1, [email,type], function(err,rows){
         if(err){
           reject(err);
-          return 1;
-        }
-        else if(rows.length !== 0){ //user  exist, return error message
-          reject(-1);
-          console.log("User already existent\n");
           return;
         }
-      });
+        else if(rows.length !== 0){ //user  exist, return error message
+          console.log("User already existent\n");
+          reject(-1);
+          return;
+        }
+      });*/
       
       //if user does not exist insert it into DB
-      this.db.db.run(sql_query2, parameters, function(err){
+      this.db.db.all(sql_query2, parameters, function(err,rows){
         if (err) {
           reject(err);
-          return 1;
+          return;
         }
-        
-        resolve("User successfully added!\n");
+        if(rows.length === 0){
+          return reject(err);
+          
+        }
+        else{
+          resolve("User successfully added!\n");
+        }
         
       });
       
