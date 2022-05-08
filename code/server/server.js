@@ -420,7 +420,6 @@ app.post('api/newUser', async (req,res) => {
       
     });
     const results = await U.newUser(new_u);
-    if()
   } catch (err) {
     console.log(err);
     res.status(503).end();
