@@ -5,6 +5,7 @@ const InternalOrder = require('./InternalOrder');
 const Item = require('./Item')
 const ReturnOrder = require('./ReturnOrder');
 const SKU = require('./SKU');
+const DataInterface = require('./DataInterface');
 /*
 Connect to DB
 */
@@ -12,6 +13,7 @@ const db = new DBhelper("EZWHDB");
 /*
 Creating instances of classe which db connection is passed to each one
 */
+const dataInterface = new DataInterface(db);
 const IO = new InternalOrder(db);
 const I = new Item(db);
 const RO = new ReturnOrder(db);
@@ -385,11 +387,11 @@ app.post('/api/sku', async (req,res)=>{
         typeof newSku.notes !== 'string' || 
         typeof newSku.price !== 'number' || 
         typeof newSku.availableQuantity !== 'number' ){
-      return res.status(422).json({error : "Unprocessable Entityy"});
+      return res.status(422).json({error : "Unprocessable Entity"});
     }
   
-    const results = await RO.insert_return_order_table(nro);
-    return res.status(200).json(results);
+    dataInterface.create_SKU(newSku);
+    return res.status(201).json({success: 'Created'});
   
   }
   catch(err)
