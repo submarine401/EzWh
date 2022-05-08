@@ -392,37 +392,29 @@ app.get('/api/users', async (req,res) => {
 });
 
 app.post('/api/newUser', async (req,res) => {
-  
   try {
     
-    const new_u = req.body.u;
+    const new_u = req.body;
     
     if( new_u.username === undefined ||  new_u.password === undefined ||  new_u.name === undefined || new_u.surname === undefined || new_u.type === undefined){
       return res.status(522).end("Unprocessable entity");
     }
     
     const result = await U.newUser(new_u);
-    const new_email = req.body.username;
-    const new_type = req.body.type;
-    const query_check_user = 'SELECT * FROM users WHERE username = ? AND type = ?';
-    this.db.db.all(query_check_user, [new_email, new_type], function(err,rows){
-      if(err){
-        console.log(err);
-        return;
-      }
-      
-      if(rows.length === 0){  //no duplicartes were found
-        return res.status(200).end();
-      }
-      else{
-        return res.status(409).end("user with same mail and type already exists\n");
-      }
-      
+    result.catch(function(){
+      return res.status(409).end();
     });
-    const results = await U.newUser(new_u);
+    
+    result.then(function(){
+      return res.status(200).end();
+    });
+    
   } catch (err) {
     console.log(err);
-    res.status(503).end();
+    if(err === -1){
+      return res.status(409).end();
+    }
+    return res.status(503).end();
   }
 });
 
@@ -433,10 +425,10 @@ app.put('/api/users/:username', async (req,res) =>{
     const body = req.body;
     const username = req.params.username;
     if (body.oldType === body.newType){
-      res.status(404).end();
+      return res.status(422).end();
     }
-    else if(req.params.username === undefined || req.body.oldType === undefined || req.body.newType === undefined){
-      res.status(422).end();
+    if(req.params.username === undefined || req.body.oldType === undefined || req.body.newType === undefined){
+      return res.status(422).end();
     }
     
     const result = await U.modify_user_rights(username);
@@ -444,7 +436,7 @@ app.put('/api/users/:username', async (req,res) =>{
     
   } catch (err) {
     console.log(err);
-    res.status(503).end();
+    return res.status(503).end();
   }  
 });
 
@@ -455,15 +447,15 @@ app.delete('/api/users/:username/:type', async (req,res) => {
   try {
     if(username === undefined || type === undefined || type === "administrator" || type === "administrator"){
       console.log("Unprocessable entity\n");
-      res.status(422).end();
+      return res.status(422).end();
     }
     
     const result = await U.deleteUser(username,type);
-    res.status(204).end();
+    return res.status(204).end();
     
   } catch (err) {
     console.log(err);
-    res.status(503).end();
+    return res.status(503).end();
   }
   
 });
