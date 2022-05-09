@@ -10,7 +10,12 @@ class DataInterface{
 
         this.dbHelper = dbHelper;
         this.skus = this.dbHelper.load_SKUs();
+
         if(this.skus === undefined) this.skus = [];
+        
+        //debug
+        this.skus.push(new SKU(1, 'new sku'));
+
         
     }
 
@@ -24,20 +29,42 @@ class DataInterface{
                                     skuData.description,
                                     skuData.weight,
                                     skuData.volume,
-                                    skuData.note,
+                                    skuData.notes,
                                     skuData.price,
-                                    skuData.available_quantity);
+                                    skuData.availableQuantity);
 
             this.skus.push(newSKU);
+
+            console.log(this.skus);
 
             await this.dbHelper.store_SKU(newSKU);
 
         }  catch(err) {
           throw(err);
         }
+    }
+
+    return_SKU(){
+        return this.skus;
+    }
+
+    get_SKU(id){
+        return this.skus.find(sku => sku.id == id);
+    }
+
+    delete_SKU(id){
+        console.log('delete SKU' + id);
+        const sku = this.get_SKU(id);
+        console.log(sku.id);
+        if(sku !== undefined){
+            this.skus.filter(sk => sk.id == id);
+            this.dbHelper.delete_SKU();
+            return true;
+        } else {
+            return false;
+        }
 
         
-
     }
 
 }

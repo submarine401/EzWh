@@ -399,8 +399,78 @@ app.post('/api/sku', async (req,res)=>{
   catch(err)
   {
     console.log(err);
+    return res.status(503).end();
   }
 });
+
+app.get('/api/skus', (req, res)=>{
+
+  try
+    {     
+      return res.status(200).json(dataInterface.return_SKU());
+    }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(500).end();
+  }
+
+});
+
+app.get('/api/skus/:id', (req, res)=>{
+
+  try{     
+
+    const id = req.params.id
+    if( id > 0 && typeof id === 'number') {
+
+      const ret = dataInterface.get_SKU(id)
+      console.log(ret);
+      if(ret === undefined){
+        return res.status(404).end();
+      } else {
+        return res.status(200).json(ret);
+      }
+
+    } else {
+      return res.status(422).json({error : "INVALID I INPUT"});
+    }
+  }
+  catch(err) {
+    console.log(err);
+    return res.status(500).end();
+  }
+
+});
+
+app.delete('/api/skus/:id', (req, res)=>{
+
+  try{     
+
+    const id = req.params.id
+    if( id > 0 && typeof id === 'number') {
+
+      if(dataInterface.delete_SKU(id)){
+        return res.status(204).end();
+      } else {
+        return res.status(404).json(ret);
+      }
+
+    } else {
+      return res.status(422).json({error : "INVALID I INPUT"});
+    }
+  }
+  catch(err) {
+    console.log(err);
+    return res.status(503).end();
+  }
+
+});
+
+// SKUapi = require('/api/SKUapi'); ---> let router = express.Router() --> usa router come app
+// app.use('/', SKUapi);
+
+
 /****************************USER API******************************/
 
 app.get('/api/suppliers', async (req,res) =>{
