@@ -1,6 +1,6 @@
 const DBhelper = require('./DBhelper');
 const SKU = require('./SKU');
-const U = require ('./User');
+//const U = require ('./User');
 
 
 class DataInterface{
@@ -12,10 +12,10 @@ class DataInterface{
 
         this.dbHelper = dbHelper;
         this.skus = this.dbHelper.load_SKUs();
-        this.users = this.dbHelper.load_users();
+        //this.users = this.dbHelper.load_users();
 
         if(this.skus === undefined) this.skus = [];
-        if(this.users === undefined) this.users = [];
+        //if(this.users === undefined) this.users = [];
         
         //debug
         this.skus.push(new SKU(1, 'new sku'));
@@ -70,12 +70,14 @@ class DataInterface{
 
         
     }
-    
+
+/********************************USER METHODS***************************/
+
     //method returning the list of all users except managers
     getUsers(){
       return new Promise((resolve,reject) =>{
-        const sql_query = 'SELECT * FROM users WHERE NOT type = manager';
-        this.db.db.all(sql_query,[], function(err, rows){
+        const sql_query = 'SELECT * FROM users';
+        this.dbHelper.db.all(sql_query,[], function(err, rows){
           
           if(err){
             reject(err);

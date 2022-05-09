@@ -1,3 +1,5 @@
+
+
 class User {
   dayjs = require('dayjs');
   constructor(db) {
@@ -17,8 +19,6 @@ class User {
   }
   
   
-  
-  //method which returns user informations if logged in
   getSuppliers(){
     return new Promise((resolve,reject) => {
       const sql_query = 'SELECT * FROM users WHERE type = supplier';
@@ -53,22 +53,17 @@ class User {
       }
       const email = u.username;
       const type = u.type;
-      const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = ? AND type = ?)';
+      const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) VALUES (?, ?, ?, ?, ?)';
       //insert into 'users' table the parameters defining in the following constant
-      const parameters=[u.username, u.password, u.name, u.surname, u.type, email, type];
+      const parameters=[u.username, u.password, u.name, u.surname, u.type];
     
-      
-      //if user does not exist insert it into DB
-      this.db.db.all(sql_query2, parameters, function(err,rows){
-        if (err) {
-          reject(err);
-          return;
+    //Insert user in the DB
+      this.db.db.all(sql_query2,parameters, function(err,rows){
+      if(err){
+        reject(err);
+        return;
         }
-        //if(rows.length === 0){
-        //  return reject(err);
-          
-        //}
-        resolve("User successfully added!\n");
+        resolve(201);
       });
       
     });

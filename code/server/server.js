@@ -495,7 +495,7 @@ app.get('/api/suppliers', async (req,res) =>{
 
 app.get('/api/users', async (req,res) => {
   try{
-    const result = await U.getUsers();
+    const result = await dataInterface.getUsers();
     return res.status(200).json(result);
   }
   catch(err){
@@ -509,19 +509,23 @@ app.post('/api/newUser', async (req,res) => {
   try {
     
     const new_u = req.body;
+    let users_array = [];
     
     if( new_u.username === undefined ||  new_u.password === undefined ||  new_u.name === undefined || new_u.surname === undefined || new_u.type === undefined){
       return res.status(522).end("Unprocessable entity");
     }
     
+    const check_username = await dataInterface.getUsers();
+    const res_check_username = check_username.filter(function(users){
+      return users.username == new_u.username;
+    });
+    
+    if(res_check_username.length !== 0){
+      return res.status(409).end("User already existent!");
+    }
     const result = await U.newUser(new_u);
-    console.log(result);
-    if(result === 409){
-      return res.status(409).end("User already existent")
-    }
-    else{
-      return res.status(200).end("User inserted!");
-    }
+    return res.status(200).end("User inserted!");
+    
 
   } catch (err) {
     console.log(err);
