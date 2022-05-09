@@ -1,6 +1,6 @@
 'use strict'
 
-class TestResult{
+class Test_Result{
 
     constructor(db){
        this.db = db;
@@ -13,11 +13,11 @@ class TestResult{
        
    }
    
-}
 
 
 
-insert_into_testResult_table(t) {
+
+insert_into_testResult_table(tr) {
     return new Promise ((resolve,reject)=>{ 
         const sql = 'INSERT INTO Test_result (TRid, date, result) VALUES(?,?,?)';
         this.db.db.run(sql,[tr.TRid, tr.date,tr.result], (err)=>{
@@ -35,11 +35,11 @@ insert_into_testResult_table(t) {
     });
 }
 
-modifyTR(TRid, t, RFid, TDid) { // oppure se prendo il metodo fatto da noi TRid, newdes newdate,newres
+modifyTR(TRid, RFid, newTestDescriptor, newDate, newResult) {  //MODIFIED (there isn't RFid in the design)
 
     return new Promise ((resolve,reject)=>{
-        const sql = 'UPDATE Test_Result SET t = ? , date = ? , result = ? WHERE TRid = ? AND RFid = ?'; //e qui forse va solo TRid
-        this.db.db.run(sql,[t.newTestDescriptor,t.newDate,t.newResult, TRid, TDid, RFid], (err)=>{ 
+        const sql = 'UPDATE Test_Result SET testResult = ? , date = ? , result = ? WHERE TRid = ? , RFid = ?'; 
+        this.db.db.run(sql,[t.newTestDescriptor,t.newDate,t.newResult, TRid,  RFid], (err)=>{ 
             if(err)
             {
                 reject(err);
@@ -68,7 +68,7 @@ delete_test_descriptor(TRid, RFif) {
 
 }
 
-get_TR(RFid) { 
+get_TR(RFid) {  //metto un else, se il secondo è undefiend allora è qiesta, senno e la get by id 
     return new Promise((resolve,reject)=>{
        
                     const sql = "SELECT * FROM Test_Result ";
@@ -113,5 +113,8 @@ get_TR_by_id(RFid, TRid) { // dalle api sembra che è per avere l id del TR e no
         });
 }
 
+
+
+}
 
 module.exports = TestDescriptor;

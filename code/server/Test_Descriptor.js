@@ -1,11 +1,11 @@
 'use strict'
 
-class TestDescriptor{
+class Test_Descriptor{
 
     constructor(db){
        this.db = db;
    
-       db.create_testDescriptor_table().then(function(response) {
+       db.create_test_Descriptor_table().then(function(response) {
         console.log(response);
     }, function(error) {
         console.error(error);
@@ -15,11 +15,11 @@ class TestDescriptor{
    
    
 
-   insert_into_testDescriptor_table(t)
+   insert_into_test_Descriptor_table(td)
    {
        return new Promise ((resolve,reject)=>{ 
            const sql = 'INSERT INTO Test_Descriptor (TDid, name, procedure_description) VALUES(?,?,?)';
-           this.db.db.run(sql,[t.TDid, t.name,t.procedure_description], (err)=>{
+           this.db.db.run(sql,[td.TDid, td.name,td.procedure_description], (err)=>{
                if(err)
                {
                    reject(err);
@@ -34,11 +34,11 @@ class TestDescriptor{
        });
    }
 
-   modify_test_descriptor(t, TDid){
+   modify_test_descriptor(td, TDid){
 
        return new Promise ((resolve,reject)=>{
            const sql = 'UPDATE Test_Descriptor SET name = ? , procedure_description = ? WHERE TDid = ?';
-           this.db.db.run(sql,[t.newName,t.newProcedureDescription,t.newIdSKU], (err)=>{
+           this.db.db.run(sql,[td.newName,td.newProcedureDescription,TDid], (err)=>{ 
                if(err)
                {
                    reject(err);
@@ -110,6 +110,8 @@ class TestDescriptor{
                
            });
    }
+//TODO fai il getTDid()
+//TODO le funzioni che stanno scritte nel Data Interface le devi scriverer li e non qua dentro
 
 }
-   module.exports = TestDescriptor;
+   module.exports = Test_Descriptor;
