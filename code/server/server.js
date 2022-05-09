@@ -693,20 +693,20 @@ app.put('/api/testDescriptor/:id',async (req,res)=>{
         return res.status(422).json({error : "Unprocessable Entity"});
       }
       
-      const id = req.params.id
-      const s = dataInterface.get_SKU(idSKU)
+      const id = req.params.id;
 
-      if(id >0 && typeof id === 'number')
-      {   
+      if(id >0 && typeof id === 'number'){   
         const t = Test_Descriptor.get_TD(id);
-           if(t === undefined){
+        const s = dataInterface.get_SKU(newIdSKU);
+          if(t === undefined){
                 return res.status(404).end();
-              } else {
-                return res.status(200).json(t);
-              }
+           }else if(s === undefined){
+                return res.status(404).end();
+          }else{
               const results = await TD.modify_test_descriptor(td, id);
               return res.status(200).json(results);
-      } 
+          } 
+      }
     }
   catch(err)
   {
