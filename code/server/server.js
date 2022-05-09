@@ -154,7 +154,8 @@ app.put('/api/internalOrders/:id',async (req,res)=>{
     }
     
     const id = req.params.id
-    const results = await IO.modify_internal_order(id,io);
+    const results = await IO.
+    ernal_order(id,io);
     return res.status(200).json(results);
 
   }
@@ -508,8 +509,13 @@ app.post('/api/newUser', async (req,res) => {
     }
     
     const result = await U.newUser(new_u);
-    //console.log(typeof(result));
-    return res.status(200).end("User inserted!");
+    console.log(result);
+    if(result === 409){
+      return res.status(409).end("User already existent")
+    }
+    else{
+      return res.status(200).end("User inserted!");
+    }
 
   } catch (err) {
     console.log(err);

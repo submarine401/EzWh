@@ -74,29 +74,42 @@ class User {
   
   
   newUser(u){
-    return new Promise((resolve,reject) => {
+    return new Promise(async (resolve,reject) => {
       if(u.password.length < 8){
         reject("Password must be at least 8 characters long!\n");
         return;
       }
       const email = u.username;
       const type = u.type;
-      const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = ? AND type = ?)';
+      const sql_query1 = 'SELECT * FROM users WHERE username = ?'
+      const params1 = [email];
+      const sql_query2 = 'INSERT INTO users (username, password, name, surname, type) VALUES (?, ? , ?, ?, ?)';
+      //const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = ? AND type = ?)';
       //insert into 'users' table the parameters defining in the following constant
-      const parameters=[u.username, u.password, u.name, u.surname, u.type, email, type];
+      //const parameters=[u.username, u.password, u.name, u.surname, u.type, email, type];
+      const params2 = [u.username,u.password,u.name,u.surname,u.type];
     
       
       //if user does not exist insert it into DB
-      this.db.db.all(sql_query2, parameters, function(err,rows){
-        if (err) {
-          reject(err);
-          return;
+      await this.db.db.all(sql_query1, params1, function(err,rows){
+        console.log(rows);
+        if (rows.length !== 0) {
+          console.log("ciao1");
+          resolve(409);
         }
-        //if(rows.length === 0){
-        //  return reject(err);
-          
-        //}
-        resolve("User successfully added!\n");
+        else if(err){
+          resolve(err);
+        }
+      });
+      this.db.db.run(sql_query2,params2,function(err,rows){
+        //console.log(rows);
+        console.log("ciao2");
+        if(err){
+         resolve(err);
+        }
+        else{
+         resolve(200);
+        }
       });
       
     });
