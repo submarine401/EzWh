@@ -5,7 +5,7 @@ class Test_Result{
     constructor(db){
        this.db = db;
    
-       db.create_testResult_table().then(function(response) {
+       db.create_test_Result_table().then(function(response) {
         console.log(response);
     }, function(error) {
         console.error(error);
@@ -17,7 +17,7 @@ class Test_Result{
 
 
 
-insert_into_testResult_table(tr) {
+insert_into_test_Result_table(tr) {
     return new Promise ((resolve,reject)=>{ 
         const sql = 'INSERT INTO Test_result (TRid, date, result) VALUES(?,?,?)';
         this.db.db.run(sql,[tr.TRid, tr.date,tr.result], (err)=>{
@@ -38,8 +38,8 @@ insert_into_testResult_table(tr) {
 modifyTR(TRid, RFid, newTestDescriptor, newDate, newResult) {  //MODIFIED (there isn't RFid in the design)
 
     return new Promise ((resolve,reject)=>{
-        const sql = 'UPDATE Test_Result SET testResult = ? , date = ? , result = ? WHERE TRid = ? , RFid = ?'; 
-        this.db.db.run(sql,[t.newTestDescriptor,t.newDate,t.newResult, TRid,  RFid], (err)=>{ 
+        const sql = 'UPDATE Test_Result SET test_Result = ? , date = ? , result = ? WHERE TRid = ? , RFid = ?'; 
+        this.db.db.run(sql,[tr.newTestDescriptor,tr.newDate,tr.newResult, TRid,  RFid], (err)=>{ 
             if(err)
             {
                 reject(err);
@@ -68,16 +68,18 @@ delete_test_descriptor(TRid, RFif) {
 
 }
 
-get_TR(RFid) {  //metto un else, se il secondo è undefiend allora è qiesta, senno e la get by id 
+get_TR(RFid, TRid) {  //metto un else, se il secondo è undefiend allora è qiesta, senno e la get by id 
     return new Promise((resolve,reject)=>{
-       
-                    const sql = "SELECT * FROM Test_Result ";
+
+
+            if(TRid===undefined){
+                const sql = "SELECT * FROM Test_Result ";
                 this.db.db.all(sql,(err,rows)=>{
                     if(err){
                         reject(err); 
                         return;
                         }
-                   /* const internalorders = rows.map((t)=>(
+                   /* const  test_Result = rows.map((t)=>(
                     { //sulle API dice che deve tornare uno idSKU 
                         TRid : tr.TRid,
                         TDid : tr.TDid,
@@ -85,35 +87,29 @@ get_TR(RFid) {  //metto un else, se il secondo è undefiend allora è qiesta, se
                         Result : tr.Result
                       
                     })); 
-                    resolve(internalorders);*/
+                    resolve( test_Result);*/
                 });
-            
-        });
-}
-
-get_TR_by_id(RFid, TRid) { // dalle api sembra che è per avere l id del TR e non passarlo come parametro
-    return new Promise((resolve,reject)=>{
-       
-                    const sql = "SELECT * FROM Test_Result where RFid = ? ";
+            }else{
+                const sql = "SELECT * FROM Test_Result where RFid = ? ";
                 this.db.db.all(sql,[RFid],(err,rows)=>{
                     if(err){
                         reject(err); 
                         return;
                         }
-              /*      const internalorders = rows.map((i)=>(
+              /*      const test_Result = rows.map((i)=>(
                     {
                         TRid : tr.TRid,
                         TDid : tr.TDid,
                         Date : tr.Date,
                         Result : tr.Result 
                      }));
-                    resolve(internalorders);*/
+                    resolve(test_Result);*/
                 });
             
+            }
+            
         });
-}
-
-
+    }
 
 }
 
