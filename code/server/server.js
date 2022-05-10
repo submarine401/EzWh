@@ -8,6 +8,7 @@ const SKU = require('./SKU');
 const DataInterface = require('./DataInterface');
 const User = require('./User');
 const SKUapi = require('./api/SKUapi');
+const PositionApi = require('./api/PositionApi');
 const Test_Descriptor = require('./Test_Descriptor');
 const Test_Result= require('./Test_Result');
 const dbHelper = require('./DBhelper');
@@ -383,6 +384,12 @@ app.get('/api/returnOrders/:id',async (req,res)=>{
 */
 
 app.use('/', SKUapi);
+
+/*
+***************************************** Position API ****************************************************
+*/
+
+app.use('/', PositionApi);
 
 
 /****************************USER API******************************/
