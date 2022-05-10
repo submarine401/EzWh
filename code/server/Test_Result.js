@@ -68,49 +68,6 @@ delete_test_descriptor(TRid, RFif) {
 
 }
 
-get_TR(RFid, TRid) { 
-    return new Promise((resolve,reject)=>{
-
-
-            if(TRid===undefined){
-                const sql = "SELECT * FROM testresults ";
-                this.db.db.all(sql,(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                     const  testresults = rows.map((t)=>(
-                    { //TODO sulle API dice che deve tornare uno idSKU 
-                        TRid : tr.TRid,
-                        TDid : tr.TDid,
-                        Date : tr.Date,
-                        Result : tr.Result
-                      
-                    })); 
-                    resolve(testresults);
-                });
-            }else{
-                const sql = "SELECT * FROM testresults where RFid = ? ";
-                this.db.db.all(sql,[RFid],(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                    const testresults = rows.map((i)=>(
-                    {
-                        TRid : tr.TRid,
-                        TDid : tr.TDid,
-                        Date : tr.Date,
-                        Result : tr.Result 
-                     }));
-                    resolve(testresults);
-                });
-            
-            }
-            
-        });
-    }
-
 }
 
 module.exports = Test_Result;

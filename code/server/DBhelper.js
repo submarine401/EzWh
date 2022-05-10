@@ -78,7 +78,7 @@ class DBhelper {
                     const test_descriptors = [];
 
                     for(id of sku.test_descriptors){
-                        test_descriptors.push(dataInterface.get_test_descriptor(id)); // get test descriptor to implement
+                        test_descriptors.push(dataInterface.get_TD_by_id(id)); 
                     }
 
                     const position = dataInterface.get_position(sku.positionID);

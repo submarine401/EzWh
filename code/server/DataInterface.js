@@ -133,7 +133,105 @@ class DataInterface{
         });
       });
     }
+
     
+    
+
+/********************************TD METHODS***************************/
+
+
+get_TD(){ 
+  return new Promise((resolve,reject)=>{
+     
+                  const sql = "SELECT * FROM testdescriptors ";
+              this.db.db.all(sql,(err,rows)=>{
+                  if(err){
+                      reject(err); 
+                      return;
+                      }
+                  const testdescriptors = rows.map((t)=>(
+                  { //TODO sulle API dice che deve tornare uno idSKU 
+                      TDid : t.TDid,
+                      name : t.name,
+                      procedure_description : t.procedure_description
+                      
+                  })); 
+                  resolve(testdescriptors);
+              });
+          
+      });
+}
+
+get_TD_by_id(TDid){
+  return new Promise((resolve,reject)=>{
+     
+       const sql = "SELECT * FROM testdescriptors where TDid = ?";
+           this.db.db.all(sql,[TDid],(err,rows)=>{
+                  if(err){
+                      reject(err); 
+                      return;
+                      }
+                  const testdescriptors = rows.map((i)=>(
+                  {
+                   TDid : t.TDid,
+                   name : t.name,
+                   procedure_description : t.procedure_description
+                  
+           }));
+                  resolve(testdescriptors);
+       });
+          
+   });
+}
+   
+
+/********************************TR METHODS***************************/
+
+
+get_TR(RFid, TRid) { 
+  return new Promise((resolve,reject)=>{
+
+
+          if(TRid===undefined){
+              const sql = "SELECT * FROM testresults ";
+              this.db.db.all(sql,(err,rows)=>{
+                  if(err){
+                      reject(err); 
+                      return;
+                      }
+                   const  testresults = rows.map((t)=>(
+                  { //TODO sulle API dice che deve tornare uno idSKU 
+                      TRid : tr.TRid,
+                      TDid : tr.TDid,
+                      Date : tr.Date,
+                      Result : tr.Result
+                    
+                  })); 
+                  resolve(testresults);
+              });
+          }else{
+              const sql = "SELECT * FROM testresults where RFid = ? ";
+              this.db.db.all(sql,[RFid],(err,rows)=>{
+                  if(err){
+                      reject(err); 
+                      return;
+                      }
+                  const testresults = rows.map((i)=>(
+                  {
+                      TRid : tr.TRid,
+                      TDid : tr.TDid,
+                      Date : tr.Date,
+                      Result : tr.Result 
+                   }));
+                  resolve(testresults);
+              });
+          
+          }
+          
+      });
+  }
+
+
 }
 
 const dataInterface = new DataInterface();

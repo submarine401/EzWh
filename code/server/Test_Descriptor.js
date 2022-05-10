@@ -70,51 +70,6 @@ class Test_Descriptor{
    
    }
 
-   get_TD(){ 
-       return new Promise((resolve,reject)=>{
-          
-                       const sql = "SELECT * FROM testdescriptors ";
-                   this.db.db.all(sql,(err,rows)=>{
-                       if(err){
-                           reject(err); 
-                           return;
-                           }
-                       const testdescriptors = rows.map((t)=>(
-                       { //TODO sulle API dice che deve tornare uno idSKU 
-                           TDid : t.TDid,
-                           name : t.name,
-                           procedure_description : t.procedure_description
-                           
-                       })); 
-                       resolve(testdescriptors);
-                   });
-               
-           });
-   }
-
-   get_TD_by_id(TDid){
-       return new Promise((resolve,reject)=>{
-          
-                       const sql = "SELECT * FROM testdescriptors where TDid = ?";
-                   this.db.db.all(sql,[TDid],(err,rows)=>{
-                       if(err){
-                           reject(err); 
-                           return;
-                           }
-                       const testdescriptors = rows.map((i)=>(
-                       {
-                        TDid : t.TDid,
-                        name : t.name,
-                        procedure_description : t.procedure_description
-                       
-                        }));
-                       resolve(testdescriptors);
-                   });
-               
-           });
-   }
-//TODO fai il getTDid()
-//TODO le funzioni che stanno scritte nel Data Interface le devi scriverer li e non qua dentro
 
 }
    module.exports = Test_Descriptor;

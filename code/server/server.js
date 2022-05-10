@@ -540,7 +540,7 @@ app.get('/api/testDescriptors', (req, res)=>{
 
   try
     {     
-      return res.status(200).json(Test_Descriptor.get_TD()); //TODO  devo mettere il getter in data interface
+      return res.status(200).json(Test_Descriptor.get_TD()); 
     }
   catch(err)
     {
