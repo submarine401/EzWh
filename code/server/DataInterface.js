@@ -1,15 +1,16 @@
-const DBhelper = require('./DBhelper');
+const dbHelper = require('./dbHelper');
 const SKU = require('./SKU');
-const U = require ('./User');
+//const U = require ('./User');
 
 
 class DataInterface{
 
-    skus = [];
+    //skus = [];
     //users = [];
 
-    constructor(dbHelper){
+    constructor(){
 
+<<<<<<< HEAD
         this.dbHelper = dbHelper;
     //    this.skus = this.dbHelper.load_SKUs();
         //this.users = this.dbHelper.load_users();
@@ -19,11 +20,27 @@ class DataInterface{
         
         //debug
     //    this.skus.push(new SKU(1, 'new sku'));
+=======
+        //this.skus = this.dbHelper.load_SKUs();
+        //this.users = this.dbHelper.load_users();
+
+        //if(this.skus === undefined) this.skus = [];
+        //if(this.users === undefined) this.users = [];
+        
+        //debug
+        //this.skus.push(new SKU(1, 'new sku'));
+>>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
 
         
     }
 
+<<<<<<< HEAD
     // async create_SKU(skuData){
+=======
+    //+************************************ SKU ****************************************
+
+    async create_SKU(skuData){
+>>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
 
     //     console.log('create SKU');
 
@@ -48,6 +65,7 @@ class DataInterface{
     //     }
     // }
 
+<<<<<<< HEAD
     // return_SKU(){
     //     return this.skus;
     // }
@@ -55,6 +73,16 @@ class DataInterface{
     // get_SKU(id){
     //     return this.skus.find(sku => sku.id == id);
     // }
+=======
+    async return_SKU(){
+        const skus = await dbHelper.load_SKUs();
+        return skus
+    }
+
+    get_SKU(id){
+        return this.return_SKU().find(sku => sku.id == id);
+    }
+>>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
 
     // delete_SKU(id){
     //     console.log('delete SKU' + id);
@@ -69,13 +97,24 @@ class DataInterface{
     //     }
 
         
+<<<<<<< HEAD
     // }
+=======
+    }
+
+/*********************************Position methods************************/ 
+
+>>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
     
+
+
+/********************************USER METHODS***************************/
+
     //method returning the list of all users except managers
     getUsers(){
       return new Promise((resolve,reject) =>{
-        const sql_query = 'SELECT * FROM users WHERE NOT type = manager';
-        this.db.db.all(sql_query,[], function(err, rows){
+        const sql_query = 'SELECT * FROM users';
+        dbHelper.db.all(sql_query,[], function(err, rows){
           
           if(err){
             reject(err);
@@ -425,6 +464,132 @@ get_issued_restock_order()
 
 
     
+    getUsers_except_manager(){
+      return new Promise((resolve,reject) => {
+        
+        const sql_query = 'SELECT * FROM users WHERE NOT type =?';
+        dbHelper.db.all(sql_query,["manager"],function(err, rows){
+          if(err){
+            reject(err);
+            return;
+          }
+          
+          //return an array of users
+          const user_array = rows.map((user) => (
+            {
+            id : user.id,
+            name : user.name,
+            surname : user.surname,
+            email : user.username,
+            type : user.type
+          }));
+          
+          resolve(user_array);
+          
+        });
+      });
+    }
+
+    
+    
+
+/********************************TD METHODS***************************/
+
+
+get_TD(){ 
+  return new Promise((resolve,reject)=>{
+     
+                  const sql = "SELECT * FROM testdescriptors ";
+              this.db.db.all(sql,(err,rows)=>{
+                  if(err){
+                      reject(err); 
+                      return;
+                      }
+                  const testdescriptors = rows.map((t)=>(
+                  { //TODO sulle API dice che deve tornare uno idSKU 
+                      TDid : t.TDid,
+                      name : t.name,
+                      procedure_description : t.procedure_description
+                      
+                  })); 
+                  resolve(testdescriptors);
+              });
+          
+      });
 }
 
-module.exports = DataInterface;
+get_TD_by_id(TDid){
+  return new Promise((resolve,reject)=>{
+     
+       const sql = "SELECT * FROM testdescriptors where TDid = ?";
+           this.db.db.all(sql,[TDid],(err,rows)=>{
+                  if(err){
+                      reject(err); 
+                      return;
+                      }
+                  const testdescriptors = rows.map((i)=>(
+                  {
+                   TDid : t.TDid,
+                   name : t.name,
+                   procedure_description : t.procedure_description
+                  
+           }));
+                  resolve(testdescriptors);
+       });
+          
+   });
+}
+   
+
+/********************************TR METHODS***************************/
+
+
+get_TR(RFid, TRid) { 
+  return new Promise((resolve,reject)=>{
+
+
+          if(TRid===undefined){
+              const sql = "SELECT * FROM testresults ";
+              this.db.db.all(sql,(err,rows)=>{
+                  if(err){
+                      reject(err); 
+                      return;
+                      }
+                   const  testresults = rows.map((t)=>(
+                  { //TODO sulle API dice che deve tornare uno idSKU 
+                      TRid : tr.TRid,
+                      TDid : tr.TDid,
+                      Date : tr.Date,
+                      Result : tr.Result
+                    
+                  })); 
+                  resolve(testresults);
+              });
+          }else{
+              const sql = "SELECT * FROM testresults where RFid = ? ";
+              this.db.db.all(sql,[RFid],(err,rows)=>{
+                  if(err){
+                      reject(err); 
+                      return;
+                      }
+                  const testresults = rows.map((i)=>(
+                  {
+                      TRid : tr.TRid,
+                      TDid : tr.TDid,
+                      Date : tr.Date,
+                      Result : tr.Result 
+                   }));
+                  resolve(testresults);
+              });
+          
+          }
+          
+      });
+  }
+
+
+}
+
+const dataInterface = new DataInterface();
+
+module.exports = dataInterface;

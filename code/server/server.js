@@ -1,6 +1,6 @@
 'use strict';
 const express = require('express');
-const DBhelper = require('./DBhelper');
+const db = require('./DBhelper');
 const InternalOrder = require('./InternalOrder');
 const Item = require('./Item');
 const ReturnOrder = require('./ReturnOrder');
@@ -8,8 +8,11 @@ const Restockorder = require('./Restockorder');
 const SKU = require('./SKU');
 const DataInterface = require('./DataInterface');
 const User = require('./User');
+const SKUapi = require('./api/SKUapi');
+const PositionApi = require('./api/PositionApi');
 const Test_Descriptor = require('./Test_Descriptor');
 const Test_Result= require('./Test_Result');
+const dbHelper = require('./DBhelper');
 
 
 
@@ -17,11 +20,11 @@ const Test_Result= require('./Test_Result');
 /*
 Connect to DB
 */
-const db = new DBhelper("EZWHDB");
+//const db = new DBhelper("EZWHDB"); --> connection moved in DBhelper.js
 /*
 Creating instances of classe which db connection is passed to each one
 */
-const dataInterface = new DataInterface(db);
+//const dataInterface = new DataInterface(db);
 const IO = new InternalOrder(db);
 const I = new Item(db);
 const RO = new ReturnOrder(db);
@@ -29,6 +32,8 @@ const RSO = new Restockorder(db);
 const U = new User(db);
 const TD = new Test_Descriptor(db);
 const TR = new Test_Result(db);
+
+dbHelper.create_sku_table().then(function(response){console.log(response);}, function(error){console.error( error);}); // to check
 
 // init express
 const app = new express();
@@ -631,104 +636,13 @@ app.get('/api/restockOrders/:id/returnItems',async (req,res)=>{
 ***************************************** SKU API ****************************************************
 */
 
+app.use('/', SKUapi);
+
 /*
-INSERT NEW SKU
+***************************************** Position API ****************************************************
 */
 
-app.post('/api/sku', async (req,res)=>{
-  try{
-
-    if(Object.keys(req.body).length === 0){
-      return res.status(422).json({error : "Unprocessable Entity"});
-    }
-
-    const newSku = req.body;
-    if( typeof newSku.description !== 'string' || 
-        typeof newSku.weight !== 'number' || 
-        typeof newSku.volume !== 'number' || 
-        typeof newSku.notes !== 'string' || 
-        typeof newSku.price !== 'number' || 
-        typeof newSku.availableQuantity !== 'number' ){
-      return res.status(422).json({error : "Unprocessable Entity"});
-    }
-  
-    dataInterface.create_SKU(newSku);
-    return res.status(201).json({success: 'Created'});
-  
-  }
-  catch(err)
-  {
-    console.log(err);
-    return res.status(503).end();
-  }
-});
-
-app.get('/api/skus', (req, res)=>{
-
-  try
-    {     
-      return res.status(200).json(dataInterface.return_SKU());
-    }
-  catch(err)
-  {
-    console.log(err);
-    return res.status(500).end();
-  }
-
-});
-
-app.get('/api/skus/:id', (req, res)=>{
-
-  try{     
-
-    const id = req.params.id
-    if( id > 0 && typeof id === 'number') {
-
-      const ret = dataInterface.get_SKU(id)
-      console.log(ret);
-      if(ret === undefined){
-        return res.status(404).end();
-      } else {
-        return res.status(200).json(ret);
-      }
-
-    } else {
-      return res.status(422).json({error : "INVALID I INPUT"});
-    }
-  }
-  catch(err) {
-    console.log(err);
-    return res.status(500).end();
-  }
-
-});
-
-app.delete('/api/skus/:id', (req, res)=>{
-
-  try{     
-
-    const id = req.params.id
-    if( id > 0 && typeof id === 'number') {
-
-      if(dataInterface.delete_SKU(id)){
-        return res.status(204).end();
-      } else {
-        return res.status(404).json(ret);
-      }
-
-    } else {
-      return res.status(422).json({error : "INVALID I INPUT"});
-    }
-  }
-  catch(err) {
-    console.log(err);
-    return res.status(503).end();
-  }
-
-});
-
-// SKUapi = require('/api/SKUapi'); ---> let router = express.Router() --> usa router come app
-// app.use('/', SKUapi);
+app.use('/', PositionApi);
 
 
 /****************************USER API******************************/
@@ -736,7 +650,7 @@ app.delete('/api/skus/:id', (req, res)=>{
 app.get('/api/suppliers', async (req,res) =>{
   try {
     
-    const result= await U.getSuppliers();
+    const results= await U.getSuppliers();
     return res.status(200).json(results);
     
   } catch (err) {
@@ -748,7 +662,7 @@ app.get('/api/suppliers', async (req,res) =>{
 
 app.get('/api/users', async (req,res) => {
   try{
-    const result = await U.getUsers();
+    const result = await DataInterface.getUsers_except_manager();
     return res.status(200).json(result);
   }
   catch(err){
@@ -762,19 +676,23 @@ app.post('/api/newUser', async (req,res) => {
   try {
     
     const new_u = req.body;
+    let users_array = [];
     
     if( new_u.username === undefined ||  new_u.password === undefined ||  new_u.name === undefined || new_u.surname === undefined || new_u.type === undefined){
       return res.status(522).end("Unprocessable entity");
     }
     
+    const check_username = await DataInterface.getUsers();
+    const res_check_username = check_username.filter(function(users){
+      return users.username == new_u.username;
+    });
+    
+    if(res_check_username.length !== 0){
+      return res.status(409).end("User already existent!");
+    }
     const result = await U.newUser(new_u);
-    console.log(result);
-    if(result === 409){
-      return res.status(409).end("User already existent")
-    }
-    else{
-      return res.status(200).end("User inserted!");
-    }
+    return res.status(200).end("User inserted!");
+    
 
   } catch (err) {
     console.log(err);
@@ -788,11 +706,23 @@ app.put('/api/users/:username', async (req,res) =>{
   try {
     const body = req.body;
     const username = req.params.username;
-    if (body.oldType === body.newType){
+    if (body.oldType === body.newType ||
+        body.oldType === 'manager'){
+      return res.status(422).end("attempt to modify manager!");
+    }
+    if(typeof req.params.username === undefined 
+      || typeof req.body.oldType !== 'string' 
+      || typeof req.body.newType !== 'string'){
       return res.status(422).end();
     }
-    if(req.params.username === undefined || req.body.oldType === undefined || req.body.newType === undefined){
-      return res.status(422).end();
+    
+    const check_type = await DataInterface.getUsers();
+    const res_check_type = check_type.filter(function(users){
+      return (users.type == body.oldType && users.username == username);
+    });
+    
+    if(res_check_type.length === 0){
+      return res.status(404).end("Wrong username or OldType");
     }
     
     const result = await U.modify_user_rights(username,body.newType);
@@ -875,7 +805,7 @@ app.get('/api/testDescriptors', (req, res)=>{
 
   try
     {     
-      return res.status(200).json(Test_Descriptor.get_TD()); //TODO  devo mettere il getter in data interface
+      return res.status(200).json(Test_Descriptor.get_TD()); 
     }
   catch(err)
     {

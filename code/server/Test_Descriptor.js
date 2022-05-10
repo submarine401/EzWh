@@ -5,6 +5,14 @@ class Test_Descriptor{
     constructor(db){
        this.db = db;
    
+<<<<<<< HEAD
+=======
+       db.create_test_descriptor_table().then(function(response) {
+        console.log(response);
+    }, function(error) {
+        console.error(error);
+    });
+>>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
        
    }
    
@@ -13,7 +21,7 @@ class Test_Descriptor{
    insert_into_test_Descriptor_table(td)
    {
        return new Promise ((resolve,reject)=>{ 
-           const sql = 'INSERT INTO Test_Descriptor (TDid, name, procedure_description) VALUES(?,?,?)';
+           const sql = 'INSERT INTO testdescriptors (TDid, name, procedure_description) VALUES(?,?,?)';
            this.db.db.run(sql,[td.TDid, td.name,td.procedure_description], (err)=>{
                if(err)
                {
@@ -35,7 +43,7 @@ class Test_Descriptor{
    modify_test_descriptor(td, TDid){
 
        return new Promise ((resolve,reject)=>{
-           const sql = 'UPDATE Test_Descriptor SET name = ? , procedure_description = ? WHERE TDid = ?';
+           const sql = 'UPDATE testdescriptors SET name = ? , procedure_description = ? WHERE TDid = ?';
            this.db.db.run(sql,[td.newName,td.newProcedureDescription,TDid], (err)=>{ 
                if(err)
                {
@@ -53,7 +61,7 @@ class Test_Descriptor{
 
    delete_test_descriptor(TDid){
        return new Promise ((resolve,reject)=>{
-           const sql = 'DELETE FROM Test_Descriptor WHERE TDid = ?';
+           const sql = 'DELETE FROM testdescriptors WHERE TDid = ?';
            this.db.db.run(sql,[TDid],(err)=>{
                if(err){
                    reject(err);
@@ -65,51 +73,6 @@ class Test_Descriptor{
    
    }
 
-   get_TD(){ 
-       return new Promise((resolve,reject)=>{
-          
-                       const sql = "SELECT * FROM Test_Descriptor ";
-                   this.db.db.all(sql,(err,rows)=>{
-                       if(err){
-                           reject(err); 
-                           return;
-                           }
-                      /* const internalorders = rows.map((t)=>(
-                       { //sulle API dice che deve tornare uno idSKU 
-                           TDid : t.TDid,
-                           name : t.name,
-                           procedure_description : t.procedure_description
-                           
-                       })); 
-                       resolve(internalorders);*/
-                   });
-               
-           });
-   }
-
-   get_TD_by_id(TDid){
-       return new Promise((resolve,reject)=>{
-          
-                       const sql = "SELECT * FROM Test_Descriptor where TDid = ?";
-                   this.db.db.all(sql,[TDid],(err,rows)=>{
-                       if(err){
-                           reject(err); 
-                           return;
-                           }
-                 /*      const internalorders = rows.map((i)=>(
-                       {
-                        TDid : t.TDid,
-                        name : t.name,
-                        procedure_description : t.procedure_description
-                       
-                        }));
-                       resolve(internalorders);*/
-                   });
-               
-           });
-   }
-//TODO fai il getTDid()
-//TODO le funzioni che stanno scritte nel Data Interface le devi scriverer li e non qua dentro
 
 }
    module.exports = Test_Descriptor;
