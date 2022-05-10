@@ -90,6 +90,7 @@ class DBhelper {
         });
     }
 
+
     create_sku_table() {
         return new Promise((resolve, reject) => {
 
