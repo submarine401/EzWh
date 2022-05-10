@@ -402,7 +402,7 @@ app.get('/api/suppliers', async (req,res) =>{
 
 app.get('/api/users', async (req,res) => {
   try{
-    const result = await dataInterface.getUsers();
+    const result = await dataInterface.getUsers_except_manager();
     return res.status(200).json(result);
   }
   catch(err){

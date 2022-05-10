@@ -100,6 +100,32 @@ class DataInterface{
       });
     }
     
+    getUsers_except_manager(){
+      return new Promise((resolve,reject) => {
+        
+        const sql_query = 'SELECT * FROM users WHERE NOT type = manager';
+        this.db.db.all(sql_query,[],function(err, rows){
+          if(err){
+            reject(err);
+            return;
+          }
+          
+          //return an array of users
+          const user_array = rows.map((user) => (
+            {
+            id : user.id,
+            name : user.name,
+            surname : user.surname,
+            email : user.username,
+            type : user.type
+          }));
+          
+          resolve(user_array);
+          
+        });
+      });
+    }
+    
 }
 
 const dataInterface = new DataInterface();
