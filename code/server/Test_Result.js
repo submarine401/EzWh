@@ -113,4 +113,4 @@ get_TR(RFid, TRid) {  //metto un else, se il secondo è undefiend allora è qies
 
 }
 
-module.exports = TestDescriptor;
+module.exports = Test_Result;

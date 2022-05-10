@@ -10,7 +10,7 @@ class DataInterface{
 
     constructor(){
 
-        this.skus = this.dbHelper.load_SKUs();
+        //this.skus = this.dbHelper.load_SKUs();
         //this.users = this.dbHelper.load_users();
 
         if(this.skus === undefined) this.skus = [];
