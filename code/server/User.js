@@ -6,14 +6,14 @@ class User {
     //proceed to create users table
     //the method returns a promise which will be consumed by
     //the then function
-    db.create_user_table().then(
-      function(response){
-        console.log('Table created successfully!\n',response);
-      },
-      function(error){
-        console.log('Creating user table: operation failed\n',error);
-      }
-    );
+    // db.create_user_table().then(
+    //   function(response){
+    //     console.log('Table created successfully!\n',response);
+    //   },
+    //   function(error){
+    //     console.log('Creating user table: operation failed\n',error);
+    //   });
+
   }
   
   

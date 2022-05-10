@@ -6,6 +6,42 @@ class DBhelper{
         if (err) throw err;
         else console.log("Connected to DB");
     });
+
+    // create IO table 
+    this.create_internal_orders_table().then(function(response) {
+        console.log(response);
+      }, function(error) {
+        console.error( error);
+      });
+    // create I table 
+    this.create_item_table().then(function(response) {
+        console.log(response);
+    }, function(error) {
+        console.error(error);
+    });
+    //create RO table
+    this.create_return_order_table().then(function(response) {
+        console.log(response);
+    }, function(error) {
+        console.error(error);
+    });
+    //create user 
+    this.create_user_table().then(
+        function(response){
+          console.log('Table created successfully!\n',response);
+        },
+        function(error){
+          console.log('Creating user table: operation failed\n',error);
+    });
+    //create restoc order table 
+    this.create_restock_order_table().then(function(response) {
+        console.log(response);
+    }, function(error) {
+        console.error(error);
+    });
+     //create ??? table 
+   
+
     }
 /*
 *******************************************CREATE INTERNAL ORDERS TABLE********************************************
@@ -109,8 +145,20 @@ create_user_table(){
     });
   });
 }
+//**************************************************RSO Table****************************************************
+create_restock_order_table (){
+    return new Promise((resolve,reject)=>{
+        const sql = 'CREATE TABLE IF NOT EXISTS restockorder (id integer PRIMARY KEY,issueate text,products text, supplierId integer, skuItems text,state text,transportNote text )';
+    this.db.run(sql, (err)=>{
+        if(err){
+            reject(err);
+            return}
+        resolve("RSO Table -> OK");
+    });
+    });
+}
+//**************************************************  Table ****************************************************
+
     
 }
 module.exports = DBhelper;
-
-/**************************************************USER METHODS****************************************************/

@@ -1,14 +1,13 @@
+const DataInterface = require('./DataInterface');  
 class Item{
-    
+      
     constructor(db)
     {
         this.db = db;
+        this.dataInterface = new DataInterface(db);
 
-        db.create_item_table().then(function(response) {
-            console.log(response);
-        }, function(error) {
-            console.error(error);
-        });
+
+     
     }
 
 
@@ -24,10 +23,13 @@ class Item{
                 }
                 else
                 {
+               //  const skuresult= await this.dataInterface.get_sku_by_id(i.SKUId);
+                 
+                 
                     resolve("new item is inserted");
                 }
 
-            });
+        });
         });
     }
 
@@ -43,6 +45,7 @@ class Item{
                 }
                 else
                 {
+
                     resolve(`Item with id ${id} is updated`);
                 }
 
@@ -64,51 +67,8 @@ class Item{
     
     }
 
-    get_all_items(){
-        return new Promise((resolve,reject)=>{
-           
-                        const sql = "SELECT * FROM item ";
-                    this.db.db.all(sql,(err,rows)=>{
-                        if(err){
-                            reject(err); 
-                            return;
-                            }
-                        const internalorders = rows.map((i)=>(
-                        {
-                            id : i.id,
-                            description : i.description,
-                            price : i.price,
-                            skuid : i.skuid,
-                            supplierid : i.supplierid
-                        }));
-                        resolve(internalorders);
-                    });
-                
-            });
-    }
+     
 
-    get_item_by_id(id){
-        return new Promise((resolve,reject)=>{
-           
-                        const sql = "SELECT * FROM item where id = ?";
-                    this.db.db.all(sql,[id],(err,rows)=>{
-                        if(err){
-                            reject(err); 
-                            return;
-                            }
-                        const internalorders = rows.map((i)=>(
-                        {
-                            id : i.id,
-                            description : i.description,
-                            price : i.price,
-                            skuid : i.skuid,
-                            supplierid : i.supplierid
-                        }));
-                        resolve(internalorders);
-                    });
-                
-            });
-    }
 
 }
 module.exports = Item

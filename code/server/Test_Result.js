@@ -5,11 +5,11 @@ class Test_Result{
     constructor(db){
        this.db = db;
    
-       db.create_test_Result_table().then(function(response) {
-        console.log(response);
-    }, function(error) {
-        console.error(error);
-    });
+    //    db.create_test_Result_table().then(function(response) {
+    //     console.log(response);
+    // }, function(error) {
+    //     console.error(error);
+    // });
        
    }
    
@@ -113,4 +113,4 @@ get_TR(RFid, TRid) {  //metto un else, se il secondo è undefiend allora è qies
 
 }
 
-module.exports = TestDescriptor;
+module.exports = Test_Result;

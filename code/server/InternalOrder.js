@@ -5,116 +5,12 @@ class InternalOrder{
      constructor(db){
         this.db = db;
 
-    db.create_internal_orders_table().then(function(response) {
-        console.log(response);
-      }, function(error) {
-        console.error( error);
-      });
+    // db.create_internal_orders_table().then(function(response) {
+    //     console.log(response);
+    //   }, function(error) {
+    //     console.error( error);
+    //   });
 }
-
-
-get_internalOrders(id){
-    return new Promise((resolve,reject)=>{
-
-        if (id === undefined)
-            {
-                const sql = "SELECT * FROM internalorders";
-                this.db.db.all(sql,[],(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                    const internalorders = rows.map((io)=>(
-                    {
-                        id : io.id,
-                        date : io.date,
-                        state : io.state,
-                        customerid : io.customerid,
-                        products : io.products
-
-                        
-                    }));
-                    resolve(internalorders);
-                });
-            }
-        else
-            {
-
-                    const sql = "SELECT * FROM internalorders where id = ?";
-                    this.db.db.all(sql,[id],(err,rows)=>{
-                        if(err){
-                            reject(err); 
-                            return;
-                            }
-                        const internalorders = rows.map((io)=>(
-                        {
-                            id : io.id,
-                            date : io.date,
-                            state : io.state,
-                            customerid : io.customerid,
-                            products : io.products
-
-                            
-                        }));
-                        resolve(internalorders);
-                    });
-                
-            }
-
-    });
-}
-
-
-get_acceped_internalOrders(){
-    return new Promise((resolve,reject)=>{
-        if (io !== undefined)
-            {
-                    const sql = "SELECT * FROM internalorders where state = ?";
-                this.db.db.all(sql,["ACCEPTED"],(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                    const internalorders = rows.map((io)=>(
-                    {
-                        id : io.id,
-                        date : io.date,
-                        state : io.state,
-                        customerid : io.customerid,
-                        products : io.products
-
-                        
-                    }));
-                    resolve(internalorders);
-                });
-            }
-        });
-    }
-
-get_issued_internalOrders(){
-    return new Promise((resolve,reject)=>{
-        if (io !== undefined)
-            {
-                    const sql = "SELECT * FROM internalorders where state = ?";
-                this.db.db.all(sql,["ISSUED"],(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                    const internalorders = rows.map((io)=>(
-                    {
-                        id : io.id,
-                        date : io.date,
-                        state : io.state,
-                        customerid : io.customerid,
-                        products : JSON.parse(io.products)
-                    }));
-                    resolve(internalorders);
-                });
-            }
-        });
-}
-    
 
 
 

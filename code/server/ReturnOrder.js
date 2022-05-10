@@ -5,11 +5,11 @@ class ReturnOrder{
     {
         this.db = db;
 
-        db.create_return_order_table().then(function(response) {
-            console.log(response);
-        }, function(error) {
-            console.error(error);
-        });
+        // db.create_return_order_table().then(function(response) {
+        //     console.log(response);
+        // }, function(error) {
+        //     console.error(error);
+        // });
     }
 
 
@@ -37,7 +37,7 @@ class ReturnOrder{
         });
     }
 
-    delete_item(roid){
+    delete_return_order(roid){
         return new Promise ((resolve,reject)=>{
             const sql = 'DELETE FROM returnorder WHERE id = ?';
             this.db.db.run(sql,[roid],(err)=>{
@@ -45,57 +45,13 @@ class ReturnOrder{
                     reject(err);
                     return;
                 }
-                resolve(`RO with id ${roid} is deleted`);
+                resolve();
             });
         });
     
     }
 
-    get_all_RO(){
-        return new Promise((resolve,reject)=>{
-           
-                        const sql = "SELECT * FROM returnorder ";
-                    this.db.db.all(sql,(err,rows)=>{
-                        if(err){
-                            reject(err); 
-                            return;
-                            }
-                        const internalorders = rows.map((ro)=>(
-                        {
-                            id : ro.id,
-                            returnDate : ro.date,
-                            products : ro.products,
-                            restockOrderId : ro.restockorderid,
-                          
-                        }));
-                        resolve(internalorders);
-                    });
-                
-            });
-    }
-
-    get_all_RO_by_id(id){
-        return new Promise((resolve,reject)=>{
-           
-                        const sql = "SELECT * FROM returnorder where id = ? ";
-                    this.db.db.all(sql,[id],(err,rows)=>{
-                        if(err){
-                            reject(err); 
-                            return;
-                            }
-                        const internalorders = rows.map((ro)=>(
-                        {
-                            id : ro.id,
-                            returnDate : ro.date,
-                            products : ro.products,
-                            restockOrderId : ro.restockorderid,
-                          
-                        }));
-                        resolve(internalorders);
-                    });
-                
-            });
-    }
+ 
 
 }
 module.exports = ReturnOrder;

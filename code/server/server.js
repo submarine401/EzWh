@@ -2,13 +2,16 @@
 const express = require('express');
 const DBhelper = require('./DBhelper');
 const InternalOrder = require('./InternalOrder');
-const Item = require('./Item')
+const Item = require('./Item');
 const ReturnOrder = require('./ReturnOrder');
+const Restockorder = require('./Restockorder');
 const SKU = require('./SKU');
 const DataInterface = require('./DataInterface');
 const User = require('./User');
 const Test_Descriptor = require('./Test_Descriptor');
 const Test_Result= require('./Test_Result');
+
+
 
 
 /*
@@ -22,6 +25,7 @@ const dataInterface = new DataInterface(db);
 const IO = new InternalOrder(db);
 const I = new Item(db);
 const RO = new ReturnOrder(db);
+const RSO = new Restockorder(db);
 const U = new User(db);
 const TD = new Test_Descriptor(db);
 const TR = new Test_Result(db);
@@ -43,7 +47,7 @@ app.get('/api/internalOrders/:id',async (req,res)=>{
           const id = req.params.id 
           if(id > 0)
           {
-            const results = await IO.get_internalOrders(id);
+            const results = await dataInterface.get_internalOrders(id);
 
             if (results.length ===0)
               return res.status(404).json("no internal order associated to id)"); 
@@ -62,7 +66,7 @@ app.get('/api/internalOrders',async (req,res)=>{
   try
     {     
          
-            const results = await IO.get_internalOrders();
+            const results = await dataInterface.get_internalOrders();
             return res.status(200).json(results);
           
     }
@@ -77,7 +81,7 @@ app.get('/api/internalOrders',async (req,res)=>{
 app.get('/api/internalOrdersIssued',async (req,res)=>{
   try
     {
-      const results = await IO.get_issued_internalOrders();
+      const results = await dataInterface.get_issued_internalOrders();
       return res.status(200).json(results);
     }
   catch(err)
@@ -90,7 +94,7 @@ app.get('/api/internalOrdersIssued',async (req,res)=>{
 app.get('/api/internalOrdersAccepted',async (req,res)=>{
   try
     {
-      const results = await IO.get_acceped_internalOrders();
+      const results = await dataInterface.get_acceped_internalOrders();
       return res.status(200).json(results);   
     }
   catch(err)
@@ -191,8 +195,12 @@ app.post('/api/item',async (req,res)=>{
       return res.status(422).json({error : "Unprocessable Entityy"});
     }
   
-    const results = await I.insert_into_item_table(ni);
+    const results = await dataInterface.get_sku_by_id(ni.SKUId).then(()=> {return 0;}, (error)=> {return I.insert_into_item_table(ni);});
+    if(results !== 0)
     return res.status(200).json(results);
+    else
+    return res.status(404).json({error : "Sku not found"});
+
   // @@@@@@@@@@@@@@@@@@@ 404 error needs to be handeled because of SKUid
   }
   catch(err)
@@ -216,8 +224,15 @@ app.put('/api/item/:id',async (req,res)=>{
       const id = req.params.id
       if(id >0)
       {
-        const results = await I.modify_item(id,i);
+
+        const results = await dataInterface.get_item_by_id(id).then((suc)=> {if(suc!==0) return I.modify_item(id,i); else return suc }, (error)=> {return 0;});
+        
+        if(results !== 0 )
         return res.status(200).json(results);
+        else
+        return res.status(404).json({error : "Item not existing)"});
+        
+
       }
       else 
       {
@@ -233,7 +248,7 @@ app.put('/api/item/:id',async (req,res)=>{
 /*
 DELETE I
 */
-app.delete('/api/item/:id',async (req,res)=>{
+app.delete('/api/items/:id',async (req,res)=>{
   try{
     const id = req.params.id
     if( id === undefined ){
@@ -252,12 +267,12 @@ app.delete('/api/item/:id',async (req,res)=>{
 /*
 GET ALL I
 */
-app.get('/api/item',async (req,res)=>{
+app.get('/api/items',async (req,res)=>{
 
-  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 404 Not Found (Sku not found)
+  
   try
     {     
-      const results = await I.get_all_items();
+      const results = await dataInterface.get_all_items();
       return res.status(200).json(results);
     }
   catch(err)
@@ -267,15 +282,18 @@ app.get('/api/item',async (req,res)=>{
   }
 });
 
-app.get('/api/item/:id',async (req,res)=>{
+app.get('/api/items/:id',async (req,res)=>{
   try
     {     
 
       const id = req.params.id
       if( id > 0 )
       {
-      const results = await I.get_item_by_id(id);
+      const results = await dataInterface.get_item_by_id(id);
+      if(results !==0)
       return res.status(200).json(results);
+      else
+      return res.status(404).json("no item associated to id");
       }
       else
       {
@@ -306,8 +324,12 @@ app.post('/api/returnOrder',async (req,res)=>{
       return res.status(422).json({error : "Unprocessable Entityy"});
     }
   
-    const results = await RO.insert_return_order_table(nro);
-    return res.status(200).json(results);
+    const results = await dataInterface.get_restock_order_by_id(nro.restockOrderId).then((err)=>{ console.log(err); },(suc)=>{  if(suc) return RO.insert_return_order_table(nro); else return suc;});
+    if(results !==0)
+    return res.status(201).json(results);
+    else
+    return res.status(404).json({error : "no restock order associated to restockOrderId"});
+
   
   }
   catch(err)
@@ -322,11 +344,13 @@ DELETE RO
 app.delete('/api/returnOrder/:id',async (req,res)=>{
   try{
     const id = req.params.id
-    if( id === undefined ){
+    console.log(id);
+    if( id <=0 ){
       return res.status(422).json({error : "INVALID IO INPUT"});
     }
   
-  const results = await RO.delete_item(id);
+  const results = await RO.delete_return_order(id);
+  console.log(results);
   return res.status(200).json(results);
   }
   catch(err)
@@ -342,7 +366,7 @@ app.get('/api/returnOrders',async (req,res)=>{
 
   try
     {     
-      const results = await RO.get_all_RO();
+      const results = await dataInterface.get_all_RO();
       return res.status(200).json(results);
     }
   catch(err)
@@ -359,8 +383,11 @@ app.get('/api/returnOrders/:id',async (req,res)=>{
       const id = req.params.id
       if( id > 0 )
       {
-      const results = await RO.get_all_RO_by_id(id);
+      const results = await dataInterface.get_all_RO_by_id(id);
+      if(results !==0 )
       return res.status(200).json(results);
+      else
+      return res.status(404).json({error : "no return order associated to id"});
       }
       else
       {
@@ -373,6 +400,232 @@ app.get('/api/returnOrders/:id',async (req,res)=>{
     return res.status(500).end();
   }
 });
+/*
+*****************************************RSO API *****************************************************
+*/
+
+/*
+INSERT NEW RSO
+*/
+app.post('/api/restockOrder',async (req,res)=>{
+  try{
+
+    if(Object.keys(req.body).length === 0){
+      return res.status(422).json({error : "Unprocessable Entity"});
+    }
+
+    const nrso = req.body.nrso;
+    if( nrso === undefined || nrso.issueDate === undefined || nrso.products === undefined || nrso.supplierId === undefined ){
+      return res.status(422).json({error : "Unprocessable Entityy"});
+    }
+  
+    const results = await RSO.insert_restock_order_table(nrso);
+    return res.status(201).json(results);
+
+  
+  }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(503).end();
+  }
+});
+/*
+MODIFY RSO
+*/
+app.put('/api/restockOrder/:id',async (req,res)=>{
+  try
+    {
+      const rso = req.body.rso;
+      if(Object.keys(req.body).length === 0 || rso === undefined || rso.newState === undefined){
+        return res.status(422).json({error : "Unprocessable Entity"});
+      }
+      
+      const id = req.params.id
+      const myresult = await dataInterface.get_restock_order_by_id(id)
+      if(myresult ===0)
+        return res.status(404).json({error : "no restock order associated to id"});
+      else
+      {
+        const results2  = await RSO.modify_restock_order_table(id,rso);
+        return res.status(200).json(results2);
+      }
+      // return res.status(200).json(results2);
+
+    }
+  catch(err)
+  { 
+      return res.status(500).end();
+  }
+});
+/*
+add transport to RSO 
+*/
+app.put('/api/restockOrder/:id/transportNote',async (req,res)=>{
+  try
+    {
+      const rso = req.body.rso;
+      if(Object.keys(req.body).length === 0 || rso === undefined || rso.transportNote === undefined){
+        return res.status(422).json({error : "Unprocessable Entity"});
+      }
+      
+      const id = req.params.id
+      const myresult = await dataInterface.get_restock_order_by_id(id)
+      if(myresult ===0)
+        return res.status(404).json({error : "no restock order associated to id"});
+      else
+      {
+        const results2  = await RSO.add_transportnote_to_restock_order_table(id,rso);
+        return res.status(200).json(results2);
+      }
+      // return res.status(200).json(results2);
+
+    }
+  catch(err)
+  { 
+      return res.status(500).end();
+  }
+});
+/*
+add transport to RSO 
+*/
+app.put('/api/restockOrder/:id/skuItems',async (req,res)=>{
+  try
+    {
+      const rso = req.body.rso;
+      if(Object.keys(req.body).length === 0 || rso === undefined || rso.skuItems === undefined){
+        return res.status(422).json({error : "Unprocessable Entity"});
+      }
+      
+      const id = req.params.id
+      
+      const myresult = await dataInterface.get_restock_order_by_id(id);
+      
+      
+      if(myresult ===0)
+        return res.status(404).json({error : "no restock order associated to id"});
+      else
+      {
+        const old_skuitem = myresult;
+        
+        const results2  = await RSO.add_skuitems_to_restock_order_table(id,rso,old_skuitem);
+        
+        return res.status(200).json(results2);
+      }
+      // return res.status(200).json(results2);
+
+    }
+  catch(err)
+  { 
+      return res.status(500).json({error : err});;
+  }
+});
+/*
+DELETE RSO
+*/
+app.delete('/api/restockOrder/:id',async (req,res)=>{
+  try{
+    const id = req.params.id
+    
+    if( id <=0 ){
+      return res.status(422).json({error : "INVALID IO INPUT"});
+    }
+  
+  const results = await RSO.delete_restock_order(id);
+  return res.status(200).json(results);
+  }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(503).end();
+  }
+});
+/*
+get all restock orders
+*/
+app.get('/api/restockOrders',async (req,res)=>{
+
+  try
+    {     
+      const results = await dataInterface.get_all_restock_order();
+      return res.status(200).json(results);
+    }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(500).end();
+  }
+});
+/*
+get restock order by id
+*/
+app.get('/api/restockOrder/:id',async (req,res)=>{
+
+  try
+    {     
+      const id = req.params.id
+      if( id <=0 ){
+        return res.status(422).json({error : "INVALID IO INPUT"});
+      }
+      const results = await dataInterface.get_restock_order_by_id(id);
+      if(results === 0 )
+        return res.status(404).json({error : "no restock order associated to id"});
+      else
+        return res.status(200).json(results);
+    }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(500).end();
+  }
+});
+/*
+get issued RSO
+*/
+app.get('/api/restockOrdersIssued',async (req,res)=>{
+
+  try
+    {     
+      const id = req.params.id
+      if( id <=0 ){
+        return res.status(422).json({error : "INVALID IO INPUT"});
+      }
+      const results = await dataInterface.get_issued_restock_order();
+      if(results === 0 )
+        return res.status(404).json({error : "no restock order associated to id"});
+      else
+        return res.status(200).json(results);
+    }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(500).end();
+  }
+});
+/*
+restockOrders/:id/returnItems
+*/
+app.get('/api/restockOrders/:id/returnItems',async (req,res)=>{
+
+  try
+    {     
+      const id = req.params.id
+      if( id <=0 ){
+        return res.status(422).json({error : "INVALID IO INPUT"});
+      }
+      const results = await dataInterface.get_restock_order_by_id(id);
+      if(results === 0 )
+        return res.status(404).json({error : "no restock order associated to id"});
+      else
+        return res.status(200).json(results);
+    }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(500).end();
+  }
+});
+
 
 /*
 ***************************************** SKU API ****************************************************

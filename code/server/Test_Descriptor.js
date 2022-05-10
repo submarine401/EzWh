@@ -5,11 +5,6 @@ class Test_Descriptor{
     constructor(db){
        this.db = db;
    
-       db.create_test_Descriptor_table().then(function(response) {
-        console.log(response);
-    }, function(error) {
-        console.error(error);
-    });
        
    }
    
