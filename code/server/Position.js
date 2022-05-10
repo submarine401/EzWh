@@ -17,19 +17,32 @@ class Position{
     }
 
     modify_position(newValues){
-        //to do
+
+        this.aisle = newValues.newAisleID;
+        this.row = newValues.newRow;
+        this.col = newValues.newCol;
+        this.id = this.aisle + this.row + this.col
+        this.maxWeight = newValues.newMaxWeight;
+        this.maxVolume = newValues.newMaxVolume;
+        this.occupiedWeight = newValues.newOccupiedWeight;
+        this.occupiedVolume = newValues.newOccupiedVolume;
     }
 
     modify_positionID(newPid){
-        //to do
+        
+        this.aisle = newPid.substr(0, 4);
+        this.row = newPid.substr(4, 4);
+        this.col = newPid.substr(8, 4);
     }
 
     increase_free_space(freed_weight, freed_volume){
-        //to do
+        this.occupiedWeight -= freed_weight;
+        this.occupiedVolume -= freed_volume;
     }
 
     decrease_free_space(added_weight, added_volume){
-        //to do
+        this.occupiedWeight += added_weight;
+        this.occupiedVolume += added_volume;
     }
 }
 
