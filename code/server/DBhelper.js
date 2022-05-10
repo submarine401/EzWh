@@ -160,6 +160,38 @@ class DBhelper {
         });
     }
 
+    
+/*
+*****************************************************CREATE TEST DESCRIPTOR TABLE********************************************
+*/
+create_test_descriptor_table (){
+    return new Promise((resolve,reject)=>{
+    const sql = 'CREATE TABLE IF NOT EXISTS Test_Descriptor (TDid integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text)';
+    this.db.run(sql, (err)=>{
+        if(err){
+            reject(err);
+            return}
+        resolve("Test_Descriptor Table -> OK");
+    });
+ });
+}
+
+/*
+*****************************************************CREATE TEST RESULT TABLE********************************************
+*/
+create_test_result_table (){
+    return new Promise((resolve,reject)=>{
+    const sql = 'CREATE TABLE IF NOT EXISTS Test_Result (TRid integer PRIMARY KEY AUTOINCREMENT,TDid integer, date text,result text)';
+    this.db.run(sql, (err)=>{
+        if(err){
+            reject(err);
+            return}
+        resolve("Test_Result Table -> OK");
+    });
+ });
+}
+
+
 }
 
 const dbHelper = new DBhelper("EZWHDB");
