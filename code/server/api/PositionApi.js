@@ -108,3 +108,5 @@ router.put('api/position/:positionID/changeID', (req, res)=>{
 router.delete('api/position/:positionID', (req, res)=>{
     
 });
+
+module.exports = router;

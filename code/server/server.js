@@ -397,7 +397,7 @@ app.use('/', PositionApi);
 app.get('/api/suppliers', async (req,res) =>{
   try {
     
-    const result= await U.getSuppliers();
+    const results= await U.getSuppliers();
     return res.status(200).json(results);
     
   } catch (err) {
@@ -453,11 +453,23 @@ app.put('/api/users/:username', async (req,res) =>{
   try {
     const body = req.body;
     const username = req.params.username;
-    if (body.oldType === body.newType){
+    if (body.oldType === body.newType ||
+        body.oldType === 'manager'){
+      return res.status(422).end("attempt to modify manager!");
+    }
+    if(typeof req.params.username === undefined 
+      || typeof req.body.oldType !== 'string' 
+      || typeof req.body.newType !== 'string'){
       return res.status(422).end();
     }
-    if(req.params.username === undefined || req.body.oldType === undefined || req.body.newType === undefined){
-      return res.status(422).end();
+    
+    const check_type = await DataInterface.getUsers();
+    const res_check_type = check_type.filter(function(users){
+      return (users.type == body.oldType && users.username == username);
+    });
+    
+    if(res_check_type.length === 0){
+      return res.status(404).end("Wrong username or OldType");
     }
     
     const result = await U.modify_user_rights(username,body.newType);
