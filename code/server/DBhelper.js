@@ -111,4 +111,6 @@ create_user_table(){
 }
     
 }
-module.exports = DBhelper;
+
+const dbHelper = new DBhelper("EZWHDB");
+module.exports = dbHelper;

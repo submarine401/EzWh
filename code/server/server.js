@@ -1,20 +1,21 @@
 'use strict';
 const express = require('express');
-const DBhelper = require('./DBhelper');
+const db = require('./DBhelper');
 const InternalOrder = require('./InternalOrder');
 const Item = require('./Item')
 const ReturnOrder = require('./ReturnOrder');
 const SKU = require('./SKU');
 const DataInterface = require('./DataInterface');
 const User = require('./User');
+const SKUapi = require('./api/SKUapi');
 /*
 Connect to DB
 */
-const db = new DBhelper("EZWHDB");
+//const db = new DBhelper("EZWHDB"); --> connection moved in DBhelper.js
 /*
 Creating instances of classe which db connection is passed to each one
 */
-const dataInterface = new DataInterface(db);
+//const dataInterface = new DataInterface(db);
 const IO = new InternalOrder(db);
 const I = new Item(db);
 const RO = new ReturnOrder(db);
@@ -372,104 +373,7 @@ app.get('/api/returnOrders/:id',async (req,res)=>{
 ***************************************** SKU API ****************************************************
 */
 
-/*
-INSERT NEW SKU
-*/
-
-app.post('/api/sku', async (req,res)=>{
-  try{
-
-    if(Object.keys(req.body).length === 0){
-      return res.status(422).json({error : "Unprocessable Entity"});
-    }
-
-    const newSku = req.body;
-    if( typeof newSku.description !== 'string' || 
-        typeof newSku.weight !== 'number' || 
-        typeof newSku.volume !== 'number' || 
-        typeof newSku.notes !== 'string' || 
-        typeof newSku.price !== 'number' || 
-        typeof newSku.availableQuantity !== 'number' ){
-      return res.status(422).json({error : "Unprocessable Entity"});
-    }
-  
-    dataInterface.create_SKU(newSku);
-    return res.status(201).json({success: 'Created'});
-  
-  }
-  catch(err)
-  {
-    console.log(err);
-    return res.status(503).end();
-  }
-});
-
-app.get('/api/skus', (req, res)=>{
-
-  try
-    {     
-      return res.status(200).json(dataInterface.return_SKU());
-    }
-  catch(err)
-  {
-    console.log(err);
-    return res.status(500).end();
-  }
-
-});
-
-app.get('/api/skus/:id', (req, res)=>{
-
-  try{     
-
-    const id = req.params.id
-    if( id > 0 && typeof id === 'number') {
-
-      const ret = dataInterface.get_SKU(id)
-      console.log(ret);
-      if(ret === undefined){
-        return res.status(404).end();
-      } else {
-        return res.status(200).json(ret);
-      }
-
-    } else {
-      return res.status(422).json({error : "INVALID I INPUT"});
-    }
-  }
-  catch(err) {
-    console.log(err);
-    return res.status(500).end();
-  }
-
-});
-
-app.delete('/api/skus/:id', (req, res)=>{
-
-  try{     
-
-    const id = req.params.id
-    if( id > 0 && typeof id === 'number') {
-
-      if(dataInterface.delete_SKU(id)){
-        return res.status(204).end();
-      } else {
-        return res.status(404).json(ret);
-      }
-
-    } else {
-      return res.status(422).json({error : "INVALID I INPUT"});
-    }
-  }
-  catch(err) {
-    console.log(err);
-    return res.status(503).end();
-  }
-
-});
-
-// SKUapi = require('/api/SKUapi'); ---> let router = express.Router() --> usa router come app
-// app.use('/', SKUapi);
+app.use('/', SKUapi);
 
 
 /****************************USER API******************************/

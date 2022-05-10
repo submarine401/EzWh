@@ -1,4 +1,4 @@
-const DBhelper = require('./DBhelper');
+const dbHelper = require('./DBhelper');
 const SKU = require('./SKU');
 
 
@@ -6,9 +6,8 @@ class DataInterface{
 
     skus = [];
 
-    constructor(dbHelper){
+    constructor(){
 
-        this.dbHelper = dbHelper;
         this.skus = this.dbHelper.load_SKUs();
 
         if(this.skus === undefined) this.skus = [];
@@ -69,4 +68,6 @@ class DataInterface{
 
 }
 
-module.exports = DataInterface;
+const dataInterface = new DataInterface();
+
+module.exports = dataInterface;
