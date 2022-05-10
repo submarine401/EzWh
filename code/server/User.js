@@ -21,8 +21,8 @@ class User {
   
   getSuppliers(){
     return new Promise((resolve,reject) => {
-      const sql_query = 'SELECT * FROM users WHERE type = supplier';
-      this.db.db.all(sql_query,[],function(err,rows){
+      const sql_query = 'SELECT * FROM users WHERE type=?';
+      this.db.db.all(sql_query,["supplier"],function(err,rows){
         if(err){
           reject(err);
           return;
@@ -77,17 +77,12 @@ class User {
       const sql_query = 'UPDATE users set type = ? WHERE username = ?'
       
       //check if username exists
-      this.db.db.run(sql_query,[u_new_type,username], function(err,rows){
+      this.db.db.all(sql_query,[u_new_type,username], function(err,rows){
       
       if(err){
         reject(err);
         return;
       }
-      
-      //if(rows.length===0){//username does not exists
-      //  reject("User does not exists\n");
-      //  return;
-      //}
       });
       
       resolve("Operation completed successfully\n");

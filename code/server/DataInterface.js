@@ -111,8 +111,8 @@ class DataInterface{
     getUsers_except_manager(){
       return new Promise((resolve,reject) => {
         
-        const sql_query = 'SELECT * FROM users WHERE NOT type = manager';
-        this.db.db.all(sql_query,[],function(err, rows){
+        const sql_query = 'SELECT * FROM users WHERE NOT type =?';
+        dbHelper.db.all(sql_query,["manager"],function(err, rows){
           if(err){
             reject(err);
             return;
