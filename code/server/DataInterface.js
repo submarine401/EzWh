@@ -5,7 +5,7 @@ const SKU = require('./SKU');
 
 class DataInterface{
 
-    skus = [];
+    //skus = [];
     //users = [];
 
     constructor(){
@@ -13,11 +13,11 @@ class DataInterface{
         //this.skus = this.dbHelper.load_SKUs();
         //this.users = this.dbHelper.load_users();
 
-        if(this.skus === undefined) this.skus = [];
+        //if(this.skus === undefined) this.skus = [];
         //if(this.users === undefined) this.users = [];
         
         //debug
-        this.skus.push(new SKU(1, 'new sku'));
+        //this.skus.push(new SKU(1, 'new sku'));
 
         
     }
@@ -47,12 +47,13 @@ class DataInterface{
         }
     }
 
-    return_SKU(){
-        return this.skus;
+    async return_SKU(){
+        const skus = await dbHelper.load_SKUs();
+        return skus
     }
 
     get_SKU(id){
-        return this.skus.find(sku => sku.id == id);
+        return this.return_SKU().find(sku => sku.id == id);
     }
 
     delete_SKU(id){

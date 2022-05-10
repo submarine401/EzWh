@@ -1,3 +1,6 @@
+const dataInterface = require('./DataInterface');
+const SKU = require('./SKU');
+
 class DBhelper {
     sqlite = require('sqlite3');
 
@@ -59,6 +62,32 @@ class DBhelper {
 
     load_SKUs() {
         console.log('loading skus');
+
+        return new Promise((resolve, reject) => {
+
+            const sql_query = 'SELECT * from sku'
+            this.db.run(sql_query, (err,rows)=>{
+
+                if(err){
+                    reject(err); 
+                    return;
+                }
+
+                const skus = rows.map((sku) => {
+                    
+                    const test_descriptors = [];
+
+                    for(id of sku.test_descriptors){
+                        test_descriptors.push(dataInterface.get_test_descriptor(id)); // get test descriptor to implement
+                    }
+
+                    const position = dataInterface.get_position(sku.positionID);
+
+                    return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.available_quantity, position, test_descriptors);
+                });
+                resolve(skus);
+            });
+        });
     }
 
     create_sku_table() {
@@ -67,7 +96,7 @@ class DBhelper {
             // position id is TEXT because it is too big for an integer
             // test_descriptors[] is text for now;
             const sql_query = 'CREATE TABLE IF NOT EXISTS sku (id INTEGER, descrpition TEXT, weight REAL, volume REAL, note TEXT, price REAL, available_quantity INTEGER, positionID TEXT, test_descriptors TEXT);'
-            this.db.run(sql_query, [], function (err) {
+            this.db.run(sql_query, function (err) {
                 if (err) {
                     reject(err);
                     return;
