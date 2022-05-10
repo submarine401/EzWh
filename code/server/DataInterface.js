@@ -1,4 +1,4 @@
-const dbHelper = require('./DBhelper');
+const dbHelper = require('./dbHelper');
 const SKU = require('./SKU');
 //const U = require ('./User');
 
@@ -84,7 +84,7 @@ class DataInterface{
     getUsers(){
       return new Promise((resolve,reject) =>{
         const sql_query = 'SELECT * FROM users';
-        this.dbHelper.db.all(sql_query,[], function(err, rows){
+        dbHelper.db.all(sql_query,[], function(err, rows){
           
           if(err){
             reject(err);

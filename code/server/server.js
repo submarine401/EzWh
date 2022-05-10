@@ -409,7 +409,7 @@ app.get('/api/suppliers', async (req,res) =>{
 
 app.get('/api/users', async (req,res) => {
   try{
-    const result = await dataInterface.getUsers_except_manager();
+    const result = await DataInterface.getUsers_except_manager();
     return res.status(200).json(result);
   }
   catch(err){
@@ -429,7 +429,7 @@ app.post('/api/newUser', async (req,res) => {
       return res.status(522).end("Unprocessable entity");
     }
     
-    const check_username = await dataInterface.getUsers();
+    const check_username = await DataInterface.getUsers();
     const res_check_username = check_username.filter(function(users){
       return users.username == new_u.username;
     });
