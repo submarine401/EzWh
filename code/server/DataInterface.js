@@ -1,16 +1,20 @@
 const dbHelper = require('./DBhelper');
 const SKU = require('./SKU');
+//const U = require ('./User');
 
 
 class DataInterface{
 
     skus = [];
+    //users = [];
 
     constructor(){
 
         this.skus = this.dbHelper.load_SKUs();
+        //this.users = this.dbHelper.load_users();
 
         if(this.skus === undefined) this.skus = [];
+        //if(this.users === undefined) this.users = [];
         
         //debug
         this.skus.push(new SKU(1, 'new sku'));
@@ -66,6 +70,36 @@ class DataInterface{
         
     }
 
+/********************************USER METHODS***************************/
+
+    //method returning the list of all users except managers
+    getUsers(){
+      return new Promise((resolve,reject) =>{
+        const sql_query = 'SELECT * FROM users';
+        this.dbHelper.db.all(sql_query,[], function(err, rows){
+          
+          if(err){
+            reject(err);
+            return;
+          }
+          
+          //if the query executes correctly create an array of 'User' objects
+          const users_not_manager = rows.map(u => ({
+            
+            id : u.id,
+            username : u.username,
+            name : u.name,
+            surname : u.surname,
+            type : u.type
+            
+          }));
+          
+          resolve(users_not_manager);
+          
+        });
+      });
+    }
+    
 }
 
 const dataInterface = new DataInterface();

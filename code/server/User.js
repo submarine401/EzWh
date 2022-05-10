@@ -1,3 +1,5 @@
+
+
 class User {
   dayjs = require('dayjs');
   constructor(db) {
@@ -17,8 +19,6 @@ class User {
   }
   
   
-  
-  //method which returns user informations if logged in
   getSuppliers(){
     return new Promise((resolve,reject) => {
       const sql_query = 'SELECT * FROM users WHERE type = supplier';
@@ -44,72 +44,26 @@ class User {
     });
   }
   
-  //method returning the list of all users except managers
-  getUsers(){
-    return new Promise((resolve,reject) =>{
-      const sql_query = 'SELECT * FROM users WHERE NOT type = manager';
-      this.db.db.all(sql_query,[], function(err, rows){
-        
-        if(err){
-          reject(err);
-          return;
-        }
-        
-        //if the query executes correctly create an array of 'User' objects
-        const users_not_manager = rows.map(u => ({
-          
-          id : u.id,
-          username : u.username,
-          name : u.name,
-          surname : u.surname,
-          type : u.type
-          
-        }));
-        
-        resolve(users_not_manager);
-        
-      });
-    });
-  }
-  
   
   newUser(u){
-    return new Promise(async (resolve,reject) => {
+    return new Promise((resolve,reject) => {
       if(u.password.length < 8){
         reject("Password must be at least 8 characters long!\n");
         return;
       }
       const email = u.username;
       const type = u.type;
-      const sql_query1 = 'SELECT * FROM users WHERE username = ?'
-      const params1 = [email];
-      const sql_query2 = 'INSERT INTO users (username, password, name, surname, type) VALUES (?, ? , ?, ?, ?)';
-      //const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = ? AND type = ?)';
+      const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) VALUES (?, ?, ?, ?, ?)';
       //insert into 'users' table the parameters defining in the following constant
-      //const parameters=[u.username, u.password, u.name, u.surname, u.type, email, type];
-      const params2 = [u.username,u.password,u.name,u.surname,u.type];
+      const parameters=[u.username, u.password, u.name, u.surname, u.type];
     
-      
-      //if user does not exist insert it into DB
-      await this.db.db.all(sql_query1, params1, function(err,rows){
-        console.log(rows);
-        if (rows.length !== 0) {
-          console.log("ciao1");
-          resolve(409);
+    //Insert user in the DB
+      this.db.db.all(sql_query2,parameters, function(err,rows){
+      if(err){
+        reject(err);
+        return;
         }
-        else if(err){
-          resolve(err);
-        }
-      });
-      this.db.db.run(sql_query2,params2,function(err,rows){
-        //console.log(rows);
-        console.log("ciao2");
-        if(err){
-         resolve(err);
-        }
-        else{
-         resolve(200);
-        }
+        resolve(201);
       });
       
     });
