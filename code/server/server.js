@@ -33,7 +33,7 @@ const U = new User(db);
 const TD = new Test_Descriptor(db);
 const TR = new Test_Result(db);
 
-dbHelper.create_sku_table().then(function(response){console.log(response);}, function(error){console.error( error);}); // to check
+db.create_sku_table().then(function(response){console.log(response);}, function(error){console.error( error);}); // to check
 
 // init express
 const app = new express();
