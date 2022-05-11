@@ -275,15 +275,63 @@ class DBhelper {
     */
 
     create_user_table() {
+        let db_ref= this;
         return new Promise((resolve, reject) => {
             const sql_query = 'CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, username text, password text, name text, surname text, type text);';
-            this.db.run(sql_query, [], function (err) {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve("Users Table -> OK");
-            });
+            const sql_query2 = 'INSERT INTO users (id, username, password, name, surname, type) VALUES (?, ?, ?, ?, ?, ?)';
+            this.db.serialize(function(){
+              db_ref.db.run(sql_query, [], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+                  //resolve("Users Table -> OK");
+              });
+              
+              db_ref.db.run(sql_query2, [1,"user1@ezwh.com","testpassword","name","surname","customer"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [2,"qualityEmployee1@ezwh.com","testpassword","name","surname","qualityEmployee"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [3,"clerk1@ezwh.com","testpassword","name","surname","clerk"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [4,"deliveryEmployee1@ezwh.com","testpassword","name","surname","deliveryEmployee"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [5,"supplier1@ezwh.com","testpassword","name","surname","supplier"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [6,"manager1@ezwh.com","testpassword","name","surname","manager"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+            });  
+            resolve("Users table -> OK")      
         });
     }
 
