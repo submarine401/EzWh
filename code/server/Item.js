@@ -4,7 +4,7 @@ class Item{
     constructor(db)
     {
         this.db = db;
-        this.dataInterface = new DataInterface(db);
+        this.dataInterface = DataInterface;
 
 
      
