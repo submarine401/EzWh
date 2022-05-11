@@ -5,19 +5,11 @@ class Test_Result{
     constructor(db){
        this.db = db;
    
-<<<<<<< HEAD
-    //    db.create_test_Result_table().then(function(response) {
-    //     console.log(response);
-    // }, function(error) {
-    //     console.error(error);
-    // });
-=======
        db.create_test_result_table().then(function(response) {
         console.log(response);
     }, function(error) {
         console.error(error);
     });
->>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
        
    }
    
