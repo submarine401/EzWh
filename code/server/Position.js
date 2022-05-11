@@ -11,8 +11,8 @@ class Position{
         this.col = newPosition.col;
         this.maxWeight = newPosition.maxWeight;
         this.maxVolume = newPosition.maxVolume;
-        this.occupiedWeight = 0;
-        this.occupiedVolume = 0;
+        this.occupiedWeight = newPosition.occupiedWeight? newPosition.occupiedWeight: 0;
+        this.occupiedVolume = newPosition.occupiedVolume? newPosition.maxWeight: 0;
 
     }
 

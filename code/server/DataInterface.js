@@ -1,7 +1,7 @@
 const dbHelper = require('./dbHelper');
+const Position = require('./Position');
 const SKU = require('./SKU');
 //const U = require ('./User');
-
 
 class DataInterface{
 
@@ -47,10 +47,6 @@ class DataInterface{
                                     skuData.price,
                                     skuData.availableQuantity);
 
-            this.skus.push(newSKU);
-
-            console.log(this.skus);
-
             await this.dbHelper.store_SKU(newSKU);
 
         }  catch(err) {
@@ -73,8 +69,7 @@ class DataInterface{
         const sku = this.get_SKU(id);
         console.log(sku.id);
         if(sku !== undefined){
-            this.skus.filter(sk => sk.id == id);
-            this.dbHelper.delete_SKU();
+            this.dbHelper.delete_SKU(id);
             return true;
         } else {
             return false;
@@ -85,7 +80,56 @@ class DataInterface{
 
  /*********************************Position methods************************/ 
 
-    
+    async get_all_position(){
+
+        const positions = await dbHelper.load_positions();
+        return positions;
+        
+    }
+
+    async create_Position(posData){
+
+        try{
+
+            const newPos = new Position(posData);
+
+            await this.dbHelper.store_Position(newPos);
+
+        }  catch(err) {
+          throw(err);
+        }
+
+    }
+
+    modify_Position(newValues, id){
+
+        const pos = this.get_all_position().find(p => p.id === id);
+
+        pos.modify_Position(newValues);
+
+    }
+
+    modify_positionID(newID, oldID){
+
+        const pos = this.get_all_position().find(p => p.id === oldID);
+
+        pos.modify_PositionID(newID);
+
+    }
+
+    delete_Position(id){
+
+        console.log('delete position' + id);
+        const pos = this.get_all_position().find(p => p.id === id);
+
+        if(pos !== undefined){
+            this.dbHelper.delete_Position(id);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
 
  /********************************USER METHODS***************************/

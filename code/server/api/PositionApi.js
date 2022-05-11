@@ -106,6 +106,27 @@ router.put('api/position/:positionID/changeID', (req, res)=>{
 });
 
 router.delete('api/position/:positionID', (req, res)=>{
+
+    try{     
+  
+        const id = req.params.positionID;
+
+        if( typeof id === 'string' && id.length === 12) {
+    
+          if(dataInterface.delete_Position(id)){
+            return res.status(204).end();
+          } else {
+            return res.status(404).json(ret);
+          }
+    
+        } else {
+          return res.status(422).json({error : "INVALID I INPUT"});
+        }
+      }
+      catch(err) {
+        console.log(err);
+        return res.status(503).end();
+      }
     
 });
 

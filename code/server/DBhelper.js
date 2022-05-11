@@ -1,10 +1,12 @@
 const dataInterface = require('./DataInterface');
+const Position = require('./Position');
 const SKU = require('./SKU');
 
 class DBhelper {
     sqlite = require('sqlite3');
 
     constructor(dbname){
+
         this.db = new this.sqlite.Database(dbname, (err) =>{ 
             if (err) throw err;
             else console.log("Connected to DB");
@@ -42,7 +44,19 @@ class DBhelper {
         }, function(error) {
             console.error(error);
         });
-        //create ??? table 
+        //create position table
+        this.create_position_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error(error);
+        });
+        //create SKU table 
+        this.create_sku_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error(error);
+        });
+        //create ??? table
     
 
     }
@@ -177,6 +191,83 @@ class DBhelper {
     }
 
     delete_SKU(id) {
+        console.log('deleting ' + id + ' from db')
+    }
+
+
+    /*
+    ***************************************************Position methods*****************************************************
+    */
+
+    create_position_table() {
+        return new Promise((resolve, reject) => {
+
+            const sql_query = 'CREATE TABLE IF NOT EXISTS position (positionID TEXT, aisleID TEXT, row TEXT, col TEXT, maxWeight REAL, maxVol REAL, occupiedWeight REAL, occupiedVol REAL);'
+            this.db.run(sql_query, function (err) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve("Position Table -> OK");
+            });
+        });
+    }
+
+
+    load_positions() {
+        console.log('loading position');
+
+        return new Promise((resolve, reject) => {
+
+            const sql_query = 'SELECT * from position'
+            this.db.run(sql_query, (err,rows)=>{
+
+                if(err){
+                    reject(err); 
+                    return;
+                }
+
+                const position = rows.map((pos) => new Position(pos));
+                resolve(position);
+            });
+        });
+    }
+
+
+    
+    store_position(position) {
+
+        try {
+            console.log('DB store');
+
+            return new Promise((resolve, reject) => {
+
+                try {
+                    const sql = 'INSERT INTO position (positionID, aisleID, row, col, maxWeight, maxVol, occupiedWeight, occupiedVol)  \
+                                VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
+                    const params = [position.id, position.aisle, position.row, position.col, position.maxWeight, 
+                                    position.maxVolume, position.occupiedWeight, position.occupiedVolume];
+                    this.db.run(sql, params, (err)=>{
+                        if(err){
+                            reject(err);
+                            return}
+                    resolve("Stored position");
+                    });
+
+                } catch (err) {
+                    throw (err);
+                }
+            })
+        } catch (err) {
+            throw (err);
+        }
+    }
+
+    update_position(sku) {
+        //to do
+    }
+
+    delete_position(id) {
         console.log('deleting ' + id + ' from db')
     }
     /*
