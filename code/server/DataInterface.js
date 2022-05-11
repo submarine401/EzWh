@@ -5,28 +5,20 @@ const SKU = require('./SKU');
 
 class DataInterface{
 
-    //skus = [];
     //users = [];
 
     constructor(){
 
         this.dbHelper = dbHelper;
-    //    this.skus = this.dbHelper.load_SKUs();
         //this.users = this.dbHelper.load_users();
 
-    //    if(this.skus === undefined) this.skus = [];
+     //   if(this.skus === undefined) this.skus = [];
         if(this.users === undefined) this.users = [];
         
-        //debug
-    //    this.skus.push(new SKU(1, 'new sku'));
-        //this.skus = this.dbHelper.load_SKUs();
         //this.users = this.dbHelper.load_users();
 
-        //if(this.skus === undefined) this.skus = [];
         //if(this.users === undefined) this.users = [];
         
-        //debug
-        //this.skus.push(new SKU(1, 'new sku'));
 
         
     }
