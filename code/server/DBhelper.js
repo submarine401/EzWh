@@ -4,55 +4,47 @@ const SKU = require('./SKU');
 class DBhelper {
     sqlite = require('sqlite3');
 
-<<<<<<< HEAD
     constructor(dbname){
-    this.db = new this.sqlite.Database(dbname, (err) =>{ 
-        if (err) throw err;
-        else console.log("Connected to DB");
-    });
-
-    // create IO table 
-    this.create_internal_orders_table().then(function(response) {
-        console.log(response);
-      }, function(error) {
-        console.error( error);
-      });
-    // create I table 
-    this.create_item_table().then(function(response) {
-        console.log(response);
-    }, function(error) {
-        console.error(error);
-    });
-    //create RO table
-    this.create_return_order_table().then(function(response) {
-        console.log(response);
-    }, function(error) {
-        console.error(error);
-    });
-    //create user 
-    this.create_user_table().then(
-        function(response){
-          console.log('Table created successfully!\n',response);
-        },
-        function(error){
-          console.log('Creating user table: operation failed\n',error);
-    });
-    //create restoc order table 
-    this.create_restock_order_table().then(function(response) {
-        console.log(response);
-    }, function(error) {
-        console.error(error);
-    });
-     //create ??? table 
-   
-
-=======
-    constructor(dbname) {
-        this.db = new this.sqlite.Database(dbname, (err) => {
+        this.db = new this.sqlite.Database(dbname, (err) =>{ 
             if (err) throw err;
             else console.log("Connected to DB");
         });
->>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
+
+        // create IO table 
+        this.create_internal_orders_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error( error);
+        });
+        // create I table 
+        this.create_item_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error(error);
+        });
+        //create RO table
+        this.create_return_order_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error(error);
+        });
+        //create user 
+        this.create_user_table().then(
+            function(response){
+            console.log('Table created successfully!\n',response);
+            },
+            function(error){
+            console.log('Creating user table: operation failed\n',error);
+        });
+        //create restoc order table 
+        this.create_restock_order_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error(error);
+        });
+        //create ??? table 
+    
+
     }
     /*
     *******************************************CREATE INTERNAL ORDERS TABLE********************************************
@@ -192,15 +184,63 @@ class DBhelper {
     */
 
     create_user_table() {
+        let db_ref= this;
         return new Promise((resolve, reject) => {
             const sql_query = 'CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, username text, password text, name text, surname text, type text);';
-            this.db.run(sql_query, [], function (err) {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve("Users Table -> OK");
-            });
+            const sql_query2 = 'INSERT INTO users (id, username, password, name, surname, type) VALUES (?, ?, ?, ?, ?, ?)';
+            this.db.serialize(function(){
+              db_ref.db.run(sql_query, [], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+                  //resolve("Users Table -> OK");
+              });
+              
+              db_ref.db.run(sql_query2, [1,"user1@ezwh.com","testpassword","name","surname","customer"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [2,"qualityEmployee1@ezwh.com","testpassword","name","surname","qualityEmployee"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [3,"clerk1@ezwh.com","testpassword","name","surname","clerk"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [4,"deliveryEmployee1@ezwh.com","testpassword","name","surname","deliveryEmployee"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [5,"supplier1@ezwh.com","testpassword","name","surname","supplier"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+              db_ref.db.run(sql_query2, [6,"manager1@ezwh.com","testpassword","name","surname","manager"], function (err) {
+                  if (err) {
+                      reject(err);
+                      return;
+                  }
+              });
+              
+            });  
+            resolve("Users table -> OK")      
         });
     }
 
@@ -236,58 +276,6 @@ create_test_result_table (){
 }
 
 
-<<<<<<< HEAD
-store_SKU(sku){
-    
-    try {
-        console.log('DB store');
-
-        return new Promise((resolve, reject) => {
-
-            try {
-                // const sql = 'INSERT INTO SKU ()  VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
-                // const params = [ sku.id, sku.description, sku.price, sku.weight, sku.volume, sku.notes, 
-                //                 sku.position === undefined?undefined:sku.position /*.id*/, sku.available_quantity,
-                //                 sku.price, sku.test_descriptors.length === 0 ? []:sku.test_descriptors.map(td => td.id)];
-                // this.db.run(sql, params, (err)=>{
-                //     if(err){
-                //         reject(err);
-                //         return}
-                    resolve("Stored SKU");
-                // });
-
-            } catch(err) {
-                throw(err);
-            }
-        })
-    } catch(err) {
-        throw(err);
-    }
-}
-
-update_SKU(sku){
-    //to do
-}
-
-delete_SKU(id){
-    console.log('deleting ' + id + ' from db')
-}
-/*
-***************************************************CREATE USER TABLE***********************************
-*/
-
-create_user_table(){
-  return new Promise((resolve,reject) =>{
-    const sql_query='CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, username text, password text, name text, surname text, type text);';
-    this.db.run(sql_query,[], function(err){
-      if(err){
-        reject(err);
-        return;
-      }
-      resolve("Users Table -> OK");
-    });
-  });
-}
 //**************************************************RSO Table****************************************************
 create_restock_order_table (){
     return new Promise((resolve,reject)=>{
@@ -302,12 +290,7 @@ create_restock_order_table (){
 }
 //**************************************************  Table ****************************************************
 
-    
-}
-module.exports = DBhelper;
-=======
 }
 
 const dbHelper = new DBhelper("EZWHDB");
 module.exports = dbHelper;
->>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781

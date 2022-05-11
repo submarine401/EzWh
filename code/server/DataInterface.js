@@ -1,4 +1,4 @@
-const dbHelper = require('./dbHelper');
+const dbHelper = require('./DBhelper');
 const SKU = require('./SKU');
 //const U = require ('./User');
 
@@ -10,6 +10,15 @@ class DataInterface{
 
     constructor(){
 
+        this.dbHelper = dbHelper;
+    //    this.skus = this.dbHelper.load_SKUs();
+        //this.users = this.dbHelper.load_users();
+
+    //    if(this.skus === undefined) this.skus = [];
+        if(this.users === undefined) this.users = [];
+        
+        //debug
+    //    this.skus.push(new SKU(1, 'new sku'));
         //this.skus = this.dbHelper.load_SKUs();
         //this.users = this.dbHelper.load_users();
 
@@ -26,59 +35,60 @@ class DataInterface{
 
     async create_SKU(skuData){
 
-    //     console.log('create SKU');
+        console.log('create SKU');
 
-    //     try{
+        try{
 
-    //         const newSKU = new SKU( !this.skus || this.skus.length === 0? 1: this.skus.map(sku => sku.id).reduce((a,b)=>a>b?a:b) + 1, //new sku id is greatest id + 1 or 1 if array is empty
-    //                                 skuData.description,
-    //                                 skuData.weight,
-    //                                 skuData.volume,
-    //                                 skuData.notes,
-    //                                 skuData.price,
-    //                                 skuData.availableQuantity);
+            const newSKU = new SKU( !this.skus || this.skus.length === 0? 1: this.skus.map(sku => sku.id).reduce((a,b)=>a>b?a:b) + 1, //new sku id is greatest id + 1 or 1 if array is empty
+                                    skuData.description,
+                                    skuData.weight,
+                                    skuData.volume,
+                                    skuData.notes,
+                                    skuData.price,
+                                    skuData.availableQuantity);
 
-    //         this.skus.push(newSKU);
+            this.skus.push(newSKU);
 
-    //         console.log(this.skus);
+            console.log(this.skus);
 
-    //         await this.dbHelper.store_SKU(newSKU);
+            await this.dbHelper.store_SKU(newSKU);
 
-    //     }  catch(err) {
-    //       throw(err);
-    //     }
-    // }
+        }  catch(err) {
+          throw(err);
+        }
+    }
 
+    
     async return_SKU(){
         const skus = await dbHelper.load_SKUs();
-        return skus
+        return skus;
     }
 
     get_SKU(id){
         return this.return_SKU().find(sku => sku.id == id);
     }
 
-    // delete_SKU(id){
-    //     console.log('delete SKU' + id);
-    //     const sku = this.get_SKU(id);
-    //     console.log(sku.id);
-    //     if(sku !== undefined){
-    //         this.skus.filter(sk => sk.id == id);
-    //         this.dbHelper.delete_SKU();
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
+    delete_SKU(id){
+        console.log('delete SKU' + id);
+        const sku = this.get_SKU(id);
+        console.log(sku.id);
+        if(sku !== undefined){
+            this.skus.filter(sk => sk.id == id);
+            this.dbHelper.delete_SKU();
+            return true;
+        } else {
+            return false;
+        }
 
         
     }
 
-/*********************************Position methods************************/ 
+ /*********************************Position methods************************/ 
 
     
 
 
-/********************************USER METHODS***************************/
+ /********************************USER METHODS***************************/
 
     //method returning the list of all users except managers
     getUsers(){
