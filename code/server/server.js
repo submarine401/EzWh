@@ -564,7 +564,7 @@ app.get('/api/restockOrders',async (req,res)=>{
 /*
 get restock order by id
 */
-app.get('/api/restockOrder/:id',async (req,res)=>{
+app.get('/api/restockOrders/:id',async (req,res)=>{
 
   try
     {     
