@@ -10,17 +10,6 @@ class DataInterface{
 
     constructor(){
 
-<<<<<<< HEAD
-        this.dbHelper = dbHelper;
-    //    this.skus = this.dbHelper.load_SKUs();
-        //this.users = this.dbHelper.load_users();
-
-    //    if(this.skus === undefined) this.skus = [];
-        if(this.users === undefined) this.users = [];
-        
-        //debug
-    //    this.skus.push(new SKU(1, 'new sku'));
-=======
         //this.skus = this.dbHelper.load_SKUs();
         //this.users = this.dbHelper.load_users();
 
@@ -29,18 +18,13 @@ class DataInterface{
         
         //debug
         //this.skus.push(new SKU(1, 'new sku'));
->>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
 
         
     }
 
-<<<<<<< HEAD
-    // async create_SKU(skuData){
-=======
     //+************************************ SKU ****************************************
 
     async create_SKU(skuData){
->>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
 
     //     console.log('create SKU');
 
@@ -65,15 +49,6 @@ class DataInterface{
     //     }
     // }
 
-<<<<<<< HEAD
-    // return_SKU(){
-    //     return this.skus;
-    // }
-
-    // get_SKU(id){
-    //     return this.skus.find(sku => sku.id == id);
-    // }
-=======
     async return_SKU(){
         const skus = await dbHelper.load_SKUs();
         return skus
@@ -82,7 +57,6 @@ class DataInterface{
     get_SKU(id){
         return this.return_SKU().find(sku => sku.id == id);
     }
->>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
 
     // delete_SKU(id){
     //     console.log('delete SKU' + id);
@@ -97,14 +71,10 @@ class DataInterface{
     //     }
 
         
-<<<<<<< HEAD
-    // }
-=======
     }
 
 /*********************************Position methods************************/ 
 
->>>>>>> 482ce7d3f98e4b3fb5c478bd7dc2ff0da91d5781
     
 
 
