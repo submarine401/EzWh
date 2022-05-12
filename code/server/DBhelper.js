@@ -196,6 +196,52 @@ class DBhelper {
         console.log('deleting ' + id + ' from db')
     }
 
+    /*
+    ***************************************************SKUItem methods*****************************************************
+    */
+    
+    create_SKUItem_table(){
+      return new Promise((resolve,reject) =>{
+        const sql_query = ' CREATE TABLE IF NOT EXISTS skuitem (SKUid integer PRIMARY KEY, RFID text, dateOfStock DATE, availability integer)';
+        this.db.run(sql_query, [], function(err){
+          if(err){
+            reject(err);
+            return;
+          }
+          resolve("SKUItem table -> OK")
+        });
+      });
+    }
+    
+    store_SKUItem(skuItem){
+      try {
+        console.log("Storing SKUItem...");
+        
+        return new Promise ((resolve,reject) => {
+          
+          try {
+            const sql_query = 'INSERT INTO skuitem (SKUid, RFID, dateOfStock, availability) VALUES (?, ?, ?, ?)';
+            const params = [skuItem.SKUid, skuItem.RFID, skuItem.dateOfStock, 0];
+            this.db.run(sql_query,params,function(err){
+              if(err){
+                reject(err);
+                return;
+              }
+              resolve('Stored SKUItem');
+            });
+          } catch (e) {
+            throw(e);
+          }
+        });
+        
+      } catch (err) {
+        throw(err);
+      }
+    }
+    
+    update_SKUItem(){
+      
+    }
 
     /*
     ***************************************************Position methods*****************************************************
@@ -401,7 +447,7 @@ create_restock_order_table (){
     });
     });
 }
-//**************************************************  Table ****************************************************
+//************************************************** SKUitem Table ****************************************************
 
 }
 
