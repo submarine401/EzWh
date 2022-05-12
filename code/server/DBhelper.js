@@ -63,7 +63,7 @@ class DBhelper {
             console.error( error);
         });
           // create test result table 
-          this.create_test_result_table.then(function(response) {
+          this.create_test_result_table().then(function(response) {
             console.log(response);
         }, function(error) {
             console.error( error);
@@ -463,4 +463,5 @@ create_restock_order_table (){
 }
 
 const dbHelper = new DBhelper("EZWHDB.db");
+
 module.exports = dbHelper;

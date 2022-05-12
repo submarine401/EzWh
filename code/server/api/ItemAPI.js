@@ -1,17 +1,8 @@
 'use strict'
 const express = require('express');
-const Item = require('../Item');
-
-// const DBhelper = require('../DBhelper');
-// const dbHelper = new DBhelper("EZWHDB");
+const I = require('../Item');
 
 const dataInterface = require('../DataInterface');
-//const dataInterface = new DataInterface();
-
-
-
-
-
 
 let router = express.Router();
 
@@ -23,7 +14,7 @@ router.get('/api/items',async (req,res)=>{
   
     try
       {     
-          console.log("fuck me");
+          
         const results = await dataInterface.get_all_items();
         return res.status(200).json(results);
       }
@@ -34,17 +25,15 @@ router.get('/api/items',async (req,res)=>{
     }
   });
 
-/*
-INSERT NEW ITEM
 
-router.post('/api/item',async (req,res)=>{
+  router.post('/api/item',async (req,res)=>{
     try{
   
       if(Object.keys(req.body).length === 0){
         return res.status(422).json({error : "Unprocessable Entity"});
       }
     
-      const ni = req.body.ni;
+      const ni = req.body;
       if( ni === undefined || ni.description === undefined || ni.price === undefined || ni.SKUId === undefined || ni.supplierId === undefined ){
         return res.status(422).json({error : "Unprocessable Entityy"});
       }
@@ -63,50 +52,11 @@ router.post('/api/item',async (req,res)=>{
       return res.status(503).end();
     }
   });
-  */
 
-  module.exports = router;
-
-
-
-
-/*
-INSERT NEW ITEM
-
-app.post('/api/item',async (req,res)=>{
-    try{
-  
-      if(Object.keys(req.body).length === 0){
-        return res.status(422).json({error : "Unprocessable Entity"});
-      }
-    
-      const ni = req.body.ni;
-      if( ni === undefined || ni.description === undefined || ni.price === undefined || ni.SKUId === undefined || ni.supplierId === undefined ){
-        return res.status(422).json({error : "Unprocessable Entityy"});
-      }
-    
-      const results = await dataInterface.get_sku_by_id(ni.SKUId).then(()=> {return 0;}, (error)=> {return I.insert_into_item_table(ni);});
-      if(results !== 0)
-      return res.status(200).json(results);
-      else
-      return res.status(404).json({error : "Sku not found"});
-  
-    // @@@@@@@@@@@@@@@@@@@ 404 error needs to be handeled because of SKUid
-    }
-    catch(err)
-    {
-      console.log(err);
-      return res.status(503).end();
-    }
-  });
-  
-  /*
-  MODIFY I
-  
-  app.put('/api/item/:id',async (req,res)=>{
+  router.put('/api/item/:id',async (req,res)=>{
     try
       {
-        const i = req.body.i;
+        const i = req.body;
         if(Object.keys(req.body).length === 0 || i === undefined || i.newDescription === undefined || i.newPrice === undefined ){
           return res.status(422).json({error : "Unprocessable Entity"});
         }
@@ -135,10 +85,9 @@ app.post('/api/item',async (req,res)=>{
       return res.status(500).end();
     }
   });
-  /*
-  DELETE I
-  
-  app.delete('/api/items/:id',async (req,res)=>{
+
+
+  router.delete('/api/items/:id',async (req,res)=>{
     try{
       const id = req.params.id
       if( id === undefined ){
@@ -154,25 +103,8 @@ app.post('/api/item',async (req,res)=>{
       return res.status(503).end();
     }
   });
-  /*
-  GET ALL I
-  
-  app.get('/api/items',async (req,res)=>{
-  
-    
-    try
-      {     
-        const results = await dataInterface.get_all_items();
-        return res.status(200).json(results);
-      }
-    catch(err)
-    {
-      console.log(err);
-      return res.status(500).end();
-    }
-  });
-  
-  app.get('/api/items/:id',async (req,res)=>{
+
+  router.get('/api/items/:id',async (req,res)=>{
     try
       {     
   
@@ -196,4 +128,4 @@ app.post('/api/item',async (req,res)=>{
       return res.status(500).end();
     }
   });
-*/
+module.exports = router;

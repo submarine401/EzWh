@@ -1,16 +1,17 @@
-const dbHelper = require('./dbHelper');
+const dbHelper = require('./DBhelper');
 const Position = require('./Position');
 const SKU = require('./SKU');
-const SKUItem = require('./SKUItem');
+// const SKUItem = require('./SKUItem'); ***********
 //const U = require ('./User');
 
 class DataInterface{
 
     //users = [];
-
+    
     constructor(){
 
         this.dbHelper = dbHelper;
+        
         //console.log(dbHelper);
         //this.users = this.dbHelper.load_users();
 
