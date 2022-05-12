@@ -18,7 +18,6 @@ class DataInterface{
         //this.users = this.dbHelper.load_users();
 
         //if(this.users === undefined) this.users = [];
-        
 
         
     }
@@ -99,6 +98,8 @@ class DataInterface{
 
         pos.modify_Position(newValues);
 
+        this.dbHelper.update_position(id, pos);
+
     }
 
     modify_positionID(newID, oldID){
@@ -106,6 +107,8 @@ class DataInterface{
         const pos = this.get_all_position().find(p => p.id === oldID);
 
         pos.modify_PositionID(newID);
+
+        this.dbHelper.update_position(oldID, pos);
 
     }
 

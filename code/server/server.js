@@ -16,6 +16,7 @@ const Test_Result= require('./Test_Result');
 
 
 
+
 /*
 Connect to DB
 */
@@ -24,13 +25,13 @@ Connect to DB
 Creating instances of classe which db connection is passed to each one
 */
 //const dataInterface = new DataInterface(db);
-const IO = new InternalOrder(db);
-const I = new Item(db);
-const RO = new ReturnOrder(db);
-const RSO = new Restockorder(db);
-const U = new User(db);
-const TD = new Test_Descriptor(db);
-const TR = new Test_Result(db);
+// const IO = new InternalOrder(db);
+// const I = new Item(db);
+// const RO = new ReturnOrder(db);
+// const RSO = new Restockorder(db);
+// const U = new User(db);
+// const TD = new Test_Descriptor(db);
+// const TR = new Test_Result(db);
 
 // init express
 const app = new express();

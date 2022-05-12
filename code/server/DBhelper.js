@@ -146,7 +146,9 @@ class DBhelper {
 
             // position id is TEXT because it is too big for an integer
             // test_descriptors[] is text for now;
-            const sql_query = 'CREATE TABLE IF NOT EXISTS sku (id INTEGER, descrpition TEXT, weight REAL, volume REAL, note TEXT, price REAL, available_quantity INTEGER, positionID TEXT, test_descriptors TEXT);'
+            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, available_quantity INTEGER, positionID TEXT, test_descriptors TEXT);\
+                                INSERT INTO sku (id, description, weight, volume, note, price, available_quantity, positionID, test_descriptors) \
+                                VALUES (1, 'pippo', 10, 10 , 'pippo note', 10, 10";  
             this.db.run(sql_query, function (err) {
                 if (err) {
                     reject(err);
@@ -165,7 +167,7 @@ class DBhelper {
             return new Promise((resolve, reject) => {
 
                 try {
-                    const sql = 'INSERT INTO SKU (id, descrpition, weight, volume, note, price, available_quantity, positionID, test_descriptors))  \
+                    const sql = 'INSERT INTO sku (id, description, weight, volume, note, price, available_quantity, positionID, test_descriptors)  \
                                 VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
                     const params = [ sku.id, sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
                                     sku.available_quantity, sku.position === undefined?undefined:sku.position /*.id*/, 
@@ -263,8 +265,28 @@ class DBhelper {
         }
     }
 
-    update_position(sku) {
-        //to do
+    update_position(id, pos) {
+        return new Promise((resolve, reject) => {
+
+            const sql_query = 'UPDATE position \
+                               SET  positionID = ?, aisleID = ?, row = ?, col = ?, maxWeight = ?, maxVol = ?, occupiedWeight = ?, occupiedVol = ? \
+                               WHERE positionID = ?';
+
+            params = [
+                pos.id, pos.aisle, pos.row, pos.col, pos.maxWeight,
+                pos.maxVolume, pos.occupiedWeight, pos.occupiedVolume,
+                id
+            ]
+            this.db.run(sql_query, params, (err)=>{
+
+                if(err){
+                    reject(err); 
+                    return;
+                }
+
+                resolve();
+            });
+        });
     }
 
     delete_position(id) {
@@ -383,5 +405,5 @@ create_restock_order_table (){
 
 }
 
-const dbHelper = new DBhelper("EZWHDB");
+const dbHelper = new DBhelper("EZWHDB.db");
 module.exports = dbHelper;
