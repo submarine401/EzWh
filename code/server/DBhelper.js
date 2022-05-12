@@ -38,7 +38,7 @@ class DBhelper {
             function(error){
             console.log(error);
         });
-        //create restoc order table 
+        //create restock order table 
         this.create_restock_order_table().then(function(response) {
             console.log(response);
         }, function(error) {
@@ -55,6 +55,24 @@ class DBhelper {
             console.log(response);
         }, function(error) {
             console.error(error);
+        });
+        // create test descriptor table 
+        this.create_test_descriptor_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error( error);
+        });
+          // create test result table 
+          this.create_test_result_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error( error);
+        });
+        //create SKUItem table
+        this.create_SKUItem_table().then(function(response){
+          console.log(response);
+        }, function(error){
+          console.error(error);
         });
         //create ??? table
     
@@ -166,10 +184,10 @@ class DBhelper {
 
                 try {
                     const sql = 'INSERT INTO sku (id, description, weight, volume, note, price, available_quantity, positionID, test_descriptors)  \
-                                VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
+                                VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?);'
                     const params = [ sku.id, sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
-                                    sku.available_quantity, sku.position === undefined?undefined:sku.position /*.id*/, 
-                                    sku.price, sku.test_descriptors.length === 0 ? []:sku.test_descriptors.map(td => td.id)];
+                                    sku.available_quantity, sku.position === undefined?undefined:sku.position /*.id*/,
+                                    sku.test_descriptors.length === 0 ? []:sku.test_descriptors.map(td => td.id)];
                     this.db.run(sql, params, (err)=>{
                         if(err){
                             reject(err);
@@ -237,8 +255,26 @@ class DBhelper {
       }
     }
     
-    update_SKUItem(){
-      
+    update_SKUItem(RFID, newValues){
+      //newValues stands for the object representing the request body
+      return new Promise((resolve,reject) => {
+        const sql_query = 'UPDATE skuitem SET RFID = ?, dateOfStock = ?, availability = ? WHERE RFID = ?';
+        const params = [
+          newValues.RFID,
+          dayjs(dateOfStock).format('YYYY-MM-DD'),
+          newValues.availability,
+          RFID
+        ];
+        this.db.run(sql_query,params,function(err){
+          
+          if(err){
+            reject(err);
+            return;
+          }
+          resolve();
+          
+        });
+      });
     }
 
     /*
@@ -466,4 +502,5 @@ create_restock_order_table (){
 }
 
 const dbHelper = new DBhelper("EZWHDB.db");
+
 module.exports = dbHelper;
