@@ -54,7 +54,7 @@ modifyTR(TRid, RFid, newTestDescriptor, newDate, newResult) {  //MODIFIED (there
     });
 }
 
-delete_test_descriptor(TRid, RFif) {
+delete_test_result(TRid, RFif) {
     return new Promise ((resolve,reject)=>{
         const sql = 'DELETE FROM testresults WHERE TRid = ? AND RFid = ?';
         this.db.db.run(sql,[TRid, RFid],(err)=>{

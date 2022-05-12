@@ -21,8 +21,6 @@ router.get('api/positions', (req, res)=>{
 
 router.post('api/position', (req, res)=>{
 
-    console.log('got post req');
-
     try{
   
         if(Object.keys(req.body).length === 0){
