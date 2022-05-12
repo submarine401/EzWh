@@ -146,9 +146,7 @@ class DBhelper {
 
             // position id is TEXT because it is too big for an integer
             // test_descriptors[] is text for now;
-            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, available_quantity INTEGER, positionID TEXT, test_descriptors TEXT);\
-                                INSERT INTO sku (id, description, weight, volume, note, price, available_quantity, positionID, test_descriptors) \
-                                VALUES (1, 'pippo', 10, 10 , 'pippo note', 10, 10";  
+            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, available_quantity INTEGER, positionID TEXT, test_descriptors TEXT);";  
             this.db.run(sql_query, function (err) {
                 if (err) {
                     reject(err);
@@ -337,6 +335,22 @@ class DBhelper {
 
     delete_position(id) {
         console.log('deleting ' + id + ' from db')
+
+        return new Promise((resolve, reject) => {
+
+            const sql_query = 'DELETE FROM position \
+                               WHERE positionID = ?';
+
+            this.db.run(sql_query, [id], (err)=>{
+
+                if(err){
+                    reject(err); 
+                    return;
+                }
+
+                resolve();
+            });
+        });
     }
     /*
     ***************************************************CREATE USER TABLE***********************************
