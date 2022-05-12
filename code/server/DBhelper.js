@@ -1,4 +1,4 @@
-const dataInterface = require('./DataInterface');
+//const dataInterface = require('./DataInterface');
 const Position = require('./Position');
 const SKU = require('./SKU');
 
