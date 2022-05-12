@@ -17,7 +17,7 @@ const InternalOrderAPI = require('./api/InternalOrderAPI');
 
 const Test_Descriptor = require('./Test_Descriptor');
 const Test_Result= require('./Test_Result');
-
+const SKUItemAPI = require('./api/SKUItemAPI');
 
 
 
@@ -68,9 +68,13 @@ app.use('/', SKUapi);
 app.use('/', PositionApi);
 
 /****************************USER API******************************/
-app.use('/',UserAPI)
 
 app.use('/',ItemAPI)
+app.use('/',UserAPI);
+
+/*****************************SKUITEM API***************************/
+app.use('/', SKUItemAPI);
+
 
 /*
 ***************************************** Test Descriptor API ****************************************************

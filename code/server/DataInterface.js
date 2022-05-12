@@ -131,7 +131,7 @@ class DataInterface{
 
 
 /*********************************SKUITEM METHODS************************/
-    create_SKUItem(SKU_item_data){
+    async create_SKUItem(SKU_item_data){
       console.log('creating SKUItem...');
 
       try{
@@ -141,12 +141,34 @@ class DataInterface{
                                   SKU_item_data.RFID,
                                   SKU_item_data.dateOfStock);
 
-        //  await this.dbHelper.store_SKUItem(newSKUItem);
+          await this.dbHelper.store_SKUItem(newSKUItem);
 
       }  catch(err) {
         throw(err);
       }
-  }
+    }
+    
+    get_SKUItem(RFID){
+      return new Promise((resolve,reject) => {
+        const sql_query = 'SELECT * FROM skuitem WHERE RFID = ?';
+        dbHelper.db.all(sql_query,[],function(err,rows){
+          if(err){
+            reject(err);
+            return;
+          }
+          if(rows.length===0){  //no SkuItem found with that ID
+            resolve(404);
+          }
+          const skuItems_array = rows.map(skuItem =>({
+            SKUid : skuItem.SKUid,
+            RFID : skuItem.RFID,
+            dateOfStock : skuItem.dateOfStock,
+            availability : skuItem.availability
+          }));
+          resolve(skuItems_array);
+        });
+      });
+    }
 
  /********************************USER METHODS***************************/
 
