@@ -38,7 +38,7 @@ class DBhelper {
             function(error){
             console.log(error);
         });
-        //create restoc order table 
+        //create restock order table 
         this.create_restock_order_table().then(function(response) {
             console.log(response);
         }, function(error) {
@@ -56,7 +56,18 @@ class DBhelper {
         }, function(error) {
             console.error(error);
         });
-        //create ??? table
+        // create test descriptor table 
+        this.create_test_descriptor_table().then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error( error);
+        });
+          // create test result table 
+          this.create_test_result_table.then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.error( error);
+        });
     
 
     }
