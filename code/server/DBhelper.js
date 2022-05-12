@@ -33,10 +33,10 @@ class DBhelper {
         //create user 
         this.create_user_table().then(
             function(response){
-            console.log('Table created successfully!\n',response);
+            console.log(response);
             },
             function(error){
-            console.log('Creating user table: operation failed\n',error);
+            console.log(error);
         });
         //create restoc order table 
         this.create_restock_order_table().then(function(response) {

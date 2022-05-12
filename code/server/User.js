@@ -53,9 +53,25 @@ class User {
       }
       const email = u.username;
       const type = u.type;
+      
+      function caesarEncr(password,key){
+        let enc = '';
+        let result = []
+        for (let i = 0; i<password.length; i++){
+          result[i]=(password.charCodeAt(i) + key);
+        } 
+        console.log(result);
+        
+        enc=String.fromCharCode.apply(String,result);
+        console.log(enc);
+        return enc;
+      }
+      
+      let enc_password  = caesarEncr(u.password,1);
+      
       const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) VALUES (?, ?, ?, ?, ?)';
       //insert into 'users' table the parameters defining in the following constant
-      const parameters=[u.username, u.password, u.name, u.surname, u.type];
+      const parameters=[u.username, enc_password, u.name, u.surname, u.type];
     
     //Insert user in the DB
       this.db.db.all(sql_query2,parameters, function(err,rows){
