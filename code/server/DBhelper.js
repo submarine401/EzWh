@@ -133,27 +133,34 @@ class DBhelper {
 
         return new Promise((resolve, reject) => {
 
-            const sql_query = 'SELECT * from sku'
-            this.db.run(sql_query, (err,rows)=>{
+            const sql_query = 'SELECT * FROM sku;';
+
+            this.db.all(sql_query, (err, rows)=>{
 
                 if(err){
                     reject(err); 
                     return;
                 }
+                resolve(rows);
+            });
+        });
+    }
 
-                const skus = rows.map((sku) => {
-                    
-                    const test_descriptors = [];
+    load_SKU(id) {
+        console.log('loading skus');
 
-                    for(id of sku.test_descriptors){
-                        test_descriptors.push(dataInterface.get_TD_by_id(id)); 
-                    }
+        return new Promise((resolve, reject) => {
 
-                    const position = dataInterface.get_position(sku.positionID);
+            const sql_query = 'SELECT * FROM sku \
+                                WHERE id = ?;';
 
-                    return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.available_quantity, position, test_descriptors);
-                });
-                resolve(skus);
+            this.db.all(sql_query, [id], (err, rows)=>{
+
+                if(err){
+                    reject(err); 
+                    return;
+                }
+                resolve(rows);
             });
         });
     }
@@ -164,7 +171,7 @@ class DBhelper {
 
             // position id is TEXT because it is too big for an integer
             // test_descriptors[] is text for now;
-            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, available_quantity INTEGER, positionID TEXT, test_descriptors TEXT);";  
+            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, availableQuantity INTEGER, positionID TEXT, test_descriptors TEXT);";  
             this.db.run(sql_query, function (err) {
                 if (err) {
                     reject(err);
@@ -183,10 +190,10 @@ class DBhelper {
             return new Promise((resolve, reject) => {
 
                 try {
-                    const sql = 'INSERT INTO sku (id, description, weight, volume, note, price, available_quantity, positionID, test_descriptors)  \
-                                VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?);'
-                    const params = [ sku.id, sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
-                                    sku.available_quantity, sku.position === undefined?undefined:sku.position /*.id*/,
+                    const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID, test_descriptors)  \
+                                VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
+                    const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
+                                    sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/,
                                     sku.test_descriptors.length === 0 ? []:sku.test_descriptors.map(td => td.id)];
                     this.db.run(sql, params, (err)=>{
                         if(err){
@@ -210,6 +217,22 @@ class DBhelper {
 
     delete_SKU(id) {
         console.log('deleting ' + id + ' from db')
+
+        return new Promise((resolve, reject) => {
+
+            const sql_query = 'DELETE FROM sku \
+                               WHERE id = ?';
+
+            this.db.run(sql_query, [id], (err)=>{
+
+                if(err){
+                    reject(err); 
+                    return;
+                }
+
+                resolve();
+            });
+        });
     }
 
     /*
@@ -284,7 +307,7 @@ class DBhelper {
     create_position_table() {
         return new Promise((resolve, reject) => {
 
-            const sql_query = 'CREATE TABLE IF NOT EXISTS position (positionID TEXT, aisleID TEXT, row TEXT, col TEXT, maxWeight REAL, maxVol REAL, occupiedWeight REAL, occupiedVol REAL);'
+            const sql_query = 'CREATE TABLE IF NOT EXISTS position (positionID TEXT PRIMARY KEY, aisleID TEXT, row TEXT, col TEXT, maxWeight REAL, maxVol REAL, occupiedWeight REAL, occupiedVol REAL);'
             this.db.run(sql_query, function (err) {
                 if (err) {
                     reject(err);
