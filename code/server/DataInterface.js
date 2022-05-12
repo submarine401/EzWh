@@ -1,6 +1,7 @@
 const dbHelper = require('./dbHelper');
 const Position = require('./Position');
 const SKU = require('./SKU');
+const SKUItem = require('./SKUItem');
 //const U = require ('./User');
 
 class DataInterface{
@@ -10,6 +11,7 @@ class DataInterface{
     constructor(){
 
         this.dbHelper = dbHelper;
+        //console.log(dbHelper);
         //this.users = this.dbHelper.load_users();
 
      //   if(this.skus === undefined) this.skus = [];
@@ -18,7 +20,6 @@ class DataInterface{
         //this.users = this.dbHelper.load_users();
 
         //if(this.users === undefined) this.users = [];
-        
 
         
     }
@@ -99,6 +100,8 @@ class DataInterface{
 
         pos.modify_Position(newValues);
 
+        this.dbHelper.update_position(id, pos);
+
     }
 
     modify_positionID(newID, oldID){
@@ -106,6 +109,8 @@ class DataInterface{
         const pos = this.get_all_position().find(p => p.id === oldID);
 
         pos.modify_PositionID(newID);
+
+        this.dbHelper.update_position(oldID, pos);
 
     }
 
@@ -124,11 +129,29 @@ class DataInterface{
     }
 
 
+/*********************************SKUITEM METHODS************************/
+    create_SKUItem(SKU_item_data){
+      console.log('creating SKUItem...');
+
+      try{
+
+          const newSKUItem = new SKUItem( 
+                                  SKU_item_data.id,
+                                  SKU_item_data.RFID,
+                                  SKU_item_data.dateOfStock);
+
+        //  await this.dbHelper.store_SKUItem(newSKUItem);
+
+      }  catch(err) {
+        throw(err);
+      }
+  }
+
  /********************************USER METHODS***************************/
 
     //method returning the list of all users except managers
-    getUsers(){
-      return new Promise((resolve,reject) =>{
+    getUsers() {
+      return new Promise((resolve,reject) => {
         const sql_query = 'SELECT * FROM users';
         dbHelper.db.all(sql_query,[], function(err, rows){
           
@@ -478,7 +501,32 @@ get_issued_restock_order()
     });
 }
 
-
+/*************************************USER METHODS*************************/
+    
+get_all_suppliers(){
+  return new Promise((resolve,reject) => {
+    const sql_query = 'SELECT * FROM users WHERE type=?';
+    dbHelper.db.all(sql_query,["supplier"],function(err,rows){
+      if(err){
+        reject(err);
+        return;
+      }
+      
+      const suppliers_array = rows.map(supplier => ({  //here an array of objects is built
+        
+        id:supplier.id,
+        username:supplier.username,   //must be an email
+        name:supplier.name,
+        surname:supplier.surname
+          
+      }));
+      
+      //pass the array of suppliers to the resolve function
+      resolve(suppliers_array);
+      
+    });
+  });
+}
     
     getUsers_except_manager(){
       return new Promise((resolve,reject) => {

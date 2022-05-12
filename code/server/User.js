@@ -1,4 +1,4 @@
-
+const db = require('./DBhelper');
 
 class User {
   dayjs = require('dayjs');
@@ -19,31 +19,6 @@ class User {
   }
   
   
-  getSuppliers(){
-    return new Promise((resolve,reject) => {
-      const sql_query = 'SELECT * FROM users WHERE type=?';
-      this.db.db.all(sql_query,["supplier"],function(err,rows){
-        if(err){
-          reject(err);
-          return;
-        }
-        
-        const suppliers_array = rows.map(supplier => ({  //here an array of objects is built
-          
-          id:supplier.id,
-          username:supplier.username,   //must be an email
-          name:supplier.name,
-          surname:supplier.surname
-            
-        }));
-        
-        //pass the array of suppliers to the resolve function
-        resolve(suppliers_array);
-        
-      });
-    });
-  }
-  
   
   newUser(u){
     return new Promise((resolve,reject) => {
@@ -60,10 +35,7 @@ class User {
         for (let i = 0; i<password.length; i++){
           result[i]=(password.charCodeAt(i) + key);
         } 
-        console.log(result);
-        
         enc=String.fromCharCode.apply(String,result);
-        console.log(enc);
         return enc;
       }
       
@@ -107,10 +79,21 @@ class User {
   }
   
   //method to delete a user given its username
-  deleteUser(username,type){
+   deleteUser(username,type){
     return new Promise((resolve,reject) =>{
-      const sql_query = 'DELETE FROM users WHERE username= ? AND type = ?';
-      this.db.db.run(sql_query, [username, type], function(err) {
+      const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
+      this.db.db.all(sql_query1,[username, type], function(err,rows) {
+        if(err){
+          reject(err);
+          return;
+        }
+        else if(rows.length === 0){
+          resolve(422);
+          return;
+        }
+      });
+      const sql_query2 = 'DELETE FROM users WHERE username= ? AND type = ?';
+      this.db.db.run(sql_query2, [username, type], function(err) {
         if(err){
           reject(err);
           return;
@@ -123,4 +106,5 @@ class User {
   
   
 }
-module.exports = User;
+const U = new User(db);
+module.exports = U;
