@@ -72,8 +72,16 @@ router.put('/api/position/:positionID', (req, res)=>{
             return res.status(422).json({error : "Unprocessable Entity"});
         }
       
-        dataInterface.modify_Position(newValues, req.params.positionID);
-        return res.status(200).end();
+        dataInterface.modify_Position(newValues, req.params.positionID)
+          .then(() => {return res.status(200).end();})
+          .catch((err => {
+            if(err === 'not found'){
+              return res.status(404).end();
+            } else {
+              console.log(err);
+              return res.status(503).end();
+            }}));
+        
       
     } catch(err) {
         console.log(err);
@@ -95,9 +103,16 @@ router.put('/api/position/:positionID/changeID', (req, res)=>{
 
             return res.status(422).json({error : "Unprocessable Entity"});
         }
-      
-        dataInterface.modify_positionID(req.body.newPositionID, req.params.positionID);
-        return res.status(200).end();
+        
+        dataInterface.modify_positionID(req.body.newPositionID, req.params.positionID)
+          .then(() => {return res.status(200).end();})
+          .catch((err => {
+            if(err === 'not found'){
+              return res.status(404).end();
+            } else {
+              console.log(err);
+              return res.status(503).end();
+            }}));
       
     } catch(err) {
         console.log(err);
@@ -114,14 +129,18 @@ router.delete('/api/position/:positionID', (req, res)=>{
 
         if( typeof id === 'string' && id.length === 12) {
     
-          if(dataInterface.delete_Position(id)){
-            return res.status(204).end();
-          } else {
-            return res.status(404).json(ret);
-          }
+          dataInterface.delete_position(id)
+            .then(() => {return res.status(204).end();})
+            .catch((err => {
+              if(err === 'not found'){
+                return res.status(503).end(); //return res.status(404).end(); not listed in api document
+              } else {
+                console.log(err);
+                return res.status(503).end();
+              }}));
     
         } else {
-          return res.status(422).json({error : "INVALID I INPUT"});
+          return res.status(422).end();
         }
       }
       catch(err) {

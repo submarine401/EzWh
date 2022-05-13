@@ -21,7 +21,7 @@ class Position{
         this.aisle = newValues.newAisleID;
         this.row = newValues.newRow;
         this.col = newValues.newCol;
-        this.id = this.aisle + this.row + this.col
+        this.id = this.aisle + this.row + this.col;
         this.maxWeight = newValues.newMaxWeight;
         this.maxVolume = newValues.newMaxVolume;
         this.occupiedWeight = newValues.newOccupiedWeight;
@@ -33,6 +33,7 @@ class Position{
         this.aisle = newPid.substr(0, 4);
         this.row = newPid.substr(4, 4);
         this.col = newPid.substr(8, 4);
+        this.id = this.aisle + this.row + this.col;
     }
 
     increase_free_space(freed_weight, freed_volume){

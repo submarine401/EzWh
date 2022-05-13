@@ -369,6 +369,9 @@ class DBhelper {
     }
 
     update_position(id, pos) {
+        console.log('DB update pos');
+        console.log(id);
+        console.log(pos);
         return new Promise((resolve, reject) => {
 
             const sql_query = 'UPDATE position \

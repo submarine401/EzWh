@@ -111,9 +111,16 @@ class DataInterface{
 
         const pos = positions.find(p => p.id === id);
 
+        if(pos === undefined){
+            console.log('no matching pos');
+            throw 'not found';
+        }
+
         pos.modify_position(newValues);
 
         this.dbHelper.update_position(id, pos);
+
+        return true;
 
     }
 
@@ -123,23 +130,31 @@ class DataInterface{
 
         const pos = positions.find(p => p.id === oldID);
 
-        pos.modify_position(newID);
+        if(pos === undefined){
+            console.log('no matching pos');
+            throw 'not found';
+        }
+        
+        pos.modify_positionID(newID);
 
         this.dbHelper.update_position(oldID, pos);
 
     }
 
-    delete_Position(id){
+    async delete_position(id){
 
         console.log('delete position' + id);
-        const pos = this.get_all_position().find(p => p.id === id);
+        const positions = await this.get_all_position();
 
-        if(pos !== undefined){
-            this.dbHelper.delete_Position(id);
-            return true;
-        } else {
-            return false;
+        const pos = positions.find(p => p.id === id);
+
+        if(pos === undefined){
+            console.log('no matching pos');
+            throw 'not found';
         }
+
+        this.dbHelper.delete_position(id);
+        
 
     }
 
