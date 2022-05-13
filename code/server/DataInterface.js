@@ -1,7 +1,7 @@
 const dbHelper = require('./DBhelper');
 const Position = require('./Position');
 const SKU = require('./SKU');
-// const SKUItem = require('./SKUItem'); ***********
+const SKUItem = require('./SKUItem');
 //const U = require ('./User');
 
 class DataInterface{
