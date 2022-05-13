@@ -1,3 +1,5 @@
+const db = require('./DBhelper');
+
 class Restockorder{
 
     constructor(db)
@@ -119,4 +121,5 @@ class Restockorder{
 
 
 }
-module.exports = Restockorder;
+const Restockorderr = new Restockorder(db)
+module.exports = Restockorderr;

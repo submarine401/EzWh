@@ -1,3 +1,4 @@
+const db = require('./DBhelper');
 class ReturnOrder{
     dayjs = require('dayjs');
 
@@ -54,4 +55,5 @@ class ReturnOrder{
  
 
 }
-module.exports = ReturnOrder;
+const ReturnOrderr = new ReturnOrder(db)
+module.exports = ReturnOrderr;

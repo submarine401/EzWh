@@ -1,4 +1,5 @@
 const DataInterface = require('./DataInterface');  
+const db = require('./DBhelper');
 class Item{
       
     constructor(db)
@@ -71,4 +72,5 @@ class Item{
 
 
 }
-module.exports = Item
+const Itemd = new Item(db)
+module.exports = Itemd
