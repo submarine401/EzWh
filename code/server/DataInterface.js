@@ -51,11 +51,12 @@ class DataInterface{
                     
             const test_descriptors = [];
 
-            for(id of sku.test_descriptors){
+            for(id of JSON.parse(sku.test_descriptors)){
                 test_descriptors.push(this.get_TD_by_id(id)); 
             }
 
-            const position = sku.positionID?this.get_all_position().find(pos => pos.positionID === sku.positionID):undefined;
+            const positions = await this.get_all_position();
+            const position = sku.positionID? positions.find(pos => pos.positionID === sku.positionID):undefined;
 
             return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.availableQuantity, position, test_descriptors);
         });
@@ -119,9 +120,15 @@ class DataInterface{
 
         const positions = await this.get_all_position();
 
+        console.log(positions + ' positions');
+
         const pos = positions.find(p => p.id === oldID);
 
+        console.log(pos + ' position pre change');
+
         pos.modify_position(newID);
+
+        console.log(pos + ' position post change');
 
         this.dbHelper.update_position(oldID, pos);
 
