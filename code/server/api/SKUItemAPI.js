@@ -59,8 +59,25 @@ router.get('/api/skuitems', async(req,res) =>{
     console.log(err);
     return res.status(500).end();
   } 
-  
-  
+});
+
+router.get('/api/skuitems/sku/:id', async(req,res) =>{
+  try {
+    const id = req.params.id;
+    if(id === undefined){
+      return res.status(422).end();
+    }
+    const result = await dataInterface.get_all_available_SKUItem(id);
+    if (result === 404){
+      return res.status(404).end();
+    }
+    else{
+      return res.status(200).json(result);
+    } 
+  } catch (err) {
+    console.log(err);
+    return res.status(500).end();
+  }
 });
 
 

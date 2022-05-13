@@ -209,7 +209,7 @@ class DataInterface{
     
     get_all_available_SKUItem(skuID){
       return new Promise((resolve,reject) => {
-        const sql_query = 'SELECT * FROM skuitem where available = ? AND SKUid = ?';
+        const sql_query = 'SELECT * FROM skuitem where availability = ? AND SKUid = ?';
         dbHelper.db.all(sql_query,["1",skuID], function(err,rows){
           if(err){
             reject(err);
