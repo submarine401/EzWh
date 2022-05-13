@@ -9,7 +9,7 @@ let router = express.Router();
 
   
   
-  app.get('/api/testDescriptors', (req, res)=>{
+  router.get('/api/testDescriptors', (req, res)=>{
   
     try
       {     
@@ -24,7 +24,7 @@ let router = express.Router();
   });
   
   
-  app.get('/api/testDescriptors/:id', (req, res)=>{
+  router.get('/api/testDescriptors/:id', (req, res)=>{
   
     try{   
   
@@ -52,7 +52,7 @@ let router = express.Router();
   });
   
   
-  app.post('/api/testDescriptor/:id', async (req,res)=>{
+  router.post('/api/testDescriptor/:id', async (req,res)=>{
     try{
   
       if(Object.keys(req.body).length === 0){
@@ -83,7 +83,7 @@ let router = express.Router();
   });
 
 
-  app.put('/api/testDescriptor/:id',async (req,res)=>{
+  router.put('/api/testDescriptor/:id',async (req,res)=>{
     try
       {
         const td = req.body;
@@ -115,7 +115,7 @@ let router = express.Router();
 
   
   
-  app.delete('/api/testDescriptor/:id', (req, res)=>{
+  router.delete('/api/testDescriptor/:id', (req, res)=>{
   
     try{     
   
@@ -137,3 +137,4 @@ let router = express.Router();
   });
   
   
+  module.exports = router;

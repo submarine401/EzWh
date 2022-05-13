@@ -7,7 +7,7 @@ const Test_Result = require('../Test_Result');
 let router = express.Router();
 
 
-app.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
+router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   
 
     try{
@@ -35,7 +35,7 @@ app.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   });
 
 
-  app.get('/api/skuitems/:rfid/testResults/:id', async (req, res)=>{
+  router.get('/api/skuitems/:rfid/testResults/:id', async (req, res)=>{
   
 
     try{
@@ -67,7 +67,7 @@ app.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
 
   
-  app.post('/api/skuitems/testResult', async (req,res)=>{
+  router.post('/api/skuitems/testResult', async (req,res)=>{
 
     try{
   
@@ -102,7 +102,7 @@ app.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   });
 
 
-  app.put('/api/skuitems/:rfid/testResult/:id',async (req,res)=>{
+  router.put('/api/skuitems/:rfid/testResult/:id',async (req,res)=>{
     try
       {
     
@@ -141,7 +141,7 @@ app.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
   
   
-  app.delete('/api/skuitems/:rfid/testResult/:id', async(req, res)=>{
+  router.delete('/api/skuitems/:rfid/testResult/:id', async(req, res)=>{
   
     try{     
         const rfid = req.params.rfid;
@@ -164,3 +164,4 @@ app.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   });
   
   
+  module.exports = router;
