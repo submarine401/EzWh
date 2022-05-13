@@ -1,4 +1,5 @@
 
+const db = require('./DBhelper');
 class InternalOrder{
     dayjs = require('dayjs');
 
@@ -91,4 +92,5 @@ modify_internal_order(id,io){
 
 
 }
-module.exports = InternalOrder;
+const InternalOrderr = new InternalOrder(db)
+module.exports = InternalOrderr;

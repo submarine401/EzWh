@@ -61,17 +61,17 @@ let router = express.Router();
   
       const newTD = req.body;
       if( typeof newTD.name !== 'string' || 
-          typeof newTD.procedure_description !== 'string' || 
+          typeof newTD.procedureDescription !== 'string' || 
           typeof newTD.idSKU !== 'number' ){
         return res.status(422).json({error : "Unprocessable Entity"});
       }
   
-      const s = dataInterface.get_SKU(idSKU)
+      const s = dataInterface.get_SKU(req.params.id)
       if(s === undefined){
         return res.status(404).json({error: "No sku associated idSKU"});
       }
   
-      await Test_Descriptor.insert_into_test_Descriptor_table(newTD); 
+      const results = await Test_Descriptor.insert_into_test_Descriptor_table(newTD); 
       return res.status(201).json({success: 'Created'});
     
     }

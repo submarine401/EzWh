@@ -22,7 +22,7 @@ router.post('/api/returnOrder',async (req,res)=>{
         return res.status(422).json({error : "Unprocessable Entityy"});
       }
     
-      const results = await dataInterface.get_restock_order_by_id(nro.restockOrderId).then((err)=>{ console.log(err); },(suc)=>{  if(suc) return RO.insert_return_order_table(nro); else return suc;});
+      const results = await dataInterface.get_restock_order_by_id(nro.restockOrderId).then( (suc)=>{  if(suc) return RO.insert_return_order_table(nro); else return suc;},  (err)=>{ console.log(err); });
       if(results !==0)
       return res.status(201).json(results);
       else
