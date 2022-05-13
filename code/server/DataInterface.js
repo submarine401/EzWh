@@ -51,6 +51,8 @@ class DataInterface{
                     
             const test_descriptors = [];
 
+            console.log(sku);
+
             for(id of sku.test_descriptors){
                 test_descriptors.push(this.get_TD_by_id(id)); 
             }
@@ -599,7 +601,7 @@ get_TD(){
   return new Promise((resolve,reject)=>{
      
                   const sql = "SELECT * FROM testdescriptors ";
-              this.db.db.all(sql,(err,rows)=>{
+                    dbHelper.db.all(sql,(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;
@@ -622,7 +624,7 @@ get_TD_by_id(TDid){
   return new Promise((resolve,reject)=>{
      
        const sql = "SELECT * FROM testdescriptors where TDid = ?";
-           this.db.db.all(sql,[TDid],(err,rows)=>{
+            dbHelper.db.all(sql,[TDid],(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;
@@ -650,7 +652,7 @@ get_TR(RFid, TRid) {
 
           if(TRid===undefined){
               const sql = "SELECT * FROM testresults ";
-              this.db.db.all(sql,(err,rows)=>{
+              dbHelper.db.all(sql,(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;
@@ -667,7 +669,7 @@ get_TR(RFid, TRid) {
               });
           }else{
               const sql = "SELECT * FROM testresults where RFid = ? ";
-              this.db.db.all(sql,[RFid],(err,rows)=>{
+              dbHelper.all(sql,[RFid],(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;
