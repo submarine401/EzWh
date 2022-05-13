@@ -22,9 +22,8 @@ router.post('/api/sku', async (req,res)=>{
           typeof newSku.availableQuantity !== 'number' ){
         return res.status(422).json({error : "Unprocessable Entity"});
       }
-    
       dataInterface.create_SKU(newSku);
-      return res.status(201).json({success: 'Created'});
+      return res.status(201).end();
     
     }
     catch(err)
@@ -36,15 +35,12 @@ router.post('/api/sku', async (req,res)=>{
   
 router.get('/api/skus', (req, res)=>{
   
-    try
-      {     
-        return res.status(200).json(dataInterface.return_SKU());
-      }
-    catch(err)
-    {
+    dataInterface.return_SKU()
+      .then(skus => {
+          return res.status(200).json(skus);})
+      .catch(err => {
       console.log(err);
-      return res.status(500).end();
-    }
+      return res.status(500).end();});
   
 });
 
@@ -53,18 +49,20 @@ router.get('/api/skus/:id', (req, res)=>{
     try{     
   
       const id = req.params.id
-      if( id > 0 && typeof id === 'number') {
+      if( id > 0 && typeof Number(id) === 'number') {
   
-        const ret = dataInterface.get_SKU(id)
-        console.log(ret);
-        if(ret === undefined){
-          return res.status(404).end();
-        } else {
-          return res.status(200).json(ret);
-        }
+        dataInterface.get_SKU(id).then(ret => {
+          console.log(ret);
+          if(ret === undefined){
+            return res.status(404).end();
+          } else {
+            return res.status(200).json(ret);
+          }
+        });
+        
   
       } else {
-        return res.status(422).json({error : "INVALID I INPUT"});
+        return res.status(422).end();
       }
     }
     catch(err) {
@@ -79,12 +77,12 @@ router.delete('/api/skus/:id', (req, res)=>{
     try{     
   
       const id = req.params.id
-      if( id > 0 && typeof id === 'number') {
+      if( id > 0 && typeof Number(id) === 'number') {
   
         if(dataInterface.delete_SKU(id)){
           return res.status(204).end();
         } else {
-          return res.status(404).json(ret);
+          return res.status(404).end();
         }
   
       } else {

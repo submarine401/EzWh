@@ -29,19 +29,14 @@ class DataInterface{
 
     async create_SKU(skuData){
 
-        console.log('create SKU');
+        console.log(skuData);
 
         try{
 
-            const newSKU = new SKU( !this.skus || this.skus.length === 0? 1: this.skus.map(sku => sku.id).reduce((a,b)=>a>b?a:b) + 1, //new sku id is greatest id + 1 or 1 if array is empty
-                                    skuData.description,
-                                    skuData.weight,
-                                    skuData.volume,
-                                    skuData.notes,
-                                    skuData.price,
-                                    skuData.availableQuantity);
+            skuData.position = undefined;
+            skuData.test_descriptors = [];
 
-            await this.dbHelper.store_SKU(newSKU);
+            await this.dbHelper.store_SKU(skuData);
 
         }  catch(err) {
           throw(err);
@@ -51,25 +46,38 @@ class DataInterface{
     
     async return_SKU(){
         const skus = await dbHelper.load_SKUs();
-        return skus;
+
+        const ret = skus.map((sku) => {
+                    
+            const test_descriptors = [];
+
+            for(id of sku.test_descriptors){
+                test_descriptors.push(this.get_TD_by_id(id)); 
+            }
+
+            const position = sku.positionID?this.get_all_position().find(pos => pos.positionID === sku.positionID):undefined;
+
+            return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.availableQuantity, position, test_descriptors);
+        });
+
+        return ret;
     }
 
-    get_SKU(id){
-        return this.return_SKU().find(sku => sku.id == id);
+    async get_SKU(id){
+        const skus = await this.return_SKU();
+        return skus.find(sku => sku.id == id);
     }
 
     delete_SKU(id){
-        console.log('delete SKU' + id);
-        const sku = this.get_SKU(id);
-        console.log(sku.id);
-        if(sku !== undefined){
-            this.dbHelper.delete_SKU(id);
-            return true;
-        } else {
-            return false;
-        }
-
-        
+        console.log('delete SKU ' + id);
+        this.get_SKU(id).then( sku => {
+            if(sku !== undefined){
+                this.dbHelper.delete_SKU(id);
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 
  /*********************************Position methods************************/ 
@@ -87,7 +95,7 @@ class DataInterface{
 
             const newPos = new Position(posData);
 
-            await this.dbHelper.store_Position(newPos);
+            await this.dbHelper.store_position(newPos);
 
         }  catch(err) {
           throw(err);
@@ -95,21 +103,25 @@ class DataInterface{
 
     }
 
-    modify_Position(newValues, id){
+    async modify_Position(newValues, id){
 
-        const pos = this.get_all_position().find(p => p.id === id);
+        const positions = await this.get_all_position();
 
-        pos.modify_Position(newValues);
+        const pos = positions.find(p => p.id === id);
+
+        pos.modify_position(newValues);
 
         this.dbHelper.update_position(id, pos);
 
     }
 
-    modify_positionID(newID, oldID){
+    async modify_positionID(newID, oldID){
 
-        const pos = this.get_all_position().find(p => p.id === oldID);
+        const positions = await this.get_all_position();
 
-        pos.modify_PositionID(newID);
+        const pos = positions.find(p => p.id === oldID);
+
+        pos.modify_position(newID);
 
         this.dbHelper.update_position(oldID, pos);
 

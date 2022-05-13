@@ -7,19 +7,16 @@ const dataInterface = require('../DataInterface');
 
 let router = express.Router();
 
-router.get('api/positions', (req, res)=>{
-    try { 
-
-        return res.status(200).json(dataInterface.get_all_position());
-
-    } catch(err) {
-
-      console.log(err);
-      return res.status(500).end();
-    }
+router.get('/api/positions', (req, res)=>{
+  dataInterface.get_all_position().then( rows => { 
+    return res.status(200).json(rows)
+  }).catch(err => {
+    console.log(err);
+    return res.status(500).end();
+  });
 });
 
-router.post('api/position', (req, res)=>{
+router.post('/api/position', (req, res)=>{
 
     try{
   
@@ -32,8 +29,12 @@ router.post('api/position', (req, res)=>{
             typeof newPos.aisleID !== 'string' ||  
             typeof newPos.row !== 'string' ||  
             typeof newPos.col !== 'string' ||  
-            typeof newPos.maxWeight !== 'double' ||  
-            typeof newPos.maxVolume !== 'double' ||  
+            typeof newPos.maxWeight !== 'number' ||  
+            typeof newPos.maxVolume !== 'number' ||
+            newPos.positionID.length !== 12|| 
+            newPos.aisleID.length !== 4||
+            newPos.row.length !== 4||
+            newPos.col.length !== 4|| 
             newPos.aisleID + newPos.row + newPos.col !== newPos.positionID ){
 
             return res.status(422).json({error : "Unprocessable Entity"});
@@ -49,7 +50,7 @@ router.post('api/position', (req, res)=>{
     
 });
 
-router.put('api/position/:positionID', (req, res)=>{
+router.put('/api/position/:positionID', (req, res)=>{
     try{
   
         if(Object.keys(req.body).length === 0){
@@ -60,10 +61,10 @@ router.put('api/position/:positionID', (req, res)=>{
         if( typeof newValues.newAisleID !== 'string' ||  
             typeof newValues.newRow !== 'string' ||  
             typeof newValues.newCol !== 'string' ||  
-            typeof newValues.newMaxWeight !== 'double' ||  
-            typeof newValues.newMaxVolume !== 'double' ||  
-            typeof newValues.newOccupiedWeight !== 'double' ||  
-            typeof newValues.newOccupiedVolume !== 'double' ||
+            typeof newValues.newMaxWeight !== 'number' ||  
+            typeof newValues.newMaxVolume !== 'number' ||  
+            typeof newValues.newOccupiedWeight !== 'number' ||  
+            typeof newValues.newOccupiedVolume !== 'number' ||
             newValues.newOccupiedVolume > newValues.newMaxVolume ||
             newValues.newOccupiedWeight > newValues.newMaxWeight ||
             req.params.positionID.length !== 12){
@@ -81,7 +82,7 @@ router.put('api/position/:positionID', (req, res)=>{
     
 });
 
-router.put('api/position/:positionID/changeID', (req, res)=>{
+router.put('/api/position/:positionID/changeID', (req, res)=>{
 
     try{
   
@@ -105,7 +106,7 @@ router.put('api/position/:positionID/changeID', (req, res)=>{
     
 });
 
-router.delete('api/position/:positionID', (req, res)=>{
+router.delete('/api/position/:positionID', (req, res)=>{
 
     try{     
   
