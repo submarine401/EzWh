@@ -95,7 +95,7 @@ class DataInterface{
 
             const newPos = new Position(posData);
 
-            await this.dbHelper.store_Position(newPos);
+            await this.dbHelper.store_position(newPos);
 
         }  catch(err) {
           throw(err);
@@ -103,21 +103,25 @@ class DataInterface{
 
     }
 
-    modify_Position(newValues, id){
+    async modify_Position(newValues, id){
 
-        const pos = this.get_all_position().find(p => p.id === id);
+        const positions = await this.get_all_position();
 
-        pos.modify_Position(newValues);
+        const pos = positions.find(p => p.id === id);
+
+        pos.modify_position(newValues);
 
         this.dbHelper.update_position(id, pos);
 
     }
 
-    modify_positionID(newID, oldID){
+    async modify_positionID(newID, oldID){
 
-        const pos = this.get_all_position().find(p => p.id === oldID);
+        const positions = await this.get_all_position();
 
-        pos.modify_PositionID(newID);
+        const pos = positions.find(p => p.id === oldID);
+
+        pos.modify_position(newID);
 
         this.dbHelper.update_position(oldID, pos);
 

@@ -325,7 +325,7 @@ class DBhelper {
         return new Promise((resolve, reject) => {
 
             const sql_query = 'SELECT * from position'
-            this.db.run(sql_query, (err,rows)=>{
+            this.db.all(sql_query, (err,rows)=>{
 
                 if(err){
                     reject(err); 
@@ -375,7 +375,7 @@ class DBhelper {
                                SET  positionID = ?, aisleID = ?, row = ?, col = ?, maxWeight = ?, maxVol = ?, occupiedWeight = ?, occupiedVol = ? \
                                WHERE positionID = ?';
 
-            params = [
+            const params = [
                 pos.id, pos.aisle, pos.row, pos.col, pos.maxWeight,
                 pos.maxVolume, pos.occupiedWeight, pos.occupiedVolume,
                 id
