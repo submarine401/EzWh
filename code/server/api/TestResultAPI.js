@@ -7,7 +7,7 @@ const Test_Result = require('../Test_Result');
 let router = express.Router();
 
 
-app.get('/api/skuitems/:rfid/testResults',  (req, res)=>{
+app.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   
 
     try{
@@ -35,7 +35,7 @@ app.get('/api/skuitems/:rfid/testResults',  (req, res)=>{
   });
 
 
-  app.get('/api/skuitems/:rfid/testResults/:id',  (req, res)=>{
+  app.get('/api/skuitems/:rfid/testResults/:id', async (req, res)=>{
   
 
     try{
@@ -90,7 +90,7 @@ app.get('/api/skuitems/:rfid/testResults',  (req, res)=>{
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
       }
   
-      Test_Result.insert_into_test_Result_table(newTR); 
+      await Test_Result.insert_into_test_Result_table(newTR); 
       return res.status(201).json({success: 'Created'});
     
     }
@@ -126,7 +126,7 @@ app.get('/api/skuitems/:rfid/testResults',  (req, res)=>{
                   return res.status(404).json({error:
                      "No sku item associated to rfid or no test descriptor associated to newIdTestDescriptor or no test result associated to id"});
             }else{
-                const results = await Test_Descriptor.modifyTR(id, rfid, p.newTestDescriptor, p.newDate, p.newResult);
+                const results = await Test_Result.modifyTR(id, rfid, p.newTestDescriptor, p.newDate, p.newResult);
                 return res.status(200).json(results);
             } 
         }
@@ -141,7 +141,7 @@ app.get('/api/skuitems/:rfid/testResults',  (req, res)=>{
 
   
   
-  app.delete('/api/skuitems/:rfid/testResult/:id', (req, res)=>{
+  app.delete('/api/skuitems/:rfid/testResult/:id', async(req, res)=>{
   
     try{     
         const rfid = req.params.rfid;

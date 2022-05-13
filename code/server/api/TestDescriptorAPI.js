@@ -13,7 +13,7 @@ let router = express.Router();
   
     try
       {     
-        return res.status(200).json(Test_Descriptor.get_TD()); 
+        return res.status(200).json(dataInterface.get_TD()); 
       }
     catch(err)
       {
@@ -28,12 +28,12 @@ let router = express.Router();
   
     try{   
   
-      const id = req.params.TDid
+      const id = req.params.id
       if( id > 0 && typeof id === 'number') {
         
         
-        const t = Test_Descriptor.get_TD(id);
-        console.log(t);
+        const t = dataInterface.get_TD_by_id(id);
+        
         if(t === undefined){
           return res.status(404).end();
         } else {
@@ -60,20 +60,18 @@ let router = express.Router();
       }
   
       const newTD = req.body;
-      if( typeof newTD.TDid !== 'number' || 
-          typeof newTD.name !== 'string' || 
+      if( typeof newTD.name !== 'string' || 
           typeof newTD.procedure_description !== 'string' || 
           typeof newTD.idSKU !== 'number' ){
         return res.status(422).json({error : "Unprocessable Entity"});
       }
   
       const s = dataInterface.get_SKU(idSKU)
-      console.log(s);
       if(s === undefined){
-        return res.status(404).end();
+        return res.status(404).json({error: "No sku associated idSKU"});
       }
   
-      Test_Descriptor.insert_into_test_Descriptor_table(newTD); 
+      await Test_Descriptor.insert_into_test_Descriptor_table(newTD); 
       return res.status(201).json({success: 'Created'});
     
     }
@@ -88,21 +86,21 @@ let router = express.Router();
   app.put('/api/testDescriptor/:id',async (req,res)=>{
     try
       {
-        const td = req.body.td;
-        if(Object.keys(req.body).length === 0 || td === undefined || td.newName === undefined ||
+        const td = req.body;
+        const id = req.params.id;
+        if(Object.keys(req.body).length === 0 || td === undefined || 
+        id === undefined|| td.newName === undefined ||
          td.newProcedureDescriprion === undefined || td.newIdSKU === undefined ){
           return res.status(422).json({error : "Unprocessable Entity"});
         }
         
-        const id = req.params.id;
-  
         if(id >0 && typeof id === 'number'){   
-          const t = Test_Descriptor.get_TD(id);
-          const s = dataInterface.get_SKU(newIdSKU);
+          const t = dataInterface.get_TD(id);
+          const s = dataInterface.get_SKU(td.newIdSKU);
             if(t === undefined || s === undefined){
-                  return res.status(404).end();
+                  return res.status(404).json({error: "No test descriptor associated id or no sku associated to IDSku"});
             }else{
-                const results = await TD.modify_test_descriptor(td, id);
+                const results = await Test_Descriptor.modify_test_descriptor(td, id);
                 return res.status(200).json(results);
             } 
         }
