@@ -9,7 +9,6 @@ let router = express.Router();
 router.post('/api/skuitem',(req,res) => {
   try {
     const body = req.body;
-    console.log(Object.keys(body));
     if(!(body.hasOwnProperty('RFID') && body.hasOwnProperty('SKUId') && body.hasOwnProperty('DateOfStock'))){
       return res.status(422).end();
     }

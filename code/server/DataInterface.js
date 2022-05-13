@@ -1,7 +1,7 @@
 const dbHelper = require('./DBhelper');
 const Position = require('./Position');
 const SKU = require('./SKU');
-// const SKUItem = require('./SKUItem'); ***********
+const SKUItem = require('./SKUItem');
 //const U = require ('./User');
 
 class DataInterface{
@@ -50,7 +50,7 @@ class DataInterface{
         const ret = skus.map((sku) => {
                     
             const test_descriptors = [];
-
+            let id;
             for(id of JSON.parse(sku.test_descriptors)){
                 test_descriptors.push(this.get_TD_by_id(id)); 
             }
@@ -629,7 +629,7 @@ get_TD_by_id(TDid){
   return new Promise((resolve,reject)=>{
      
        const sql = "SELECT * FROM testdescriptors where TDid = ?";
-            dbHelper.all(sql,[TDid],(err,rows)=>{
+           dbHelper.db.all(sql,[TDid],(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;
