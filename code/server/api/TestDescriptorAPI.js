@@ -52,7 +52,7 @@ let router = express.Router();
   });
   
   
-  router.post('/api/testDescriptor/:id', async (req,res)=>{
+  router.post('/api/testDescriptor', async (req,res)=>{
     try{
   
       if(Object.keys(req.body).length === 0){
@@ -66,7 +66,8 @@ let router = express.Router();
         return res.status(422).json({error : "Unprocessable Entity"});
       }
   
-      const s = dataInterface.get_SKU(req.params.id)
+      const s = await dataInterface.get_SKU(req.body.idSKU)
+      console.log(s);
       if(s === undefined){
         return res.status(404).json({error: "No sku associated idSKU"});
       }
@@ -96,7 +97,7 @@ let router = express.Router();
         
         if(id >0 && typeof id === 'number'){   
           const t = dataInterface.get_TD(id);
-          const s = dataInterface.get_SKU(td.newIdSKU);
+          const s = await dataInterface.get_SKU(td.newIdSKU);
             if(t === undefined || s === undefined){
                   return res.status(404).json({error: "No test descriptor associated id or no sku associated to IDSku"});
             }else{

@@ -13,7 +13,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
     try{
       const rfid = req.params.rfid;
 
-      if( rfid > 0 && typeof rfid === 'number') {
+      if( rfid > 0 && typeof rfid === 'string') {
           
         const t = dataInterface.get_SKU(rfid);
 
@@ -42,7 +42,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       const rfid = req.params.rfid;
       const id = req.params.id;
 
-      if( rfid > 0 && typeof rfid === 'number'
+      if( rfid > 0 && typeof rfid === 'string'
        && id > 0 && typeof id === 'number' ) {
         
         
@@ -76,7 +76,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       }
   
       const newTR = req.body;
-      if( typeof newTR.rfid !== 'number' || 
+      if( typeof newTR.rfid !== 'string' || 
           typeof newTR.idTestDescriptor !== 'number' || 
           typeof newTR.Date !== 'string' || 
           typeof newTR.Result !== 'boolean' ){
@@ -117,7 +117,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         
   
         if(id >0 && typeof id === 'number' && 
-                    rfid >0 && typeof rfid === 'number'){   
+                    rfid >0 && typeof rfid === 'string'){   
           const t = dataInterface.get_TD(p.newIdTestDescriptor);
           const s = dataInterface.get_SKU(rfid);
           const tr = get_TR(rfid, id);
@@ -147,7 +147,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         const rfid = req.params.rfid;
         const id = req.params.id;
       if( id > 0 && typeof id === 'number' && 
-      rfid >0 && typeof rfid === 'number') {
+      rfid >0 && typeof rfid === 'string') {
   
         if(Test_Result.delete_test_result(id, rfif)){
           return res.status(204).end();

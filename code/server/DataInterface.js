@@ -67,7 +67,7 @@ class DataInterface{
 
     async get_SKU(id){
         const skus = await this.return_SKU();
-        return skus.find(sku => sku.id == id);
+        return skus.find(sku => sku.id === id);
     }
 
     delete_SKU(id){
@@ -607,10 +607,11 @@ get_TD(){
                       return;
                       }
                   const testdescriptors = rows.map((t)=>(
-                  { //TODO sulle API dice che deve tornare uno idSKU 
+                  {
                       TDid : t.TDid,
                       name : t.name,
-                      procedure_description : t.procedure_description
+                      procedure_description : t.procedure_description,
+                      idSKU : t.idSKU
                       
                   })); 
                   resolve(testdescriptors);
@@ -658,7 +659,7 @@ get_TR(RFid, TRid) {
                       return;
                       }
                    const  testresults = rows.map((t)=>(
-                  { //TODO sulle API dice che deve tornare uno idSKU 
+                  {
                       TRid : tr.TRid,
                       TDid : tr.TDid,
                       Date : tr.Date,

@@ -1,5 +1,7 @@
 'use strict'
 
+const db = require('./DBhelper');
+
 class Test_Descriptor{
 
     constructor(db){
@@ -18,8 +20,8 @@ class Test_Descriptor{
    insert_into_test_Descriptor_table(td)
    {
        return new Promise ((resolve,reject)=>{ 
-           const sql = 'INSERT INTO testdescriptors (TDid, name, procedure_description) VALUES(?,?,?)';
-           this.db.db.run(sql,[td.TDid, td.name,td.procedure_description], (err)=>{
+           const sql = 'INSERT INTO testdescriptors (name, procedure_description, idSKU) VALUES(?,?,?)';
+           this.db.db.run(sql,[ td.name,td.procedureDescription, td.idSKU], (err)=>{
                if(err)
                {
                    reject(err);
@@ -72,4 +74,6 @@ class Test_Descriptor{
 
 
 }
-   module.exports = Test_Descriptor;
+
+const TD = new Test_Descriptor(db)
+module.exports = TD;

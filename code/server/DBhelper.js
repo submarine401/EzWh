@@ -482,11 +482,12 @@ class DBhelper {
 */
 create_test_descriptor_table (){
     return new Promise((resolve,reject)=>{
-    const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (TDid integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text)';
+    const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (TDid integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
     this.db.run(sql, (err)=>{
         if(err){
             reject(err);
-            return}
+            return
+        }
         resolve("testdescriptors Table -> OK");
     });
  });
@@ -497,7 +498,7 @@ create_test_descriptor_table (){
 */
 create_test_result_table (){
     return new Promise((resolve,reject)=>{
-    const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT,TDid integer, date text,result text)';
+    const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT,TDid integer, date text,result boolean)';
     this.db.run(sql, (err)=>{
         if(err){
             reject(err);
