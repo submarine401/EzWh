@@ -14,9 +14,10 @@ const ItemAPI = require('./api/ItemAPI')
 const RestockOrederAPI = require('./api/RestockOrederAPI')
 const ReturnOrederAPI = require('./api/ReturnOrderAPI');
 const InternalOrderAPI = require('./api/InternalOrderAPI');
-
 const Test_Descriptor = require('./Test_Descriptor');
 const Test_Result= require('./Test_Result');
+const TestDescriptorAPI = require('./api/TestDescriptorAPI');
+const TestResultAPI= require('./api/TestResultAPI');
 const SKUItemAPI = require('./api/SKUItemAPI');
 
 
