@@ -627,7 +627,7 @@ get_all_suppliers(){
 /********************************TD METHODS***************************/
 
 
-get_TD(){ 
+ get_TD(){ 
   return new Promise((resolve,reject)=>{
      
                   const sql = "SELECT * FROM testdescriptors ";
@@ -638,12 +638,13 @@ get_TD(){
                       }
                   const testdescriptors = rows.map((t)=>(
                   {
-                      TDid : t.TDid,
+                      id : t.TDid,
                       name : t.name,
-                      procedure_description : t.procedure_description,
+                      procedureDescription : t.procedure_description,
                       idSKU : t.idSKU
                       
                   })); 
+                  console.log(testdescriptors);
                   resolve(testdescriptors);
               });
           
@@ -660,7 +661,7 @@ get_TD_by_id(TDid){
                       reject(err); 
                       return;
                       }
-                  const testdescriptors = rows.map((i)=>(
+                  const testdescriptors = rows.map((t)=>(
                   {
                    TDid : t.TDid,
                    name : t.name,

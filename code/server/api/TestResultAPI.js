@@ -35,7 +35,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   });
 
 
-  router.get('/api/skuitems/:rfid/testResults/:id', async (req, res)=>{
+  router.get('/api/skuitems/:rfid/testResults/:id', async (req, res)=>{ //NON VA 
   
 
     try{
@@ -101,8 +101,8 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
     }
   });
 
-
-  router.put('/api/skuitems/:rfid/testResult/:id',async (req,res)=>{
+ 
+  router.put('/api/skuitems/:rfid/testResult/:id',async (req,res)=>{ //422
     try
       {
     
@@ -141,7 +141,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
   
   
-  router.delete('/api/skuitems/:rfid/testResult/:id', async(req, res)=>{
+  router.delete('/api/skuitems/:rfid/testResult/:id', async(req, res)=>{ //422
   
     try{     
         const rfid = req.params.rfid;

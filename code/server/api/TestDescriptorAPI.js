@@ -9,11 +9,13 @@ let router = express.Router();
 
   
   
-  router.get('/api/testDescriptors', (req, res)=>{
+  router.get('/api/testDescriptors', async (req, res)=>{
   
     try
       {     
-        return res.status(200).json(dataInterface.get_TD()); 
+        const result = await dataInterface.get_TD();
+        console.log(result);
+        return res.status(200).json(result); 
       }
     catch(err)
       {
@@ -24,15 +26,16 @@ let router = express.Router();
   });
   
   
-  router.get('/api/testDescriptors/:id', (req, res)=>{
-  
+  router.get('/api/testDescriptors/:id', async (req, res)=>{ //NON VA
+   
     try{   
   
-      const id = req.params.id
+      const id = req.params.id;
+
       if( id > 0 && typeof id === 'number') {
         
         
-        const t = dataInterface.get_TD_by_id(id);
+        const t = await dataInterface.get_TD_by_id(id);
         
         if(t === undefined){
           return res.status(404).end();
@@ -84,7 +87,7 @@ let router = express.Router();
   });
 
 
-  router.put('/api/testDescriptor/:id',async (req,res)=>{
+  router.put('/api/testDescriptor/:id',async (req,res)=>{ //MI DA 422
     try
       {
         const td = req.body;
@@ -116,7 +119,7 @@ let router = express.Router();
 
   
   
-  router.delete('/api/testDescriptor/:id', (req, res)=>{
+  router.delete('/api/testDescriptor/:id', async (req, res)=>{ //422
   
     try{     
   

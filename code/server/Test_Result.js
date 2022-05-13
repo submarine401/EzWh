@@ -22,8 +22,8 @@ class Test_Result{
 
 insert_into_test_Result_table(tr) {
     return new Promise ((resolve,reject)=>{ 
-        const sql = 'INSERT INTO testresults (TRid, date, result) VALUES(?,?,?)';
-        this.db.db.run(sql,[tr.TRid, tr.date,tr.result], (err)=>{
+        const sql = 'INSERT INTO testresults (rfid, tdid, date, result) VALUES(?,?,?,?)';
+        this.db.db.run(sql,[tr.rfid, tr.idTestDescriptor , tr.date,tr.result], (err)=>{
             if(err)
             {
                 reject(err);
