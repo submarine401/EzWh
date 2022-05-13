@@ -508,10 +508,40 @@ get_all_restock_order()
             }
             else
             {
-                if(rows.length === 0)
+
+                let p = []
+                let orgObject = {};
+
+
+
+                const resul = rows.map((ro)=>{
+                  if (ro.state === 'ISSUED')
+                  orgObject  = { id : ro.id,
+                    issueate : ro.issueate,
+                    supplierId : ro.supplierId,
+                    state : ro.state,
+                    transportNote : ro.transportNote}
+                  else
+                  {
+                  orgObject ={ id : ro.id,
+                        issueate : ro.issueate,
+                        products : ro.products,
+                        supplierId : ro.supplierId,
+                        skuItems : ro.skuItems,
+                        state : ro.state,
+                        transportNote : ro.transportNote}
+                  }
+                  p.push(orgObject);
+
+                    });
+                    
+                
+                if(p.length === 0)
                     resolve(0);
-                else
-                    resolve(rows);
+                    resolve(p);
+               
+                
+                    
             }
         });
     });

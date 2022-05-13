@@ -59,7 +59,7 @@ router.post('/api/restockOrder',async (req,res)=>{
       }
     catch(err)
     { 
-        return res.status(500).end();
+        return res.status(503).end();
     }
   });
   /*

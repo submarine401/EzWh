@@ -8,6 +8,7 @@ class Restockorder{
     }
 
 
+
     insert_restock_order_table(rso)
     {
         return new Promise ((resolve,reject)=>{

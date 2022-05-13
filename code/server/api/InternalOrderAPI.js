@@ -76,7 +76,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
   /*
   POST IO
   */
-  router.post('/api/internalorders',async (req,res)=>{
+  router.post('/api/internalOrders',async (req,res)=>{
     try{
   
       if(Object.keys(req.body).length === 0){
@@ -89,7 +89,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
       }
     
     const results = await IO.insert_internal_order(nio);
-    return res.status(200).json(results);
+    return res.status(201).json(results);
     }
     catch(err)
     {

@@ -40,7 +40,7 @@ router.get('/api/items',async (req,res)=>{
     
       const results = await dataInterface.get_sku_by_id(ni.SKUId).then(()=> {return 0;}, (error)=> {return I.insert_into_item_table(ni);});
       if(results !== 0)
-      return res.status(200).json(results);
+      return res.status(201).json(results);
       else
       return res.status(404).json({error : "Sku not found"});
   
@@ -95,7 +95,7 @@ router.get('/api/items',async (req,res)=>{
       }
     
     const results = await I.delete_item(id);
-    return res.status(200).json(results);
+    return res.status(204).json(results);
     }
     catch(err)
     {
