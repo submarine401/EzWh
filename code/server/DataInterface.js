@@ -29,8 +29,6 @@ class DataInterface{
 
     async create_SKU(skuData){
 
-        console.log(skuData);
-
         try{
 
             skuData.position = undefined;
@@ -47,17 +45,17 @@ class DataInterface{
     async return_SKU(){
         const skus = await dbHelper.load_SKUs();
 
-        const ret = skus.map((sku) => {
+        const positions = await this.get_all_position()
+
+        const ret = skus.map( (sku) => {
                     
             const test_descriptors = [];
 
-            console.log(sku);
-
-            for(id of sku.test_descriptors){
+            for(id of JSON.parse(sku.test_descriptors)){
                 test_descriptors.push(this.get_TD_by_id(id)); 
             }
 
-            const position = sku.positionID?this.get_all_position().find(pos => pos.positionID === sku.positionID):undefined;
+            const position = sku.positionID?positions.find(pos => pos.positionID === sku.positionID):undefined;
 
             return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.availableQuantity, position, test_descriptors);
         });
@@ -67,8 +65,9 @@ class DataInterface{
 
     async get_SKU(id){
         const skus = await this.return_SKU();
-        return skus.find(sku => sku.id === id);
+        return skus.find(sku => sku.id == id);
     }
+
 
     delete_SKU(id){
         console.log('delete SKU ' + id);
@@ -80,6 +79,28 @@ class DataInterface{
                 return false;
             }
         });
+    }
+
+    async modify_SKU(){
+
+        try{
+
+            const skus = await this.return_SKU();
+
+            const sku = skus.find(p => p.id === id);
+
+            if(sku === undefined){
+                console.log('no matching sku');
+                throw 'not found';
+            }
+
+            sku.modify_SKU(newValues);
+
+        }  catch(err) {
+          throw(err);
+        }
+        
+        
     }
 
  /*********************************Position methods************************/ 
@@ -119,8 +140,6 @@ class DataInterface{
         pos.modify_position(newValues);
 
         this.dbHelper.update_position(id, pos);
-
-        return true;
 
     }
 

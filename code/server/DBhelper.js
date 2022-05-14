@@ -194,7 +194,7 @@ class DBhelper {
                                 VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
                     const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
                                     sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/,
-                                    sku.test_descriptors.length === 0 ? []:sku.test_descriptors.map(td => td.id)];
+                                    sku.test_descriptors.length === 0 ? '[]':sku.test_descriptors.map(td => td.id).toString()];
                     this.db.run(sql, params, (err)=>{
                         if(err){
                             reject(err);
@@ -369,9 +369,6 @@ class DBhelper {
     }
 
     update_position(id, pos) {
-        console.log('DB update pos');
-        console.log(id);
-        console.log(pos);
         return new Promise((resolve, reject) => {
 
             const sql_query = 'UPDATE position \

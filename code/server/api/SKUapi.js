@@ -37,7 +37,8 @@ router.get('/api/skus', (req, res)=>{
   
     dataInterface.return_SKU()
       .then(skus => {
-          return res.status(200).json(skus);})
+        console.log(skus);
+        return res.status(200).json(skus);})
       .catch(err => {
       console.log(err);
       return res.status(500).end();});
@@ -70,6 +71,47 @@ router.get('/api/skus/:id', (req, res)=>{
       return res.status(500).end();
     }
   
+});
+
+router.put('/api/sku/:id', (req, res)=>{
+
+  try{
+  
+    if(Object.keys(req.body).length === 0){
+      return res.status(422).end();
+    }
+
+    const newValues = req.body;
+    if( typeof newValues.description !== 'string' || 
+        typeof newValues.weight !== 'number' || 
+        typeof newValues.volume !== 'number' || 
+        typeof newValues.notes !== 'string' || 
+        typeof newValues.price !== 'number' || 
+        typeof newValues.availableQuantity !== 'number'){
+
+      return res.status(422).end();
+    }
+  
+    dataInterface.modify_SKU(req.body, req.params.id)
+      .then(() => {return res.status(200).end();})
+      .catch((err => {
+        if(err === 'not enough space in position'){
+          return res.status(422).end();
+        } else if(err === 'not found'){
+          return res.status(404).end();
+        } else {
+          console.log(err);
+          return res.status(503).end();
+        }}));
+    
+  } catch(err) {
+      console.log(err);
+      return res.status(503).end();
+  }
+});
+
+router.put('/api/sku/:id/position', (req, res)=>{
+
 });
 
 router.delete('/api/skus/:id', (req, res)=>{
