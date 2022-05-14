@@ -74,7 +74,7 @@ router.get('/api/skus/:id', (req, res)=>{
 });
 
 router.put('/api/sku/:id', (req, res)=>{
-
+  
   try{
   
     if(Object.keys(req.body).length === 0){
@@ -82,15 +82,17 @@ router.put('/api/sku/:id', (req, res)=>{
     }
 
     const newValues = req.body;
-    if( typeof newValues.description !== 'string' || 
-        typeof newValues.weight !== 'number' || 
-        typeof newValues.volume !== 'number' || 
-        typeof newValues.notes !== 'string' || 
-        typeof newValues.price !== 'number' || 
-        typeof newValues.availableQuantity !== 'number'){
+    if( typeof newValues.newDescription !== 'string' || 
+        typeof newValues.newWeight !== 'number' || 
+        typeof newValues.newVolume !== 'number' || 
+        typeof newValues.newNotes !== 'string' || 
+        typeof newValues.newPrice !== 'number' || 
+        typeof newValues.newAvailableQuantity !== 'number'){
 
       return res.status(422).end();
     }
+
+    
   
     dataInterface.modify_SKU(req.body, req.params.id)
       .then(() => {return res.status(200).end();})

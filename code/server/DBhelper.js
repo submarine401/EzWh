@@ -211,8 +211,28 @@ class DBhelper {
         }
     }
 
-    update_SKU(sku) {
-        //to do
+    update_SKU(id, sku) {
+        return new Promise((resolve, reject) => {
+
+            const sql_query = 'UPDATE sku \
+                               SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? , test_descriptors = ? \
+                               WHERE id = ?';
+
+            const params = [
+                sku.description, sku.weight, sku.volume, sku.note, sku.price, 
+                sku.availableQuantity, sku.positionID, JSON.stringify(sku.test_descriptors),
+                id
+            ]
+            this.db.run(sql_query, params, (err)=>{
+
+                if(err){
+                    reject(err); 
+                    return;
+                }
+
+                resolve();
+            });
+        });
     }
 
     delete_SKU(id) {

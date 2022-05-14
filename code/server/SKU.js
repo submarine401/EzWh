@@ -6,10 +6,10 @@ const dbHelper = require("./DBhelper");
 class SKU{
 
     
-    constructor(id, descrpition, weight, volume, note, price, availableQuantity, position, test_descriptors){
+    constructor(id, description, weight, volume, note, price, availableQuantity, position, test_descriptors){
 
         this.id = id;
-        this.descrpition = descrpition;
+        this.description = description;
         this.weight = weight;
         this.volume = volume;
         this.note = note;
@@ -22,10 +22,18 @@ class SKU{
 
     async modify_SKU(newValues){
 
+        console.log(newValues);
+
         const positions = this.position? await dataInterface.get_all_position():undefined;
+
+        console.log(positions);
+
         if(positions){
             
             const pos = positions.find(p => p.id === id);
+
+            console.log('aaaa');
+            console.log(pos);
 
             const newFullWeight = newValues.newWeight*newValues.newAvailableQuntity;
             const newFullVol = newValues.newVolume*newValues.newAvailableQuntity;
@@ -43,12 +51,13 @@ class SKU{
             
         }
 
-        this.descrpition = newValues.newDescription;
+        
+        this.description = newValues.newDescription;
         this.weight = newValues.newWeight;
         this.volume = newValues.newVolume;
         this.note = newValues.newNotes;
         this.price = newValues.newPrice;
-        this.availableQuantity = newValues.newAvailableQuntity;
+        this.availableQuantity = newValues.newAvailableQuantity;
 
         dbHelper.update_SKU(this.id, this);
 

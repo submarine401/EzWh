@@ -81,18 +81,18 @@ class DataInterface{
         });
     }
 
-    async modify_SKU(){
+    async modify_SKU(newValues, id){
 
         try{
 
-            const skus = await this.return_SKU();
-
-            const sku = skus.find(p => p.id === id);
+            const sku = await this.get_SKU(id);
 
             if(sku === undefined){
                 console.log('no matching sku');
                 throw 'not found';
             }
+
+            console.log('modifying ' + sku.id);
 
             sku.modify_SKU(newValues);
 
