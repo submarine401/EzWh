@@ -207,7 +207,7 @@ class DataInterface{
             return;
           }
           if(rows===undefined){  //no SkuItem found with that ID
-            resolve(422);
+            resolve(404);
             return;
           }
           /*const skuItems = rows.map(skuItem =>({
@@ -253,9 +253,9 @@ class DataInterface{
             resolve(404);
           }
           const skuItem_array = rows.map(skuI =>({
-            SKUId : skuI.SKUId,
+            SKUId : skuI.SKUid,
             RFID : skuI.RFID,
-            DateOfStock : skuI.DateOfStock,
+            DateOfStock : skuI.dateOfStock,
           }));
           resolve(skuItem_array);
         });

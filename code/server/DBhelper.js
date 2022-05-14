@@ -1,6 +1,6 @@
 //const dataInterface = require('./DataInterface');
 const Position = require('./Position');
-const SKU = require('./SKU');
+//const SKU = require('./SKU');
 const dayjs = require('dayjs')
 class DBhelper {
     sqlite = require('sqlite3');
