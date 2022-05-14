@@ -179,15 +179,17 @@ class DataInterface{
 
 
 /*********************************SKUITEM METHODS************************/
+
+
     async create_SKUItem(SKU_item_data){
       console.log('creating SKUItem...');
 
       try{
 
           const newSKUItem = new SKUItem( 
-                                  SKU_item_data.id,
+                                  SKU_item_data.idSKU,
                                   SKU_item_data.RFID,
-                                  SKU_item_data.dateOfStock);
+                                  SKU_item_data.DateOfStock);
 
           await this.dbHelper.store_SKUItem(newSKUItem);
 
@@ -196,10 +198,10 @@ class DataInterface{
       }
     }
     
-    get_SKUItem(RFID){
+    get_SKUItem_by_RFID(RFID){
       return new Promise((resolve,reject) => {
         const sql_query = 'SELECT * FROM skuitem WHERE RFID = ?';
-        dbHelper.db.all(sql_query,[],function(err,rows){
+        dbHelper.db.run(sql_query,[],function(err,rows){
           if(err){
             reject(err);
             return;
@@ -207,13 +209,55 @@ class DataInterface{
           if(rows.length===0){  //no SkuItem found with that ID
             resolve(404);
           }
-          const skuItems_array = rows.map(skuItem =>({
-            SKUid : skuItem.SKUid,
+          const skuItems = rows.map(skuItem =>({
+            SKUid : skuItem.SKUId,
             RFID : skuItem.RFID,
-            dateOfStock : skuItem.dateOfStock,
+            dateOfStock : skuItem.DateOfStock,
             availability : skuItem.availability
           }));
-          resolve(skuItems_array);
+          resolve(skuItems);
+        });
+      });
+    }
+    
+    get_all_SKUItem(){
+      return new Promise ((resolve,reject) =>{
+        
+        const sql_query = 'SELECT * FROM skuitem';
+        dbHelper.db.all(sql_query,[],function(err,rows){
+          
+          if(err){
+            reject(err);
+            return;
+          }
+          const skuItem_array = rows.map(skuI =>({
+            SKUid : skuI.SKUid,
+            RFID : skuI.RFID,
+            dateOfStock : skuI.dateOfStock,
+            availability : skuI.availability
+          }));
+          resolve(skuItem_array);
+        });
+      });
+    }
+    
+    get_all_available_SKUItem(skuID){
+      return new Promise((resolve,reject) => {
+        const sql_query = 'SELECT * FROM skuitem where availability = ? AND SKUid = ?';
+        dbHelper.db.all(sql_query,["1",skuID], function(err,rows){
+          if(err){
+            reject(err);
+            return;
+          }
+          if(rows.length === 0){  //no skuItems found with that SKUID
+            resolve(404);
+          }
+          const skuItem_array = rows.map(skuI =>({
+            SKUId : skuI.SKUId,
+            RFID : skuI.RFID,
+            DateOfStock : skuI.DateOfStock,
+          }));
+          resolve(skuItem_array);
         });
       });
     }

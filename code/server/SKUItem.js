@@ -1,6 +1,6 @@
 'use strict';
 
-const DBhelper = require("./DBhelper");
+//const DBhelper = require("./DBhelper");
 
 class SKUItem{
   dayjs = require('dayjs');
@@ -8,11 +8,11 @@ class SKUItem{
     
     constructor(id, RFID, dateOfStock){
 
-        this.SKUid = id;
+        this.idSKU = id;
         this.RFID= RFID;
-        this.dateOfStock = dateOfStock;
+        this.DateOfStock = dateOfStock;
         this.availability = 0;
-        console.log('created '+ this);
+        //console.log('created '+ this);
     }
 }
 

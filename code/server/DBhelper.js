@@ -1,7 +1,7 @@
 //const dataInterface = require('./DataInterface');
 const Position = require('./Position');
 const SKU = require('./SKU');
-
+const dayjs = require('dayjs')
 class DBhelper {
     sqlite = require('sqlite3');
 
@@ -260,7 +260,7 @@ class DBhelper {
           
           try {
             const sql_query = 'INSERT INTO skuitem (SKUid, RFID, dateOfStock, availability) VALUES (?, ?, ?, ?)';
-            const params = [skuItem.SKUid, skuItem.RFID, skuItem.dateOfStock, 0];
+            const params = [skuItem.idSKU, skuItem.RFID, dayjs(skuItem.DateOfStock).format('YYYY-MM-DD'), 0];
             this.db.run(sql_query,params,function(err){
               if(err){
                 reject(err);
