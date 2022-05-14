@@ -187,7 +187,7 @@ class DataInterface{
       try{
 
           const newSKUItem = new SKUItem( 
-                                  SKU_item_data.idSKU,
+                                  SKU_item_data.SKUId,
                                   SKU_item_data.RFID,
                                   SKU_item_data.DateOfStock);
 
@@ -201,21 +201,22 @@ class DataInterface{
     get_SKUItem_by_RFID(RFID){
       return new Promise((resolve,reject) => {
         const sql_query = 'SELECT * FROM skuitem WHERE RFID = ?';
-        dbHelper.db.run(sql_query,[],function(err,rows){
+        dbHelper.db.get(sql_query,[RFID],function(err,rows){
           if(err){
             reject(err);
             return;
           }
-          if(rows.length===0){  //no SkuItem found with that ID
+          if(rows===undefined){  //no SkuItem found with that ID
             resolve(404);
+            return;
           }
-          const skuItems = rows.map(skuItem =>({
+          /*const skuItems = rows.map(skuItem =>({
             SKUid : skuItem.SKUId,
             RFID : skuItem.RFID,
             dateOfStock : skuItem.DateOfStock,
             availability : skuItem.availability
-          }));
-          resolve(skuItems);
+          }));*/
+          resolve(rows);
         });
       });
     }
@@ -225,7 +226,6 @@ class DataInterface{
         
         const sql_query = 'SELECT * FROM skuitem';
         dbHelper.db.all(sql_query,[],function(err,rows){
-          
           if(err){
             reject(err);
             return;
@@ -253,11 +253,24 @@ class DataInterface{
             resolve(404);
           }
           const skuItem_array = rows.map(skuI =>({
-            SKUId : skuI.SKUId,
+            SKUId : skuI.SKUid,
             RFID : skuI.RFID,
-            DateOfStock : skuI.DateOfStock,
+            DateOfStock : skuI.dateOfStock,
           }));
           resolve(skuItem_array);
+        });
+      });
+    }
+    
+    deleteSKUItem(rfid){
+      return new Promise((resolve,reject) =>{
+        const sql_query = 'DELETE FROM skuitem WHERE RFID = ?';
+        dbHelper.db.run(sql_query,[rfid], function(err){
+          if(err){
+            reject(err);
+            return;
+          }
+          resolve(204);
         });
       });
     }

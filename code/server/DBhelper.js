@@ -1,6 +1,6 @@
 //const dataInterface = require('./DataInterface');
 const Position = require('./Position');
-const SKU = require('./SKU');
+//const SKU = require('./SKU');
 const dayjs = require('dayjs')
 class DBhelper {
     sqlite = require('sqlite3');
@@ -241,7 +241,7 @@ class DBhelper {
     
     create_SKUItem_table(){
       return new Promise((resolve,reject) =>{
-        const sql_query = ' CREATE TABLE IF NOT EXISTS skuitem (SKUid integer PRIMARY KEY, RFID text, dateOfStock DATE, availability integer)';
+        const sql_query = ' CREATE TABLE IF NOT EXISTS skuitem (SKUItemID integer PRIMARY KEY, SKUid integer, RFID text, dateOfStock DATE, availability integer)';
         this.db.run(sql_query, [], function(err){
           if(err){
             reject(err);
@@ -259,7 +259,7 @@ class DBhelper {
         return new Promise ((resolve,reject) => {
           
           try {
-            const sql_query = 'INSERT INTO skuitem (SKUid, RFID, dateOfStock, availability) VALUES (?, ?, ?, ?)';
+            const sql_query = 'INSERT OR REPLACE INTO skuitem (SKUid, RFID, dateOfStock, availability) VALUES (?, ?, ?, ?)';
             const params = [skuItem.idSKU, skuItem.RFID, dayjs(skuItem.DateOfStock).format('YYYY-MM-DD'), 0];
             this.db.run(sql_query,params,function(err){
               if(err){
@@ -283,9 +283,9 @@ class DBhelper {
       return new Promise((resolve,reject) => {
         const sql_query = 'UPDATE skuitem SET RFID = ?, dateOfStock = ?, availability = ? WHERE RFID = ?';
         const params = [
-          newValues.RFID,
-          dayjs(dateOfStock).format('YYYY-MM-DD'),
-          newValues.availability,
+          newValues.newRFID,
+          dayjs(newValues.newDateOfStock).format('YYYY-MM-DD'),
+          newValues.newAvailable,
           RFID
         ];
         this.db.run(sql_query,params,function(err){
