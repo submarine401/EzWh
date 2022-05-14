@@ -15,7 +15,6 @@ router.post('/api/skuitem',async(req,res) => {
     
     //check if SKUId corresponds to a real SKU
     const check_SKUid = await dataInterface.get_SKU(body.SKUId);
-    console.log(check_SKUid);
     if(check_SKUid === undefined){
       return res.status(404).end('no SKU associated to SKUId');
     }
@@ -31,14 +30,14 @@ router.post('/api/skuitem',async(req,res) => {
 
 router.put('/api/skuitems/:rfid', async (req,res) => {
   try {
-    const target_RFID = req.params.id;
+    const target_RFID = req.params.rfid;
     const body = req.body;
-    if (target_RFID === undefined || Object.keys(body) !== ["newRFID","newAvailable","newDateOfStock"]){   //validation of RFID failed
+    if (target_RFID === undefined || !(body.hasOwnProperty('newRFID') && body.hasOwnProperty('newAvailable') && body.hasOwnProperty('newDateOfStock'))){   //validation of RFID failed
       return res.status(422).end();
     }
     
-    const check_RFID = dataInterface.get_SKUItem(target_RFID);
-    if (check_RFID.rows ===0){  //No SKUItem correspondant to that ID
+    const check_RFID = dataInterface.get_SKUItem_by_RFID(target_RFID);
+    if (check_RFID.length ===0){  //No SKUItem correspondant to that ID
       return res.status(404).end();
     }
     
@@ -77,6 +76,25 @@ router.get('/api/skuitems/sku/:id', async(req,res) =>{
   } catch (err) {
     console.log(err);
     return res.status(500).end();
+  }
+});
+
+router.delete('/api/skuitems/:rfid',async(req,res) =>{
+  try {
+    
+    const check_rfid = await dataInterface.get_SKUItem_by_RFID(req.params.rfid);
+    if(check_rfid === 422 || typeof req.params.rfid !== 'string'){  //no sku item with the target RFID
+      return res.status(422).end();
+    }
+    
+    const result = await dataInterface.deleteSKUItem(req.params.rfid);
+    if(result === 204){
+      return res.status(204).end();
+    }
+    
+  } catch (err) {
+    console.log(err);
+    return res.status(503).end();
   }
 });
 
