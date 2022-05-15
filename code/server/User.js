@@ -74,6 +74,11 @@ class User {
   //method to delete a user given its username
    deleteUser(username,type){
     return new Promise((resolve,reject) =>{
+      const users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
+      if(users_array.includes(type) === false){
+        resolve(422);
+        return;
+      }
       const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
       this.db.db.all(sql_query1,[username, type], function(err,rows) {
         if(err){

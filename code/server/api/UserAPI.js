@@ -13,7 +13,6 @@ router.get('/api/suppliers', async (req,res) =>{
     return res.status(200).json(results);
     
   } catch (err) {
-    //MISSING ERROR 401 (NOT AUTHENTICATED)
     console.log(err);
     return res.status(500).end();
   }
@@ -25,7 +24,6 @@ router.get('/api/users', async (req,res) => {
     return res.status(200).json(result);
   }
   catch(err){
-    //MISSING ERROR 401 (NOT AUTHENTICATED)
     console.log(err);
     return res.status(500).end();
   }
@@ -56,7 +54,6 @@ router.post('/api/newUser', async (req,res) => {
       return res.status(200).end("User inserted!");
     }
     
-
   } catch (err) {
     console.log(err);
     return res.status(503).end();
@@ -83,15 +80,13 @@ router.put('/api/users/:username', async (req,res) =>{
     const res_check_type = check_type.filter(function(users){
       return (users.type == body.oldType && users.username == username);
     });
-    
     if(res_check_type.length === 0){
       return res.status(404).end("Wrong username or OldType");
     }
     
     const result = await U.modify_user_rights(username,body.newType);
     return res.status(200).end();
-    
-    
+      
   } catch (err) {
     console.log(err);
     return res.status(503).end();
@@ -103,10 +98,6 @@ router.delete('/api/users/:username/:type', async (req,res) => {
   const type = req.params.type;
   const username = req.params.username
   try {
-    if(username === undefined || type === undefined || type === "administrator" || type === "manager"){
-      return res.status(422).end("Validation of username or of type failed or attempt to delete a manager/administrator\n");
-    }
-    
     const result = await U.deleteUser(username,type);
     if(result === 422){
       return res.status(422).end("Failed to validate username or type!");
@@ -117,7 +108,6 @@ router.delete('/api/users/:username/:type', async (req,res) => {
     console.log(err);
     return res.status(503).end();
   }
-  
 });
 
 module.exports = router;
