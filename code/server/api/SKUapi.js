@@ -155,11 +155,11 @@ router.delete('/api/skus/:id', (req, res)=>{
         if(dataInterface.delete_SKU(id)){
           return res.status(204).end();
         } else {
-          return res.status(404).end();
+          return res.status(422).json({error : "NOT FOUND"});
         }
   
       } else {
-        return res.status(422).json({error : "INVALID I INPUT"});
+        return res.status(422).end();
       }
     }
     catch(err) {

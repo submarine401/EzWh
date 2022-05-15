@@ -150,6 +150,15 @@ class DataInterface{
 
         try{
 
+            const positions = await this.get_all_position();
+
+            const pos = positions.find(p => p.id === posData.positionID);
+
+            if(pos !== undefined){
+                console.log('already existing position');
+                throw 'already existing';
+            }
+
             const newPos = new Position(posData);
 
             await this.dbHelper.store_position(newPos);
