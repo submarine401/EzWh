@@ -100,7 +100,7 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
         return res.status(422).json({error : "Unprocessable Entity"});
       }
       
-      if(id >0 && typeof Number(id) === 'number'){   
+      if(id > 0 && typeof Number(id) === 'number'){   
         const t = dataInterface.get_TD(id);
         const s = await dataInterface.get_SKU(td.newIdSKU);
           if(t === undefined || s === undefined){
@@ -121,17 +121,19 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
 
 
 
-router.delete('/api/testDescriptor/:id', async (req, res)=>{ //422
+router.delete('/api/testDescriptor/:id', async (req, res)=>{
 
   try{     
 
     const id = req.params.id
-    if( id > 0 && typeof id === 'number') {
+    if( id > 0 && typeof Number(id) === 'number') {
 
       if(Test_Descriptor.delete_test_descriptor(id)){
         return res.status(204).end();
-      } 
-    } else {
+      } else {
+        return res.status(404).end();
+      }
+        } else {
       return res.status(422).json({error : "Unprocessable Entity"});
     } 
   }

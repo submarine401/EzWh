@@ -16,6 +16,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       if( rfid > 0 && typeof rfid === 'string') {
           
         const t = dataInterface.get_SKU(rfid);
+        console.log(t);
 
         if(t === undefined){
           return res.status(404).json({error: "No skuItem foybd for this rfID"});
@@ -43,7 +44,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       const id = req.params.id;
 
       if( rfid > 0 && typeof rfid === 'string'
-       && id > 0 && typeof id === 'number' ) {
+       && id > 0 && typeof Number(id) === 'number' ) {
         
         
         const t = dataInterface.get_TR(rfid, id);
@@ -116,7 +117,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         }
         
   
-        if(id >0 && typeof id === 'number' && 
+        if(id >0 && typeof Number(id) === 'number' && 
                     rfid >0 && typeof rfid === 'string'){   
           const t = dataInterface.get_TD(p.newIdTestDescriptor);
           const s = dataInterface.get_SKU(rfid);
@@ -150,8 +151,10 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       rfid >0 && typeof rfid === 'string') {
   
         if(Test_Result.delete_test_result(id, rfif)){
-          return res.status(204).end();
-        } 
+          return res.status(204).end(); 
+        } else {
+          return res.status(404).end();
+        }
       } else {
         return res.status(422).json({error : "Unprocessable Entity"});
       } 
