@@ -1,11 +1,10 @@
-const db = require('./DBhelper');
+const dbHelper = require('./DBhelper');
 
 class User {
   dayjs = require('dayjs');
-  constructor(db) {
-    this.db = db;
+  constructor(){
+    
   }
-  
   
   
   newUser(u){
@@ -39,7 +38,7 @@ class User {
       const parameters=[u.username, enc_password, u.name, u.surname, u.type];
     
     //Insert user in the DB
-      this.db.db.all(sql_query2,parameters, function(err,rows){
+      dbHelper.db.all(sql_query2,parameters, function(err,rows){
       if(err){
         reject(err);
         return;
@@ -58,7 +57,7 @@ class User {
       const sql_query = 'UPDATE users set type = ? WHERE username = ?'
       
       //check if username exists
-      this.db.db.all(sql_query,[u_new_type,username], function(err,rows){
+      dbHelper.db.all(sql_query,[u_new_type,username], function(err,rows){
       
       if(err){
         reject(err);
@@ -74,8 +73,13 @@ class User {
   //method to delete a user given its username
    deleteUser(username,type){
     return new Promise((resolve,reject) =>{
+      const users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
+      if(users_array.includes(type) === false){
+        resolve(422);
+        return;
+      }
       const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
-      this.db.db.all(sql_query1,[username, type], function(err,rows) {
+      dbHelper.db.all(sql_query1,[username, type], function(err,rows) {
         if(err){
           reject(err);
           return;
@@ -86,7 +90,7 @@ class User {
         }
       });
       const sql_query2 = 'DELETE FROM users WHERE username= ? AND type = ?';
-      this.db.db.run(sql_query2, [username, type], function(err) {
+      dbHelper.db.run(sql_query2, [username, type], function(err) {
         if(err){
           reject(err);
           return;
@@ -99,5 +103,5 @@ class User {
   
   
 }
-const U = new User(db);
+const U = new User();
 module.exports = U;
