@@ -220,7 +220,7 @@ class DBhelper {
 
             const params = [
                 sku.description, sku.weight, sku.volume, sku.note, sku.price, 
-                sku.availableQuantity, sku.positionID, JSON.stringify(sku.test_descriptors),
+                sku.availableQuantity, sku.position.id, JSON.stringify(sku.test_descriptors),
                 id
             ]
             this.db.run(sql_query, params, (err)=>{
@@ -327,7 +327,7 @@ class DBhelper {
     create_position_table() {
         return new Promise((resolve, reject) => {
 
-            const sql_query = 'CREATE TABLE IF NOT EXISTS position (positionID TEXT PRIMARY KEY, aisleID TEXT, row TEXT, col TEXT, maxWeight REAL, maxVol REAL, occupiedWeight REAL, occupiedVol REAL);'
+            const sql_query = 'CREATE TABLE IF NOT EXISTS position (positionID TEXT PRIMARY KEY, aisleID TEXT, row TEXT, col TEXT, maxWeight REAL, maxVolume REAL, occupiedWeight REAL, occupiedVolume REAL);'
             this.db.run(sql_query, function (err) {
                 if (err) {
                     reject(err);
@@ -368,7 +368,7 @@ class DBhelper {
             return new Promise((resolve, reject) => {
 
                 try {
-                    const sql = 'INSERT INTO position (positionID, aisleID, row, col, maxWeight, maxVol, occupiedWeight, occupiedVol)  \
+                    const sql = 'INSERT INTO position (positionID, aisleID, row, col, maxWeight, maxVolume, occupiedWeight, occupiedVolume)  \
                                 VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
                     const params = [position.id, position.aisle, position.row, position.col, position.maxWeight, 
                                     position.maxVolume, position.occupiedWeight, position.occupiedVolume];
@@ -392,7 +392,7 @@ class DBhelper {
         return new Promise((resolve, reject) => {
 
             const sql_query = 'UPDATE position \
-                               SET  positionID = ?, aisleID = ?, row = ?, col = ?, maxWeight = ?, maxVol = ?, occupiedWeight = ?, occupiedVol = ? \
+                               SET  positionID = ?, aisleID = ?, row = ?, col = ?, maxWeight = ?, maxVolume = ?, occupiedWeight = ?, occupiedVolume = ? \
                                WHERE positionID = ?';
 
             const params = [

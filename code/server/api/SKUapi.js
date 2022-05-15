@@ -94,7 +94,7 @@ router.put('/api/sku/:id', (req, res)=>{
 
     
   
-    dataInterface.modify_SKU(req.body, req.params.id)
+    dataInterface.modify_SKU(newValues, req.params.id)
       .then(() => {return res.status(200).end();})
       .catch((err => {
         if(err === 'not enough space in position'){
@@ -113,7 +113,36 @@ router.put('/api/sku/:id', (req, res)=>{
 });
 
 router.put('/api/sku/:id/position', (req, res)=>{
+  try{
+  
+    if(Object.keys(req.body).length === 0){
+      return res.status(422).end();
+    }
 
+    const skuID = req.params.id;
+    const positionID = req.body.position
+    if( typeof positionID !== 'string' ||
+        positionID.length !== 12){
+
+      return res.status(422).end();
+    }
+
+    dataInterface.add_modify_SKU_position(skuID, positionID)
+      .then(() => {return res.status(200).end();})
+      .catch((err => {
+        if(err === 'not enough space in position'){
+          return res.status(422).end();
+        } else if(err === 'not found'){
+          return res.status(404).end();
+        } else {
+          console.log(err);
+          return res.status(503).end();
+        }}));
+    
+  } catch(err) {
+      console.log(err);
+      return res.status(503).end();
+  }
 });
 
 router.delete('/api/skus/:id', (req, res)=>{

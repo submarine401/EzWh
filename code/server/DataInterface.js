@@ -55,8 +55,8 @@ class DataInterface{
                 test_descriptors.push(this.get_TD_by_id(id)); 
             }
 
-            const position = sku.positionID?positions.find(pos => pos.positionID === sku.positionID):undefined;
-
+            const position = sku.positionID?positions.find(pos => pos.id === sku.positionID):undefined;
+            
             return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.availableQuantity, position, test_descriptors);
         });
 
@@ -65,6 +65,7 @@ class DataInterface{
 
     async get_SKU(id){
         const skus = await this.return_SKU();
+        console.log(skus);
         return skus.find(sku => sku.id == id);
     }
 
@@ -95,6 +96,39 @@ class DataInterface{
             console.log('modifying ' + sku.id);
 
             sku.modify_SKU(newValues);
+
+        }  catch(err) {
+          throw(err);
+        }
+        
+        
+    }
+
+    async add_modify_SKU_position(skuID, positionID){
+
+        try{
+
+            const sku = await this.get_SKU(skuID);
+
+            if(sku === undefined){
+                console.log('no matching sku');
+                throw 'not found';
+            }
+
+            console.log('modifying ');
+            console.log(sku.id);
+            console.log('pos ' + positionID);
+
+            const positions = await this.get_all_position();
+
+            const newPos = positions.find(pos => pos.id === positionID);
+
+            if(newPos === undefined){
+                console.log('no matching pos');
+                throw 'not found';
+            }
+
+            await sku.add_modify_SKU_position(newPos);
 
         }  catch(err) {
           throw(err);

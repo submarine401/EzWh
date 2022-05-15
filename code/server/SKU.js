@@ -22,23 +22,16 @@ class SKU{
 
     async modify_SKU(newValues){
 
-        console.log(newValues);
-
-        const positions = this.position? await dataInterface.get_all_position():undefined;
-
-        console.log(positions);
-
-        if(positions){
+        if(this.position){
             
-            const pos = positions.find(p => p.id === id);
-
             console.log('aaaa');
-            console.log(pos);
+            console.log(this.position);
+            console.log(newValues);
 
-            const newFullWeight = newValues.newWeight*newValues.newAvailableQuntity;
-            const newFullVol = newValues.newVolume*newValues.newAvailableQuntity;
+            const newFullWeight = newValues.newWeight*newValues.newAvailableQuantity;
+            const newFullVol = newValues.newVolume*newValues.newAvailableQuantity;
 
-            if(pos.maxWeight < newFullWeight || pos.maxVolume < newFullVol){
+            if(this.position.maxWeight < newFullWeight || this.position.maxVolume < newFullVol){
                 console.log('not enough space in position');
                 throw('not enough space in position');
             }
@@ -46,8 +39,12 @@ class SKU{
             const weightDiff = newFullWeight - this.weight*this.availableQuantity;
             const volDiff = newFullVol - this.volume*this.availableQuantity;
 
-            pos.decrease_free_space(weightDiff, volDiff);
-            dbHelper.update_position(pos.positionID, pos);
+            // console.log('old\tnew\tdiff');
+            // console.log(this.weight*this.availableQuantity + '\t' + newFullWeight + '\t' + weightDiff);
+            // console.log(this.volume*this.availableQuantity + '\t' + newFullVol + '\t' + volDiff);
+
+            this.position.decrease_free_space(weightDiff, volDiff);
+            dbHelper.update_position(this.position.id, this.position);
             
         }
 
@@ -61,6 +58,35 @@ class SKU{
 
         dbHelper.update_SKU(this.id, this);
 
+    }
+
+    async add_modify_SKU_position(newPos){
+        
+        if(this.position && this.position.id === newPos.positionID) return;
+
+        const fullWeight = this.weight*this.availableQuantity;
+        const fullVol = this.volume*this.availableQuantity;
+
+        //console.log('weight:' + fullWeight + ', vol:' + fullVol);
+
+        if(newPos.maxWeight < fullWeight || newPos.maxVolume < fullVol){
+            console.log('not enough space in position');
+            throw('not enough space in position');
+        }
+
+        if(this.position) {
+            this.position.increase_free_space(fullWeight, fullVol);
+            console.log(this.position);
+            await dbHelper.update_position(this.position.id, this.position);
+        }
+
+        newPos.decrease_free_space(fullWeight, fullVol);
+        console.log(newPos);
+        await dbHelper.update_position(newPos.id, newPos);
+
+        this.position = newPos;
+
+        await dbHelper.update_SKU(this.id, this);
     }
 }
 
