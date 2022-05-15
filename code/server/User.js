@@ -4,18 +4,6 @@ class User {
   dayjs = require('dayjs');
   constructor(db) {
     this.db = db;
-    
-    //proceed to create users table
-    //the method returns a promise which will be consumed by
-    //the then function
-    // db.create_user_table().then(
-    //   function(response){
-    //     console.log('Table created successfully!\n',response);
-    //   },
-    //   function(error){
-    //     console.log('Creating user table: operation failed\n',error);
-    //   });
-
   }
   
   
@@ -26,8 +14,13 @@ class User {
         reject("Password must be at least 8 characters long!\n");
         return;
       }
+      let users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
       const email = u.username;
       const type = u.type;
+      if(users_array.includes(type) === false){
+        resolve(422);
+        return;
+      }
       
       function caesarEncr(password,key){
         let enc = '';

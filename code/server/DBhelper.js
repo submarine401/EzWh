@@ -301,6 +301,10 @@ class DBhelper {
     update_SKUItem(RFID, newValues){
       //newValues stands for the object representing the request body
       return new Promise((resolve,reject) => {
+        if(newValues.newAvailable > 1 || newValues.newAvailable < 0){
+          resolve(422);
+          return;
+        }
         const sql_query = 'UPDATE skuitem SET RFID = ?, dateOfStock = ?, availability = ? WHERE RFID = ?';
         const params = [
           newValues.newRFID,
@@ -315,7 +319,7 @@ class DBhelper {
             return;
           }
           resolve();
-          
+          return;
         });
       });
     }
