@@ -111,8 +111,12 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
       }
     
     const results = await IO.delete_internal_order(id);
+    if (results) {
     return res.status(200).json(results);
-    }
+     } else {
+      return res.status(422).json({error : "Not found"});
+      }
+    } 
     catch(err)
     {
       console.log(err);

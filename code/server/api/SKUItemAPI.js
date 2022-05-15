@@ -42,8 +42,13 @@ router.put('/api/skuitems/:rfid', async (req,res) => {
     }
     
     const result = await dataInterface.dbHelper.update_SKUItem(target_RFID,body);
-    return res.status(200).end();
-    
+    console.log(result);
+    if(result === 422){
+      return res.status(422).end();
+    }
+    else{
+      return res.status(200).end();
+    }
   } catch (err) {
     console.log(error);
     return res.status(503).end();

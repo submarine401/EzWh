@@ -136,7 +136,11 @@ router.post('/api/restockOrder',async (req,res)=>{
       }
     
     const results = await RSO.delete_restock_order(id);
+    if (results) {
     return res.status(200).json(results);
+    } else {
+      return res.status(422).json({error : "Not found"});
+     }
     }
     catch(err)
     {

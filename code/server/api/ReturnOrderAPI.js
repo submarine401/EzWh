@@ -48,9 +48,11 @@ router.post('/api/returnOrder',async (req,res)=>{
       }
     
     const results = await RO.delete_return_order(id);
-    console.log(results);
+    if (results) {
     return res.status(200).json(results);
-    }
+    } else {
+      return res.status(422).json({error : "Not found"});
+     } }
     catch(err)
     {
       console.log(err);
