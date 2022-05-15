@@ -814,7 +814,7 @@ get_TR(RFid, TRid) {
                       reject(err); 
                       return;
                       }
-                   const  testresults = rows.map((t)=>(
+                   const  testresults = rows.map((tr)=>(
                   {
                       TRid : tr.TRid,
                       TDid : tr.TDid,
@@ -826,17 +826,17 @@ get_TR(RFid, TRid) {
               });
           }else{
               const sql = "SELECT * FROM testresults where RFid = ? ";
-              dbHelper.all(sql,[RFid],(err,rows)=>{
+              dbHelper.db.all(sql,[RFid],(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;
                       }
-                  const testresults = rows.map((i)=>(
+                  const testresults = rows.map((tr)=>(
                   {
                       TRid : tr.TRid,
                       TDid : tr.TDid,
-                      Date : tr.Date,
-                      Result : tr.Result 
+                      date : tr.Date,
+                      result : tr.Result 
                    }));
                   resolve(testresults);
               });

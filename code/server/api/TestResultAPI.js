@@ -15,7 +15,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
       if( rfid > 0 && typeof rfid === 'string') {
           
-        const t = dataInterface.get_SKU(rfid);
+        const t = await dataInterface.get_SKUItem_by_RFID(rfid);
         console.log(t);
 
         if(t === undefined){
@@ -36,8 +36,8 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   });
 
 
-  router.get('/api/skuitems/:rfid/testResults/:id', async (req, res)=>{ //NON VA 
-  
+  router.get('/api/skuitems/:rfid/testResults/:id', async (req, res)=>{ 
+  //qualunque id gli dia mi da sempre la stessa lista
 
     try{
       const rfid = req.params.rfid;
@@ -47,8 +47,8 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
        && id > 0 && typeof Number(id) === 'number' ) {
         
         
-        const t = dataInterface.get_TR(rfid, id);
-   
+        const t = await dataInterface.get_TR(rfid, id);
+   console.log(t);
         if(t === undefined){
           return res.status(404).json({error: "No test result associated to id or no sku item associated to rfid"});
         } else {
@@ -88,7 +88,8 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       const td = await dataInterface.get_TD_by_id(newTR.idTestDescriptor);
 
       console.log(s)
-      if(s === undefined || td === undefined){
+
+      if(s === 404 || td === undefined){
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
       }
   
@@ -108,10 +109,10 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
     try
       {
     
-      const p = req.params;
+      const p = req.body;
       const rfid = req.params.rfid;
       const id = req.params.id;
-
+console.log(p)
         if(Object.keys(req.body).length === 0 || rfid === undefined || id === undefined 
         || p.newIdTestDescriptor === undefined || p.newDate === undefined || p.newResult === undefined ){
           return res.status(422).json({error : "Unprocessable Entity"});
@@ -120,11 +121,12 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   
         if(id >0 && typeof Number(id) === 'number' && 
                     rfid >0 && typeof rfid === 'string'){   
-          const t = dataInterface.get_TD(p.newIdTestDescriptor);
-          const s = dataInterface.get_SKU(rfid);
-          const tr = get_TR(rfid, id);
-
-            if(s === undefined || t === undefined || tr === undefined){
+          const t = await dataInterface.get_TD(p.newIdTestDescriptor);
+          const s = await dataInterface.get_SKUItem_by_RFID(rfid);
+          const tr = await dataInterface.get_TR(rfid, id);
+console.log(s)
+console.log(tr)
+            if(s === 404 || t === undefined || tr === undefined){
                   return res.status(404).json({error:
                      "No sku item associated to rfid or no test descriptor associated to newIdTestDescriptor or no test result associated to id"});
             }else{
