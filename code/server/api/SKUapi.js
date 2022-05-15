@@ -93,7 +93,8 @@ router.put('/api/sku/:id', (req, res)=>{
         typeof newValues.newAvailableQuantity !== 'number'|| 
         newValues.newWeight <= 0 || 
         newValues.newVolume <= 0 || 
-        newValues.newPrice  <= 0){
+        newValues.newPrice  <= 0 ||
+        typeof Number(req.params.id) !== 'number'){
 
       return res.status(422).end();
     }
@@ -135,7 +136,7 @@ router.put('/api/sku/:id/position', (req, res)=>{
 
     dataInterface.add_modify_SKU_position(skuID, positionID)
       .then(() => {return res.status(200).end();})
-      .catch((err => {
+      .catch(err => {
         if(err === 'not enough space in position'){
           return res.status(422).end();
         } else if(err === 'not found'){
@@ -143,7 +144,7 @@ router.put('/api/sku/:id/position', (req, res)=>{
         } else {
           console.log(err);
           return res.status(503).end();
-        }}));
+        }});
     
   } catch(err) {
       console.log(err);
@@ -157,20 +158,20 @@ router.delete('/api/skus/:id', (req, res)=>{
   
       const id = req.params.id
       if( id > 0 && typeof Number(id) === 'number') {
-  
-        dataInterface.delete_SKU(id).then(result => {
-          if(result){
-            return res.status(204).end();
-          } else {
-            return res.status(422).json({error : "NOT FOUND"});
-          }
-        }).catch(err => {
+        dataInterface.delete_SKU(id)
+        .then(() => {return res.status(204).end();})
+        .catch(err => {
+          console.log(err);
           if(err === 'cannot delete'){
             return res.status(422).json({error : "SKU IS ASSOCIATED TO SKU ITEMS"});
-          } else {
-            console.log(err);
+
+          } else if (err === 'not found') {
+            return res.status(422).json({error : "NOT FOUND"});
+
+          }else {
             return res.status(503).end();
-          }
+          } 
+
         });
   
       } else {
