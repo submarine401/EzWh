@@ -72,6 +72,13 @@ class DataInterface{
 
     delete_SKU(id){
         console.log('delete SKU ' + id);
+
+        const skuItems = await this.get_all_SKUItem();
+        if(skuItems.find(si => si.SKUid === id)){
+            console.log('sku has skuItems');
+            throw 'cannot delete'
+        }
+
         this.get_SKU(id).then( sku => {
             if(sku !== undefined){
                 this.dbHelper.delete_SKU(id);
