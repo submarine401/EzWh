@@ -21,7 +21,7 @@ router.post('/api/position', (req, res)=>{
     try{
   
         if(Object.keys(req.body).length === 0){
-          return res.status(422).json({error : "Unprocessable Entity"});
+          return res.status(422).end();
         }
     
         const newPos = req.body;
@@ -35,13 +35,24 @@ router.post('/api/position', (req, res)=>{
             newPos.aisleID.length !== 4||
             newPos.row.length !== 4||
             newPos.col.length !== 4|| 
-            newPos.aisleID + newPos.row + newPos.col !== newPos.positionID ){
+            newPos.aisleID + newPos.row + newPos.col !== newPos.positionID||  
+            newPos.maxWeight <= 0 ||  
+            newPos.maxVolume <= 0 ){
 
             return res.status(422).json({error : "Unprocessable Entity"});
         }
       
-        dataInterface.create_Position(newPos);
-        return res.status(201).json({success: 'Created'});
+        dataInterface.create_Position(newPos).then(() => {
+          return res.status(201).json({success: 'Created'});
+        }) .catch(err => {
+          if(err === 'already existing'){
+            res.status(422).json({success: 'already existing'});
+          } else {
+            console.log(err);
+            return res.status(503).end();
+          }
+        });
+        
       
     } catch(err) {
         console.log(err);
@@ -67,7 +78,11 @@ router.put('/api/position/:positionID', (req, res)=>{
             typeof newValues.newOccupiedVolume !== 'number' ||
             newValues.newOccupiedVolume > newValues.newMaxVolume ||
             newValues.newOccupiedWeight > newValues.newMaxWeight ||
-            req.params.positionID.length !== 12){
+            req.params.positionID.length !== 12||  
+            newValues.newMaxWeight <= 0 ||  
+            newValues.newMaxVolume <= 0 ||  
+            newValues.newOccupiedWeight < 0 ||  
+            newValues.newOccupiedVolume < 0){
 
             return res.status(422).json({error : "Unprocessable Entity"});
         }
@@ -133,7 +148,7 @@ router.delete('/api/position/:positionID', (req, res)=>{
             .then(() => {return res.status(204).end();})
             .catch((err => {
               if(err === 'not found'){
-                return res.status(503).end(); //return res.status(404).end(); not listed in api document
+                return res.status(422).json({error : "NOT FOUND"}); //return res.status(404).end(); not listed in api document
               } else {
                 console.log(err);
                 return res.status(503).end();

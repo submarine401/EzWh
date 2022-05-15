@@ -19,7 +19,10 @@ router.post('/api/sku', async (req,res)=>{
           typeof newSku.volume !== 'number' || 
           typeof newSku.notes !== 'string' || 
           typeof newSku.price !== 'number' || 
-          typeof newSku.availableQuantity !== 'number' ){
+          typeof newSku.availableQuantity !== 'number' || 
+          newSku.weight <= 0 || 
+          newSku.volume <= 0 || 
+          newSku.price <= 0){
         return res.status(422).json({error : "Unprocessable Entity"});
       }
       dataInterface.create_SKU(newSku);
@@ -87,7 +90,10 @@ router.put('/api/sku/:id', (req, res)=>{
         typeof newValues.newVolume !== 'number' || 
         typeof newValues.newNotes !== 'string' || 
         typeof newValues.newPrice !== 'number' || 
-        typeof newValues.newAvailableQuantity !== 'number'){
+        typeof newValues.newAvailableQuantity !== 'number'|| 
+        newValues.newWeight <= 0 || 
+        newValues.newVolume <= 0 || 
+        newValues.newPrice  <= 0){
 
       return res.status(422).end();
     }
@@ -152,14 +158,23 @@ router.delete('/api/skus/:id', (req, res)=>{
       const id = req.params.id
       if( id > 0 && typeof Number(id) === 'number') {
   
-        if(dataInterface.delete_SKU(id)){
-          return res.status(204).end();
-        } else {
-          return res.status(404).end();
-        }
+        dataInterface.delete_SKU(id).then(result => {
+          if(result){
+            return res.status(204).end();
+          } else {
+            return res.status(422).json({error : "NOT FOUND"});
+          }
+        }).catch(err => {
+          if(err === 'cannot delete'){
+            return res.status(422).json({error : "SKU IS ASSOCIATED TO SKU ITEMS"});
+          } else {
+            console.log(err);
+            return res.status(503).end();
+          }
+        });
   
       } else {
-        return res.status(422).json({error : "INVALID I INPUT"});
+        return res.status(422).end();
       }
     }
     catch(err) {
