@@ -84,9 +84,10 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         return res.status(422).json({error : "Unprocessable Entity"});
       }
   
-      const s = dataInterface.get_SKU(newTR.rfid);
-      const td = dataInterface.get_TD_by_id(newTR.idTestDescriptor);
+      const s = await dataInterface.get_SKUItem_by_RFID(newTR.rfid);
+      const td = await dataInterface.get_TD_by_id(newTR.idTestDescriptor);
 
+      console.log(s)
       if(s === undefined || td === undefined){
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
       }
@@ -142,7 +143,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
   
   
-  router.delete('/api/skuitems/:rfid/testResult/:id', async(req, res)=>{ //422
+  router.delete('/api/skuitems/:rfid/testResult/:id', async(req, res)=>{ 
   
     try{     
         const rfid = req.params.rfid;
@@ -153,7 +154,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         if(Test_Result.delete_test_result(id, rfif)){
           return res.status(204).end(); 
         } else {
-          return res.status(404).end();
+          return res.status(422).json({error : "Not found"});
         }
       } else {
         return res.status(422).json({error : "Unprocessable Entity"});

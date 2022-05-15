@@ -51,7 +51,7 @@ router.post('/api/returnOrder',async (req,res)=>{
     if (results) {
     return res.status(200).json(results);
     } else {
-      return res.status(404).end();
+      return res.status(422).json({error : "Not found"});
      } }
     catch(err)
     {
