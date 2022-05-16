@@ -35,7 +35,7 @@ router.post('/api/newUser', async (req,res) => {
     const new_u = req.body;
     
     if( new_u.username === undefined ||  new_u.password === undefined ||  new_u.name === undefined || new_u.surname === undefined || new_u.type === undefined){
-      return res.status(522).end("Unprocessable entity");
+      return res.status(422).end("Unprocessable entity");
     }
     
     const check_username = await dataInterface.getUsers();
@@ -62,12 +62,14 @@ router.post('/api/newUser', async (req,res) => {
 
 
 router.put('/api/users/:username', async (req,res) =>{
+  let privileged_users = ['manager','administrator'];
   let users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
   try {
     const body = req.body;
     const username = req.params.username;
     if (body.oldType === body.newType ||
-        users_array.includes(body.newType) === false){
+        users_array.includes(body.newType) === false || 
+        privileged_users.includes(body.oldType) === true){
       return res.status(422).end("Failed body validation");
     }
     if(typeof req.params.username === undefined 
