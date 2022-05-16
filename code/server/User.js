@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 const dbHelper = require('./DBhelper');
 
 class User {
@@ -105,3 +107,4 @@ class User {
 }
 const U = new User();
 module.exports = U;
+>>>>>>> 5190e83aee1a080190cd3666deaf8bca84204b2c
