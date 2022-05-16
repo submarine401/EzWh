@@ -220,7 +220,8 @@ class DBhelper {
 
             const params = [
                 sku.description, sku.weight, sku.volume, sku.note, sku.price, 
-                sku.availableQuantity, sku.position.id, JSON.stringify(sku.test_descriptors),
+                sku.availableQuantity, sku.position?sku.position.id:undefined,
+                JSON.stringify(sku.test_descriptors),
                 id
             ]
             this.db.run(sql_query, params, (err)=>{

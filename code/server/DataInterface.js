@@ -65,28 +65,27 @@ class DataInterface{
 
     async get_SKU(id){
         const skus = await this.return_SKU();
-        console.log(skus);
         return skus.find(sku => sku.id == id);
     }
 
 
-    delete_SKU(id){
+    async delete_SKU(id){
         console.log('delete SKU ' + id);
 
         const skuItems = await this.get_all_SKUItem();
         if(skuItems.find(si => si.SKUid === id)){
             console.log('sku has skuItems');
-            throw 'cannot delete'
+            throw 'cannot delete';
         }
 
-        this.get_SKU(id).then( sku => {
-            if(sku !== undefined){
-                this.dbHelper.delete_SKU(id);
-                return true;
-            } else {
-                return false;
-            }
-        });
+        const sku = await this.get_SKU(id);
+        
+        if(sku !== undefined){
+            this.dbHelper.delete_SKU(id);
+        } else {
+            console.log('sku not found');
+            throw 'not found';
+        }
     }
 
     async modify_SKU(newValues, id){
