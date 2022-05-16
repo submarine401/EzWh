@@ -2,6 +2,8 @@
 
 const express = require('express');
 const dataInterface = require('../DataInterface');
+const dbHelper = require('../DBhelper');
+const SKU = require('../SKU');
 const Test_Descriptor = require('../Test_Descriptor');
 
 
@@ -75,7 +77,11 @@ router.post('/api/testDescriptor', async (req,res)=>{
       return res.status(404).json({error: "No sku associated idSKU"});
     }
 
-    const results = await Test_Descriptor.insert_into_test_Descriptor_table(newTD); 
+    await Test_Descriptor.insert_into_test_Descriptor_table(newTD);
+    const maxID = await dbHelper.getMaxTDid();
+    s.test_descriptors.push(maxID);
+    dbHelper.update_SKU(s.id, s);
+
     return res.status(201).json({success: 'Created'});
   
   }
@@ -93,7 +99,6 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
       const td = req.body;
       const id = req.params.id;
       
-      console.log(" new p "+ td.newProcedureDescription );
       if(Object.keys(req.body).length === 0 || td === undefined || 
       id === undefined|| td.newName === undefined ||
        td.newProcedureDescription === undefined || td.newIdSKU === undefined ){
@@ -107,6 +112,7 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
                 return res.status(404).json({error: "No test descriptor associated id or no sku associated to IDSku"});
           }else{
               const results = await Test_Descriptor.modify_test_descriptor(td, id);
+              
               return res.status(200).json(results);
           } 
       }
