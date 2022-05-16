@@ -48,7 +48,7 @@ router.post('/api/newUser', async (req,res) => {
     }
     const result = await U.newUser(new_u);
     if(result === 422){
-      return res.status(422).end('Inserted type does not match any valid type!')
+      return res.status(422).end('Inserted type does not match any valid type or password is too short')
     }
     else{
       return res.status(200).end("User inserted!");

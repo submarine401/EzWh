@@ -10,7 +10,7 @@ class User {
   newUser(u){
     return new Promise((resolve,reject) => {
       if(u.password.length < 8){
-        reject("Password must be at least 8 characters long!\n");
+        resolve(422);
         return;
       }
       let users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
