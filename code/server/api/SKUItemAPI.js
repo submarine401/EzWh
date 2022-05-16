@@ -84,12 +84,32 @@ router.get('/api/skuitems/sku/:id', async(req,res) =>{
   }
 });
 
+router.get('/api/skuitems/:rfid', async(req,res) =>{
+  try{
+    if(!req.params.rfid){
+      return res.status(422).end();
+    }
+    const result = await dataInterface.get_SKUItem_by_RFID(req.params.rfid);
+    if(result === 404){
+      return res.status(404).end('no SKUItem associated to RFID');
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  }
+  catch(err){
+    console.log(err);
+    return res.status(500).end();
+  }
+});
+
 router.delete('/api/skuitems/:rfid',async(req,res) =>{
   try {
-    
+    console.log("ciao");
+    console.log(typeof req.params.rfid)
     const check_rfid = await dataInterface.get_SKUItem_by_RFID(req.params.rfid);
-    if(check_rfid === 404 || typeof req.params.rfid !== 'string'){  //no sku item with the target RFID
-      return res.status(422).end();
+    if(check_rfid === 404){  //no sku item with the target RFID
+      return res.status(422).end('Validation of RFID failed!');
     }
     
     const result = await dataInterface.deleteSKUItem(req.params.rfid);

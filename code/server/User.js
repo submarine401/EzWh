@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 const dbHelper = require('./DBhelper');
 
 class User {
@@ -10,7 +12,7 @@ class User {
   newUser(u){
     return new Promise((resolve,reject) => {
       if(u.password.length < 8){
-        reject("Password must be at least 8 characters long!\n");
+        resolve(422);
         return;
       }
       let users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
@@ -105,3 +107,4 @@ class User {
 }
 const U = new User();
 module.exports = U;
+>>>>>>> 5190e83aee1a080190cd3666deaf8bca84204b2c
