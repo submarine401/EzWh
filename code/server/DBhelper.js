@@ -380,8 +380,9 @@ class DBhelper {
                     this.db.run(sql, params, (err)=>{
                         if(err){
                             reject(err);
-                            return}
-                    resolve("Stored position");
+                            return;
+                        }
+                        resolve("Stored position");
                     });
 
                 } catch (err) {
@@ -516,6 +517,20 @@ create_test_descriptor_table (){
         resolve("testdescriptors Table -> OK");
     });
  });
+}
+
+
+getMaxTDid(){
+    return new Promise((resolve,reject)=>{
+        const sql = 'SELECT MAX(TDid) FROM testdescriptors';
+        this.db.get(sql, (err, res)=>{
+            if(err){
+                reject(err);
+                return;
+            }
+            resolve(res);
+        });
+    });
 }
 
 /*
