@@ -225,7 +225,27 @@ router.post('/api/restockOrder',async (req,res)=>{
         if(results === 0 )
           return res.status(404).json({error : "no restock order associated to id"});
         else
-          return res.status(200).json(results);
+        {
+         
+          let rejected = [];
+          let rej = [];
+          let skuid_rfids = []
+          const r = JSON.parse(results[0].skuItems)
+          r.forEach((x)=>skuid_rfids.push(JSON.parse(x)))
+          
+          skuid_rfids.forEach(async(skurfid)=>{
+          let result_rejected_items = await dataInterface.get_rejected_skuitems_of_restockOrder(skurfid);
+          //console.log(result_rejected_items)
+          if(result_rejected_items !== 0)
+            rejected.push(skurfid);
+          })
+
+          console.log(rejected)
+          return res.status(200).json(rejected);
+        }
+        
+         
+        
       }
     catch(err)
     {
@@ -234,8 +254,6 @@ router.post('/api/restockOrder',async (req,res)=>{
     }
   });
   
-
-
 
 
 module.exports = router;
