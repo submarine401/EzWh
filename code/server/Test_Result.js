@@ -22,7 +22,7 @@ class Test_Result{
 
 insert_into_test_Result_table(tr) {
     return new Promise ((resolve,reject)=>{ 
-        const sql = 'INSERT INTO testresults (rfid, tdid, date, result) VALUES(?,?,?,?)';
+        const sql = 'INSERT INTO testresults (rfid, TDid, date, result) VALUES(?,?,?,?)';
         this.db.db.run(sql,[tr.rfid, tr.idTestDescriptor , tr.Date, tr.Result], (err)=>{
             if(err)
             {
@@ -57,7 +57,7 @@ modifyTR(TRid, RFid, newTestDescriptor, newDate, newResult) {  //MODIFIED (there
     });
 }
 
-delete_test_result(TRid, RFif) {
+delete_test_result(TRid, RFid) {
     return new Promise ((resolve,reject)=>{
         const sql = 'DELETE FROM testresults WHERE TRid = ? AND RFid = ?';
         this.db.db.run(sql,[TRid, RFid],(err)=>{

@@ -2,6 +2,8 @@
 
 const express = require('express');
 const dataInterface = require('../DataInterface');
+const dbHelper = require('../DBhelper');
+const SKU = require('../SKU');
 const Test_Descriptor = require('../Test_Descriptor');
 
 
@@ -25,13 +27,12 @@ router.get('/api/testDescriptors', async (req, res)=>{
 });
 
 
-router.get('/api/testDescriptors/:id', async (req, res)=>{ //NON VA
+router.get('/api/testDescriptors/:id', async (req, res)=>{
  
   try{   
 
     const id = req.params.id;
-    if( id > 0  && typeof Number(id) === 'number') { //il controllo id===number non va bene
-      
+    if( id > 0  && typeof Number(id) === 'number') {
       
       const t = await dataInterface.get_TD_by_id(id);
      
@@ -75,7 +76,8 @@ router.post('/api/testDescriptor', async (req,res)=>{
       return res.status(404).json({error: "No sku associated idSKU"});
     }
 
-    const results = await Test_Descriptor.insert_into_test_Descriptor_table(newTD); 
+    await Test_Descriptor.insert_into_test_Descriptor_table(newTD);
+
     return res.status(201).json({success: 'Created'});
   
   }
@@ -93,7 +95,6 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
       const td = req.body;
       const id = req.params.id;
       
-      console.log(" new p "+ td.newProcedureDescription );
       if(Object.keys(req.body).length === 0 || td === undefined || 
       id === undefined|| td.newName === undefined ||
        td.newProcedureDescription === undefined || td.newIdSKU === undefined ){
@@ -107,6 +108,7 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
                 return res.status(404).json({error: "No test descriptor associated id or no sku associated to IDSku"});
           }else{
               const results = await Test_Descriptor.modify_test_descriptor(td, id);
+              
               return res.status(200).json(results);
           } 
       }

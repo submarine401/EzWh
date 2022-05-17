@@ -1,6 +1,5 @@
 //const dataInterface = require('./DataInterface');
 const Position = require('./Position');
-//const SKU = require('./SKU');
 const dayjs = require('dayjs')
 class DBhelper {
     sqlite = require('sqlite3');
@@ -74,7 +73,6 @@ class DBhelper {
         }, function(error){
           console.error(error);
         });
-        //create ??? table
     
 
     }
@@ -170,8 +168,7 @@ class DBhelper {
         return new Promise((resolve, reject) => {
 
             // position id is TEXT because it is too big for an integer
-            // test_descriptors[] is text for now;
-            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, availableQuantity INTEGER, positionID TEXT, test_descriptors TEXT);";  
+            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, availableQuantity INTEGER, positionID TEXT);"; 
             this.db.run(sql_query, function (err) {
                 if (err) {
                     reject(err);
@@ -188,13 +185,13 @@ class DBhelper {
             console.log('DB store');
 
             return new Promise((resolve, reject) => {
+                
 
                 try {
-                    const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID, test_descriptors)  \
-                                VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
+                    const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID)  \
+                                VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
                     const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
-                                    sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/,
-                                    sku.test_descriptors.length === 0 ? '[]':sku.test_descriptors.map(td => td.id).toString()];
+                                    sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/];
                     this.db.run(sql, params, (err)=>{
                         if(err){
                             reject(err);
@@ -212,18 +209,21 @@ class DBhelper {
     }
 
     update_SKU(id, sku) {
+
+        console.log("aaaaaaaaa")
+        console.log(sku.test_descriptors)
+        console.log(sku.test_descriptors.map(td => td.id))
         return new Promise((resolve, reject) => {
 
             const sql_query = 'UPDATE sku \
-                               SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? , test_descriptors = ? \
-                               WHERE id = ?';
+                               SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? \
+                               WHERE id = ?'; 
 
             const params = [
                 sku.description, sku.weight, sku.volume, sku.note, sku.price, 
                 sku.availableQuantity, sku.position?sku.position.id:undefined,
-                JSON.stringify(sku.test_descriptors),
                 id
-            ]
+            ] 
             this.db.run(sql_query, params, (err)=>{
 
                 if(err){
@@ -380,8 +380,9 @@ class DBhelper {
                     this.db.run(sql, params, (err)=>{
                         if(err){
                             reject(err);
-                            return}
-                    resolve("Stored position");
+                            return;
+                        }
+                        resolve("Stored position");
                     });
 
                 } catch (err) {
@@ -507,7 +508,7 @@ class DBhelper {
 */
 create_test_descriptor_table (){
     return new Promise((resolve,reject)=>{
-    const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (TDid integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
+    const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (id integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
     this.db.run(sql, (err)=>{
         if(err){
             reject(err);
@@ -517,6 +518,7 @@ create_test_descriptor_table (){
     });
  });
 }
+
 
 /*
 *****************************************************CREATE TEST RESULT TABLE********************************************

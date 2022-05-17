@@ -15,7 +15,6 @@ class DataInterface{
         //console.log(dbHelper);
         //this.users = this.dbHelper.load_users();
 
-     //   if(this.skus === undefined) this.skus = [];
         if(this.users === undefined) this.users = [];
         
         //this.users = this.dbHelper.load_users();
@@ -32,7 +31,6 @@ class DataInterface{
         try{
 
             skuData.position = undefined;
-            skuData.test_descriptors = [];
 
             await this.dbHelper.store_SKU(skuData);
 
@@ -45,15 +43,13 @@ class DataInterface{
     async return_SKU(){
         const skus = await dbHelper.load_SKUs();
 
-        const positions = await this.get_all_position()
+        const positions = await this.get_all_position();
+
+        const all_test_descriptors = await this.get_TD();
 
         const ret = skus.map( (sku) => {
                     
-            const test_descriptors = [];
-
-            for(id of JSON.parse(sku.test_descriptors)){
-                test_descriptors.push(this.get_TD_by_id(id)); 
-            }
+            const test_descriptors = all_test_descriptors.filter(td => td.idSKU === sku.id).map(td => td.id);
 
             const position = sku.positionID?positions.find(pos => pos.id === sku.positionID):undefined;
             
@@ -795,13 +791,12 @@ get_all_suppliers(){
                       }
                   const testdescriptors = rows.map((t)=>(
                   {
-                      id : t.TDid,
+                      id : t.id,
                       name : t.name,
                       procedureDescription : t.procedure_description,
                       idSKU : t.idSKU
                       
                   })); 
-                  console.log(testdescriptors);
                   resolve(testdescriptors);
               });
           
@@ -809,18 +804,18 @@ get_all_suppliers(){
       
 }
 
-get_TD_by_id(TDid){
+get_TD_by_id(id){
   return new Promise((resolve,reject)=>{
      
-       const sql = "SELECT * FROM testdescriptors where TDid = ?";
-            dbHelper.db.all(sql,[TDid],(err,rows)=>{
+       const sql = "SELECT * FROM testdescriptors where id = ?";
+            dbHelper.db.all(sql,[id],(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;
                       }
                   const testdescriptors = rows.map((t)=>(
                   {
-                   TDid : t.TDid,
+                   id : t.id,
                    name : t.name,
                    procedure_description : t.procedure_description
                   
@@ -839,9 +834,12 @@ get_TR(RFid, TRid) {
   return new Promise((resolve,reject)=>{
 
 
-          if(TRid===undefined){
+         
+    
+    if(TRid===undefined){
               const sql = "SELECT * FROM testresults ";
               dbHelper.db.all(sql,(err,rows)=>{
+                  console.log(rows.length)
                   if(err){
                       reject(err); 
                       return;
@@ -849,7 +847,7 @@ get_TR(RFid, TRid) {
                    const  testresults = rows.map((tr)=>(
                   {
                       TRid : tr.TRid,
-                      TDid : tr.TDid,
+                      id : tr.id,
                       Date : tr.Date,
                       Result : tr.Result
                     
@@ -862,11 +860,15 @@ get_TR(RFid, TRid) {
                   if(err){
                       reject(err); 
                       return;
-                      }
+                      }if (rows.length === 0 ){
+                        reject(404); 
+                        
+                        return;
+                    }
                   const testresults = rows.map((tr)=>(
                   {
                       TRid : tr.TRid,
-                      TDid : tr.TDid,
+                      id : tr.id,
                       date : tr.Date,
                       result : tr.Result 
                    }));
