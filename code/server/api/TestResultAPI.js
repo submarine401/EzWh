@@ -1,5 +1,6 @@
 'use strict'
 
+const e = require('express');
 const express = require('express');
 const dataInterface = require('../DataInterface');
 const Test_Result = require('../Test_Result');
@@ -16,13 +17,13 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       if( rfid > 0 && typeof rfid === 'string') {
           
         const t = await dataInterface.get_SKUItem_by_RFID(rfid);
-        console.log(t);
+     
 
-        if(t === undefined){
-          return res.status(404).json({error: "No skuItem foybd for this rfID"});
+        if(t === 404){
+          return res.status(404).json({error: "No skuItem found for this rfID"});
         } else {
           return res.status(200).json(t);
-        }
+        } 
   
       } else {
         return res.status(422).json({error : "Unprocessable Entity"});
@@ -48,20 +49,20 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         
         
         const t = await dataInterface.get_TR(rfid, id);
-   console.log(t);
-        if(t === undefined){
-          return res.status(404).json({error: "No test result associated to id or no sku item associated to rfid"});
-        } else {
-          return res.status(200).json(t);
-        }
-  
+        console.log("+++"+t);
+
+
+        
+       
       } else {
         return res.status(422).json({error : "Unprocessable Entity"});
       }
-    }
-    catch(err) {
-      console.log(err);
-      return res.status(500).end();
+    } catch(err) {
+      if(err===404){
+        return res.status(404).json({error: "No test result associated to id or no sku item associated to rfid"});
+        } else {return res.status(200).json(t); }
+
+     // return res.status(500).end();
     }
   
   });
@@ -70,6 +71,8 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   
   router.post('/api/skuitems/testResult', async (req,res)=>{
 
+    
+    console.log("--")
     try{
   
       if(Object.keys(req.body).length === 0 ){
@@ -84,10 +87,12 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         return res.status(422).json({error : "Unprocessable Entity"});
       }
   
+      //console.log("--"+s)
       const s = await dataInterface.get_SKUItem_by_RFID(newTR.rfid);
+      
+      //console.log("+++"+s)
       const td = await dataInterface.get_TD_by_id(newTR.idTestDescriptor);
 
-      console.log(s)
 
       if(s === 404 || td === undefined){
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});

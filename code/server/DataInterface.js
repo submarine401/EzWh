@@ -800,9 +800,11 @@ get_TD_by_id(id){
                   {
                    id : t.id,
                    name : t.name,
-                   procedure_description : t.procedure_description
+                   procedure_description : t.procedure_description,
+                   idSKU : t.idSKU
                   
            }));
+           console.log(testdescriptors);
                   resolve(testdescriptors);
        });
           
@@ -816,11 +818,8 @@ get_TD_by_id(id){
 get_TR(RFid, TRid) { 
   return new Promise((resolve,reject)=>{
 
-
-         
-    
     if(TRid===undefined){
-              const sql = "SELECT * FROM testresults ";
+              const sql = "SELECT * FROM testresults WHERE RFid = ?  ";
               dbHelper.db.all(sql,(err,rows)=>{
                   console.log(rows.length)
                   if(err){
@@ -829,34 +828,34 @@ get_TR(RFid, TRid) {
                       }
                    const  testresults = rows.map((tr)=>(
                   {
-                      TRid : tr.TRid,
-                      id : tr.id,
-                      Date : tr.Date,
-                      Result : tr.Result
+                    TRid : tr.TRid,
+                    RFid : tr.RFid,
+                    Date : tr.date,
+                    Result : tr.result 
                     
                   })); 
                   resolve(testresults);
+
               });
           }else{
-              const sql = "SELECT * FROM testresults where RFid = ? ";
+              const sql = "SELECT * FROM testresults where RFid = ? AND TRid = ?";
               dbHelper.db.all(sql,[RFid],(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;
-                      }if (rows.length === 0 ){
-                        reject(404); 
-                        
-                        return;
-                    }
+                    }  
                   const testresults = rows.map((tr)=>(
                   {
                       TRid : tr.TRid,
-                      id : tr.id,
-                      date : tr.Date,
-                      result : tr.Result 
+                      RFid : tr.RFid,
+                      Date : tr.date,
+                      Result : tr.result 
                    }));
                   resolve(testresults);
+                // console.log("sssss2")
+                // console.log(rows)
               });
+              
           
           }
           
