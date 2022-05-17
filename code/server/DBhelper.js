@@ -543,7 +543,7 @@ getMaxid(){
 */
 create_test_result_table (){
     return new Promise((resolve,reject)=>{
-    const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, id integer, date text,result boolean)';
+    const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, TDid integer, date text,result boolean)';
     this.db.run(sql, (err)=>{
         if(err){
             reject(err);

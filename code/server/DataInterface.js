@@ -826,9 +826,12 @@ get_TR(RFid, TRid) {
   return new Promise((resolve,reject)=>{
 
 
-          if(TRid===undefined){
+         
+    
+    if(TRid===undefined){
               const sql = "SELECT * FROM testresults ";
               dbHelper.db.all(sql,(err,rows)=>{
+                  console.log(rows.length)
                   if(err){
                       reject(err); 
                       return;
@@ -849,7 +852,11 @@ get_TR(RFid, TRid) {
                   if(err){
                       reject(err); 
                       return;
-                      }
+                      }if (rows.length === 0 ){
+                        reject(404); 
+                        
+                        return;
+                    }
                   const testresults = rows.map((tr)=>(
                   {
                       TRid : tr.TRid,
