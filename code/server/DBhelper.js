@@ -210,9 +210,6 @@ class DBhelper {
 
     update_SKU(id, sku) {
 
-        console.log("aaaaaaaaa")
-        console.log(sku.test_descriptors)
-        console.log(sku.test_descriptors.map(td => td.id))
         return new Promise((resolve, reject) => {
 
             const sql_query = 'UPDATE sku \
