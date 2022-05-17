@@ -15,7 +15,6 @@ class DataInterface{
         //console.log(dbHelper);
         //this.users = this.dbHelper.load_users();
 
-     //   if(this.skus === undefined) this.skus = [];
         if(this.users === undefined) this.users = [];
         
         //this.users = this.dbHelper.load_users();
@@ -32,7 +31,6 @@ class DataInterface{
         try{
 
             skuData.position = undefined;
-            skuData.test_descriptors = [];
 
             await this.dbHelper.store_SKU(skuData);
 
@@ -51,13 +49,7 @@ class DataInterface{
 
         const ret = skus.map( (sku) => {
                     
-            const test_descriptors = [];
-
-            // forEach(id of arr){
-            //     test_descriptors.push(all_test_descriptors.find(td => td.id === id)); 
-            // }
-
-           JSON.parse(sku.test_descriptors).forEach(td => test_descriptors.push(all_test_descriptors.find(tdi => td.id === tdi.id)));
+            const test_descriptors = all_test_descriptors.filter(td => td.idSKU === sku.id).map(td => td.id);
 
             const position = sku.positionID?positions.find(pos => pos.id === sku.positionID):undefined;
             
@@ -788,7 +780,6 @@ get_all_suppliers(){
                       idSKU : t.idSKU
                       
                   })); 
-             //     console.log(testdescriptors);
                   resolve(testdescriptors);
               });
           

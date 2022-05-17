@@ -1,6 +1,5 @@
 //const dataInterface = require('./DataInterface');
 const Position = require('./Position');
-//const SKU = require('./SKU');
 const dayjs = require('dayjs')
 class DBhelper {
     sqlite = require('sqlite3');
@@ -74,7 +73,6 @@ class DBhelper {
         }, function(error){
           console.error(error);
         });
-        //create ??? table
     
 
     }
@@ -170,8 +168,7 @@ class DBhelper {
         return new Promise((resolve, reject) => {
 
             // position id is TEXT because it is too big for an integer
-            // test_descriptors[] is text for now;
-            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, availableQuantity INTEGER, positionID TEXT, test_descriptors TEXT);";  
+            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, availableQuantity INTEGER, positionID TEXT);"; 
             this.db.run(sql_query, function (err) {
                 if (err) {
                     reject(err);
@@ -191,11 +188,10 @@ class DBhelper {
                 
 
                 try {
-                    const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID, test_descriptors)  \
-                                VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
+                    const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID)  \
+                                VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
                     const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
-                                    sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/,
-                                    sku.test_descriptors.length === 0 ? '[]':sku.test_descriptors.map(td => td.id).toString()];
+                                    sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/];
                     this.db.run(sql, params, (err)=>{
                         if(err){
                             reject(err);
@@ -220,13 +216,12 @@ class DBhelper {
         return new Promise((resolve, reject) => {
 
             const sql_query = 'UPDATE sku \
-                               SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? , test_descriptors = ? \
-                               WHERE id = ?';
+                               SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? \
+                               WHERE id = ?'; 
 
             const params = [
                 sku.description, sku.weight, sku.volume, sku.note, sku.price, 
                 sku.availableQuantity, sku.position?sku.position.id:undefined,
-                JSON.stringify(sku.test_descriptors.map(td => td.id)),
                 id
             ] 
             this.db.run(sql_query, params, (err)=>{
@@ -524,19 +519,6 @@ create_test_descriptor_table (){
  });
 }
 
-
-getMaxid(){
-    return new Promise((resolve,reject)=>{
-        const sql = 'SELECT MAX(id) FROM testdescriptors';
-        this.db.all(sql, (err, res)=>{ 
-            if(err){
-                reject(err);
-                return;
-            }
-            resolve(res[0]["MAX(id)"]);
-        });
-    });
-}
 
 /*
 *****************************************************CREATE TEST RESULT TABLE********************************************
