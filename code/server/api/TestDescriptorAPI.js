@@ -27,13 +27,12 @@ router.get('/api/testDescriptors', async (req, res)=>{
 });
 
 
-router.get('/api/testDescriptors/:id', async (req, res)=>{ //NON VA
+router.get('/api/testDescriptors/:id', async (req, res)=>{
  
   try{   
 
     const id = req.params.id;
-    if( id > 0  && typeof Number(id) === 'number') { //il controllo id===number non va bene
-      
+    if( id > 0  && typeof Number(id) === 'number') {
       
       const t = await dataInterface.get_TD_by_id(id);
      
@@ -78,9 +77,6 @@ router.post('/api/testDescriptor', async (req,res)=>{
     }
 
     await Test_Descriptor.insert_into_test_Descriptor_table(newTD);
-    const maxID = await dbHelper.getMaxTDid();
-    s.test_descriptors.push(maxID);
-    dbHelper.update_SKU(s.id, s);
 
     return res.status(201).json({success: 'Created'});
   
