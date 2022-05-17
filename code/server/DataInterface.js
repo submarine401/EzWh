@@ -372,7 +372,7 @@ class DataInterface{
                             date : io.date,
                             state : io.state,
                             customerid : io.customerid,
-                            products : io.products
+                            products : JSON.parse(io.products)
     
                             
                         }));
@@ -394,7 +394,7 @@ class DataInterface{
                                 date : io.date,
                                 state : io.state,
                                 customerid : io.customerid,
-                                products : io.products
+                                products : JSON.parse(io.products)
     
                                 
                             }));
@@ -424,7 +424,7 @@ class DataInterface{
                             date : io.date,
                             state : io.state,
                             customerid : io.customerid,
-                            products : io.products
+                            products : JSON.parse(io.products)
     
                             
                         }));
@@ -449,7 +449,7 @@ class DataInterface{
                                 date : io.date,
                                 state : io.state,
                                 customerid : io.customerid,
-                                products : io.products
+                                products : JSON.parse(io.products)
                             }));
                             resolve(internalorders);
                         });
@@ -510,31 +510,8 @@ get_item_by_id(id){
             
         });
 }
-//************************************ FORGIVE ME Gabriele******************************************* */
-get_sku_by_id(id)
-{
-    return new Promise ((reject,resolve)=>{
-        const sql = "SELECT * FROM sku where id = ?";
-        this.dbHelper.db.all(sql,[id],(err,rows)=>{
-            if(err)
-            {
-                reject(err);
-                return;
-            }
-            else
-            {
-                if(rows.length === 0){
-                    reject('n');
-                }
-                else
-                    resolve('y');
-            }
-        });
-    });
-}
 
 
-//****************************************************************************************** */
 get_all_RO(){
     return new Promise((resolve,reject)=>{
        
@@ -548,7 +525,7 @@ get_all_RO(){
                     {
                         id : ro.id,
                         returnDate : ro.date,
-                        products : ro.products,
+                        products : JSON.parse(ro.products),
                         restockOrderId : ro.restockorderid,
                       
                     }));
@@ -571,7 +548,7 @@ get_all_RO_by_id(id){
                     {
                         id : ro.id,
                         returnDate : ro.date,
-                        products : ro.products,
+                        products : JSON.parse(ro.products),
                         restockOrderId : ro.restockorderid,
                       
                     }));
@@ -600,20 +577,60 @@ get_restock_order_by_id(id)
                     resolve(0);
                 else
                 {
+                    const resul = rows.map((rso)=>({
+                        id : rso.id,
+                        issueate : rso.issueate,
+                        products : rso.products,
+                        supplierId : rso.supplierId,
+                        skuItems : rso.skuItems,
+                        state : rso.state,
+                        transportNote : rso.transportNote
+                    }));
 
-                    resolve(rows);
+                    resolve(resul);
                 }
             }
         });
     });
 }
 
-get_restock_order_items(id)
+
+get_rejected_skuitems_of_restockOrder(rfids){
+    return new Promise((resolve,rejecte)=>{
+        //console.log(rfids.rfid)
+        //console.log("///")
+        const sql = "SELECT result FROM testresults WHERE RFid = ?";
+        this.dbHelper.db.all(sql,[rfids.rfid], (err,rows)=>{
+            if(err){
+                rejecte(err);
+                return;
+                }
+            else
+            {
+               const result  = rows.map((x)=>({res:x.result}))
+               if(!result[0].res)
+                resolve(rfids);
+                else
+                resolve(0)
+            }
+        } )
+    });
+}
+
+
+
+
+get_restock_order_items(rso)
 {
-    //needs to test part be implemented 
+    // let rfids = []
+    // const r = JSON.parse(rso[0].skuItems)
+    // r.forEach((x)=>rfids.push(JSON.parse(x).rfid))
+    // console.log(rfids);
+
+
     return new Promise ((resolve,reject)=>{
         const sql = "SELECT * FROM restockorder where id = ?";
-        this.dbHelper.db.all(sql,[id],(err,rows)=>{
+        this.dbHelper.db.all(sql,[rso.id],(err,rows)=>{
             if(err)
             {
                 reject(err);
@@ -627,7 +644,7 @@ get_restock_order_items(id)
                 {
                     const RSOI = rows.map((ro)=>(
                         {
-                            RestokOrtedItems : skuItems, 
+                            RestokOrtedItems : skuItems
                         }));
                     resolve(RSOI);
                 }

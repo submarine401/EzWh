@@ -21,9 +21,12 @@ class ReturnOrder{
             ro.products.map((x)=>{
                 prods.push(JSON.stringify(x))
             });
+
+          
+            const g = JSON.stringify(prods);
             
             const sql = 'INSERT INTO returnorder (date,products,restockorderid) VALUES(?,?,?)';
-            this.db.db.run(sql,[ro.returnDate,prods,ro.restockOrderId], (err)=>{
+            this.db.db.run(sql,[ro.returnDate,g,ro.restockOrderId], (err)=>{
                 if(err)
                 {
                     reject(err);

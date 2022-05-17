@@ -137,8 +137,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
       }
       // need 
       const id = req.params.id
-      const results = await IO.
-      ernal_order(id,io);
+      const results = await IO.modify_internal_order(id,io);
       return res.status(200).json(results);
   
     }

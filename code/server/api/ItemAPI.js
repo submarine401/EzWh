@@ -37,14 +37,12 @@ router.get('/api/items',async (req,res)=>{
       if( ni === undefined || ni.description === undefined || ni.price === undefined || ni.SKUId === undefined || ni.supplierId === undefined ){
         return res.status(422).json({error : "Unprocessable Entityy"});
       }
-    
-      const results = await dataInterface.get_sku_by_id(ni.SKUId).then(()=> {return 0;}, (error)=> {return I.insert_into_item_table(ni);});
+       const results = await dataInterface.get_SKU(ni.SKUId).then((success)=>{if(success !== undefined){return I.insert_into_item_table(ni)}else return 0 },(failure)=>{return failure})
       if(results !== 0)
       return res.status(201).json(results);
       else
       return res.status(404).json({error : "Sku not found"});
   
-    // @@@@@@@@@@@@@@@@@@@ 404 error needs to be handeled because of SKUid
     }
     catch(err)
     {
