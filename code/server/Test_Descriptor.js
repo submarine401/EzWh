@@ -39,11 +39,11 @@ class Test_Descriptor{
   
 
 
-   modify_test_descriptor(td, TDid){
+   modify_test_descriptor(td, id){
 
        return new Promise ((resolve,reject)=>{
-           const sql = 'UPDATE testdescriptors SET name = ? , procedure_description = ? WHERE TDid = ?';
-           this.db.db.run(sql,[td.newName,td.newProcedureDescription,TDid], (err)=>{ 
+           const sql = 'UPDATE testdescriptors SET name = ? , procedure_description = ?, idSKU = ?  WHERE id = ?';
+           this.db.db.run(sql,[td.newName,td.newProcedureDescription,td.newIdSku,id], (err)=>{ 
                if(err)
                {
                    reject(err);
@@ -51,22 +51,22 @@ class Test_Descriptor{
                }
                else
                {
-                   resolve(`Test Descriptor with id ${TDid} is updated`);
+                   resolve(`Test Descriptor with id ${id} is updated`);
                }
 
            });
        });
    }
 
-   delete_test_descriptor(TDid){
+   delete_test_descriptor(id){
        return new Promise ((resolve,reject)=>{
-           const sql = 'DELETE FROM testdescriptors WHERE TDid = ?';
-           this.db.db.run(sql,[TDid],(err)=>{
+           const sql = 'DELETE FROM testdescriptors WHERE id = ?';
+           this.db.db.run(sql,[id],(err)=>{
                if(err){
                    reject(err);
                    return;
                }
-               resolve(`Test descriptor with id ${TDid} is deleted`);
+               resolve(`Test descriptor with id ${id} is deleted`);
            });
        });
    

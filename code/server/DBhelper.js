@@ -188,6 +188,7 @@ class DBhelper {
             console.log('DB store');
 
             return new Promise((resolve, reject) => {
+                
 
                 try {
                     const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID, test_descriptors)  \
@@ -212,6 +213,10 @@ class DBhelper {
     }
 
     update_SKU(id, sku) {
+
+        console.log("aaaaaaaaa")
+        console.log(sku.test_descriptors)
+        console.log(sku.test_descriptors.map(td => td.id))
         return new Promise((resolve, reject) => {
 
             const sql_query = 'UPDATE sku \
@@ -221,9 +226,9 @@ class DBhelper {
             const params = [
                 sku.description, sku.weight, sku.volume, sku.note, sku.price, 
                 sku.availableQuantity, sku.position?sku.position.id:undefined,
-                JSON.stringify(sku.test_descriptors),
+                JSON.stringify(sku.test_descriptors.map(td => td.id)),
                 id
-            ]
+            ] 
             this.db.run(sql_query, params, (err)=>{
 
                 if(err){
@@ -508,7 +513,7 @@ class DBhelper {
 */
 create_test_descriptor_table (){
     return new Promise((resolve,reject)=>{
-    const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (TDid integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
+    const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (id integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
     this.db.run(sql, (err)=>{
         if(err){
             reject(err);
@@ -520,15 +525,15 @@ create_test_descriptor_table (){
 }
 
 
-getMaxTDid(){
+getMaxid(){
     return new Promise((resolve,reject)=>{
-        const sql = 'SELECT MAX(TDid) FROM testdescriptors';
-        this.db.get(sql, (err, res)=>{
+        const sql = 'SELECT MAX(id) FROM testdescriptors';
+        this.db.all(sql, (err, res)=>{ 
             if(err){
                 reject(err);
                 return;
             }
-            resolve(res);
+            resolve(res[0]["MAX(id)"]);
         });
     });
 }
@@ -538,7 +543,7 @@ getMaxTDid(){
 */
 create_test_result_table (){
     return new Promise((resolve,reject)=>{
-    const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, TDid integer, date text,result boolean)';
+    const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, id integer, date text,result boolean)';
     this.db.run(sql, (err)=>{
         if(err){
             reject(err);

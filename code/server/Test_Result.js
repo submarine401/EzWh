@@ -22,7 +22,7 @@ class Test_Result{
 
 insert_into_test_Result_table(tr) {
     return new Promise ((resolve,reject)=>{ 
-        const sql = 'INSERT INTO testresults (rfid, tdid, date, result) VALUES(?,?,?,?)';
+        const sql = 'INSERT INTO testresults (rfid, id, date, result) VALUES(?,?,?,?)';
         this.db.db.run(sql,[tr.rfid, tr.idTestDescriptor , tr.Date, tr.Result], (err)=>{
             if(err)
             {
@@ -41,7 +41,7 @@ insert_into_test_Result_table(tr) {
 modifyTR(TRid, RFid, newTestDescriptor, newDate, newResult) {  //MODIFIED (there isn't RFid in the design)
 
     return new Promise ((resolve,reject)=>{
-        const sql = 'UPDATE testresults SET TDid = ? , date = ? , result = ? WHERE TRid = ? AND RFid = ?'; 
+        const sql = 'UPDATE testresults SET id = ? , date = ? , result = ? WHERE TRid = ? AND RFid = ?'; 
         this.db.db.run(sql,[newTestDescriptor,newDate,newResult, TRid,  RFid], (err)=>{ 
             if(err)
             {
