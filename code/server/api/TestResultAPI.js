@@ -16,9 +16,8 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
       if( rfid > 0 && typeof rfid === 'string') {
           
-        const t = await dataInterface.get_SKUItem_by_RFID(rfid);
-     
-
+        const t = await dataInterface.get_TR(rfid);
+          
         if(t === 404){
           return res.status(404).json({error: "No skuItem found for this rfID"});
         } else {
@@ -38,7 +37,6 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
 
   router.get('/api/skuitems/:rfid/testResults/:id', async (req, res)=>{ 
-  //qualunque id gli dia mi da sempre la stessa lista
 
     try{
       const rfid = req.params.rfid;
@@ -49,20 +47,19 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         
         
         const t = await dataInterface.get_TR(rfid, id);
-        console.log("+++"+t);
+        console.log(t);
 
+        if(t.length===0) {
+          return res.status(404).json({error: "No test result associated to id or no sku item associated to rfid"});
+        } else {
+          return res.status(200).json(t); 
+        }
 
-        
-       
       } else {
         return res.status(422).json({error : "Unprocessable Entity"});
       }
     } catch(err) {
-      if(err===404){
-        return res.status(404).json({error: "No test result associated to id or no sku item associated to rfid"});
-        } else {return res.status(200).json(t); }
-
-     // return res.status(500).end();
+    return res.status(500).end();
     }
   
   });
@@ -72,7 +69,6 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   router.post('/api/skuitems/testResult', async (req,res)=>{
 
     
-    console.log("--")
     try{
   
       if(Object.keys(req.body).length === 0 ){
@@ -91,10 +87,12 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       const s = await dataInterface.get_SKUItem_by_RFID(newTR.rfid);
       
       //console.log("+++"+s)
+
       const td = await dataInterface.get_TD_by_id(newTR.idTestDescriptor);
+//console.log(td)
 
 
-      if(s === 404 || td === undefined){
+      if(s === 404 || td.length === 0){
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
       }
   
@@ -110,32 +108,31 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
   });
 
  
-  router.put('/api/skuitems/:rfid/testResult/:id',async (req,res)=>{ //422
+  router.put('/api/skuitems/:rfid/testResult/:id',async (req,res)=>{  
     try
       {
     
       const p = req.body;
       const rfid = req.params.rfid;
       const id = req.params.id;
-console.log(p)
         if(Object.keys(req.body).length === 0 || rfid === undefined || id === undefined 
         || p.newIdTestDescriptor === undefined || p.newDate === undefined || p.newResult === undefined ){
           return res.status(422).json({error : "Unprocessable Entity"});
         }
         
-  
+
         if(id >0 && typeof Number(id) === 'number' && 
                     rfid >0 && typeof rfid === 'string'){   
-          const t = await dataInterface.get_TD(p.newIdTestDescriptor);
+          const t = await dataInterface.get_TD_by_id(p.newIdTestDescriptor);
           const s = await dataInterface.get_SKUItem_by_RFID(rfid);
           const tr = await dataInterface.get_TR(rfid, id);
-console.log(s)
+
 console.log(tr)
-            if(s === 404 || t === undefined || tr === undefined){
+            if(s === 404 || t.length === 0 || tr.length === 0 ){
                   return res.status(404).json({error:
                      "No sku item associated to rfid or no test descriptor associated to newIdTestDescriptor or no test result associated to id"});
             }else{
-                const results = await Test_Result.modifyTR(id, rfid, p.newTestDescriptor, p.newDate, p.newResult);
+                const results = await Test_Result.modifyTR(id, rfid, p.newIdTestDescriptor, p.newDate, p.newResult);
                 return res.status(200).json(results);
             } 
         }
@@ -155,10 +152,13 @@ console.log(tr)
     try{     
         const rfid = req.params.rfid;
         const id = req.params.id;
-      if( id > 0 && typeof id === 'number' && 
+      if( id > 0 && typeof Number(id) === 'number' && 
       rfid >0 && typeof rfid === 'string') {
-  
-        if(Test_Result.delete_test_result(id, rfif)){
+
+        const t = await dataInterface.get_TR(rfid, id);
+  console.log(t)
+        if(t.length!== 0 && Test_Result.delete_test_result(id, rfid)){
+
           return res.status(204).end(); 
         } else {
           return res.status(422).json({error : "Not found"});

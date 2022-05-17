@@ -38,11 +38,11 @@ insert_into_test_Result_table(tr) {
     });
 }
 
-modifyTR(TRid, RFid, newTestDescriptor, newDate, newResult) {  //MODIFIED (there isn't RFid in the design)
+modifyTR(TRid, RFid, newIdTestDescriptor, newDate, newResult) {  //MODIFIED (there isn't RFid in the design)
 
     return new Promise ((resolve,reject)=>{
         const sql = 'UPDATE testresults SET TDid = ? , date = ? , result = ? WHERE TRid = ? AND RFid = ?'; 
-        this.db.db.run(sql,[newTestDescriptor,newDate,newResult, TRid,  RFid], (err)=>{ 
+        this.db.db.run(sql,[newIdTestDescriptor,newDate,newResult, TRid,  RFid], (err)=>{ 
             if(err)
             {
                 reject(err);

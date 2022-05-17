@@ -821,8 +821,7 @@ get_TD_by_id(id){
                    idSKU : t.idSKU
                   
            }));
-           console.log(testdescriptors);
-                  resolve(testdescriptors);
+           resolve(testdescriptors);
        });
           
    });
@@ -837,40 +836,47 @@ get_TR(RFid, TRid) {
 
     if(TRid===undefined){
               const sql = "SELECT * FROM testresults WHERE RFid = ?  ";
-              dbHelper.db.all(sql,(err,rows)=>{
-                  console.log(rows.length)
+              dbHelper.db.all(sql,[RFid],(err,rows)=>{
+                 console.log(rows.length)
                   if(err){
                       reject(err); 
                       return;
-                      }
+                      }else if(rows.length===0){
+                          resolve(404);
+                          return;
+                      }else{
+                
+                    
                    const  testresults = rows.map((tr)=>(
                   {
-                    TRid : tr.TRid,
-                    RFid : tr.RFid,
+                    id : tr.TRid,
+                    idTestDescriptor : tr.TDid,
                     Date : tr.date,
                     Result : tr.result 
                     
                   })); 
-                  resolve(testresults);
 
+                  resolve(testresults);
+                }
               });
           }else{
               const sql = "SELECT * FROM testresults where RFid = ? AND TRid = ?";
-              dbHelper.db.all(sql,[RFid],(err,rows)=>{
-                  if(err){
+              dbHelper.db.all(sql,[RFid, TRid],(err,rows)=>{
+              
+                  if(err ){
                       reject(err); 
                       return;
-                    }  
+                    }
                   const testresults = rows.map((tr)=>(
                   {
-                      TRid : tr.TRid,
-                      RFid : tr.RFid,
-                      Date : tr.date,
-                      Result : tr.result 
+                    id : tr.TRid,
+                    idTestDescriptor : tr.TDid,
+                    Date : tr.date,
+                    Result : tr.result 
+                    
                    }));
                   resolve(testresults);
-                // console.log("sssss2")
-                // console.log(rows)
+                
               });
               
           
