@@ -1,18 +1,18 @@
 'use strict';
 
-const dbHelper = require("./DBhelper");
-
-class SKUItem{
-  dayjs = require('dayjs');
-  //sqlite=require('sqlite3');
-    constructor(id, RFID, dateOfStock){
-        
-        this.dbHelper = dbHelper;
-        this.idSKU = id;
-        this.RFID= RFID;
-        this.DateOfStock = dateOfStock;
-        this.availability = 0;
-    }
+const SKUItem = require("./SKUItem");
+const dayjs=require('dayjs');
+class SKUItemDAO{
+  
+  sqlite=require('sqlite3');
+  constructor(dbname){
+    this.db = new this.sqlite.Database(dbname, (err) =>{
+      if(err){
+        console.log(err);
+        throw err;
+      }
+    });
+  }
     
     async create_SKUItem(SKU_item_data){
       console.log('creating SKUItem...');
@@ -23,7 +23,7 @@ class SKUItem{
                                   SKU_item_data.RFID,
                                   SKU_item_data.DateOfStock);
 
-          await this.dbHelper.store_SKUItem(newSKUItem);
+          await this.store_SKUItem(newSKUItem);
 
       }  catch(err) {
         throw(err);
@@ -109,7 +109,7 @@ class SKUItem{
           
           try {
             const sql_query = 'INSERT OR REPLACE INTO skuitem (SKUid, RFID, dateOfStock, availability) VALUES (?, ?, ?, ?)';
-            const params = [skuItem.idSKU, skuItem.RFID, dayjs(skuItem.DateOfStock).format('YYYY-MM-DD'), 0];
+            const params = [skuItem.idSKU, skuItem.RFID, dayjs(skuItem.DateOfStock).format('YYYY-MM-DD'), skuItem.availability];
             this.db.run(sql_query,params,function(err){
               if(err){
                 reject(err);
@@ -155,4 +155,4 @@ class SKUItem{
     
 }
 
-module.exports = SKUItem;
+module.exports = SKUItemDAO;
