@@ -1,8 +1,12 @@
 'use strict'
 const express = require('express');
 const IO = require('../InternalOrder');
-
 const dataInterface = require('../DataInterface');
+const db = require('../modules/InternalOrdersDao');
+const InternalOrderservice = require('../services/InternalOrderservice')
+const internalOrderservice = new InternalOrderservice(db);
+
+
 
 let router = express.Router();
 
@@ -16,7 +20,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
             const id = req.params.id 
             if(id > 0)
             {
-              const results = await dataInterface.get_internalOrders(id);
+              const results = await internalOrderservice.getAllInternalOrder(id);
   
               if (results.length ===0)
                 return res.status(404).json("no internal order associated to id)"); 
@@ -35,7 +39,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
     try
       {     
            
-              const results = await dataInterface.get_internalOrders();
+              const results = await internalOrderservice.getAllInternalOrder();
               return res.status(200).json(results);
             
       }
@@ -50,7 +54,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
   router.get('/api/internalOrdersIssued',async (req,res)=>{
     try
       {
-        const results = await dataInterface.get_issued_internalOrders();
+        const results = await internalOrderservice.getIssuedInternalOrders();
         return res.status(200).json(results);
       }
     catch(err)
@@ -63,7 +67,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
   router.get('/api/internalOrdersAccepted',async (req,res)=>{
     try
       {
-        const results = await dataInterface.get_acceped_internalOrders();
+        const results = await internalOrderservice.getAccepedInternalOrders();
         return res.status(200).json(results);   
       }
     catch(err)
@@ -88,7 +92,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
         return res.status(422).json({error : "Unprocessable Entity"});
       }
     
-    const results = await IO.insert_internal_order(nio);
+    const results = await  internalOrderservice.setInternalOrder(nio);
     return res.status(201).json(results);
     }
     catch(err)
@@ -110,7 +114,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
         return res.status(422).json({error : "INVALID IO INPUT"});
       }
     
-    const results = await IO.delete_internal_order(id);
+    const results = await internalOrderservice.deleteInternalOrder(id);
     if (results) {
     return res.status(200).json(results);
      } else {
@@ -137,7 +141,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
       }
       // need 
       const id = req.params.id
-      const results = await IO.modify_internal_order(id,io);
+      const results = await internalOrderservice.modifyInternalOrder(id,io);
       return res.status(200).json(results);
   
     }

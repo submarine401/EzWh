@@ -1,8 +1,12 @@
 'use strict'
 const express = require('express');
 const RO = require('../ReturnOrder');
-
 const dataInterface = require('../DataInterface');
+const db = require('../modules/ReturnOrdersDao');
+const ReturnOrderservice = require('../services/ReturnOrderservice')
+const returnOrderservice = new ReturnOrderservice(db);
+const RestockOrderservice = require('../services/RestockOrderservice')
+const restockOrderservice = new RestockOrderservice(db);
 
 let router = express.Router();
 
@@ -22,7 +26,7 @@ router.post('/api/returnOrder',async (req,res)=>{
         return res.status(422).json({error : "Unprocessable Entityy"});
       }
     
-      const results = await dataInterface.get_restock_order_by_id(nro.restockOrderId).then( (suc)=>{  if(suc) return RO.insert_return_order_table(nro); else return suc;},  (err)=>{ console.log(err); });
+      const results = await restockOrderservice.getRestockOrderById(nro.restockOrderId).then( (suc)=>{  if(suc) return returnOrderservice.setReturnOrder(nro); else return suc;},  (err)=>{ console.log(err); });
       if(results !==0)
       return res.status(201).json(results);
       else
@@ -47,7 +51,7 @@ router.post('/api/returnOrder',async (req,res)=>{
         return res.status(422).json({error : "INVALID IO INPUT"});
       }
     
-    const results = await RO.delete_return_order(id);
+    const results = await returnOrderservice.deleteReturnOrder(id);
     if (results) {
     return res.status(200).json(results);
     } else {
@@ -55,7 +59,6 @@ router.post('/api/returnOrder',async (req,res)=>{
      } }
     catch(err)
     {
-      console.log(err);
       return res.status(503).end();
     }
   });
@@ -66,7 +69,7 @@ router.post('/api/returnOrder',async (req,res)=>{
   
     try
       {     
-        const results = await dataInterface.get_all_RO();
+        const results = await returnOrderservice.getAllReturnOrders();
         return res.status(200).json(results);
       }
     catch(err)
@@ -83,7 +86,7 @@ router.post('/api/returnOrder',async (req,res)=>{
         const id = req.params.id
         if( id > 0 )
         {
-        const results = await dataInterface.get_all_RO_by_id(id);
+        const results = await returnOrderservice.getReturnOrderById(id);
         if(results !==0 )
         return res.status(200).json(results);
         else

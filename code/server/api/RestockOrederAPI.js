@@ -1,8 +1,11 @@
 'use strict'
 const express = require('express');
 const RSO = require('../Restockorder');
-
 const dataInterface = require('../DataInterface');
+const db = require('../modules/RestockOrdersDao');
+const RestockOrderservice = require('../services/RestockOrderservice')
+const restockOrderservice = new RestockOrderservice(db);
+
 
 let router = express.Router();
 
@@ -23,7 +26,7 @@ router.post('/api/restockOrder',async (req,res)=>{
         return res.status(422).json({error : "Unprocessable Entityy"});
       }
     
-      const results = await RSO.insert_restock_order_table(nrso);
+      const results = await restockOrderservice.setRestockOrder(nrso);
       return res.status(201).json(results);
   
     
@@ -46,12 +49,12 @@ router.post('/api/restockOrder',async (req,res)=>{
         }
         
         const id = req.params.id
-        const myresult = await dataInterface.get_restock_order_by_id(id)
+        const myresult = await restockOrderservice.getRestockOrderById(id)
         if(myresult ===0)
           return res.status(404).json({error : "no restock order associated to id"});
         else
         {
-          const results2  = await RSO.modify_restock_order_table(id,rso);
+          const results2  = await restockOrderservice.modifyRestockOrder(id,rso);
           return res.status(200).json(results2);
         }
         // return res.status(200).json(results2);
@@ -74,12 +77,12 @@ router.post('/api/restockOrder',async (req,res)=>{
         }
         
         const id = req.params.id
-        const myresult = await dataInterface.get_restock_order_by_id(id)
+        const myresult = await restockOrderservice.getRestockOrderById(id)
         if(myresult ===0)
           return res.status(404).json({error : "no restock order associated to id"});
         else
         {
-          const results2  = await RSO.add_transportnote_to_restock_order_table(id,rso);
+          const results2  = await restockOrderservice.addTransportNoteToRestockOrder(id,rso);
           return res.status(200).json(results2);
         }
         // return res.status(200).json(results2);
@@ -103,7 +106,7 @@ router.post('/api/restockOrder',async (req,res)=>{
         
         const id = req.params.id
         
-        const myresult = await dataInterface.get_restock_order_by_id(id);
+        const myresult = await restockOrderservice.getRestockOrderById(id);
         
         
         if(myresult ===0)
@@ -112,11 +115,11 @@ router.post('/api/restockOrder',async (req,res)=>{
         {
           const old_skuitem = myresult;
           
-          const results2  = await RSO.add_skuitems_to_restock_order_table(id,rso,old_skuitem);
+          const results2  = await restockOrderservice.addSkuItemToRestockOrder(id,rso,old_skuitem);
           
           return res.status(200).json(results2);
         }
-        // return res.status(200).json(results2);
+        
   
       }
     catch(err)
@@ -135,7 +138,7 @@ router.post('/api/restockOrder',async (req,res)=>{
         return res.status(422).json({error : "INVALID IO INPUT"});
       }
     
-    const results = await RSO.delete_restock_order(id);
+    const results = await restockOrderservice.deleteRestockOrderById(id)
     if (results) {
     return res.status(200).json(results);
     } else {
@@ -155,7 +158,7 @@ router.post('/api/restockOrder',async (req,res)=>{
   
     try
       {     
-        const results = await dataInterface.get_all_restock_order();
+        const results = await restockOrderservice.getAllRestockOrders();
         return res.status(200).json(results);
       }
     catch(err)
@@ -175,7 +178,7 @@ router.post('/api/restockOrder',async (req,res)=>{
         if( id <=0 ){
           return res.status(422).json({error : "INVALID IO INPUT"});
         }
-        const results = await dataInterface.get_restock_order_by_id(id);
+        const results = await restockOrderservice.getRestockOrderById(id);
         if(results === 0 )
           return res.status(404).json({error : "no restock order associated to id"});
         else
@@ -198,9 +201,9 @@ router.post('/api/restockOrder',async (req,res)=>{
         if( id <=0 ){
           return res.status(422).json({error : "INVALID IO INPUT"});
         }
-        const results = await dataInterface.get_issued_restock_order();
+        const results = await restockOrderservice.getIssuedRestockOrder();
         if(results === 0 )
-          return res.status(404).json({error : "no restock order associated to id"});
+          return res.status(404).json({error : "no issued order associated"});
         else
           return res.status(200).json(results);
       }
@@ -221,7 +224,7 @@ router.post('/api/restockOrder',async (req,res)=>{
         if( id <=0 ){
           return res.status(422).json({error : "INVALID IO INPUT"});
         }
-        const results = await dataInterface.get_restock_order_by_id(id);
+        const results = await restockOrderservice.getRestockOrderById(id)
         if(results === 0 )
           return res.status(404).json({error : "no restock order associated to id"});
         else
@@ -234,13 +237,14 @@ router.post('/api/restockOrder',async (req,res)=>{
           r.forEach((x)=>skuid_rfids.push(JSON.parse(x)))
           
           skuid_rfids.forEach(async(skurfid)=>{
-          let result_rejected_items = await dataInterface.get_rejected_skuitems_of_restockOrder(skurfid);
+          let result_rejected_items = await restockOrderservice.getRejectedSkuItemsOfRestockOrder(skurfid);
           //console.log(result_rejected_items)
           if(result_rejected_items !== 0)
             rejected.push(skurfid);
+            console.log(rejected)
           })
 
-          console.log(rejected)
+          
           return res.status(200).json(rejected);
         }
         

@@ -14,46 +14,46 @@ class ReturnOrder{
     }
 
 
-    insert_return_order_table(ro)
-    {
-        return new Promise ((resolve,reject)=>{
-            let prods = [];
-            ro.products.map((x)=>{
-                prods.push(JSON.stringify(x))
-            });
+    // insert_return_order_table(ro)
+    // {
+    //     return new Promise ((resolve,reject)=>{
+    //         let prods = [];
+    //         ro.products.map((x)=>{
+    //             prods.push(JSON.stringify(x))
+    //         });
 
           
-            const g = JSON.stringify(prods);
+    //         const g = JSON.stringify(prods);
             
-            const sql = 'INSERT INTO returnorder (date,products,restockorderid) VALUES(?,?,?)';
-            this.db.db.run(sql,[ro.returnDate,g,ro.restockOrderId], (err)=>{
-                if(err)
-                {
-                    reject(err);
-                    return;
-                }
-                else
-                {
-                    resolve("new returnorder is inserted");
-                }
+    //         const sql = 'INSERT INTO returnorder (date,products,restockorderid) VALUES(?,?,?)';
+    //         this.db.db.run(sql,[ro.returnDate,g,ro.restockOrderId], (err)=>{
+    //             if(err)
+    //             {
+    //                 reject(err);
+    //                 return;
+    //             }
+    //             else
+    //             {
+    //                 resolve("new returnorder is inserted");
+    //             }
 
-            });
-        });
-    }
+    //         });
+    //     });
+    // }
 
-    delete_return_order(roid){
-        return new Promise ((resolve,reject)=>{
-            const sql = 'DELETE FROM returnorder WHERE id = ?';
-            this.db.db.run(sql,[roid],(err)=>{
-                if(err){
-                    reject(err);
-                    return;
-                }
-                resolve();
-            });
-        });
+    // delete_return_order(roid){
+    //     return new Promise ((resolve,reject)=>{
+    //         const sql = 'DELETE FROM returnorder WHERE id = ?';
+    //         this.db.db.run(sql,[roid],(err)=>{
+    //             if(err){
+    //                 reject(err);
+    //                 return;
+    //             }
+    //             resolve();
+    //         });
+    //     });
     
-    }
+    // }
 
  
 

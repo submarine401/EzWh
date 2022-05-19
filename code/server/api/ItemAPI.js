@@ -1,6 +1,10 @@
 'use strict'
 const express = require('express');
 const I = require('../Item');
+const db = require('../modules/ItemDao');
+const Itemservice = require('../services/Itemservice')
+const itemservice = new Itemservice(db);
+
 
 const dataInterface = require('../DataInterface');
 
@@ -15,7 +19,7 @@ router.get('/api/items',async (req,res)=>{
     try
       {     
           
-        const results = await dataInterface.get_all_items();
+        const results = await itemservice.getAllItems();
         return res.status(200).json(results);
       }
     catch(err)
@@ -37,7 +41,7 @@ router.get('/api/items',async (req,res)=>{
       if( ni === undefined || ni.description === undefined || ni.price === undefined || ni.SKUId === undefined || ni.supplierId === undefined ){
         return res.status(422).json({error : "Unprocessable Entityy"});
       }
-       const results = await dataInterface.get_SKU(ni.SKUId).then((success)=>{if(success !== undefined){return I.insert_into_item_table(ni)}else return 0 },(failure)=>{return failure;})
+       const results = await dataInterface.get_SKU(ni.SKUId).then((success)=>{if(success !== undefined){return itemservice.setItem(ni)}else return 0 },(failure)=>{return failure;})
       if(results !== 0)
       return res.status(201).json(results);
       else
@@ -63,7 +67,7 @@ router.get('/api/items',async (req,res)=>{
         if(id >0)
         {
   
-          const results = await dataInterface.get_item_by_id(id).then((suc)=> {if(suc!==0) return I.modify_item(id,i); else return suc }, (error)=> {return 0;});
+          const results = await dataInterface.get_item_by_id(id).then((suc)=> {if(suc!==0) return itemservice.modifyItem(id,i); else return suc }, (error)=> {return 0;});
           
           if(results !== 0 )
           return res.status(200).json(results);
@@ -92,7 +96,7 @@ router.get('/api/items',async (req,res)=>{
         return res.status(422).json({error : "INVALID IO INPUT"});
       }
     
-    const results = await I.delete_item(id);
+    const results = await itemservice.deleteItem(id);
     return res.status(204).json(results);
     }
     catch(err)
@@ -109,7 +113,7 @@ router.get('/api/items',async (req,res)=>{
         const id = req.params.id
         if( id > 0 )
         {
-        const results = await dataInterface.get_item_by_id(id);
+        const results = await itemservice.getItembyId(id);
         if(results !==0)
         return res.status(200).json(results);
         else
@@ -126,4 +130,5 @@ router.get('/api/items',async (req,res)=>{
       return res.status(500).end();
     }
   });
+
 module.exports = router;
