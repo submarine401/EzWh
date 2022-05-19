@@ -2,14 +2,15 @@
 
 const express = require ('express');
 const dataInterface = require ('../DataInterface');
-const U = require('../User');
+const UserDAO = require('../UserDAO');
+const U = new UserDAO("EZWHDB.db");
 
 let router = express.Router();
 
 router.get('/api/suppliers', async (req,res) =>{
   try {
     
-    const results= await dataInterface.get_all_suppliers();
+    const results= await U.get_all_suppliers();
     return res.status(200).json(results);
     
   } catch (err) {
@@ -20,7 +21,7 @@ router.get('/api/suppliers', async (req,res) =>{
 
 router.get('/api/users', async (req,res) => {
   try{
-    const result = await dataInterface.getUsers_except_manager();
+    const result = await U.getUsers_except_manager();
     return res.status(200).json(result);
   }
   catch(err){
@@ -38,7 +39,7 @@ router.post('/api/newUser', async (req,res) => {
       return res.status(422).end("Unprocessable entity");
     }
     
-    const check_username = await dataInterface.getUsers();
+    const check_username = await U.getUsers();
     const res_check_username = check_username.filter(function(users){
       return users.username == new_u.username;
     });
@@ -78,7 +79,7 @@ router.put('/api/users/:username', async (req,res) =>{
       return res.status(422).end();
     }
     
-    const check_type = await dataInterface.getUsers();
+    const check_type = await U.getUsers();
     const res_check_type = check_type.filter(function(users){
       return (users.type == body.oldType && users.username == username);
     });

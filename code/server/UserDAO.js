@@ -2,7 +2,7 @@
 
 class UserDAO {
   dayjs = require('dayjs');
-  const sqlite= require ('sqlite3')
+  sqlite = require ('sqlite3')
   constructor(dbname){
     this.db = new this.sqlite.Database(dbname, (err) =>{
       if(err){
@@ -59,7 +59,7 @@ class UserDAO {
   getUsers() {
     return new Promise((resolve,reject) => {
       const sql_query = 'SELECT * FROM users';
-      dbHelper.db.all(sql_query,[], function(err, rows){
+      this.db.all(sql_query,[], function(err, rows){
         
         if(err){
           reject(err);
@@ -83,7 +83,7 @@ class UserDAO {
   get_all_suppliers(){
     return new Promise((resolve,reject) => {
       const sql_query = 'SELECT * FROM users WHERE type=?';
-      dbHelper.db.all(sql_query,["supplier"],function(err,rows){
+      this.db.all(sql_query,["supplier"],function(err,rows){
         if(err){
           reject(err);
           return;
@@ -105,7 +105,7 @@ class UserDAO {
       getUsers_except_manager(){
         return new Promise((resolve,reject) => {      
           const sql_query = 'SELECT * FROM users WHERE NOT type =?';
-          dbHelper.db.all(sql_query,["manager"],function(err, rows){
+          this.db.all(sql_query,["manager"],function(err, rows){
             if(err){
               reject(err);
               return;
