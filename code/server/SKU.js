@@ -1,7 +1,7 @@
 'use strict';
 
 const dataInterface = require("./DataInterface");
-const skuDao = require("./modules/skuDao");
+const skuDao = require("./modules/SkuDao");
 
 class SKU{
 
