@@ -1,4 +1,4 @@
-'use strict'
+/*'use strict'
 
 const db = require('./DBhelper');
 
@@ -78,3 +78,4 @@ class Test_Descriptor{
 
 const TD = new Test_Descriptor(db)
 module.exports = TD;
+/*
