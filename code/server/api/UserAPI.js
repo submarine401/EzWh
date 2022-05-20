@@ -2,15 +2,16 @@
 
 const express = require ('express');
 const dataInterface = require ('../DataInterface');
-const UserDAO = require('../UserDAO');
-const U = new UserDAO("EZWHDB.db");
+const db = require('../modules/UserDAO');
+const UserService = require("../services/UserService");
+const userService = new UserService(db);
 
 let router = express.Router();
 
 router.get('/api/suppliers', async (req,res) =>{
   try {
     
-    const results= await U.get_all_suppliers();
+    const results= await userService.getSuppliers();
     return res.status(200).json(results);
     
   } catch (err) {
@@ -21,7 +22,7 @@ router.get('/api/suppliers', async (req,res) =>{
 
 router.get('/api/users', async (req,res) => {
   try{
-    const result = await U.getUsers_except_manager();
+    const result = await userService.get_users_no_manager();
     return res.status(200).json(result);
   }
   catch(err){
@@ -39,7 +40,7 @@ router.post('/api/newUser', async (req,res) => {
       return res.status(422).end("Unprocessable entity");
     }
     
-    const check_username = await U.getUsers();
+    const check_username = await userService.get_users_no_manager();
     const res_check_username = check_username.filter(function(users){
       return users.username == new_u.username;
     });
@@ -47,7 +48,7 @@ router.post('/api/newUser', async (req,res) => {
     if(res_check_username.length !== 0){
       return res.status(409).end("User already existent!");
     }
-    const result = await U.newUser(new_u);
+    const result = await userService.setUser(new_u);
     if(result === 422){
       return res.status(422).end('Inserted type does not match any valid type or password is too short')
     }
@@ -79,7 +80,7 @@ router.put('/api/users/:username', async (req,res) =>{
       return res.status(422).end();
     }
     
-    const check_type = await U.getUsers();
+    const check_type = await userService.getUsers();
     const res_check_type = check_type.filter(function(users){
       return (users.type == body.oldType && users.username == username);
     });
@@ -87,7 +88,7 @@ router.put('/api/users/:username', async (req,res) =>{
       return res.status(404).end("Wrong username or OldType");
     }
     
-    const result = await U.modify_user_rights(username,body.newType);
+    const result = await userService.modify_user(username,body.newType);
     if(result === 200){
       return res.status(200).end();
     }
@@ -106,7 +107,7 @@ router.delete('/api/users/:username/:type', async (req,res) => {
   const type = req.params.type;
   const username = req.params.username
   try {
-    const result = await U.deleteUser(username,type);
+    const result = await userService.delete_user(username,type);
     if(result === 422){
       return res.status(422).end("Failed to validate username or type!");
     }
