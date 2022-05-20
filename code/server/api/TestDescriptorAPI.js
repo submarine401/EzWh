@@ -2,15 +2,8 @@
 
 const express = require('express');
 const dataInterface = require('../DataInterface');
-<<<<<<< HEAD
 const db = require('../modules/Test_DescriptorDAO');
 const Test_DescriptorService = require('../services/Test_DescriptorService')
-=======
-const dbHelper = require('../DBhelper');
-const db = require ('../modules/Test_DescriptorDAO')
-const SKU = require('../SKU');
-const Test_DescriptorService = require('../services/Test_DescriptorService');
->>>>>>> 732c8a6 (updated test descriptors and test result apis)
 const TestDescriptorService = new Test_DescriptorService(db);
 
 

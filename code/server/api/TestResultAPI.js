@@ -3,17 +3,9 @@
 //const e = require('express');
 const express = require('express');
 const dataInterface = require('../DataInterface');
-<<<<<<< HEAD
 const db = require('../modules/Test_ResultDAO');
 const Test_ResultService = require('../services/Test_ResultService')
 const TestResultService = new Test_ResultService(db);
-
-=======
-//const Test_Result = require('../Test_Result');
-const db = require ('../modules/Test_ResultDAO')
-const Test_ResultService = require ('../services/Test_ResultService')
-const testResultsService = new Test_ResultService(db);
->>>>>>> 732c8a6 (updated test descriptors and test result apis)
 let router = express.Router();
 
 
