@@ -28,5 +28,8 @@ getTestResult = async (RFid, TRid) => {
 
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 732c8a6 (updated test descriptors and test result apis)
 module.exports = Test_ResultService;
