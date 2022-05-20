@@ -221,8 +221,6 @@ class DataInterface{
         
 
     }
-<<<<<<< Updated upstream
-=======
 
 
 /*********************************SKUITEM METHODS************************/
@@ -231,7 +229,6 @@ class DataInterface{
 
     
 
->>>>>>> Stashed changes
 //-------------------------------------------------------------------------------
     get_internalOrders(id){
         return new Promise((resolve,reject)=>{
@@ -603,11 +600,8 @@ get_issued_restock_order()
     });
 }
 
-<<<<<<< Updated upstream
-=======
 /*************************************USER METHODS*************************/
     
->>>>>>> Stashed changes
 /********************************TD METHODS***************************/
 
 

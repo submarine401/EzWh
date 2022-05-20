@@ -208,7 +208,6 @@ class DBhelper {
     //         return new Promise((resolve, reject) => {
                 
 
-<<<<<<< Updated upstream
     //             try {
     //                 const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID)  \
     //                             VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
@@ -274,7 +273,6 @@ class DBhelper {
     //         });
     //     });
     // }
-=======
     /*
     ***************************************************SKUItem table*****************************************************
     */
@@ -293,7 +291,6 @@ class DBhelper {
     }
     
     
->>>>>>> Stashed changes
 
     /*
     ***************************************************Position methods*****************************************************

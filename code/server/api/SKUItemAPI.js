@@ -1,11 +1,7 @@
 'use strict'
 
 const express = require('express');
-<<<<<<< Updated upstream
 const db = require('../modules/SKUItemDAO');
-=======
-const SKUItem = require('../SKUItemDAO');
->>>>>>> Stashed changes
 const dataInterface = require('../DataInterface');
 const SKUItemService = require ('../services/SKUItemService')
 const SKU_item_service = new SKUItemService(db);
