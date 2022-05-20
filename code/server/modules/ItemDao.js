@@ -60,3 +60,17 @@ exports.delete_item = (iid)=>{
 
 }
 
+exports.deleteItemData = () => {
+    return new Promise((resolve, reject) => {
+      const sql = 'DELETE FROM item';
+      db.run(sql, [], function (err) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(true);
+      })
+    })
+  };
+  
+

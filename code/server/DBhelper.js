@@ -8,70 +8,70 @@ class DBhelper {
 
         this.db = new this.sqlite.Database(dbname, (err) =>{ 
             if (err) throw err;
-            else console.log("Connected to DB");
+           // else console.log("Connected to DB");
         });
 
         // create IO table 
         this.create_internal_orders_table().then(function(response) {
-            console.log(response);
+            //console.log(response);
         }, function(error) {
-            console.error( error);
+            //console.error( error);
         });
         // create I table 
         this.create_item_table().then(function(response) {
-            console.log(response);
+           // console.log(response);
         }, function(error) {
-            console.error(error);
+            //console.error(error);
         });
         //create RO table
         this.create_return_order_table().then(function(response) {
-            console.log(response);
+            //console.log(response);
         }, function(error) {
-            console.error(error);
+            //console.error(error);
         });
         //create user 
         this.create_user_table().then(
             function(response){
-            console.log(response);
+            //console.log(response);
             },
             function(error){
-            console.log(error);
+            //console.log(error);
         });
         //create restock order table 
         this.create_restock_order_table().then(function(response) {
-            console.log(response);
+            //console.log(response);
         }, function(error) {
-            console.error(error);
+            //console.error(error);
         });
         //create position table
         this.create_position_table().then(function(response) {
-            console.log(response);
+            //console.log(response);
         }, function(error) {
-            console.error(error);
+            //console.error(error);
         });
         //create SKU table 
         this.create_sku_table().then(function(response) {
-            console.log(response);
+            //console.log(response);
         }, function(error) {
-            console.error(error);
+            //console.error(error);
         });
         // create test descriptor table 
         this.create_test_descriptor_table().then(function(response) {
-            console.log(response);
+            //console.log(response);
         }, function(error) {
-            console.error( error);
+            //console.error( error);
         });
           // create test result table 
           this.create_test_result_table().then(function(response) {
-            console.log(response);
+            //console.log(response);
         }, function(error) {
-            console.error( error);
+            //console.error( error);
         });
         //create SKUItem table
         this.create_SKUItem_table().then(function(response){
-          console.log(response);
+         // console.log(response);
         }, function(error){
-          console.error(error);
+         // console.error(error);
         });
     
 
