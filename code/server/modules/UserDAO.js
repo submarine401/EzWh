@@ -42,7 +42,9 @@
         reject(err);
         return;
         }
-        resolve(201);
+        else{
+          resolve(201);
+        }
       });
       
     });
