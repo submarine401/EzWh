@@ -88,7 +88,12 @@ router.put('/api/users/:username', async (req,res) =>{
     }
     
     const result = await U.modify_user_rights(username,body.newType);
-    return res.status(200).end();
+    if(result === 200){
+      return res.status(200).end();
+    }
+    else{
+      return res.status(503).end();
+    }
       
   } catch (err) {
     console.log(err);
