@@ -112,6 +112,7 @@ router.put('/api/users/:username', async (req,res) =>{
 router.delete('/api/users/:username/:type', async (req,res) => {
   const type = req.params.type;
   const username = req.params.username
+  console.log(username);
   try {
     const result = await userService.delete_user(username,type);
     if(result === 422){

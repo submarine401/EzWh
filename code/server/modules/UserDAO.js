@@ -5,7 +5,6 @@
   if (err) throw err;
   });
   
-  
   exports.newUser = function(u){
     return new Promise((resolve,reject) => {
       if(u.password.length < 8){
@@ -50,32 +49,7 @@
     });
   }
   
-  //method returning the list of all users except managers
-  /*getUsers() {
-    return new Promise((resolve,reject) => {
-      const sql_query = 'SELECT * FROM users';
-      this.db.all(sql_query,[], function(err, rows){
-        
-        if(err){
-          reject(err);
-          return;
-        }
-        //create an array of 'User' objects
-        const users_not_manager = rows.map(u => ({
-          
-          id : u.id,
-          username : u.username,
-          name : u.name,
-          surname : u.surname,
-          type : u.type
-          
-        }));
-        resolve(users_not_manager);    
-      });
-    });
-  }*/
-  
-  exports.get_all_suppliers = function(){
+  exports.get_all_suppliers = async function(){
     return new Promise((resolve,reject) => {
       const sql_query = 'SELECT * FROM users WHERE type=?';
       db.all(sql_query,["supplier"],function(err,rows){
@@ -86,7 +60,7 @@
         const suppliers_array = rows.map(supplier => ({  //here an array of objects is built
           
           id:supplier.id,
-          username:supplier.username,   //must be an email
+          email:supplier.username,   //must be an email
           name:supplier.name,
           surname:supplier.surname
             
@@ -97,7 +71,7 @@
     });
   }
       
-      exports.getUsers_except_manager= function(){
+      exports.getUsers_except_manager= async function(){
         return new Promise((resolve,reject) => {      
           const sql_query = 'SELECT * FROM users WHERE NOT type =?';
           db.all(sql_query,["manager"],function(err, rows){
@@ -124,26 +98,30 @@
   
   /*API function which modifies access rights of a user, 
   given its username as parameter*/
-  exports.modify_user_rights = function(username,u_new_type){
+  exports.modify_user_rights = async function(username,u_new_type){
     return new Promise((resolve,reject) => {
       const sql_query = 'UPDATE users set type = ? WHERE username = ?'
       
       //check if username exists
       db.all(sql_query,[u_new_type,username], function(err,rows){
       
-      if(err){
-        reject(err);
-        return;
-      }
+        if(err){
+          reject(err);
+          return;
+        }
+        if(rows.length===0){
+          resolve(422);
+        }
+        else{
+          resolve(200);
+        }
       });
-      
-      resolve(200);
       
     });
   }
   
   //method to delete a user given its username
-   exports.deleteUser = function(username,type){
+   exports.deleteUser = async function(username,type){
     return new Promise((resolve,reject) =>{
       const users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
       if(users_array.includes(type) === false){
@@ -151,6 +129,7 @@
         return;
       }
       const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
+      console.log(username);
       db.all(sql_query1,[username, type], function(err,rows) {
         if(err){
           reject(err);
@@ -167,7 +146,20 @@
           reject(err);
           return;
         }
-        resolve(`user with username: ${username} has been correcly deleted.\n`);
+        resolve(204);
       });
     });  
   }
+  
+  exports.deleteUserData = () => {
+      return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM users';
+        db.run(sql, [], function (err) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(true);
+        })
+      })
+    };
