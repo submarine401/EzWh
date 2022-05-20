@@ -21,10 +21,10 @@ var agent = chai.request.agent(app);
         }
 
 
-            // deleteItem(204,1);
-            // deleteItem(404);
-          //  newItem(201,item)
-          //  newItem(422)
+            deleteItem(204,1);
+            deleteItem(404);
+            newItem(201,item)
+            newItem(422)
             getItemById(200,3,item);
             getItemById(404,1,item);
         
