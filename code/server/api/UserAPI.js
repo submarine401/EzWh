@@ -2,8 +2,9 @@
 
 const express = require ('express');
 const dataInterface = require ('../DataInterface');
-const UserDAO = require('../modules/UserDAO');
-const U = new UserDAO("EZWHDB.db");
+const dao = require('../modules/UserDAO');
+const UserService = require('UserService');
+const usersService = new UserService(dao);
 
 let router = express.Router();
 

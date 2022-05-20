@@ -208,6 +208,7 @@ class DBhelper {
     //         return new Promise((resolve, reject) => {
                 
 
+<<<<<<< Updated upstream
     //             try {
     //                 const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID)  \
     //                             VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
@@ -273,6 +274,26 @@ class DBhelper {
     //         });
     //     });
     // }
+=======
+    /*
+    ***************************************************SKUItem table*****************************************************
+    */
+    
+    create_SKUItem_table(){
+      return new Promise((resolve,reject) =>{
+        const sql_query = ' CREATE TABLE IF NOT EXISTS skuitem (SKUItemID integer PRIMARY KEY, SKUid integer, RFID text, dateOfStock DATE, availability integer)';
+        this.db.run(sql_query, [], function(err){
+          if(err){
+            reject(err);
+            return;
+          }
+          resolve("SKUItem table -> OK")
+        });
+      });
+    }
+    
+    
+>>>>>>> Stashed changes
 
     /*
     ***************************************************Position methods*****************************************************
@@ -497,8 +518,6 @@ create_restock_order_table (){
     });
     });
 }
-//************************************************** SKUitem Table ****************************************************
-
 }
 
 const dbHelper = new DBhelper("EZWHDB.db");
