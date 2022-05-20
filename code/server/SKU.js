@@ -1,7 +1,7 @@
 'use strict';
 
 const dataInterface = require("./DataInterface");
-const dbHelper = require("./DBhelper");
+const skuDao = require("./modules/skuDao");
 
 class SKU{
 
@@ -44,7 +44,7 @@ class SKU{
             // console.log(this.volume*this.availableQuantity + '\t' + newFullVol + '\t' + volDiff);
 
             this.position.decrease_free_space(weightDiff, volDiff);
-            dbHelper.update_position(this.position.id, this.position);
+            positionDao.update_position(this.position.id, this.position);
             
         }
 
@@ -56,7 +56,7 @@ class SKU{
         this.price = newValues.newPrice;
         this.availableQuantity = newValues.newAvailableQuantity;
 
-        dbHelper.update_SKU(this.id, this);
+        skuDao.update_SKU(this.id, this);
 
     }
 
@@ -77,16 +77,16 @@ class SKU{
         if(this.position) {
             this.position.increase_free_space(fullWeight, fullVol);
             console.log(this.position);
-            await dbHelper.update_position(this.position.id, this.position);
+            await positionDao.update_position(this.position.id, this.position);
         }
 
         newPos.decrease_free_space(fullWeight, fullVol);
         console.log(newPos);
-        await dbHelper.update_position(newPos.id, newPos);
+        await positionDao.update_position(newPos.id, newPos);
 
         this.position = newPos;
 
-        await dbHelper.update_SKU(this.id, this);
+        await skuDao.update_SKU(this.id, this);
     }
 }
 

@@ -76,6 +76,23 @@ class DBhelper {
     
 
     }
+
+    /*
+    *******************************************CREATE sku item TABLE********************************************
+    */
+
+    create_SKUItem_table(){
+        return new Promise((resolve,reject) =>{
+          const sql_query = ' CREATE TABLE IF NOT EXISTS skuitem (SKUItemID integer PRIMARY KEY, SKUid integer, RFID text, dateOfStock DATE, availability integer)';
+          this.db.run(sql_query, [], function(err){
+            if(err){
+              reject(err);
+              return;
+            }
+            resolve("SKUItem table -> OK")
+          });
+        });
+      }
     /*
     *******************************************CREATE INTERNAL ORDERS TABLE********************************************
     */
@@ -126,44 +143,8 @@ class DBhelper {
     ***************************************************SKU methods*****************************************************
     */
 
-    load_SKUs() {
-        console.log('loading skus');
 
-        return new Promise((resolve, reject) => {
-
-            const sql_query = 'SELECT * FROM sku;';
-
-            this.db.all(sql_query, (err, rows)=>{
-
-                if(err){
-                    reject(err); 
-                    return;
-                }
-                resolve(rows);
-            });
-        });
-    }
-
-    load_SKU(id) {
-        console.log('loading skus');
-
-        return new Promise((resolve, reject) => {
-
-            const sql_query = 'SELECT * FROM sku \
-                                WHERE id = ?;';
-
-            this.db.all(sql_query, [id], (err, rows)=>{
-
-                if(err){
-                    reject(err); 
-                    return;
-                }
-                resolve(rows);
-            });
-        });
-    }
-
-
+    
     create_sku_table() {
         return new Promise((resolve, reject) => {
 
@@ -179,148 +160,119 @@ class DBhelper {
         });
     }
 
-    store_SKU(sku) {
 
-        try {
-            console.log('DB store');
+    // load_SKUs() {
+    //     console.log('loading skus');
 
-            return new Promise((resolve, reject) => {
+    //     return new Promise((resolve, reject) => {
+
+    //         const sql_query = 'SELECT * FROM sku;';
+
+    //         this.db.all(sql_query, (err, rows)=>{
+
+    //             if(err){
+    //                 reject(err); 
+    //                 return;
+    //             }
+    //             resolve(rows);
+    //         });
+    //     });
+    // }
+
+    // load_SKU(id) {
+    //     console.log('loading skus');
+
+    //     return new Promise((resolve, reject) => {
+
+    //         const sql_query = 'SELECT * FROM sku \
+    //                             WHERE id = ?;';
+
+    //         this.db.all(sql_query, [id], (err, rows)=>{
+
+    //             if(err){
+    //                 reject(err); 
+    //                 return;
+    //             }
+    //             resolve(rows);
+    //         });
+    //     });
+    // }
+
+
+
+    // store_SKU(sku) {
+
+    //     try {
+    //         console.log('DB store');
+
+    //         return new Promise((resolve, reject) => {
                 
 
-                try {
-                    const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID)  \
-                                VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
-                    const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
-                                    sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/];
-                    this.db.run(sql, params, (err)=>{
-                        if(err){
-                            reject(err);
-                            return}
-                    resolve("Stored SKU");
-                    });
+    //             try {
+    //                 const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID)  \
+    //                             VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
+    //                 const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
+    //                                 sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/];
+    //                 this.db.run(sql, params, (err)=>{
+    //                     if(err){
+    //                         reject(err);
+    //                         return}
+    //                 resolve("Stored SKU");
+    //                 });
 
-                } catch (err) {
-                    throw (err);
-                }
-            })
-        } catch (err) {
-            throw (err);
-        }
-    }
+    //             } catch (err) {
+    //                 throw (err);
+    //             }
+    //         })
+    //     } catch (err) {
+    //         throw (err);
+    //     }
+    // }
 
-    update_SKU(id, sku) {
+    // update_SKU(id, sku) {
 
-        return new Promise((resolve, reject) => {
+    //     return new Promise((resolve, reject) => {
 
-            const sql_query = 'UPDATE sku \
-                               SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? \
-                               WHERE id = ?'; 
+    //         const sql_query = 'UPDATE sku \
+    //                            SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? \
+    //                            WHERE id = ?'; 
 
-            const params = [
-                sku.description, sku.weight, sku.volume, sku.note, sku.price, 
-                sku.availableQuantity, sku.position?sku.position.id:undefined,
-                id
-            ] 
-            this.db.run(sql_query, params, (err)=>{
+    //         const params = [
+    //             sku.description, sku.weight, sku.volume, sku.note, sku.price, 
+    //             sku.availableQuantity, sku.position?sku.position.id:undefined,
+    //             id
+    //         ] 
+    //         this.db.run(sql_query, params, (err)=>{
 
-                if(err){
-                    reject(err); 
-                    return;
-                }
+    //             if(err){
+    //                 reject(err); 
+    //                 return;
+    //             }
 
-                resolve();
-            });
-        });
-    }
+    //             resolve();
+    //         });
+    //     });
+    // }
 
-    delete_SKU(id) {
-        console.log('deleting ' + id + ' from db')
+    // delete_SKU(id) {
+    //     console.log('deleting ' + id + ' from db')
 
-        return new Promise((resolve, reject) => {
+    //     return new Promise((resolve, reject) => {
 
-            const sql_query = 'DELETE FROM sku \
-                               WHERE id = ?';
+    //         const sql_query = 'DELETE FROM sku \
+    //                            WHERE id = ?';
 
-            this.db.run(sql_query, [id], (err)=>{
+    //         this.db.run(sql_query, [id], (err)=>{
 
-                if(err){
-                    reject(err); 
-                    return;
-                }
+    //             if(err){
+    //                 reject(err); 
+    //                 return;
+    //             }
 
-                resolve();
-            });
-        });
-    }
-
-    /*
-    ***************************************************SKUItem methods*****************************************************
-    */
-    
-    create_SKUItem_table(){
-      return new Promise((resolve,reject) =>{
-        const sql_query = ' CREATE TABLE IF NOT EXISTS skuitem (SKUItemID integer PRIMARY KEY, SKUid integer, RFID text, dateOfStock DATE, availability integer)';
-        this.db.run(sql_query, [], function(err){
-          if(err){
-            reject(err);
-            return;
-          }
-          resolve("SKUItem table -> OK")
-        });
-      });
-    }
-    
-    store_SKUItem(skuItem){
-      try {
-        console.log("Storing SKUItem...");
-        
-        return new Promise ((resolve,reject) => {
-          
-          try {
-            const sql_query = 'INSERT OR REPLACE INTO skuitem (SKUid, RFID, dateOfStock, availability) VALUES (?, ?, ?, ?)';
-            const params = [skuItem.idSKU, skuItem.RFID, dayjs(skuItem.DateOfStock).format('YYYY-MM-DD'), 0];
-            this.db.run(sql_query,params,function(err){
-              if(err){
-                reject(err);
-                return;
-              }
-              resolve('Stored SKUItem');
-            });
-          } catch (e) {
-            throw(e);
-          }
-        });
-        
-      } catch (err) {
-        throw(err);
-      }
-    }
-    
-    update_SKUItem(RFID, newValues){
-      //newValues stands for the object representing the request body
-      return new Promise((resolve,reject) => {
-        if(newValues.newAvailable > 1 || newValues.newAvailable < 0){
-          resolve(422);
-          return;
-        }
-        const sql_query = 'UPDATE skuitem SET RFID = ?, dateOfStock = ?, availability = ? WHERE RFID = ?';
-        const params = [
-          newValues.newRFID,
-          dayjs(newValues.newDateOfStock).format('YYYY-MM-DD'),
-          newValues.newAvailable,
-          RFID
-        ];
-        this.db.run(sql_query,params,function(err){
-          
-          if(err){
-            reject(err);
-            return;
-          }
-          resolve();
-          return;
-        });
-      });
-    }
+    //             resolve();
+    //         });
+    //     });
+    // }
 
     /*
     ***************************************************Position methods*****************************************************
