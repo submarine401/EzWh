@@ -10,7 +10,7 @@ describe('get Items', ()=>{
             id : "1",
             description : "a new item",
             price : "11.99",
-            skuid : "1",
+            skuid : "9",
             supplierid : "2"
         });
     });
@@ -21,7 +21,7 @@ describe('get Items', ()=>{
                 id : 1,
                 description : "a new item",
                 price : 10.99,
-                skuid : 1,
+                skuid : 9,
                 supplierid : 2
         });
     });
@@ -42,13 +42,14 @@ describe("setitem", () => {
 
         let res = await itemService.setItem (item);
         //first call, first parameter passed
-        expect(dao.insert_into_item_table.mock.calls[0][0]).toBe(item["description"]);
+        
+        expect(dao.insert_into_item_table.mock.calls[0][0]['description']).toBe(item["description"]);
         //first call, second parameter passed
-        expect(dao.insert_into_item_table.mock.calls[0][1]).toBe(item["price"]);
+        expect(dao.insert_into_item_table.mock.calls[0][0]['price']).toBe(item["price"]);
         //first call, third parameter passed
-        expect(dao.insert_into_item_table.mock.calls[0][2]).toBe(item["SKUId"]);
+        expect(dao.insert_into_item_table.mock.calls[0][0]['SKUId']).toBe(item["SKUId"]);
         //first call, fourth parameter passed
-        expect(dao.insert_into_item_table.mock.calls[0][3]).toBe(item["supplierId"]);
+        expect(dao.insert_into_item_table.mock.calls[0][0]['supplierId']).toBe(item["supplierId"]);
     });
 
 });

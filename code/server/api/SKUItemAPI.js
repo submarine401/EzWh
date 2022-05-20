@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express');
-const SKUItemDAO = require('../SKUItemDAO');
+const SKUItemDAO = require('../modules/SKUItemDAO');
 const dataInterface = require('../DataInterface');
 const SKU_DAO = new SKUItemDAO("EZWHDB.db");
 
