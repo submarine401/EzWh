@@ -2,7 +2,7 @@
 
 const express = require ('express');
 const dataInterface = require ('../DataInterface');
-const db = require('../UserDAO');
+const db = require('../modules/UserDAO');
 const UserService = require("../services/UserService");
 const userService = new UserService(db);
 

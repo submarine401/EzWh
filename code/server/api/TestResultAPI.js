@@ -97,11 +97,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
       }
   
-<<<<<<< HEAD
       await TestDResultService.setTestResult(newTR); 
-=======
-      await testResultsService.setTestResult(newTR); 
->>>>>>> 732c8a6 (updated test descriptors and test result apis)
       return res.status(201).json({success: 'Created'});
     
     }
@@ -137,11 +133,7 @@ console.log(tr)
                   return res.status(404).json({error:
                      "No sku item associated to rfid or no test descriptor associated to newIdTestDescriptor or no test result associated to id"});
             }else{
-<<<<<<< HEAD
                 const results = await TestResultService.modifyTestResult(id, rfid, p.newIdTestDescriptor, p.newDate, p.newResult);
-=======
-                const results = await testResultsService.modifyTestResult(id, rfid, p.newIdTestDescriptor, p.newDate, p.newResult);
->>>>>>> 732c8a6 (updated test descriptors and test result apis)
                 return res.status(200).json(results);
             } 
         }
@@ -166,11 +158,7 @@ console.log(tr)
 
         const t = await TestResultService.getTestResult(rfid, id);
   console.log(t)
-<<<<<<< HEAD
         if(t.length!== 0 && TestResultService.deleteTestResult(id, rfid)){
-=======
-        if(t.length!== 0 && testResultsService.deleteTestResult(id, rfid)){
->>>>>>> 732c8a6 (updated test descriptors and test result apis)
 
           return res.status(204).end(); 
         } else {
