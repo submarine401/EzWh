@@ -1,6 +1,6 @@
 'use strict';
 
-const SKUItem = require("../SKUItem");
+//const SKUItem = require("../SKUItem");
 const dayjs=require('dayjs');
   
 const sqlite=require('sqlite3');
