@@ -1,4 +1,4 @@
-class SKUItem_service{
+class SKUItemService{
   dao;
   
   constructor(dao){
@@ -16,9 +16,10 @@ class SKUItem_service{
     return list;
   }
   
-  available_SKUItem = async function(skuID){}
+  available_SKUItem = async function(skuID){
   const av_list = await this.dao.get_all_available_SKUItem(skuID);
   return av_list;
+  }
   
   delete_SKUItem = async function (rfid){
     const result = await this.dao.deleteSKUItem(rfid);
@@ -32,4 +33,4 @@ class SKUItem_service{
   
 }
 
-module.exports = SKUItem_service;
+module.exports = SKUItemService;
