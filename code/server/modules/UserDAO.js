@@ -142,7 +142,7 @@ class UserDAO {
       }
       });
       
-      resolve("Operation completed successfully\n");
+      resolve(200);
       
     });
   }
