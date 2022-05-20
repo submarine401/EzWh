@@ -1,11 +1,11 @@
 'use strict';
 const express = require('express');
 const db = require('./DBhelper');
-const InternalOrder = require('./InternalOrder');
-const Item = require('./Item');
-const ReturnOrder = require('./ReturnOrder');
-const Restockorder = require('./Restockorder');
-const SKU = require('./SKU');
+//const InternalOrder = require('./InternalOrder');
+//const Item = require('./Item');
+//const ReturnOrder = require('./ReturnOrder');
+//const Restockorder = require('./Restockorder');
+//const SKU = require('./SKU');
 const dataInterface = require('./DataInterface');
 const UserAPI = require('./api/UserAPI');
 const SKUapi = require('./api/SKUapi');
@@ -14,8 +14,8 @@ const ItemAPI = require('./api/ItemAPI')
 const RestockOrederAPI = require('./api/RestockOrederAPI')
 const ReturnOrederAPI = require('./api/ReturnOrderAPI');
 const InternalOrderAPI = require('./api/InternalOrderAPI');
-const Test_Descriptor = require('./Test_Descriptor');
-const Test_Result= require('./Test_Result');
+//const Test_Descriptor = require('./Test_Descriptor');
+//const Test_Result= require('./Test_Result');
 const TestDescriptorAPI = require('./api/TestDescriptorAPI');
 const TestResultAPI= require('./api/TestResultAPI');
 const SKUItemAPI = require('./api/SKUItemAPI');

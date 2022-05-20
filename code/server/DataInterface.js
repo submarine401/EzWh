@@ -599,7 +599,7 @@ get_issued_restock_order()
   return new Promise((resolve,reject)=>{
      
                   const sql = "SELECT * FROM testdescriptors ";
-                    dbHelper.db.all(sql,(err,rows)=>{
+                    this.dbHelper.db.all(sql,(err,rows)=>{
                   if(err){
                       reject(err); 
                       return;

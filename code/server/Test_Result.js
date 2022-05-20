@@ -1,7 +1,5 @@
-'use strict'
 
-
-const db = require('./DBhelper');
+/*const db = require('./DBhelper');
 
 class Test_Result{
 
@@ -76,3 +74,4 @@ delete_test_result(TRid, RFid) {
 
 const TR = new Test_Result(db)
 module.exports = TR;
+*/
