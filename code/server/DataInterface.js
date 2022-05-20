@@ -26,201 +26,201 @@ class DataInterface{
 
     //+************************************ SKU ****************************************
 
-    async create_SKU(skuData){
+    // async create_SKU(skuData){
 
-        try{
+    //     try{
 
-            skuData.position = undefined;
+    //         skuData.position = undefined;
 
-            await this.skuDao.store_SKU(skuData);
+    //         await this.skuDao.store_SKU(skuData);
 
-        }  catch(err) {
-          throw(err);
-        }
-    }
+    //     }  catch(err) {
+    //       throw(err);
+    //     }
+    // }
 
     
-    async return_SKU(){
-        const skus = await skuDao.load_SKUs();
+    // async return_SKU(){
+    //     const skus = await skuDao.load_SKUs();
 
-        const positions = await this.get_all_position();
+    //     const positions = await this.get_all_position();
 
-        const all_test_descriptors = await this.get_TD();
+    //     const all_test_descriptors = await this.get_TD();
 
-        const ret = skus.map( (sku) => {
+    //     const ret = skus.map( (sku) => {
                     
-            const test_descriptors = all_test_descriptors.filter(td => td.idSKU === sku.id).map(td => td.id);
+    //         const test_descriptors = all_test_descriptors.filter(td => td.idSKU === sku.id).map(td => td.id);
 
-            const position = sku.positionID?positions.find(pos => pos.id === sku.positionID):undefined;
+    //         const position = sku.positionID?positions.find(pos => pos.id === sku.positionID):undefined;
             
-            return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.availableQuantity, position, test_descriptors);
-        });
+    //         return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.availableQuantity, position, test_descriptors);
+    //     });
 
-        return ret;
-    }
+    //     return ret;
+    // }
 
-    async get_SKU(id){
-        const skus = await this.return_SKU();
-        return skus.find(sku => sku.id == id);
-    }
+    // async get_SKU(id){
+    //     const skus = await this.return_SKU();
+    //     return skus.find(sku => sku.id == id);
+    // }
 
 
-    async delete_SKU(id){
-        console.log('delete SKU ' + id);
+    // async delete_SKU(id){
+    //     console.log('delete SKU ' + id);
 
-        const skuItems = await this.get_all_SKUItem();
-        if(skuItems.find(si => si.SKUid === id)){
-            console.log('sku has skuItems');
-            throw 'cannot delete';
-        }
+    //     const skuItems = await this.get_all_SKUItem();
+    //     if(skuItems.find(si => si.SKUid === id)){
+    //         console.log('sku has skuItems');
+    //         throw 'cannot delete';
+    //     }
 
-        const sku = await this.get_SKU(id);
+    //     const sku = await this.get_SKU(id);
         
-        if(sku !== undefined){
-            this.skuDao.delete_SKU(id);
-        } else {
-            console.log('sku not found');
-            throw 'not found';
-        }
-    }
+    //     if(sku !== undefined){
+    //         this.skuDao.delete_SKU(id);
+    //     } else {
+    //         console.log('sku not found');
+    //         throw 'not found';
+    //     }
+    // }
 
-    async modify_SKU(newValues, id){
+    // async modify_SKU(newValues, id){
 
-        try{
+    //     try{
 
-            const sku = await this.get_SKU(id);
+    //         const sku = await this.get_SKU(id);
 
-            if(sku === undefined){
-                console.log('no matching sku');
-                throw 'not found';
-            }
+    //         if(sku === undefined){
+    //             console.log('no matching sku');
+    //             throw 'not found';
+    //         }
 
-            console.log('modifying ' + sku.id);
+    //         console.log('modifying ' + sku.id);
 
-            sku.modify_SKU(newValues);
+    //         sku.modify_SKU(newValues);
 
-        }  catch(err) {
-          throw(err);
-        }
-        
-        
-    }
-
-    async add_modify_SKU_position(skuID, positionID){
-
-        try{
-
-            const sku = await this.get_SKU(skuID);
-
-            if(sku === undefined){
-                console.log('no matching sku');
-                throw 'not found';
-            }
-
-            console.log('modifying ');
-            console.log(sku.id);
-            console.log('pos ' + positionID);
-
-            const positions = await this.get_all_position();
-
-            const newPos = positions.find(pos => pos.id === positionID);
-
-            if(newPos === undefined){
-                console.log('no matching pos');
-                throw 'not found';
-            }
-
-            await sku.add_modify_SKU_position(newPos);
-
-        }  catch(err) {
-          throw(err);
-        }
+    //     }  catch(err) {
+    //       throw(err);
+    //     }
         
         
-    }
+    // }
+
+    // async add_modify_SKU_position(skuID, positionID){
+
+    //     try{
+
+    //         const sku = await this.get_SKU(skuID);
+
+    //         if(sku === undefined){
+    //             console.log('no matching sku');
+    //             throw 'not found';
+    //         }
+
+    //         console.log('modifying ');
+    //         console.log(sku.id);
+    //         console.log('pos ' + positionID);
+
+    //         const positions = await this.get_all_position();
+
+    //         const newPos = positions.find(pos => pos.id === positionID);
+
+    //         if(newPos === undefined){
+    //             console.log('no matching pos');
+    //             throw 'not found';
+    //         }
+
+    //         await sku.add_modify_SKU_position(newPos);
+
+    //     }  catch(err) {
+    //       throw(err);
+    //     }
+        
+        
+    // }
 
  /*********************************Position methods************************/ 
 
-    async get_all_position(){
+    // async get_all_position(){
 
-        const positions = await positionDao.load_positions();
-        return positions;
+    //     const positions = await positionDao.load_positions();
+    //     return positions;
         
-    }
+    // }
 
-    async create_Position(posData){
+    // async create_Position(posData){
 
-        try{
+    //     try{
 
-            const positions = await this.get_all_position();
+    //         const positions = await this.get_all_position();
 
-            const pos = positions.find(p => p.id === posData.positionID);
+    //         const pos = positions.find(p => p.id === posData.positionID);
 
-            if(pos !== undefined){
-                console.log('already existing position');
-                throw 'already existing';
-            }
+    //         if(pos !== undefined){
+    //             console.log('already existing position');
+    //             throw 'already existing';
+    //         }
 
-            const newPos = new Position(posData);
+    //         const newPos = new Position(posData);
 
-            await this.positionDao.store_position(newPos);
+    //         await this.positionDao.store_position(newPos);
 
-        }  catch(err) {
-          throw(err);
-        }
+    //     }  catch(err) {
+    //       throw(err);
+    //     }
 
-    }
+    // }
 
-    async modify_Position(newValues, id){
+    // async modify_Position(newValues, id){
 
-        const positions = await this.get_all_position();
+    //     const positions = await this.get_all_position();
 
-        const pos = positions.find(p => p.id === id);
+    //     const pos = positions.find(p => p.id === id);
 
-        if(pos === undefined){
-            console.log('no matching pos');
-            throw 'not found';
-        }
+    //     if(pos === undefined){
+    //         console.log('no matching pos');
+    //         throw 'not found';
+    //     }
 
-        pos.modify_position(newValues);
+    //     pos.modify_position(newValues);
 
-        this.positionDao.update_position(id, pos);
+    //     this.positionDao.update_position(id, pos);
 
-    }
+    // }
 
-    async modify_positionID(newID, oldID){
+    // async modify_positionID(newID, oldID){
 
-        const positions = await this.get_all_position();
+    //     const positions = await this.get_all_position();
 
-        const pos = positions.find(p => p.id === oldID);
+    //     const pos = positions.find(p => p.id === oldID);
 
-        if(pos === undefined){
-            console.log('no matching pos');
-            throw 'not found';
-        }
+    //     if(pos === undefined){
+    //         console.log('no matching pos');
+    //         throw 'not found';
+    //     }
         
-        pos.modify_positionID(newID);
+    //     pos.modify_positionID(newID);
 
-        this.positionDao.update_position(oldID, pos);
+    //     this.positionDao.update_position(oldID, pos);
 
-    }
+    // }
 
-    async delete_position(id){
+    // async delete_position(id){
 
-        console.log('delete position' + id);
-        const positions = await this.get_all_position();
+    //     console.log('delete position' + id);
+    //     const positions = await this.get_all_position();
 
-        const pos = positions.find(p => p.id === id);
+    //     const pos = positions.find(p => p.id === id);
 
-        if(pos === undefined){
-            console.log('no matching pos');
-            throw 'not found';
-        }
+    //     if(pos === undefined){
+    //         console.log('no matching pos');
+    //         throw 'not found';
+    //     }
 
-        this.positionDao.delete_position(id);
+    //     this.positionDao.delete_position(id);
         
 
-    }
+    // }
 //-------------------------------------------------------------------------------
     get_internalOrders(id){
         return new Promise((resolve,reject)=>{

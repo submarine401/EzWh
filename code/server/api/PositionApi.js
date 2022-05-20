@@ -3,12 +3,12 @@
 const express = require('express');
 const SKU = require('../SKU');
 const Position = require('../Position');
-const dataInterface = require('../DataInterface');
+const positionService = require('../services/PositionService');
 
 let router = express.Router();
 
 router.get('/api/positions', (req, res)=>{
-  dataInterface.get_all_position().then( rows => { 
+  positionService.get_all_position().then( rows => { 
     return res.status(200).json(rows)
   }).catch(err => {
     console.log(err);
@@ -42,7 +42,7 @@ router.post('/api/position', (req, res)=>{
             return res.status(422).json({error : "Unprocessable Entity"});
         }
       
-        dataInterface.create_Position(newPos).then(() => {
+        positionService.create_Position(newPos).then(() => {
           return res.status(201).json({success: 'Created'});
         }) .catch(err => {
           if(err === 'already existing'){
@@ -87,7 +87,7 @@ router.put('/api/position/:positionID', (req, res)=>{
             return res.status(422).json({error : "Unprocessable Entity"});
         }
       
-        dataInterface.modify_Position(newValues, req.params.positionID)
+        positionService.modify_Position(newValues, req.params.positionID)
           .then(() => {return res.status(200).end();})
           .catch((err => {
             if(err === 'not found'){
@@ -119,7 +119,7 @@ router.put('/api/position/:positionID/changeID', (req, res)=>{
             return res.status(422).json({error : "Unprocessable Entity"});
         }
         
-        dataInterface.modify_positionID(req.body.newPositionID, req.params.positionID)
+        positionService.modify_positionID(req.body.newPositionID, req.params.positionID)
           .then(() => {return res.status(200).end();})
           .catch((err => {
             if(err === 'not found'){
@@ -144,7 +144,7 @@ router.delete('/api/position/:positionID', (req, res)=>{
 
         if( typeof id === 'string' && id.length === 12) {
     
-          dataInterface.delete_position(id)
+          positionService.delete_position(id)
             .then(() => {return res.status(204).end();})
             .catch((err => {
               if(err === 'not found'){

@@ -2,7 +2,7 @@
 
 const express = require('express');
 const SKU = require('../SKU');
-const dataInterface = require('../DataInterface');
+const skuService = require('../services/SkuService');
 
 let router = express.Router();
 
@@ -25,7 +25,7 @@ router.post('/api/sku', async (req,res)=>{
           newSku.price <= 0){
         return res.status(422).json({error : "Unprocessable Entity"});
       }
-      dataInterface.create_SKU(newSku);
+      skuService.create_SKU(newSku);
       return res.status(201).end();
     
     }
@@ -38,7 +38,7 @@ router.post('/api/sku', async (req,res)=>{
   
 router.get('/api/skus', (req, res)=>{
   
-    dataInterface.return_SKU()
+    skuService.return_SKU()
       .then(skus => {
         console.log(skus);
         return res.status(200).json(skus);})
@@ -55,7 +55,7 @@ router.get('/api/skus/:id', (req, res)=>{
       const id = req.params.id
       if( id > 0 && typeof Number(id) === 'number') {
   
-        dataInterface.get_SKU(id).then(ret => {
+        skuService.get_SKU(id).then(ret => {
           console.log(ret);
           if(ret === undefined){
             return res.status(404).end();
@@ -101,7 +101,7 @@ router.put('/api/sku/:id', (req, res)=>{
 
     
   
-    dataInterface.modify_SKU(newValues, req.params.id)
+    skuService.modify_SKU(newValues, req.params.id)
       .then(() => {return res.status(200).end();})
       .catch((err => {
         if(err === 'not enough space in position'){
@@ -134,7 +134,7 @@ router.put('/api/sku/:id/position', (req, res)=>{
       return res.status(422).end();
     }
 
-    dataInterface.add_modify_SKU_position(skuID, positionID)
+    skuService.add_modify_SKU_position(skuID, positionID)
       .then(() => {return res.status(200).end();})
       .catch(err => {
         if(err === 'not enough space in position'){
@@ -158,7 +158,7 @@ router.delete('/api/skus/:id', (req, res)=>{
   
       const id = req.params.id
       if( id > 0 && typeof Number(id) === 'number') {
-        dataInterface.delete_SKU(id)
+        skuService.delete_SKU(id)
         .then(() => {return res.status(204).end();})
         .catch(err => {
           console.log(err);
