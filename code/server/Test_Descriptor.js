@@ -43,7 +43,7 @@ class Test_Descriptor{
 
        return new Promise ((resolve,reject)=>{
            const sql = 'UPDATE testdescriptors SET name = ? , procedure_description = ?, idSKU = ?  WHERE id = ?';
-           this.db.db.run(sql,[td.newName,td.newProcedureDescription,td.newIdSku,id], (err)=>{ 
+           this.db.db.run(sql,[td.newName,td.newProcedureDescription,td.newIdSKU,id], (err)=>{ 
                if(err)
                {
                    reject(err);
@@ -51,6 +51,7 @@ class Test_Descriptor{
                }
                else
                {
+                   console.log(td.newIdSKU);
                    resolve(`Test Descriptor with id ${id} is updated`);
                }
 
