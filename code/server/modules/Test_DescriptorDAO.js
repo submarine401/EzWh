@@ -61,3 +61,26 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
    
    }
 
+   exports.get_TD = ()=>{ 
+    return new Promise((resolve,reject)=>{
+       
+                    const sql = "SELECT * FROM testdescriptors ";
+                      db.all(sql,(err,rows)=>{
+                    if(err){
+                        reject(err); 
+                        return;
+                        }
+                    const testdescriptors = rows.map((t)=>(
+                    {
+                        id : t.id,
+                        name : t.name,
+                        procedureDescription : t.procedure_description,
+                        idSKU : t.idSKU
+                        
+                    })); 
+                    resolve(testdescriptors);
+                });
+            
+        });
+        
+  }

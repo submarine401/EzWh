@@ -1,6 +1,6 @@
 sqlite = require('sqlite3');
 
-const db = new sqlite.Database('database.db', (err) => {
+const db = new sqlite.Database('EZWHDB.db', (err) => {
     if (err) throw err;
 });
   
@@ -9,9 +9,9 @@ exports.load_SKUs = () => {
 
     return new Promise((resolve, reject) => {
 
-        const sql_query = 'SELECT * FROM sku;';
+        const sql_query = "SELECT * FROM sku";
 
-        this.db.all(sql_query, (err, rows)=>{
+        db.all(sql_query, (err, rows)=>{
 
             if(err){
                 reject(err); 

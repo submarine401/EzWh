@@ -594,29 +594,29 @@ get_issued_restock_order()
 
 
 
- get_TD(){ 
-  return new Promise((resolve,reject)=>{
+//  get_TD(){ 
+//   return new Promise((resolve,reject)=>{
      
-                  const sql = "SELECT * FROM testdescriptors ";
-                    this.dbHelper.db.all(sql,(err,rows)=>{
-                  if(err){
-                      reject(err); 
-                      return;
-                      }
-                  const testdescriptors = rows.map((t)=>(
-                  {
-                      id : t.id,
-                      name : t.name,
-                      procedureDescription : t.procedure_description,
-                      idSKU : t.idSKU
+//                   const sql = "SELECT * FROM testdescriptors ";
+//                     this.dbHelper.db.all(sql,(err,rows)=>{
+//                   if(err){
+//                       reject(err); 
+//                       return;
+//                       }
+//                   const testdescriptors = rows.map((t)=>(
+//                   {
+//                       id : t.id,
+//                       name : t.name,
+//                       procedureDescription : t.procedure_description,
+//                       idSKU : t.idSKU
                       
-                  })); 
-                  resolve(testdescriptors);
-              });
+//                   })); 
+//                   resolve(testdescriptors);
+//               });
           
-      });
+//       });
       
-}
+// }
 
 get_TD_by_id(id){
   return new Promise((resolve,reject)=>{
