@@ -2,9 +2,9 @@
 
 const express = require('express');
 const dataInterface = require('../DataInterface');
-const dbHelper = require('../DBhelper');
-const SKU = require('../SKU');
-const Test_Descriptor = require('../Test_Descriptor');
+const db = require('../modules/Test_DescriptorDAO');
+const Test_DescriptorService = require('../services/Test_DescriptorService')
+const TestDescriptorService = new Test_DescriptorService(db);
 
 
 let router = express.Router();
@@ -14,7 +14,7 @@ router.get('/api/testDescriptors', async (req, res)=>{
   
   try
     {     
-      const result = await dataInterface.get_TD();
+      const result = await TestDescriptorService.getAllTestDescriptors();
       console.log(result);
       return res.status(200).json(result); 
     }
@@ -34,7 +34,7 @@ router.get('/api/testDescriptors/:id', async (req, res)=>{
     const id = req.params.id;
     if( id > 0  && typeof Number(id) === 'number') {
       
-      const t = await dataInterface.get_TD_by_id(id);
+      const t = await TestDescriptorService.getTestDescriptorsById(id);
      
       console.log( t);
 
@@ -76,7 +76,7 @@ router.post('/api/testDescriptor', async (req,res)=>{
       return res.status(404).json({error: "No sku associated idSKU"});
     }
 
-    await Test_Descriptor.insert_into_test_Descriptor_table(newTD);
+    await TestDescriptorService.setTestDescriptor(newTD);
 
     return res.status(201).json({success: 'Created'});
   
@@ -102,13 +102,13 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
       }
       
       if(id > 0 && typeof Number(id) === 'number'){   
-        const t = await dataInterface.get_TD_by_id(id);
+        const t = await TestDescriptorService.getTestDescriptorsById(id);
      
         const s = await dataInterface.get_SKU(td.newIdSKU);
           if(t.length === 0 || s === undefined){
                 return res.status(404).json({error: "No test descriptor associated id or no sku associated to IDSku"});
           }else{
-              const results = await Test_Descriptor.modify_test_descriptor(td, id);
+              const results = await TestDescriptorService.modifyTestDescriptor(td, id);
               
               return res.status(200).json(results);
           } 
@@ -131,9 +131,9 @@ router.delete('/api/testDescriptor/:id', async (req, res)=>{
     const id = req.params.id
     if( id > 0 && typeof Number(id) === 'number' ) {
 
-      const t = await dataInterface.get_TD_by_id(id);
+      const t = await TestDescriptorService.getTestDescriptorsById(id);
    
-      if(t.length!==0 && await Test_Descriptor.delete_test_descriptor(id)){
+      if(t.length!==0 && await TestDescriptorService.deleteTestDescriptor(id)){
         return res.status(204).end("Test Descriptor deleted");
       } else {
         return res.status(422).json({error : "Not found"});
