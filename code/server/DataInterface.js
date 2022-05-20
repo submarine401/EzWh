@@ -32,7 +32,7 @@ class DataInterface{
 
             skuData.position = undefined;
 
-            await this.dbHelper.store_SKU(skuData);
+            await this.skuDao.store_SKU(skuData);
 
         }  catch(err) {
           throw(err);
@@ -41,7 +41,7 @@ class DataInterface{
 
     
     async return_SKU(){
-        const skus = await dbHelper.load_SKUs();
+        const skus = await skuDao.load_SKUs();
 
         const positions = await this.get_all_position();
 
@@ -77,7 +77,7 @@ class DataInterface{
         const sku = await this.get_SKU(id);
         
         if(sku !== undefined){
-            this.dbHelper.delete_SKU(id);
+            this.skuDao.delete_SKU(id);
         } else {
             console.log('sku not found');
             throw 'not found';
@@ -143,7 +143,7 @@ class DataInterface{
 
     async get_all_position(){
 
-        const positions = await dbHelper.load_positions();
+        const positions = await positionDao.load_positions();
         return positions;
         
     }
@@ -163,7 +163,7 @@ class DataInterface{
 
             const newPos = new Position(posData);
 
-            await this.dbHelper.store_position(newPos);
+            await this.positionDao.store_position(newPos);
 
         }  catch(err) {
           throw(err);
@@ -184,7 +184,7 @@ class DataInterface{
 
         pos.modify_position(newValues);
 
-        this.dbHelper.update_position(id, pos);
+        this.positionDao.update_position(id, pos);
 
     }
 
@@ -201,7 +201,7 @@ class DataInterface{
         
         pos.modify_positionID(newID);
 
-        this.dbHelper.update_position(oldID, pos);
+        this.positionDao.update_position(oldID, pos);
 
     }
 
@@ -217,7 +217,7 @@ class DataInterface{
             throw 'not found';
         }
 
-        this.dbHelper.delete_position(id);
+        this.positionDao.delete_position(id);
         
 
     }

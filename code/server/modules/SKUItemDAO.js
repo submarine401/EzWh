@@ -2,19 +2,13 @@
 
 const SKUItem = require("../SKUItem");
 const dayjs=require('dayjs');
-class SKUItemDAO{
   
-  sqlite=require('sqlite3');
-  constructor(dbname){
-    this.db = new this.sqlite.Database(dbname, (err) =>{
-      if(err){
-        console.log(err);
-        throw err;
-      }
-    });
-  }
+const sqlite=require('sqlite3');
+const db = new sqlite.Database('EZWHDB.db', (err) => {
+  if (err) throw err;
+  });
     
-    async create_SKUItem(SKU_item_data){
+    exports.create_SKUItem = function(SKU_item_data){
       console.log('creating SKUItem...');
 
       try{
@@ -23,17 +17,17 @@ class SKUItemDAO{
                                   SKU_item_data.RFID,
                                   SKU_item_data.DateOfStock);
 
-          await this.store_SKUItem(newSKUItem);
+          store_SKUItem(newSKUItem);
 
       }  catch(err) {
         throw(err);
       }
     }
     
-    get_SKUItem_by_RFID(RFID){
+    exports.get_SKUItem_by_RFID = function(RFID){
       return new Promise((resolve,reject) => {
         const sql_query = 'SELECT * FROM skuitem WHERE RFID = ?';
-        this.db.get(sql_query,[RFID],function(err,rows){
+        db.get(sql_query,[RFID],function(err,rows){
           if(err){
             reject(err);
             return;
@@ -47,11 +41,11 @@ class SKUItemDAO{
       });
     }
     
-    get_all_SKUItem(){
+    exports.get_all_SKUItem = function(){
       return new Promise ((resolve,reject) =>{
         
         const sql_query = 'SELECT * FROM skuitem';
-        this.db.all(sql_query,[],function(err,rows){
+        db.all(sql_query,[],function(err,rows){
           if(err){
             reject(err);
             return;
@@ -67,10 +61,10 @@ class SKUItemDAO{
       });
     }
     
-    get_all_available_SKUItem(skuID){
+    exports.get_all_available_SKUItem = function(skuID){
       return new Promise((resolve,reject) => {
         const sql_query = 'SELECT * FROM skuitem where availability = ? AND SKUid = ?';
-        this.db.all(sql_query,["1",skuID], function(err,rows){
+        db.all(sql_query,["1",skuID], function(err,rows){
           if(err){
             reject(err);
             return;
@@ -88,10 +82,10 @@ class SKUItemDAO{
       });
     }
     
-    deleteSKUItem(rfid){
+    exports.deleteSKUItem = function(rfid){
       return new Promise((resolve,reject) =>{
         const sql_query = 'DELETE FROM skuitem WHERE RFID = ?';
-        this.db.run(sql_query,[rfid], function(err){
+        db.run(sql_query,[rfid], function(err){
           if(err){
             reject(err);
             return;
@@ -101,7 +95,7 @@ class SKUItemDAO{
       });
     }
     
-    store_SKUItem(skuItem){
+    exports.store_SKUItem = function(skuItem){
       try {
         console.log("Storing SKUItem...");
         
@@ -110,7 +104,7 @@ class SKUItemDAO{
           try {
             const sql_query = 'INSERT OR REPLACE INTO skuitem (SKUid, RFID, dateOfStock, availability) VALUES (?, ?, ?, ?)';
             const params = [skuItem.idSKU, skuItem.RFID, dayjs(skuItem.DateOfStock).format('YYYY-MM-DD'), skuItem.availability];
-            this.db.run(sql_query,params,function(err){
+            db.run(sql_query,params,function(err){
               if(err){
                 reject(err);
                 return;
@@ -127,7 +121,7 @@ class SKUItemDAO{
       }
     }
     
-    update_SKUItem(RFID, newValues){
+    exports.update_SKUItem = function(RFID, newValues){
       //newValues stands for the object representing the request body
       return new Promise((resolve,reject) => {
         if(newValues.newAvailable > 1 || newValues.newAvailable < 0){
@@ -141,7 +135,7 @@ class SKUItemDAO{
           newValues.newAvailable,
           RFID
         ];
-        this.db.run(sql_query,params,function(err){
+        db.run(sql_query,params,function(err){
           
           if(err){
             reject(err);
@@ -153,6 +147,3 @@ class SKUItemDAO{
       });
     }
     
-}
-
-module.exports = SKUItemDAO;

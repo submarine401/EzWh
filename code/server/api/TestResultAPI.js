@@ -1,10 +1,11 @@
 'use strict'
 
-const e = require('express');
+//const e = require('express');
 const express = require('express');
 const dataInterface = require('../DataInterface');
-const Test_Result = require('../Test_Result');
-
+const db = require('../modules/Test_ResultDAO');
+const Test_ResultService = require('../services/Test_ResultService')
+const TestResultService = new Test_ResultService(db);
 let router = express.Router();
 
 
@@ -16,7 +17,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
       if( rfid > 0 && typeof rfid === 'string') {
           
-        const t = await dataInterface.get_TR(rfid);
+        const t = await Test.get_TR(rfid);
           
         if(t === 404){
           return res.status(404).json({error: "No skuItem found for this rfID"});
@@ -46,7 +47,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
        && id > 0 && typeof Number(id) === 'number' ) {
         
         
-        const t = await dataInterface.get_TR(rfid, id);
+        const t = await TestResultService.getTestResult(rfid, id);
         console.log(t);
 
         if(t.length===0) {
@@ -88,7 +89,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       
       //console.log("+++"+s)
 
-      const td = await dataInterface.get_TD_by_id(newTR.idTestDescriptor);
+      const td = await TestDescriptorService.getTestDescriptorsById(newTR.idTestDescriptor);
 //console.log(td)
 
 
@@ -96,7 +97,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
       }
   
-      await Test_Result.insert_into_test_Result_table(newTR); 
+      await TestDResultService.setTestResult(newTR); 
       return res.status(201).json({success: 'Created'});
     
     }
@@ -123,16 +124,16 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
         if(id >0 && typeof Number(id) === 'number' && 
                     rfid >0 && typeof rfid === 'string'){   
-          const t = await dataInterface.get_TD_by_id(p.newIdTestDescriptor);
+          const t = await TestDescriptorService.getTestDescriptorsById(p.newIdTestDescriptor);
           const s = await dataInterface.get_SKUItem_by_RFID(rfid);
-          const tr = await dataInterface.get_TR(rfid, id);
+          const tr = await TestResultService.getTestResult(rfid, id);
 
 console.log(tr)
             if(s === 404 || t.length === 0 || tr.length === 0 ){
                   return res.status(404).json({error:
                      "No sku item associated to rfid or no test descriptor associated to newIdTestDescriptor or no test result associated to id"});
             }else{
-                const results = await Test_Result.modifyTR(id, rfid, p.newIdTestDescriptor, p.newDate, p.newResult);
+                const results = await TestResultService.modifyTestResult(id, rfid, p.newIdTestDescriptor, p.newDate, p.newResult);
                 return res.status(200).json(results);
             } 
         }
@@ -155,9 +156,9 @@ console.log(tr)
       if( id > 0 && typeof Number(id) === 'number' && 
       rfid >0 && typeof rfid === 'string') {
 
-        const t = await dataInterface.get_TR(rfid, id);
+        const t = await TestResultService.getTestResult(rfid, id);
   console.log(t)
-        if(t.length!== 0 && Test_Result.delete_test_result(id, rfid)){
+        if(t.length!== 0 && TestResultService.deleteTestResult(id, rfid)){
 
           return res.status(204).end(); 
         } else {

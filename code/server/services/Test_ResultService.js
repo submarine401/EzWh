@@ -21,9 +21,11 @@ deleteTestResult = async (TRid, RFid) => {
 }
 
 
-getAllTestResult = async (RFid, TRid) => {
+getTestResult = async (RFid, TRid) => {
     const result = await dataInterface.get_TR(RFid, TRid);
     return result;
 }
 
 }
+
+module.exports = Test_ResultService;

@@ -1,19 +1,12 @@
-//const dbHelper = require('./DBhelper');
-
-class UserDAO {
-  dayjs = require('dayjs');
-  sqlite = require ('sqlite3')
-  constructor(dbname){
-    this.db = new this.sqlite.Database(dbname, (err) =>{
-      if(err){
-        console.log(err);
-        throw err;
-      }
-    });
-  }
+'use strict'
+  const dayjs = require('dayjs');
+  const sqlite = require ('sqlite3')
+  const db = new sqlite.Database('EZWHDB.db', (err) => {
+  if (err) throw err;
+  });
   
   
-  newUser(u){
+  exports.newUser = function(u){
     return new Promise((resolve,reject) => {
       if(u.password.length < 8){
         resolve(422);
@@ -44,7 +37,7 @@ class UserDAO {
       const parameters=[u.username, enc_password, u.name, u.surname, u.type];
     
     //Insert user in the DB
-      this.db.all(sql_query2,parameters, function(err,rows){
+      db.all(sql_query2,parameters, function(err,rows){
       if(err){
         reject(err);
         return;
@@ -56,7 +49,7 @@ class UserDAO {
   }
   
   //method returning the list of all users except managers
-  getUsers() {
+  /*getUsers() {
     return new Promise((resolve,reject) => {
       const sql_query = 'SELECT * FROM users';
       this.db.all(sql_query,[], function(err, rows){
@@ -78,12 +71,12 @@ class UserDAO {
         resolve(users_not_manager);    
       });
     });
-  }
+  }*/
   
-  get_all_suppliers(){
+  exports.get_all_suppliers = function(){
     return new Promise((resolve,reject) => {
       const sql_query = 'SELECT * FROM users WHERE type=?';
-      this.db.all(sql_query,["supplier"],function(err,rows){
+      db.all(sql_query,["supplier"],function(err,rows){
         if(err){
           reject(err);
           return;
@@ -102,10 +95,10 @@ class UserDAO {
     });
   }
       
-      getUsers_except_manager(){
+      exports.getUsers_except_manager= function(){
         return new Promise((resolve,reject) => {      
           const sql_query = 'SELECT * FROM users WHERE NOT type =?';
-          this.db.all(sql_query,["manager"],function(err, rows){
+          db.all(sql_query,["manager"],function(err, rows){
             if(err){
               reject(err);
               return;
@@ -129,12 +122,12 @@ class UserDAO {
   
   /*API function which modifies access rights of a user, 
   given its username as parameter*/
-  modify_user_rights(username,u_new_type){
+  exports.modify_user_rights = function(username,u_new_type){
     return new Promise((resolve,reject) => {
       const sql_query = 'UPDATE users set type = ? WHERE username = ?'
       
       //check if username exists
-      this.db.all(sql_query,[u_new_type,username], function(err,rows){
+      db.all(sql_query,[u_new_type,username], function(err,rows){
       
       if(err){
         reject(err);
@@ -148,7 +141,7 @@ class UserDAO {
   }
   
   //method to delete a user given its username
-   deleteUser(username,type){
+   exports.deleteUser = function(username,type){
     return new Promise((resolve,reject) =>{
       const users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
       if(users_array.includes(type) === false){
@@ -156,7 +149,7 @@ class UserDAO {
         return;
       }
       const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
-      this.db.all(sql_query1,[username, type], function(err,rows) {
+      db.all(sql_query1,[username, type], function(err,rows) {
         if(err){
           reject(err);
           return;
@@ -167,7 +160,7 @@ class UserDAO {
         }
       });
       const sql_query2 = 'DELETE FROM users WHERE username= ? AND type = ?';
-      this.db.run(sql_query2, [username, type], function(err) {
+      db.run(sql_query2, [username, type], function(err) {
         if(err){
           reject(err);
           return;
@@ -176,8 +169,3 @@ class UserDAO {
       });
     });  
   }
-  
-  
-}
-//const U = new User();
-module.exports = UserDAO;
