@@ -2,9 +2,9 @@
 
 const express = require ('express');
 const dataInterface = require ('../DataInterface');
-const db = require('../modules/UserDAO');
-const UserService = require("../services/UserService");
-const userService = new UserService(db);
+const dao = require('../modules/UserDAO');
+const UserService = require('UserService');
+const usersService = new UserService(dao);
 
 let router = express.Router();
 

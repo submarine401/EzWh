@@ -21,6 +21,11 @@ class Itemservice {
         const result = await this.dao.delete_item(iid);
         return result;
     }
+    
+    deleteAllItemContent = async () => {
+        const result = await this.dao.deleteItemData();
+        return result;
+    }
 
     getAllItems = async () => {
         const result = await dataInterface.get_all_items();

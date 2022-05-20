@@ -5,7 +5,6 @@ const db = require('../modules/ItemDao');
 const Itemservice = require('../services/Itemservice')
 const itemservice = new Itemservice(db);
 
-
 const dataInterface = require('../DataInterface');
 
 let router = express.Router();
