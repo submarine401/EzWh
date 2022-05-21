@@ -16,7 +16,7 @@ class Position{
 
     }
 
-    modify_position(newValues){
+    modifyPosition(newValues){
 
         this.aisle = newValues.newAisleID;
         this.row = newValues.newRow;
@@ -28,7 +28,7 @@ class Position{
         this.occupiedVolume = newValues.newOccupiedVolume;
     }
 
-    modify_positionID(newPid){
+    modifyPositionID(newPid){
         
         this.aisle = newPid.substr(0, 4);
         this.row = newPid.substr(4, 4);

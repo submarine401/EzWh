@@ -36,9 +36,12 @@ class PositionService{
 
     }
 
-    async modify_Position(newValues, id){
+    async modifyPosition(newValues, id){
 
         const positions = await this.get_all_position();
+
+        // console.log(positions);
+        // console.log(id);
 
         const pos = positions.find(p => p.id === id);
 
@@ -46,14 +49,26 @@ class PositionService{
             console.log('no matching pos');
             throw 'not found';
         }
+        
+        const newID = newValues.newAisleID + newValues.newRow + newValues.newCol
 
-        pos.modify_position(newValues);
+        if(id !== newID){
+            const posNewId = positions.find(p => p.id === newID);
+            if(posNewId !== undefined){
+                console.log('new ID alredy taken');
+                throw 'taken ID';
+            }
+        }
+
+        console.log(pos);
+
+        pos.modifyPosition(newValues);
 
         this.dao.update_position(id, pos);
 
     }
 
-    async modify_positionID(newID, oldID){
+    async modifyPositionID(newID, oldID){
 
         const positions = await this.get_all_position();
 
@@ -63,10 +78,20 @@ class PositionService{
             console.log('no matching pos');
             throw 'not found';
         }
-        
-        pos.modify_positionID(newID);
 
-        this.dao.update_position(oldID, pos);
+        if(newID !== oldID){
+
+            const posNewId = positions.find(p => p.id === newID);
+            if(posNewId !== undefined){
+                console.log('new ID alredy taken');
+                throw 'taken ID';
+            }
+            
+            pos.modifyPositionID(newID);
+            this.dao.update_position(oldID, pos);
+        }
+        
+       
 
     }
 
