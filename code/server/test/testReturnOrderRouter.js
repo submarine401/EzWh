@@ -6,19 +6,22 @@ chai.should();
 const app = require('../server');
 var agent = chai.request.agent(app);
 
- 
+   
+
         describe('test ReturnOrder apis', () => {
 
-            // beforeEach(async () => {
-            //     await agent.delete('/api/allUsers');
-            // })
-            
             const RO = {
-                    "returnDate":"2021/11/29 09:33",
-                    "products": [{"SKUId":12,"description":"a product","price":10.99,"RFID":"12345678901234567890123456789016"},
-                                {"SKUId":180,"description":"another product","price":11.99,"RFID":"12345678901234567890123456789038"}],
-                    "restockOrderId" : 2
-                }
+                "returnDate":"2021/11/29 09:33",
+                "products": [{"SKUId":12,"description":"a product","price":10.99,"RFID":"12345678901234567890123456789016"},
+                            {"SKUId":180,"description":"another product","price":11.99,"RFID":"12345678901234567890123456789038"}],
+                "restockOrderId" : 2
+            }
+
+
+            beforeEach(async () => {
+                await agent.delete('/api/allReturnOrder');
+            })
+         
             deleteRestockOrder(204,10);
             deleteRestockOrder(422);
             deleteRestockOrder(422);
@@ -76,36 +79,45 @@ function getROById(expectedHTTPStatus, id,ro) {
                     done(err);
                 })
 
-            }
+            }//ens else
         });
         
     });
 }
 
-function newReturnOrder(expectedHTTPStatus, ro) {
-    it('adding a new RO', function (done) {
-        if (ro !== undefined) {
-            agent.post('/api/returnOrder')
-                .send(ro)
-                .then(function (res) {
+function newReturnOrder(expectedHTTPStatus,ro) {
+    it('add Return order data to the system',  (done)=> {
+        agent.get('/api/restockOrders/'+ro.restockOrderId)
+        .then((res)=> {                     
+            if(res.status ===200){
+        agent.post('/api/returnOrder')
+            .send(ro)
+            .then( (res)=> {
+                if(res.status ===201)
+                {
+                res.should.have.status(expectedHTTPStatus);
+                res.body.should.equal("new returnorder is inserted");
+                }
+                else
+                {
+                    agent.post('/api/returnOrder')
+                .then((res)=> {                     
                     res.should.have.status(expectedHTTPStatus);
-                    res.body.should.equal("new returnorder is inserted");
                     done();
-                }).catch((err)=>{
-                    done(err);
-                }).catch((err)=>{
-                    done(err);
-                })
-        } else {
-            agent.post('/api/returnOrder') //we are not sending any data
-                .then( (res)=> {                     
-                    res.should.have.status(expectedHTTPStatus);
+                }).catch((err)=>{done(err);})
+                }
+            }).catch((err)=>{done(err);})
+            }
+            else {
+                agent.get('/api/restockOrders/'+ro.restockOrderId)
+                .then((res)=> {                     
+                    res.should.have.status(404);
                     done();
-                }).catch((err)=>{
-                    done(err);
-                })
-        }
+                }).catch((err)=>{done(err);})
 
+            }//ens else
+        });
+        
     });
 }
 

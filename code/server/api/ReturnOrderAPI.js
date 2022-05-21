@@ -66,7 +66,31 @@ router.post('/api/returnOrder',async (req,res)=>{
       return res.status(503).end();
     }
   });
-  /*
+
+  router.delete('/api/allReturnOrder',async (req,res)=>{
+    try{
+      const id = req.params.id
+      
+      if( id >0 ){
+        
+        const results = await returnOrderservice.deleteAllReturnOrder();
+        if (results) {
+          return res.status(204).json(results);
+          }
+           else {
+            return res.status(422).json({error : "Not found"});
+           } 
+      }
+      return res.status(422).json({error : "INVALID IO INPUT"});
+    
+    
+    }
+    catch(err)
+    {
+      return res.status(503).end();
+    }
+  });
+  /* allReturnOrder
   GET ALL RO
   */
   router.get('/api/returnOrders',async (req,res)=>{
