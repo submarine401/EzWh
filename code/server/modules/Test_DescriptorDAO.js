@@ -12,6 +12,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
            db.run(sql,[ td.name,td.procedureDescription, td.idSKU], (err)=>{
                if(err)
                {
+                   
                    reject(err);
                    return;
                }
