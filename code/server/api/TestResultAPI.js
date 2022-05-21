@@ -2,8 +2,8 @@
 
 //const e = require('express');
 const express = require('express');
-const dataInterface = require('../DataInterface');
 const db = require('../modules/Test_ResultDAO');
+const skuService = require('../services/SkuService');
 const Test_ResultService = require('../services/Test_ResultService')
 const TestResultService = new Test_ResultService(db);
 let router = express.Router();
@@ -85,7 +85,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       }
   
       //console.log("--"+s)
-      const s = await dataInterface.get_SKUItem_by_RFID(newTR.rfid);
+      const s = await skuService.get_SKUItem_by_RFID(newTR.rfid);
       
       //console.log("+++"+s)
 
@@ -125,7 +125,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         if(id >0 && typeof Number(id) === 'number' && 
                     rfid >0 && typeof rfid === 'string'){   
           const t = await TestDescriptorService.getTestDescriptorsById(p.newIdTestDescriptor);
-          const s = await dataInterface.get_SKUItem_by_RFID(rfid);
+          const s = await skuService.get_SKUItem_by_RFID(rfid);
           const tr = await TestResultService.getTestResult(rfid, id);
 
 console.log(tr)

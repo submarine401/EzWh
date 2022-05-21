@@ -89,7 +89,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         return new Promise((resolve,reject)=>{
         
             const sql = "SELECT * FROM testdescriptors where id = ?";
-                dbHelper.db.all(sql,[id],(err,rows)=>{
+                db.all(sql,[id],(err,rows)=>{
                         if(err){
                             reject(err); 
                             return;

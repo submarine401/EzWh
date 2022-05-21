@@ -1,4 +1,4 @@
-sqlite = require('sqlite3');
+sqlite = require('sqlite3')
 
 const db = new sqlite.Database('EZWHDB.db', (err) => {
     if (err) throw err;
@@ -62,7 +62,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     
         if(TRid===undefined){
                   const sql = "SELECT * FROM testresults WHERE RFid = ?  ";
-                  dbHelper.db.all(sql,[RFid],(err,rows)=>{
+                  db.all(sql,[RFid],(err,rows)=>{
                      console.log(rows.length)
                       if(err){
                           reject(err); 
@@ -87,7 +87,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                   });
               }else{
                   const sql = "SELECT * FROM testresults where RFid = ? AND TRid = ?";
-                  dbHelper.db.all(sql,[RFid, TRid],(err,rows)=>{
+                  db.all(sql,[RFid, TRid],(err,rows)=>{
                   
                       if(err ){
                           reject(err); 
