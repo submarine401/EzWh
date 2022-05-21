@@ -110,4 +110,17 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     }
             
 
+    exports.deleteTestDescriptorData = () => {
+        return new Promise((resolve, reject) => {
+          const sql = 'DELETE FROM testdescriptors';
+          db.run(sql, [], function (err) {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(true);
+          })
+        })
+      };
+      
   

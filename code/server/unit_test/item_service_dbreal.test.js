@@ -49,9 +49,7 @@ describe("item", () => {
                     supplierid : item.supplierid
                 });
         });
-    }
-    
-    
+    } 
 
 });
 
