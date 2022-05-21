@@ -171,7 +171,7 @@ class DataInterface{
 
     // }
 
-    // async modify_Position(newValues, id){
+    // async modifyPosition(newValues, id){
 
     //     const positions = await this.get_all_position();
 
@@ -182,13 +182,13 @@ class DataInterface{
     //         throw 'not found';
     //     }
 
-    //     pos.modify_position(newValues);
+    //     pos.modifyPosition(newValues);
 
     //     this.positionDao.update_position(id, pos);
 
     // }
 
-    // async modify_positionID(newID, oldID){
+    // async modifyPositionID(newID, oldID){
 
     //     const positions = await this.get_all_position();
 
@@ -199,7 +199,7 @@ class DataInterface{
     //         throw 'not found';
     //     }
         
-    //     pos.modify_positionID(newID);
+    //     pos.modifyPositionID(newID);
 
     //     this.positionDao.update_position(oldID, pos);
 
