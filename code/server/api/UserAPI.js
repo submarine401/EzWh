@@ -4,11 +4,7 @@ const express = require ('express');
 const dataInterface = require ('../DataInterface');
 const dao = require('../modules/UserDAO');
 const UserService = require('../services/UserService');
-<<<<<<< HEAD
-const usersService = new UserService(dao);
-=======
 const userService = new UserService(dao);
->>>>>>> 0f04c674427fb0f00c5ac6656487242e7a681d1a
 
 let router = express.Router();
 

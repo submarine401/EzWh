@@ -1,115 +1,133 @@
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
-// chai.use(chaiHttp);
-// chai.should();
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+chai.should();
 
-// const app = require('../server');
-// var agent = chai.request.agent(app);
+const app = require('../server');
+var agent = chai.request.agent(app);
 
  
-//         describe('test ReturnOrder apis', () => {
+        describe('test ReturnOrder apis', () => {
 
-//             // beforeEach(async () => {
-//             //     await agent.delete('/api/allUsers');
-//             // })
+            // beforeEach(async () => {
+            //     await agent.delete('/api/allUsers');
+            // })
             
-//             const item = {
-//             "description" : "a new item",
-//             "price" : 10.99,
-//             "SKUId" : 9,
-//             "supplierId" : 2
-//         }
-
-
-//             deleteItem(204,1);
-//             deleteItem(404);
-//             newItem(201,item)
-//             newItem(422)
-//             getItemById(200,3,item);
-//             getItemById(404,1,item);
+            const RO = {
+                    "returnDate":"2021/11/29 09:33",
+                    "products": [{"SKUId":12,"description":"a product","price":10.99,"RFID":"12345678901234567890123456789016"},
+                                {"SKUId":180,"description":"another product","price":11.99,"RFID":"12345678901234567890123456789038"}],
+                    "restockOrderId" : 2
+                }
+            deleteRestockOrder(204,10);
+            deleteRestockOrder(422);
+            deleteRestockOrder(422);
+            newReturnOrder(201,RO)
+            newReturnOrder(422)
+            getROById(200,20,RO);
+            getROById(404,100,RO);
+           // getItemById(404,1,item);
         
-//         });
+        });
         
-// function getItemById(expectedHTTPStatus, id,item) {
-//     it('getting Item data from the system',  (done)=> {
-//         agent.post('/api/item')
-//             .send(item)
-//             .then( (res)=> {
-//                 res.should.have.status(201);
-//                 res.body.should.equal("new item is inserted");
-//                 agent.get("/api/items/" + id)
-//                     .then( (r)=> {
-//                      if(r.status !== 404){   
-//                             r.should.have.status(expectedHTTPStatus);
-//                             r.body[0]["id"].should.equal(id);
-//                             r.body[0]['description'].should.equal(item.description);
-//                             r.body[0]['price'].should.equal(item.price);
-//                             r.body[0]["skuid"].should.equal(item.SKUId);
-//                             r.body[0]["supplierid"].should.equal(item.supplierId);
-//                             done();
-//                         }
-//                     else{
-//                         agent.get("/api/items/" + id)
-//                         .then((res)=> {                     
-//                             res.should.have.status(expectedHTTPStatus);
-//                             done();
-//                         })
-//                         }
-//                     }
-                    
-//                     ).catch((err)=>{
-//                         done(err);
-//                     })
-//             });
-//     });
-// }
+function getROById(expectedHTTPStatus, id,ro) {
+    it('getting Return order data from the system',  (done)=> {
+        agent.get('/api/restockOrders/'+ro.restockOrderId)
+        .then((res)=> {                     
+            if(res.status ===200){
+        agent.post('/api/returnOrder')
+            .send(ro)
+            .then( (res)=> {
+                res.should.have.status(201);
+                res.body.should.equal("new returnorder is inserted");
+                agent.get('/api/restockOrders/' + id)
+                    .then( (r)=> {
+                     if(r.status !== 404){   
+                            r.should.have.status(expectedHTTPStatus);
+                            r.body[0]["id"].should.equal(id);
+                            r.body[0]['returnDate'].should.equal(ro.returnDate);
+                            r.body[0]['products'].should.equal(ro.products);
+                            r.body[0]["restockOrderId"].should.equal(item.restockOrderId);
+                            done();
+                        }
+                    else{
+                        agent.get('/api/returnOrders/' + id)
+                        .then((res)=> {                     
+                            res.should.have.status(expectedHTTPStatus);
+                            done();
+                        }).catch((err)=>{
+                            done(err);
+                        })
+                        }
+                    }).catch((err)=>{
+                        done(err);
+                    })
+            })
+            .catch((err)=>{
+                done(err);
+            })
+            }
+            else {
+                agent.get('/api/restockOrders/'+ro.restockOrderId)
+                .then((res)=> {                     
+                    res.should.have.status(404);
+                    done();
+                }).catch((err)=>{
+                    done(err);
+                })
 
-// function newItem(expectedHTTPStatus, item) {
-//     it('adding a new item', function (done) {
-//         if (item !== undefined) {
-//             agent.post('/api/item')
-//                 .send(item)
-//                 .then(function (res) {
-//                     res.should.have.status(expectedHTTPStatus);
-//                     res.body.should.equal("new item is inserted");
-//                     done();
-//                 }).catch((err)=>{
-//                     done(err);
-//                 })
-//         } else {
-//             agent.post('/api/item') //we are not sending any data
-//                 .then( (res)=> {                     
-//                     res.should.have.status(expectedHTTPStatus);
-//                     done();
-//                 }).catch((err)=>{
-//                     done(err);
-//                 })
-//         }
+            }
+        });
+        
+    });
+}
 
-//     });
-// }
+function newReturnOrder(expectedHTTPStatus, ro) {
+    it('adding a new RO', function (done) {
+        if (ro !== undefined) {
+            agent.post('/api/returnOrder')
+                .send(ro)
+                .then(function (res) {
+                    res.should.have.status(expectedHTTPStatus);
+                    res.body.should.equal("new returnorder is inserted");
+                    done();
+                }).catch((err)=>{
+                    done(err);
+                }).catch((err)=>{
+                    done(err);
+                })
+        } else {
+            agent.post('/api/returnOrder') //we are not sending any data
+                .then( (res)=> {                     
+                    res.should.have.status(expectedHTTPStatus);
+                    done();
+                }).catch((err)=>{
+                    done(err);
+                })
+        }
 
+    });
+}
 
-
-// function  deleteItem(expectedHTTPStatus, id) {
-//     it('Deleting item', function (done) {
-//         if(id !== undefined){
-//         agent.delete('/api/items/'+id)
-//             .then( (res)=> {
-//                 res.should.have.status(expectedHTTPStatus);
-//                 done();
-//             });
-//         }
-//         else{
-//             agent.delete('/api/items/'+id) //we are not sending any data
-//             .then( (res)=> {                     
-//                 res.should.have.status(expectedHTTPStatus);
-//                 done();
-//             }).catch((err)=>{
-//                 done(err);
-//             })
-//         }
-//     });
-// }
-
-
+function  deleteRestockOrder(expectedHTTPStatus, id) {
+    it('Deleting Return Order', function (done) {
+        if(id !== undefined){
+        agent.delete('/api/returnOrder/'+id)
+            .then( (res)=> {
+                res.should.have.status(expectedHTTPStatus);
+                done();
+            }).catch((err)=>{
+                done(err);
+            });
+        }
+        else{
+            agent.delete('/api/returnOrder/'+id) //we are not sending any data
+            .then( (res)=> {                     
+                res.should.have.status(expectedHTTPStatus);
+                done();
+            }).catch((err)=>{
+                done(err);
+            })
+        }
+    });
+}

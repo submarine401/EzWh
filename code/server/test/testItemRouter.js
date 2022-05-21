@@ -9,6 +9,8 @@ var agent = chai.request.agent(app);
  
         describe('test Item apis', () => {
 
+          
+
             // beforeEach(async () => {
             //     await agent.delete('/api/allUsers');
             // })
@@ -21,11 +23,11 @@ var agent = chai.request.agent(app);
         }
 
 
-            deleteItem(204,1);
-            deleteItem(404);
+            deleteItem(204,13);
+            deleteItem(422);
             newItem(201,item)
             newItem(422)
-            getItemById(200,3,item);
+            getItemById(200,8,item);
             getItemById(404,1,item);
         
         });
@@ -93,11 +95,13 @@ function newItem(expectedHTTPStatus, item) {
 
 function  deleteItem(expectedHTTPStatus, id) {
     it('Deleting item', function (done) {
-        if(id !== undefined){
+        if(!id >0){
         agent.delete('/api/items/'+id)
             .then( (res)=> {
                 res.should.have.status(expectedHTTPStatus);
                 done();
+            }).catch((err)=>{
+                done(err);
             });
         }
         else{
@@ -105,6 +109,8 @@ function  deleteItem(expectedHTTPStatus, id) {
             .then( (res)=> {                     
                 res.should.have.status(expectedHTTPStatus);
                 done();
+            }).catch((err)=>{
+                done(err);
             }).catch((err)=>{
                 done(err);
             })

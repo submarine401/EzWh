@@ -46,17 +46,21 @@ router.post('/api/returnOrder',async (req,res)=>{
   router.delete('/api/returnOrder/:id',async (req,res)=>{
     try{
       const id = req.params.id
-      console.log(id);
-      if( id <=0 ){
-        return res.status(422).json({error : "INVALID IO INPUT"});
+      
+      if( id >0 ){
+        
+        const results = await returnOrderservice.deleteReturnOrder(id);
+        if (results) {
+          return res.status(204).json(results);
+          }
+           else {
+            return res.status(422).json({error : "Not found"});
+           } 
       }
+      return res.status(422).json({error : "INVALID IO INPUT"});
     
-    const results = await returnOrderservice.deleteReturnOrder(id);
-    if (results) {
-    return res.status(200).json(results);
-    } else {
-      return res.status(422).json({error : "Not found"});
-     } }
+    
+    }
     catch(err)
     {
       return res.status(503).end();

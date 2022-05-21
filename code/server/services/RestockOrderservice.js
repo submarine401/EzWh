@@ -34,6 +34,11 @@ class RestockOrderservice {
         const result = await this.dao.delete_restock_order(id);
         return result;
     }
+
+    deleteAllRestockOrder = async () => {
+        const result = await this.dao.delete_all_restock_order();
+        return result;
+    }
     
     getAllRestockOrders = async () => {
         const result = await dataInterface.get_all_restock_order();

@@ -106,9 +106,6 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
   */
   router.delete('/api/internalOrders/:id',async (req,res)=>{
     try{
-  
-     
-    
       const id = req.params.id
       if( id === undefined ){
         return res.status(422).json({error : "INVALID IO INPUT"});
@@ -116,7 +113,7 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
     
     const results = await internalOrderservice.deleteInternalOrder(id);
     if (results) {
-    return res.status(200).json(results);
+    return res.status(204).json(results);
      } else {
       return res.status(422).json({error : "Not found"});
       }
@@ -128,6 +125,26 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
     }
   });
   /*
+    delete all IOs
+  */
+    router.delete('/api/allIO',async (req,res)=>{
+      try{
+      
+      
+      const results = await internalOrderservice.deleteAllInternalOrder();
+      if (results) {
+      return res.status(200).json(results);
+       } else {
+        return res.status(422).json({error : "Not found"});
+        }
+      } 
+      catch(err)
+      {
+        console.log(err);
+        return res.status(503).end();
+      }
+    });
+  /* /api/allIO
   MODIFY IO
   */
   router.put('/api/internalOrders/:id',async (req,res)=>{

@@ -15,8 +15,9 @@ exports.insert_internal_order = (nio)=>{
                 
             });
         const g = JSON.stringify(prods);
+        //dayjs().format('YYYY-MM-DD HH:mm:ss') 
         const sql = 'INSERT INTO internalorders (date,state,customerId,products) VALUES(?,?,?,?)';
-        db.run(sql,[dayjs().format('YYYY-MM-DD HH:mm:ss') ,"ISSUED",nio.customerId,g],(err)=>{
+        db.run(sql,[nio.issueDate,"ISSUED",nio.customerId,g],(err)=>{
             if(err){
                 reject(err);
                 return;
@@ -75,6 +76,20 @@ exports.delete_internal_order = (ioid)=>{
                 return;
             }
             resolve(`IO with id ${ioid} is deleted`);
+        });
+    });
+
+}
+
+exports.delete_all_internal_order = ()=>{
+    return new Promise ((resolve,reject)=>{
+        const sql = 'DELETE FROM internalorders';
+        db.run(sql,[],(err)=>{
+            if(err){
+                reject(err);
+                return;
+            }
+            resolve(`IO table is empty`);
         });
     });
 

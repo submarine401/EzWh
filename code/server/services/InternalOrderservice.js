@@ -21,6 +21,11 @@ class InternalOrderservice {
         return result;
     }
 
+    deleteAllInternalOrder = async () => {
+        const result = await this.dao.delete_all_internal_order();
+        return result;
+    }
+
     getAllInternalOrder = async (id) => {
         const result = await dataInterface.get_internalOrders(id);
         return result;
