@@ -1,5 +1,6 @@
 sqlite = require('sqlite3');
-const Position =require("../Position")
+const Position = require('../Position');
+
 const db = new sqlite.Database('EZWHDB.db', (err) => {
     if (err) throw err;
 });

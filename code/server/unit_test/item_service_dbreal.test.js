@@ -1,7 +1,6 @@
 const Itemservice = require('../services/Itemservice');
 const dao = require('../modules/ItemDao')
 const itemService = new Itemservice(dao);
-
 describe("item", () => {
     beforeEach(async () => {
         await dao.deleteItemData();
@@ -50,9 +49,7 @@ describe("item", () => {
                     supplierid : item.supplierid
                 });
         });
-    }
-    
-    
+    } 
 
 });
 

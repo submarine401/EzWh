@@ -30,7 +30,7 @@ exports.load_SKU = (id) => {
         const sql_query = 'SELECT * FROM sku \
                             WHERE id = ?;';
 
-        this.db.all(sql_query, [id], (err, rows)=>{
+        db.all(sql_query, [id], (err, rows)=>{
 
             if(err){
                 reject(err); 
@@ -54,7 +54,7 @@ exports.store_SKU= (sku) => {
                             VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
                 const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
                                 sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/];
-                this.db.run(sql, params, (err)=>{
+                db.run(sql, params, (err)=>{
                     if(err){
                         reject(err);
                         return}
@@ -83,7 +83,7 @@ exports.update_SKU = (id, sku) => {
             sku.availableQuantity, sku.position?sku.position.id:undefined,
             id
         ] 
-        this.db.run(sql_query, params, (err)=>{
+        db.run(sql_query, params, (err)=>{
 
             if(err){
                 reject(err); 
@@ -103,7 +103,7 @@ exports.delete_SKU = (id) => {
         const sql_query = 'DELETE FROM sku \
                            WHERE id = ?';
 
-        this.db.run(sql_query, [id], (err)=>{
+        db.run(sql_query, [id], (err)=>{
 
             if(err){
                 reject(err); 

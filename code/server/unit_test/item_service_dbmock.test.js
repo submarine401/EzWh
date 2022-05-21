@@ -2,17 +2,11 @@ const Itemservice = require('../services/Itemservice');
 const dao = require('../modules/ItemDaoMock')
 const itemService = new Itemservice(dao);
 const dataInterface = require('../DataInterface');
+
 //test case defenition 
 describe('get Items', ()=>{
     beforeEach(()=>{
         dao.get_all_items.mockReset();
-        dao.get_all_items.mockReturnValueOnce({
-            id : "1",
-            description : "a new item",
-            price : "11.99",
-            skuid : "9",
-            supplierid : "2"
-        });
     });
 
     test('get Items', async () => {
@@ -53,5 +47,3 @@ describe("setitem", () => {
     });
 
 });
-
-

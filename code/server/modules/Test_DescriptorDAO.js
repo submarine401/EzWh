@@ -12,6 +12,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
            db.run(sql,[ td.name,td.procedureDescription, td.idSKU], (err)=>{
                if(err)
                {
+                   
                    reject(err);
                    return;
                }
@@ -82,5 +83,44 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 });
             
         });
+
+    }
+
+    exports.get_TD_by_id = (id) => {
+        return new Promise((resolve,reject)=>{
         
-  }
+            const sql = "SELECT * FROM testdescriptors where id = ?";
+                db.all(sql,[id],(err,rows)=>{
+                        if(err){
+                            reject(err); 
+                            return;
+                            }
+                        const testdescriptors = rows.map((t)=>(
+                        {
+                        id : t.id,
+                        name : t.name,
+                        procedure_description : t.procedure_description,
+                        idSKU : t.idSKU
+                        
+                }));
+                resolve(testdescriptors);
+            });
+                
+        });
+    }
+            
+
+    exports.deleteTestDescriptorData = () => {
+        return new Promise((resolve, reject) => {
+          const sql = 'DELETE FROM testdescriptors';
+          db.run(sql, [], function (err) {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(true);
+          })
+        })
+      };
+      
+  

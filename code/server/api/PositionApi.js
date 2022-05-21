@@ -87,11 +87,13 @@ router.put('/api/position/:positionID', (req, res)=>{
             return res.status(422).json({error : "Unprocessable Entity"});
         }
       
-        positionService.modify_Position(newValues, req.params.positionID)
+        positionService.modifyPosition(newValues, req.params.positionID)
           .then(() => {return res.status(200).end();})
           .catch((err => {
             if(err === 'not found'){
               return res.status(404).end();
+            } else if(err === 'taken ID'){
+              return res.status(422).end();
             } else {
               console.log(err);
               return res.status(503).end();
@@ -119,11 +121,13 @@ router.put('/api/position/:positionID/changeID', (req, res)=>{
             return res.status(422).json({error : "Unprocessable Entity"});
         }
         
-        positionService.modify_positionID(req.body.newPositionID, req.params.positionID)
+        positionService.modifyPositionID(req.body.newPositionID, req.params.positionID)
           .then(() => {return res.status(200).end();})
           .catch((err => {
             if(err === 'not found'){
               return res.status(404).end();
+            } else if(err === 'taken ID'){
+              return res.status(422).end();
             } else {
               console.log(err);
               return res.status(503).end();

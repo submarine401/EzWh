@@ -1,11 +1,12 @@
-'use strict'
-
 const express = require('express');
-const dataInterface = require('../DataInterface');
+
 const db = require('../modules/Test_DescriptorDAO');
 const Test_DescriptorService = require('../services/Test_DescriptorService')
 const TestDescriptorService = new Test_DescriptorService(db);
 
+const dbs = require('../modules/SkuDao');
+const SkuService = require('../services/SkuService');
+const sku_Service = new SkuService(dbs)
 
 let router = express.Router();
 
@@ -70,7 +71,7 @@ router.post('/api/testDescriptor', async (req,res)=>{
       return res.status(422).json({error : "Unprocessable Entity"});
     }
     const idSKU= req.body.idSKU;
-    const s = await dataInterface.get_SKU(idSKU);
+    const s = await sku_Service.get_SKU(idSKU);
     
     if(s === undefined){ 
       return res.status(404).json({error: "No sku associated idSKU"});
@@ -104,7 +105,7 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
       if(id > 0 && typeof Number(id) === 'number'){   
         const t = await TestDescriptorService.getTestDescriptorsById(id);
      
-        const s = await dataInterface.get_SKU(td.newIdSKU);
+        const s = await sku_Service.get_SKU(td.newIdSKU);
           if(t.length === 0 || s === undefined){
                 return res.status(404).json({error: "No test descriptor associated id or no sku associated to IDSku"});
           }else{

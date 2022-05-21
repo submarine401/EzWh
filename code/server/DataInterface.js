@@ -171,7 +171,7 @@ class DataInterface{
 
     // }
 
-    // async modify_Position(newValues, id){
+    // async modifyPosition(newValues, id){
 
     //     const positions = await this.get_all_position();
 
@@ -182,13 +182,13 @@ class DataInterface{
     //         throw 'not found';
     //     }
 
-    //     pos.modify_position(newValues);
+    //     pos.modifyPosition(newValues);
 
     //     this.positionDao.update_position(id, pos);
 
     // }
 
-    // async modify_positionID(newID, oldID){
+    // async modifyPositionID(newID, oldID){
 
     //     const positions = await this.get_all_position();
 
@@ -199,7 +199,7 @@ class DataInterface{
     //         throw 'not found';
     //     }
         
-    //     pos.modify_positionID(newID);
+    //     pos.modifyPositionID(newID);
 
     //     this.positionDao.update_position(oldID, pos);
 
@@ -591,113 +591,6 @@ get_issued_restock_order()
         });
     });
 }
-
-
-
-//  get_TD(){ 
-//   return new Promise((resolve,reject)=>{
-     
-//                   const sql = "SELECT * FROM testdescriptors ";
-//                     this.dbHelper.db.all(sql,(err,rows)=>{
-//                   if(err){
-//                       reject(err); 
-//                       return;
-//                       }
-//                   const testdescriptors = rows.map((t)=>(
-//                   {
-//                       id : t.id,
-//                       name : t.name,
-//                       procedureDescription : t.procedure_description,
-//                       idSKU : t.idSKU
-                      
-//                   })); 
-//                   resolve(testdescriptors);
-//               });
-          
-//       });
-      
-// }
-
-get_TD_by_id(id){
-  return new Promise((resolve,reject)=>{
-     
-       const sql = "SELECT * FROM testdescriptors where id = ?";
-            dbHelper.db.all(sql,[id],(err,rows)=>{
-                  if(err){
-                      reject(err); 
-                      return;
-                      }
-                  const testdescriptors = rows.map((t)=>(
-                  {
-                   id : t.id,
-                   name : t.name,
-                   procedure_description : t.procedure_description,
-                   idSKU : t.idSKU
-                  
-           }));
-           resolve(testdescriptors);
-       });
-          
-   });
-}
-   
-
-/********************************TR METHODS***************************/
-
-
-get_TR(RFid, TRid) { 
-  return new Promise((resolve,reject)=>{
-
-    if(TRid===undefined){
-              const sql = "SELECT * FROM testresults WHERE RFid = ?  ";
-              dbHelper.db.all(sql,[RFid],(err,rows)=>{
-                 console.log(rows.length)
-                  if(err){
-                      reject(err); 
-                      return;
-                      }else if(rows.length===0){
-                          resolve(404);
-                          return;
-                      }else{
-                
-                    
-                   const  testresults = rows.map((tr)=>(
-                  {
-                    id : tr.TRid,
-                    idTestDescriptor : tr.TDid,
-                    Date : tr.date,
-                    Result : tr.result 
-                    
-                  })); 
-
-                  resolve(testresults);
-                }
-              });
-          }else{
-              const sql = "SELECT * FROM testresults where RFid = ? AND TRid = ?";
-              dbHelper.db.all(sql,[RFid, TRid],(err,rows)=>{
-              
-                  if(err ){
-                      reject(err); 
-                      return;
-                    }
-                  const testresults = rows.map((tr)=>(
-                  {
-                    id : tr.TRid,
-                    idTestDescriptor : tr.TDid,
-                    Date : tr.date,
-                    Result : tr.result 
-                    
-                   }));
-                  resolve(testresults);
-                
-              });
-              
-          
-          }
-          
-      });
-  }
 
 
 }
