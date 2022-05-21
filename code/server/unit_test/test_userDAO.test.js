@@ -44,3 +44,5 @@ describe('GET list of suppliers', () => {
   });
   
 });
+
+ });
