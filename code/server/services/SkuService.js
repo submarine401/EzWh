@@ -116,3 +116,5 @@ class SkuService{
         
     }
 }
+
+module.exports = SkuService;

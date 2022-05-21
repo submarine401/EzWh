@@ -1,11 +1,14 @@
-const positionDao = require('../modules/PositionDao');
 const Position = require('../Position');
 
 class PositionService{
 
+    constructor(dao){
+        this.dao = dao;
+    }
+
     async get_all_position(){
 
-        const positions = await positionDao.load_positions();
+        const positions = await this.dao.load_positions();
         return positions;
         
     }
@@ -25,7 +28,7 @@ class PositionService{
 
             const newPos = new Position(posData);
 
-            await this.positionDao.store_position(newPos);
+            await this.dao.store_position(newPos);
 
         }  catch(err) {
           throw(err);
@@ -46,7 +49,7 @@ class PositionService{
 
         pos.modify_position(newValues);
 
-        this.positionDao.update_position(id, pos);
+        this.dao.update_position(id, pos);
 
     }
 
@@ -63,7 +66,7 @@ class PositionService{
         
         pos.modify_positionID(newID);
 
-        this.positionDao.update_position(oldID, pos);
+        this.dao.update_position(oldID, pos);
 
     }
 
@@ -79,9 +82,11 @@ class PositionService{
             throw 'not found';
         }
 
-        this.positionDao.delete_position(id);
+        this.dao.delete_position(id);
         
 
     }
 
 }
+
+module.exports = PositionService;

@@ -1,6 +1,4 @@
 'use strict';
-
-const skuService = require("./services/SkuService");
 const skuDao = require("./modules/SkuDao");
 
 class SKU{
