@@ -1,4 +1,4 @@
-const dataInterface = require('../DataInterface');
+
 class Test_ResultService {
     dao;
 
@@ -22,7 +22,7 @@ deleteTestResult = async (TRid, RFid) => {
 
 
 getTestResult = async (RFid, TRid) => {
-    const result = await dataInterface.get_TR(RFid, TRid);
+    const result = await this.dao.get_TR(RFid, TRid);
     return result;
 }
 

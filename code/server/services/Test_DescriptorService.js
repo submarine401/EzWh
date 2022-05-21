@@ -1,4 +1,3 @@
-const dataInterface = require("../DataInterface");
 class Test_DescriptorService {
     dao;
 
@@ -28,7 +27,7 @@ getAllTestDescriptors = async () => {
 }
 
 getTestDescriptorsById = async (id) => {
-    const result = await dataInterface.get_TD_by_id(id);
+    const result = await this.dao.get_TD_by_id(id);
     return result;
 }
 

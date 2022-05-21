@@ -618,33 +618,33 @@ get_issued_restock_order()
       
 // }
 
-get_TD_by_id(id){
-  return new Promise((resolve,reject)=>{
+// get_TD_by_id(id){
+//   return new Promise((resolve,reject)=>{
      
-       const sql = "SELECT * FROM testdescriptors where id = ?";
-            dbHelper.db.all(sql,[id],(err,rows)=>{
-                  if(err){
-                      reject(err); 
-                      return;
-                      }
-                  const testdescriptors = rows.map((t)=>(
-                  {
-                   id : t.id,
-                   name : t.name,
-                   procedure_description : t.procedure_description,
-                   idSKU : t.idSKU
+//        const sql = "SELECT * FROM testdescriptors where id = ?";
+//             dbHelper.db.all(sql,[id],(err,rows)=>{
+//                   if(err){
+//                       reject(err); 
+//                       return;
+//                       }
+//                   const testdescriptors = rows.map((t)=>(
+//                   {
+//                    id : t.id,
+//                    name : t.name,
+//                    procedure_description : t.procedure_description,
+//                    idSKU : t.idSKU
                   
-           }));
-           resolve(testdescriptors);
-       });
+//            }));
+//            resolve(testdescriptors);
+//        });
           
-   });
-}
+//    });
+// }
    
 
 /********************************TR METHODS***************************/
 
-
+/*
 get_TR(RFid, TRid) { 
   return new Promise((resolve,reject)=>{
 
@@ -698,7 +698,7 @@ get_TR(RFid, TRid) {
           
       });
   }
-
+*/
 
 }
 

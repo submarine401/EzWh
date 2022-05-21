@@ -82,5 +82,31 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 });
             
         });
+
+    }
+
+    exports.get_TD_by_id = (id) => {
+        return new Promise((resolve,reject)=>{
         
-  }
+            const sql = "SELECT * FROM testdescriptors where id = ?";
+                dbHelper.db.all(sql,[id],(err,rows)=>{
+                        if(err){
+                            reject(err); 
+                            return;
+                            }
+                        const testdescriptors = rows.map((t)=>(
+                        {
+                        id : t.id,
+                        name : t.name,
+                        procedure_description : t.procedure_description,
+                        idSKU : t.idSKU
+                        
+                }));
+                resolve(testdescriptors);
+            });
+                
+        });
+    }
+            
+
+  

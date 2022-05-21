@@ -56,5 +56,58 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     });
 
 }
+    
+    exports.get_TR = (RFid, TRid) => { 
+      return new Promise((resolve,reject)=>{
+    
+        if(TRid===undefined){
+                  const sql = "SELECT * FROM testresults WHERE RFid = ?  ";
+                  dbHelper.db.all(sql,[RFid],(err,rows)=>{
+                     console.log(rows.length)
+                      if(err){
+                          reject(err); 
+                          return;
+                          }else if(rows.length===0){
+                              resolve(404);
+                              return;
+                          }else{
+                    
+                        
+                       const  testresults = rows.map((tr)=>(
+                      {
+                        id : tr.TRid,
+                        idTestDescriptor : tr.TDid,
+                        Date : tr.date,
+                        Result : tr.result 
+                        
+                      })); 
+    
+                      resolve(testresults);
+                    }
+                  });
+              }else{
+                  const sql = "SELECT * FROM testresults where RFid = ? AND TRid = ?";
+                  dbHelper.db.all(sql,[RFid, TRid],(err,rows)=>{
+                  
+                      if(err ){
+                          reject(err); 
+                          return;
+                        }
+                      const testresults = rows.map((tr)=>(
+                      {
+                        id : tr.TRid,
+                        idTestDescriptor : tr.TDid,
+                        Date : tr.date,
+                        Result : tr.result 
+                        
+                       }));
+                      resolve(testresults);
+                    
+                  });
+ 
+              }
+          });
+    
+}
 
 
