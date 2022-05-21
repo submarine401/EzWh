@@ -3,8 +3,12 @@
 const express = require ('express');
 const dataInterface = require ('../DataInterface');
 const dao = require('../modules/UserDAO');
-const UserService = require('UserService');
+const UserService = require('../services/UserService');
+<<<<<<< HEAD
 const usersService = new UserService(dao);
+=======
+const userService = new UserService(dao);
+>>>>>>> 0f04c674427fb0f00c5ac6656487242e7a681d1a
 
 let router = express.Router();
 
@@ -41,9 +45,11 @@ router.post('/api/newUser', async (req,res) => {
     }
     
     const check_username = await userService.get_users_no_manager();
-    const res_check_username = check_username.filter(function(users){
-      return users.username == new_u.username;
+    console.log(check_username);
+    const res_check_username = check_username.filter(users => {
+      return users.email == new_u.username;
     });
+    console.log(res_check_username);
     
     if(res_check_username.length !== 0){
       return res.status(409).end("User already existent!");
@@ -106,6 +112,7 @@ router.put('/api/users/:username', async (req,res) =>{
 router.delete('/api/users/:username/:type', async (req,res) => {
   const type = req.params.type;
   const username = req.params.username
+  console.log(username);
   try {
     const result = await userService.delete_user(username,type);
     if(result === 422){

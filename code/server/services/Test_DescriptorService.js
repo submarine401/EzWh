@@ -1,4 +1,4 @@
-const dataInterface = require('../DataInterface');
+const dataInterface = require("../DataInterface");
 class Test_DescriptorService {
     dao;
 
@@ -23,7 +23,7 @@ deleteTestDescriptor = async (id) => {
 
 
 getAllTestDescriptors = async () => {
-    const result = await dataInterface.get_TD();
+    const result = await this.dao.get_TD();
     return result;
 }
 

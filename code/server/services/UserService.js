@@ -17,13 +17,13 @@ class UserService{
   }
   
   setUser = async function(user_object){
-    const result = this.dao.newUser(user_object);
+    const result = await this.dao.newUser(user_object);
     return result;
   }
   
   modify_user = async function(username,type_data){  
     //type data is a JSON object like the one descriped inside the PUT API
-    const result = this.dao.modify_user_rights(username,type_data);
+    const result = await this.dao.modify_user_rights(username,type_data);
     return result;
   }
   

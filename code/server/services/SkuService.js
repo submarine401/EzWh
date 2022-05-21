@@ -1,6 +1,14 @@
 const skuDao = require('../modules/SkuDao');
 const SKU = require('../SKU');
 
+const db = require('../modules/PositionDao');
+const PositionService = require('../services/PositionService');
+const positionService = new PositionService(db)
+
+const db_td = require('../modules/Test_DescriptorDAO');
+const Test_DescriptorService = require('../services/Test_DescriptorService');
+const test_DescriptorService = new Test_DescriptorService(db_td)
+
 class SkuService{
 
     async create_SKU(skuData){
@@ -20,9 +28,9 @@ class SkuService{
     async return_SKU(){
         const skus = await skuDao.load_SKUs();
 
-        const positions = await this.get_all_position();
+        const positions = await positionService.get_all_position();
 
-        const all_test_descriptors = await this.get_TD();
+        const all_test_descriptors = await test_DescriptorService.getAllTestDescriptors();
 
         const ret = skus.map( (sku) => {
                     
@@ -116,5 +124,4 @@ class SkuService{
         
     }
 }
-
 module.exports = SkuService;

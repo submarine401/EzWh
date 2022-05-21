@@ -5,6 +5,9 @@ const db = require('../modules/ItemDao');
 const Itemservice = require('../services/Itemservice')
 const itemservice = new Itemservice(db);
 
+const SkuService = require('../services/SkuService')
+const skuService = new SkuService(db);
+
 const dataInterface = require('../DataInterface');
 
 let router = express.Router();
@@ -40,7 +43,8 @@ router.get('/api/items',async (req,res)=>{
       if( ni === undefined || ni.description === undefined || ni.price === undefined || ni.SKUId === undefined || ni.supplierId === undefined ){
         return res.status(422).json({error : "Unprocessable Entityy"});
       }
-       const results = await dataInterface.get_SKU(ni.SKUId).then((success)=>{if(success !== undefined){return itemservice.setItem(ni)}else return 0 },(failure)=>{return failure;})
+       const results = await skuService.get_SKU(ni.SKUId).then((success)=>{if(success !== undefined){return itemservice.setItem(ni)}else return 0 },(failure)=>{return failure;})
+       console.log(results)
       if(results !== 0)
       return res.status(201).json(results);
       else

@@ -88,5 +88,4 @@ class PositionService{
     }
 
 }
-
 module.exports = PositionService;
