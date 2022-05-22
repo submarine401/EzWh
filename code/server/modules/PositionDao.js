@@ -93,7 +93,7 @@ exports.update_position = (id, pos) => {
                            WHERE positionID = ?';
 
         const params = [
-            pos.id, pos.aisle, pos.row, pos.col, pos.maxWeight,
+            pos.positionID, pos.aisleID, pos.row, pos.col, pos.maxWeight,
             pos.maxVolume, pos.occupiedWeight, pos.occupiedVolume,
             id
         ]
