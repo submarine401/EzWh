@@ -473,34 +473,34 @@ class DBhelper {
 /*
 *****************************************************CREATE TEST DESCRIPTOR TABLE********************************************
 */
-create_test_descriptor_table (){
-    return new Promise((resolve,reject)=>{
-    const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (id integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
-    this.db.run(sql, (err)=>{
-        if(err){
-            reject(err);
-            return
-        }
-        resolve("testdescriptors Table -> OK");
-    });
- });
-}
+// create_test_descriptor_table (){
+//     return new Promise((resolve,reject)=>{
+//     const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (id integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
+//     this.db.run(sql, (err)=>{
+//         if(err){
+//             reject(err);
+//             return
+//         }
+//         resolve("testdescriptors Table -> OK");
+//     });
+//  });
+// }
 
 
 /*
 *****************************************************CREATE TEST RESULT TABLE********************************************
 */
-create_test_result_table (){
-    return new Promise((resolve,reject)=>{
-    const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, TDid integer, date text,result boolean)';
-    this.db.run(sql, (err)=>{
-        if(err){
-            reject(err);
-            return}
-        resolve("testresults Table -> OK");
-    });
- });
-}
+// create_test_result_table (){
+//     return new Promise((resolve,reject)=>{
+//     const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, TDid integer, date text,result boolean)';
+//     this.db.run(sql, (err)=>{
+//         if(err){
+//             reject(err);
+//             return}
+//         resolve("testresults Table -> OK");
+//     });
+//  });
+// }
 
 
 //**************************************************RSO Table****************************************************

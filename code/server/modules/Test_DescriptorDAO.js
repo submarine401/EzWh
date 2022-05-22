@@ -6,9 +6,25 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     });
 
 
+exports.create_test_descriptor_table =  () => {
+    return new Promise((resolve,reject)=>{
+    const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (id integer PRIMARY KEY AUTOINCREMENT,name text,procedureDescription text, idSKU integer)';
+     db.run(sql, (err)=>{
+        if(err){
+            reject(err);
+            return
+        }
+        resolve("testdescriptors Table -> OK");
+        console.log("created")
+    });
+ });
+}
+
+
+
    exports.insert_into_test_Descriptor_table = (td) =>  {
        return new Promise ((resolve,reject)=>{ 
-           const sql = 'INSERT INTO testdescriptors (name, procedure_description, idSKU) VALUES(?,?,?)';
+           const sql = 'INSERT INTO testdescriptors (name, procedureDescription, idSKU) VALUES(?,?,?)';
            db.run(sql,[ td.name,td.procedureDescription, td.idSKU], (err)=>{
                if(err)
                {
@@ -19,6 +35,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                else
                {
                    resolve("new test descriptor is inserted");
+     console.log(td)
                }
 
            });
@@ -31,7 +48,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
    exports.modify_test_descriptor = (td, id) => {
 
        return new Promise ((resolve,reject)=>{
-           const sql = 'UPDATE testdescriptors SET name = ? , procedure_description = ?, idSKU = ?  WHERE id = ?';
+           const sql = 'UPDATE testdescriptors SET name = ? , procedureDescription = ?, idSKU = ?  WHERE id = ?';
            db.run(sql,[td.newName,td.newProcedureDescription,td.newIdSKU,id], (err)=>{ 
                if(err)
                {
@@ -75,7 +92,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                     {
                         id : t.id,
                         name : t.name,
-                        procedureDescription : t.procedure_description,
+                        procedureDescription : t.procedureDescription,
                         idSKU : t.idSKU
                         
                     })); 
@@ -90,19 +107,23 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         return new Promise((resolve,reject)=>{
         
             const sql = "SELECT * FROM testdescriptors where id = ?";
+            console.log(id)
+            
                 db.all(sql,[id],(err,rows)=>{
                         if(err){
                             reject(err); 
                             return;
                             }
+                            console.log(rows)
                         const testdescriptors = rows.map((t)=>(
                         {
                         id : t.id,
                         name : t.name,
-                        procedure_description : t.procedure_description,
+                        procedureDescription : t.procedureDescription,
                         idSKU : t.idSKU
                         
                 }));
+                console.log(testdescriptors)
                 resolve(testdescriptors);
             });
                 
@@ -112,7 +133,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.deleteTestDescriptorData = () => {
         return new Promise((resolve, reject) => {
-          const sql = 'DELETE FROM testdescriptors';
+          const sql = 'DROP TABLE IF EXISTS testdescriptors';
           db.run(sql, [], function (err) {
             if (err) {
               reject(err);

@@ -4,7 +4,10 @@ class Test_ResultService {
 
 constructor(dao){
     this.dao= dao;
+    this.dao.create_test_result_table();
 }
+
+
 setTestResult = async (tr) => {
     const result = await this.dao.insert_into_test_Result_table(tr);
     return result;

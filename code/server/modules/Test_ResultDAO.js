@@ -5,7 +5,17 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     if (err) throw err;
     });
 
-       
+    exports.create_test_result_table = () => {
+        return new Promise((resolve,reject)=>{
+        const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, TDid integer, date text,result boolean)';
+         db.run(sql, (err)=>{
+            if(err){
+                reject(err);
+                return}
+            resolve("testresults Table -> OK");
+        });
+     });
+    }
 
     exports.insert_into_test_Result_table = (tr)  => {
     return new Promise ((resolve,reject)=>{ 
