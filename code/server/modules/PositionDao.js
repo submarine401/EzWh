@@ -29,7 +29,7 @@ exports.delete_position_data = () => {
                 reject(err);
                 return;
             }
-            resolve("Position data -> DELETED");
+            resolve(true);
         });
     });
 }

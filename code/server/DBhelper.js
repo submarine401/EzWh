@@ -43,12 +43,12 @@ class DBhelper {
         }, function(error) {
             //console.error(error);
         });
-        //create position table
-        this.create_position_table().then(function(response) {
-            //console.log(response);
-        }, function(error) {
-            //console.error(error);
-        });
+        // //create position table
+        // this.create_position_table().then(function(response) {
+        //     //console.log(response);
+        // }, function(error) {
+        //     //console.error(error);
+        // });
         //create SKU table 
         this.create_sku_table().then(function(response) {
             //console.log(response);
@@ -296,19 +296,19 @@ class DBhelper {
     ***************************************************Position methods*****************************************************
     */
 
-    create_position_table() {
-        return new Promise((resolve, reject) => {
+    // create_position_table() {
+    //     return new Promise((resolve, reject) => {
 
-            const sql_query = 'CREATE TABLE IF NOT EXISTS position (positionID TEXT PRIMARY KEY, aisleID TEXT, row TEXT, col TEXT, maxWeight REAL, maxVolume REAL, occupiedWeight REAL, occupiedVolume REAL);'
-            this.db.run(sql_query, function (err) {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve("Position Table -> OK");
-            });
-        });
-    }
+    //         const sql_query = 'CREATE TABLE IF NOT EXISTS position (positionID TEXT PRIMARY KEY, aisleID TEXT, row TEXT, col TEXT, maxWeight REAL, maxVolume REAL, occupiedWeight REAL, occupiedVolume REAL);'
+    //         this.db.run(sql_query, function (err) {
+    //             if (err) {
+    //                 reject(err);
+    //                 return;
+    //             }
+    //             resolve("Position Table -> OK");
+    //         });
+    //     });
+    // }
 
 
     // load_positions() {
