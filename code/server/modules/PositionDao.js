@@ -20,6 +20,20 @@ exports.create_position_table = () => {
     });
 }
 
+exports.delete_position_table = () => {
+    return new Promise((resolve, reject) => {
+
+        const sql_query = 'DROP TABLE IF EXISTS position'
+        db.run(sql_query, function (err) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve("Position Table -> DELETED");
+        });
+    });
+}
+
 
 exports.load_positions = () => {
     console.log('loading position');
@@ -52,7 +66,7 @@ exports.store_position = (position) => {
             try {
                 const sql = 'INSERT INTO position (positionID, aisleID, row, col, maxWeight, maxVolume, occupiedWeight, occupiedVolume)  \
                             VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
-                const params = [position.id, position.aisle, position.row, position.col, position.maxWeight, 
+                const params = [position.positionID, position.aisleID, position.row, position.col, position.maxWeight, 
                                 position.maxVolume, position.occupiedWeight, position.occupiedVolume];
                 db.run(sql, params, (err)=>{
                     if(err){

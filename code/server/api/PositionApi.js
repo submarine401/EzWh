@@ -3,9 +3,11 @@
 const express = require('express');
 const SKU = require('../SKU');
 const Position = require('../Position');
-const positionService = require('../services/PositionService');
+const PositionService = require('../services/PositionService');
 
 let router = express.Router();
+const dao = require('../modules/PositionDao')
+const positionService = new PositionService(dao);
 
 router.get('/api/positions', (req, res)=>{
   positionService.get_all_position().then( rows => { 
