@@ -1,3 +1,4 @@
+'use strict'
 sqlite = require('sqlite3')
 
 const db = new sqlite.Database('EZWHDB.db', (err) => {

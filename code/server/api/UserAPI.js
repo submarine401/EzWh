@@ -4,7 +4,7 @@ const express = require ('express');
 const dataInterface = require ('../DataInterface');
 const dao = require('../modules/UserDAO');
 const UserService = require('../services/UserService');
-const usersService = new UserService(dao);
+const userService = new UserService(dao);
 
 let router = express.Router();
 

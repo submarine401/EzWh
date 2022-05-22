@@ -95,12 +95,14 @@ router.get('/api/items',async (req,res)=>{
   router.delete('/api/items/:id',async (req,res)=>{
     try{
       const id = req.params.id
-      if( id === undefined ){
-        return res.status(422).json({error : "INVALID IO INPUT"});
-      }
-    
-    const results = await itemservice.deleteItem(id);
+      console.log(id);
+      if( id > 0 ){
+        const results = await itemservice.deleteItem(id);
     return res.status(204).json(results);
+       
+      }
+      return res.status(422).json({error : "INVALID IO INPUT"});
+    
     }
     catch(err)
     {

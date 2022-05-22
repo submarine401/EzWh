@@ -141,3 +141,16 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
             });
         
         }
+        exports.delete_all_restock_order = ()=>{
+            return new Promise ((resolve,reject)=>{
+                const sql = 'DELETE FROM restockorder ';
+                db.run(sql,[],(err)=>{
+                    if(err){
+                        reject(err);
+                        return;
+                    }
+                    resolve(`Restock order table is empty`);
+                });
+            });
+        
+        }

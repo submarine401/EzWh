@@ -1,12 +1,21 @@
-'use strict'
 
-//const e = require('express');
 const express = require('express');
+let router = express.Router();
+
 const db = require('../modules/Test_ResultDAO');
-const skuService = require('../services/SkuService');
 const Test_ResultService = require('../services/Test_ResultService')
 const TestResultService = new Test_ResultService(db);
-let router = express.Router();
+
+
+const dbtd = require('../modules/Test_DescriptorDAO');
+const Test_DescriptorService = require('../services/Test_DescriptorService');
+const test_DescriptorService = new Test_DescriptorService(dbtd)
+
+
+const dbsi = require('../modules/SKUItemDAO');
+const SKUItemService = require ('../services/SKUItemService')
+const SKU_item_service = new SKUItemService(dbsi);
+
 
 
 router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
@@ -17,7 +26,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
       if( rfid > 0 && typeof rfid === 'string') {
           
-        const t = await Test.get_TR(rfid);
+        const t = await TestResultService.getTestResult(rfid);
           
         if(t === 404){
           return res.status(404).json({error: "No skuItem found for this rfID"});
@@ -85,11 +94,11 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       }
   
       //console.log("--"+s)
-      const s = await skuService.get_SKUItem_by_RFID(newTR.rfid);
+      const s = await SKU_item_service.search_by_RFID(newTR.rfid);
       
       //console.log("+++"+s)
 
-      const td = await TestDescriptorService.getTestDescriptorsById(newTR.idTestDescriptor);
+      const td = await test_DescriptorService.getTestDescriptorsById(newTR.idTestDescriptor);
 //console.log(td)
 
 
@@ -97,7 +106,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
       }
   
-      await TestDResultService.setTestResult(newTR); 
+      await TestResultService.setTestResult(newTR); 
       return res.status(201).json({success: 'Created'});
     
     }
@@ -124,8 +133,8 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
         if(id >0 && typeof Number(id) === 'number' && 
                     rfid >0 && typeof rfid === 'string'){   
-          const t = await TestDescriptorService.getTestDescriptorsById(p.newIdTestDescriptor);
-          const s = await skuService.get_SKUItem_by_RFID(rfid);
+          const t = await test_DescriptorService.getTestDescriptorsById(p.newIdTestDescriptor);
+          const s = await SKU_item_service.search_by_RFID(rfid);
           const tr = await TestResultService.getTestResult(rfid, id);
 
 console.log(tr)
@@ -157,7 +166,7 @@ console.log(tr)
       rfid >0 && typeof rfid === 'string') {
 
         const t = await TestResultService.getTestResult(rfid, id);
-  console.log(t)
+  
         if(t.length!== 0 && TestResultService.deleteTestResult(id, rfid)){
 
           return res.status(204).end(); 

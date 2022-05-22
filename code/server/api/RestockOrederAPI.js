@@ -134,11 +134,33 @@ router.post('/api/restockOrder',async (req,res)=>{
     try{
       const id = req.params.id
       
+      if( id >0 ){
+        const results = await restockOrderservice.deleteRestockOrderById(id)
+        if (results) {
+        return res.status(204).json(results);
+        } else {
+          return res.status(422).json({error : "Not found"});
+         }
+      }
+      return res.status(422).json({error : "INVALID IO INPUT"});
+  
+    }
+    catch(err)
+    {
+      console.log(err);
+      return res.status(503).end();
+    }
+  });
+
+  router.delete('/api/allRSO',async (req,res)=>{
+    try{
+      const id = req.params.id
+      
       if( id <=0 ){
         return res.status(422).json({error : "INVALID IO INPUT"});
       }
     
-    const results = await restockOrderservice.deleteRestockOrderById(id)
+    const results = await restockOrderservice.deleteAllRestockOrder()
     if (results) {
     return res.status(200).json(results);
     } else {
@@ -151,7 +173,8 @@ router.post('/api/restockOrder',async (req,res)=>{
       return res.status(503).end();
     }
   });
-  /*
+
+  /*api/allRSO'
   get all restock orders
   */
   router.get('/api/restockOrders',async (req,res)=>{
