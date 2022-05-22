@@ -20,16 +20,16 @@ exports.create_position_table = () => {
     });
 }
 
-exports.delete_position_table = () => {
+exports.delete_position_data = () => {
     return new Promise((resolve, reject) => {
 
-        const sql_query = 'DROP TABLE IF EXISTS position'
+        const sql_query = 'DELETE FROM position'
         db.run(sql_query, function (err) {
             if (err) {
                 reject(err);
                 return;
             }
-            resolve("Position Table -> DELETED");
+            resolve("Position data -> DELETED");
         });
     });
 }

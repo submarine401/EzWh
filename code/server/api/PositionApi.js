@@ -45,10 +45,10 @@ router.post('/api/position', (req, res)=>{
         }
       
         positionService.create_Position(newPos).then(() => {
-          return res.status(201).json({success: 'Created'});
+          return res.status(201).end();
         }) .catch(err => {
           if(err === 'already existing'){
-            res.status(422).json({success: 'already existing'});
+            res.status(422).json({error: 'already existing'});
           } else {
             console.log(err);
             return res.status(503).end();
@@ -169,6 +169,15 @@ router.delete('/api/position/:positionID', (req, res)=>{
         return res.status(503).end();
       }
     
+});
+
+router.delete('/api/positions', (req, res)=>{
+  positionService.deleteAll().then( result => { 
+    return res.status(result?204:500).end();
+  }).catch(err => {
+    console.log(err);
+    return res.status(500).end();
+  });
 });
 
 module.exports = router;

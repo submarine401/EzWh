@@ -311,99 +311,99 @@ class DBhelper {
     }
 
 
-    load_positions() {
-        console.log('loading position');
+    // load_positions() {
+    //     console.log('loading position');
 
-        return new Promise((resolve, reject) => {
+    //     return new Promise((resolve, reject) => {
 
-            const sql_query = 'SELECT * from position'
-            this.db.all(sql_query, (err,rows)=>{
+    //         const sql_query = 'SELECT * from position'
+    //         this.db.all(sql_query, (err,rows)=>{
 
-                if(err){
-                    reject(err); 
-                    return;
-                }
+    //             if(err){
+    //                 reject(err); 
+    //                 return;
+    //             }
 
-                const position = rows.map((pos) => new Position(pos));
-                resolve(position);
-            });
-        });
-    }
+    //             const position = rows.map((pos) => new Position(pos));
+    //             resolve(position);
+    //         });
+    //     });
+    // }
 
 
     
-    store_position(position) {
+    // store_position(position) {
 
-        try {
-            console.log('DB store');
+    //     try {
+    //         console.log('DB store');
 
-            return new Promise((resolve, reject) => {
+    //         return new Promise((resolve, reject) => {
 
-                try {
-                    const sql = 'INSERT INTO position (positionID, aisleID, row, col, maxWeight, maxVolume, occupiedWeight, occupiedVolume)  \
-                                VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
-                    const params = [position.id, position.aisle, position.row, position.col, position.maxWeight, 
-                                    position.maxVolume, position.occupiedWeight, position.occupiedVolume];
-                    this.db.run(sql, params, (err)=>{
-                        if(err){
-                            reject(err);
-                            return;
-                        }
-                        resolve("Stored position");
-                    });
+    //             try {
+    //                 const sql = 'INSERT INTO position (positionID, aisleID, row, col, maxWeight, maxVolume, occupiedWeight, occupiedVolume)  \
+    //                             VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?);'
+    //                 const params = [position.id, position.aisle, position.row, position.col, position.maxWeight, 
+    //                                 position.maxVolume, position.occupiedWeight, position.occupiedVolume];
+    //                 this.db.run(sql, params, (err)=>{
+    //                     if(err){
+    //                         reject(err);
+    //                         return;
+    //                     }
+    //                     resolve("Stored position");
+    //                 });
 
-                } catch (err) {
-                    throw (err);
-                }
-            })
-        } catch (err) {
-            throw (err);
-        }
-    }
+    //             } catch (err) {
+    //                 throw (err);
+    //             }
+    //         })
+    //     } catch (err) {
+    //         throw (err);
+    //     }
+    // }
 
-    update_position(id, pos) {
-        return new Promise((resolve, reject) => {
+    // update_position(id, pos) {
+    //     return new Promise((resolve, reject) => {
 
-            const sql_query = 'UPDATE position \
-                               SET  positionID = ?, aisleID = ?, row = ?, col = ?, maxWeight = ?, maxVolume = ?, occupiedWeight = ?, occupiedVolume = ? \
-                               WHERE positionID = ?';
+    //         const sql_query = 'UPDATE position \
+    //                            SET  positionID = ?, aisleID = ?, row = ?, col = ?, maxWeight = ?, maxVolume = ?, occupiedWeight = ?, occupiedVolume = ? \
+    //                            WHERE positionID = ?';
 
-            const params = [
-                pos.id, pos.aisle, pos.row, pos.col, pos.maxWeight,
-                pos.maxVolume, pos.occupiedWeight, pos.occupiedVolume,
-                id
-            ]
-            this.db.run(sql_query, params, (err)=>{
+    //         const params = [
+    //             pos.id, pos.aisle, pos.row, pos.col, pos.maxWeight,
+    //             pos.maxVolume, pos.occupiedWeight, pos.occupiedVolume,
+    //             id
+    //         ]
+    //         this.db.run(sql_query, params, (err)=>{
 
-                if(err){
-                    reject(err); 
-                    return;
-                }
+    //             if(err){
+    //                 reject(err); 
+    //                 return;
+    //             }
 
-                resolve();
-            });
-        });
-    }
+    //             resolve();
+    //         });
+    //     });
+    // }
 
-    delete_position(id) {
-        console.log('deleting ' + id + ' from db')
+    // delete_position(id) {
+    //     console.log('deleting ' + id + ' from db')
 
-        return new Promise((resolve, reject) => {
+    //     return new Promise((resolve, reject) => {
 
-            const sql_query = 'DELETE FROM position \
-                               WHERE positionID = ?';
+    //         const sql_query = 'DELETE FROM position \
+    //                            WHERE positionID = ?';
 
-            this.db.run(sql_query, [id], (err)=>{
+    //         this.db.run(sql_query, [id], (err)=>{
 
-                if(err){
-                    reject(err); 
-                    return;
-                }
+    //             if(err){
+    //                 reject(err); 
+    //                 return;
+    //             }
 
-                resolve();
-            });
-        });
-    }
+    //             resolve();
+    //         });
+    //     });
+    // }
     /*
     ***************************************************CREATE USER TABLE***********************************
     */

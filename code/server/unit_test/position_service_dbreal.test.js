@@ -6,7 +6,7 @@ const Position = require('../Position');
 
 describe('get Positions', ()=>{
     beforeEach(async ()=>{
-        await dao.delete_position_table();
+        await dao.delete_position_data();
         await dao.create_position_table();
         await dao.store_position(new Position({
             positionID:"800234543412",
@@ -64,7 +64,7 @@ describe('get Positions', ()=>{
 
 describe("add position", () => {
     beforeEach(async () => {
-        await dao.delete_position_table();
+        await dao.delete_position_data();
         await dao.create_position_table();
     })
     test('add position', async () => {
@@ -96,7 +96,7 @@ describe("add position", () => {
 
 describe("modify position", () => {
     beforeEach(async () => {
-        await dao.delete_position_table();
+        await dao.delete_position_data();
         await dao.create_position_table();
         // await dao.store_position(new Position({
         //     positionID:"800234543412",
@@ -179,7 +179,7 @@ describe("modify position", () => {
         await positionService.delete_position(id);
 
         let res = await dao.load_positions();
-        
+
         expect(res.length).toBe(0);
     });
 
