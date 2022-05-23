@@ -17,7 +17,7 @@ Version:
     In the table, report the description of the black box test case and (traceability) the correspondence with the Jest test case writing the
     class and method name that contains the test case>
     <Jest tests  must be in code/server/unit_test  >
-
+# Class **_ItemDao_**
 ### Class **_ItemDao_** - method **get_item_by_id(id)**
 
     In this method we check whether specific item by given id is onside the database or not, if exists the returned value is corresponding item and success status, othewise it will return zero to  API layer which means thers is not corrspondance to given id, and prints: "no item associated to id"
@@ -115,12 +115,110 @@ Modifies given id of item with fields in the newItem object and returns the mess
 | EMPTY_DB | ITEM_EXISTANCE | VALID_SUPPLIERID_TYPE | Valid / Invalid | Description of the test case                        | Jest test case              |
 | -------- | --------------- | --------------------- | --------------- | --------------------------------------------------- | --------------------------- |
 | FALSE        | TRUE              | null                  | Invalid         | it should return -1                        | testupdateNullItem |
-| FALSE    | TRUE            | TRUE                  | Valid           | it should resolve the array of all suppliers' items | testupdateItem |
+| FALSE    | TRUE            | TRUE                  | Valid           | it should resolve a message which says give item id is updated | testupdateItem |
 
-
+# Class **_InternalOrderDao_**
 ### Class **_InternalOrderDao_** - method **get_item_by_id(id)**
+    In this method we check whether specific Internal Order by given id is onside the database or not, if exists the returned value is corresponding Internal Order and success status, othewise it will return zero to  API layer which means thers is not corrspondance to given id, and prints: "no internal order associated to id"
 
-# please do not write here
+**Criteria**
+
+| Criteria        | Description                                   |
+| --------------- | --------------------------------------------- |
+| EMPTY_DB        | There is not any stored Internal Order in database.                     |
+| IO_EXISTANCE    | If there is an Internal Order with the given id     |
+| ID_TYPE_CORRECT | If the type of the id param is correct or not |
+
+**Predicates**
+
+| Criteria        | Predicate  |
+| --------------- | ---------- |
+| DB_EMPTY        | True/False |
+| IO_EXISTANCE  | True/False |
+| ID_TYPE_CORRECT | True/False |
+
+**Boundaries**:
+
+| Criteria        | Boundary values |
+| --------------- | :-------------: |
+| DB_EMPTY        |       N/A       |
+| IO_EXISTANCE  |       N/A       |
+| ID_TYPE_CORRECT |       N/A       |
+
+**Combination of predicates**:
+
+| EMPTY_DB | IO_EXISTANCE | ID_TYPE_CORRECT | Valid / Invalid | Description of the test case             | Jest test case     |
+| -------- | ------------ | --------------- | --------------- | ---------------------------------------- | ------------------ |
+| TRUE     |              |                 | Valid           | If the db is empty, return 'no IO associated to id'     | testgetIONotexisted |
+| FALSE    | FALSE        | TRUE            | Valid           | If the IO is not inserted, returns '0'  | testgetIONotexisted |
+| FALSE    | TRUE         | TRUE            | Valid           | Return the Internal order related to given id  | testIOgetById |
+| \*       | \*           | FALSE           | Invalid         | If the passed id is less than one      | testgetIOWithIdlessthanOne  |
+
+### **Class ItemDAO - method insert_internal_order(internalOrder)**
+
+Save an Internal Order with  (id: int, issueDate: str, products: JSON, customerId: int, state: "ISSUED") into the database.
+
+
+
+**Criteria for method insert_internal_order :**
+
+| Criteria             | Description                               |
+| -------------------- | ----------------------------------------- |
+| VALID_IO_TYPE      | If the IO attributes have invalid attributes. |
+
+**Predicates for method insert_into_item_table:**
+
+| Criteria             | Predicate  |
+| -------------------- | ---------- |
+| VALID_IO_TYPE      | True/False |
+
+**Boundaries**:
+
+| Criteria             | Boundary values |
+| -------------------- | --------------- |
+| VALID_IO_TYPE      | null            |
+
+**Combination of predicates**:
+
+|  | VALID_IO_TYPE     | Valid / Invalid | Description of the test case           | Jest test case       |
+| -------------------- | ------------------- | --------------- | -------------------------------------- | -------------------- |
+|                 | TRUE                | Valid           | The IO is correctly saved in the db  | testsetIO |
+|                 | FALSE (null)        | Invalid         | The IO is not saved, returns -1 |  testsetEmptyIO  |
+
+
+### Class **_ItemDao_** - method **modify_internal_order(id,newIO)_**
+Modifies given id of item with fields in the newItem object and returns the message which says: `Item with given id is updated`
+
+**Criteria for method modify_internal_order:**
+
+| Criteria              | Description                                        |
+| --------------------- | -------------------------------------------------- |
+| EMPTY_DB              |                                                    |
+| IO_EXISTANCE       | Wheter IO with the given id exists or not|
+| VALID_IO_TYPE | Wheter the newIO attributes are valid or not|
+
+**Predicates for method _modify_item:**
+
+| Criteria              | Predicate  |
+| --------------------- | ---------- |
+| EMPTY_DB              | True/False |
+| IO_EXISTANCE        | True/False |
+| VALID_IO_TYPE   | True/False |
+
+**Boundaries**:
+
+| Criteria              | Boundary values |
+| --------------------- | --------------- |
+| VALID_IO_TYPE | null            |
+
+**Combination of predicates**:
+
+| EMPTY_DB | ITEM_EXISTANCE | VALID_SUPPLIERID_TYPE | Valid / Invalid | Description of the test case                        | Jest test case              |
+| -------- | --------------- | --------------------- | --------------- | --------------------------------------------------- | --------------------------- |
+| FALSE        | TRUE              | null                  | Invalid         | it should return -1                        | testupdateNullIO |
+| FALSE    | TRUE            | TRUE                  | Valid           | it should resolve a message which says give IO id is updated  | testupdateIO |
+| FALSE    | TRUE            | TRUE                  | Valid           | it should resolve a message which says give IO id is updated  | testupdateIO |
+
 
 ### Class **_RestockorderDao_** - method **get_item_by_id(id)**
 

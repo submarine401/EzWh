@@ -42,7 +42,7 @@ describe("test itemDao", () => {
 
     testgetItem(1,item1);
     testgetItem(2,item2);
-    testgetItemNotexisted(100,item2);
+    testgetItemNotexisted(100);
     testgetItemWithIdlessthanOne(0,item1)
 
     async function testgetItem(i,item) {
@@ -58,7 +58,7 @@ describe("test itemDao", () => {
         });
     } 
 
-    async function testgetItemNotexisted(i,item) {
+    async function testgetItemNotexisted(i) {
         test('get not existed Item', async () => {
             let res = await itemService.getItembyId(i);
             expect(res).toEqual(0);
