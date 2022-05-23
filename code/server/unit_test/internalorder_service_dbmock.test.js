@@ -7,22 +7,26 @@ describe('get internal orders', ()=>{
     beforeEach(()=>{
         dao.get_internalOrders.mockReset();
         dao.get_internalOrders.mockReturnValueOnce({
-            "issueDate":"2021/11/29 09:33",
-            "products": [{"SKUId":12,"description":"a product","price":10.99,"qty":3},
-                        {"SKUId":180,"description":"another product","price":11.99,"qty":3}],
-            "customerId" : 1
+            id: 1,
+            date: "2021/11/29 09:33",
+            state: "ISSUED",
+            customerid: "1",
+            products: [
+                "{\"SKUId\":12,\"description\":\"a product\",\"price\":10.99,\"qty\":3}",
+                "{\"SKUId\":180,\"description\":\"another product\",\"price\":11.99,\"qty\":3}"
+            ]
         });
     });
 
     test('get internal order', async () => {
         let res = await internalOrderservice.getAllInternalOrder();
-        expect(res[0]).toEqual({
+        expect(res).toEqual({
 
-            "id": 1,
-            "date": "2021/11/29 09:33",
-            "state": "ISSUED",
-            "customerid": "1",
-            "products": [
+            id: 1,
+            date: "2021/11/29 09:33",
+            state: "ISSUED",
+            customerid: "1",
+            products: [
                 "{\"SKUId\":12,\"description\":\"a product\",\"price\":10.99,\"qty\":3}",
                 "{\"SKUId\":180,\"description\":\"another product\",\"price\":11.99,\"qty\":3}"
             ]

@@ -8,6 +8,7 @@ if (err) throw err;
 exports.insert_internal_order = (nio)=>{
     return new Promise ((resolve,reject)=>{
 
+        if(nio !== undefined){
         let prods = [];
         nio.products.map(x=>
             {
@@ -19,49 +20,63 @@ exports.insert_internal_order = (nio)=>{
         const sql = 'INSERT INTO internalorders (date,state,customerId,products) VALUES(?,?,?,?)';
         db.run(sql,[nio.issueDate,"ISSUED",nio.customerId,g],(err)=>{
             if(err){
-                reject(err);
-                return;
+                // reject(err);
+                // return;
             }
             resolve("Inserted new IO successfully");
 
         });
+    }
+    else 
+    {
+        resolve(-1)
+    }
+
+
+
     });
 }
 
 exports.modify_internal_order = (id,io)=>{
     return new Promise ((resolve,reject)=>{
-        if(io.products === undefined )
-        {
-        const sql = 'UPDATE internalorders SET state = ? WHERE id = ?';
-        db.run(sql,[io.newState,id],(err)=>{
-            if(err){
-                reject(err);
-                return;
+        if(io !== undefined){
+            if(io.products === undefined )
+            {
+            const sql = 'UPDATE internalorders SET state = ? WHERE id = ?';
+            db.run(sql,[io.newState,id],(err)=>{
+                if(err){
+                    // reject(err);
+                    // return;
+                }
+                resolve(`IO with id ${id} is updated`);
+            });
             }
-            resolve(`IO with id ${id} is updated`);
-        });
-        }
-        else
-        {
+            else
+            {
+                
+                const sql = 'UPDATE internalorders SET state = ? , products = ? WHERE id = ?';
             
-            const sql = 'UPDATE internalorders SET state = ? , products = ? WHERE id = ?';
-        
 
-                let prods = [];
-                io.products.map(x=>
-                    {
-                        prods.push(JSON.stringify(x))
-                        
-                    });
-                const g = JSON.stringify(prods);            
-        db.run(sql,[io.newState,g,id],(err)=>{
-            if(err){
-                reject(err);
-                return;
+                    let prods = [];
+                    io.products.map(x=>
+                        {
+                            prods.push(JSON.stringify(x))
+                            
+                        });
+                    const g = JSON.stringify(prods);            
+            db.run(sql,[io.newState,g,id],(err)=>{
+                if(err){
+                    // reject(err);
+                    // return;
+                }
+                resolve(`IO with id ${id} is updated`);
+            });
+
             }
-            resolve(`IO with id ${id} is updated`);
-        });
-
+        }
+        else 
+        {
+            resolve(-1)
         }
     
     });
@@ -94,3 +109,108 @@ exports.delete_all_internal_order = ()=>{
     });
 
 }
+
+exports.get_internalOrders = (id)=>{
+    return new Promise((resolve,reject)=>{
+
+        if (id === undefined)
+            {
+                const sql = "SELECT * FROM internalorders";
+                db.all(sql,[],(err,rows)=>{
+                    if(err){
+                        reject(err); 
+                        return;
+                        }
+                    const internalorders = rows.map((io)=>(
+                    {
+                        id : io.id,
+                        date : io.date,
+                        state : io.state,
+                        customerid : io.customerid,
+                        products : JSON.parse(io.products)
+                    }));
+                    resolve(internalorders);
+                });
+            }
+        else
+            {
+                if(id>=1)
+                {
+                    const sql = "SELECT * FROM internalorders where id = ?";
+                    db.all(sql,[id],(err,rows)=>{
+                        if(err){
+                            reject(err); 
+                            return;
+                            }
+                        const internalorders = rows.map((io)=>(
+                        {
+                            id : io.id,
+                            date : io.date,
+                            state : io.state,
+                            customerid : io.customerid,
+                            products : JSON.parse(io.products)
+                        }));
+                        if(internalorders.length === 0)
+                        {resolve(0)}
+                        else{
+                        resolve(internalorders);
+                        }
+                    });
+                }
+                else{
+                resolve(-1);
+                }
+            }
+    });
+}
+
+
+
+
+exports.get_acceped_internalOrders = ()=>{
+    return new Promise((resolve,reject)=>{
+       
+                    const sql = "SELECT * FROM internalorders where state = ?";
+                db.all(sql,["ACCEPTED"],(err,rows)=>{
+                    if(err){
+                        reject(err); 
+                        return;
+                        }
+                    const internalorders = rows.map((io)=>(
+                    {
+                        id : io.id,
+                        date : io.date,
+                        state : io.state,
+                        customerid : io.customerid,
+                        products : JSON.parse(io.products)
+
+                        
+                    }));
+                    resolve(internalorders);
+                });
+            
+        });
+    }
+
+    exports.get_issued_internalOrders = ()=>{
+        return new Promise((resolve,reject)=>{
+            
+                        const sql = "SELECT * FROM internalorders where state = ?";
+                    db.all(sql,["ISSUED"],(err,rows)=>{
+                        if(err){
+                            reject(err); 
+                            return;
+                            }
+                        const internalorders = rows.map((io)=>(
+                        {
+                            id : io.id,
+                            date : io.date,
+                            state : io.state,
+                            customerid : io.customerid,
+                            products : JSON.parse(io.products)
+                        }));
+                        resolve(internalorders);
+                    });
+                
+            });
+    }
