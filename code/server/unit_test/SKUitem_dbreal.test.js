@@ -33,7 +33,7 @@ describe('GET all SKUItems', () =>{
   });
   
   test('GET SKUItem by SKUID with available = 1', async() =>{
-    const SKUID = 9;
+    const SKUID = 5;
     const keys =[
       "SKUId",
       "RFID",
@@ -73,7 +73,6 @@ describe('GET all SKUItems', () =>{
     let res = await SKU_itemservice.available_SKUItem(SKUID)
     expect(res).toEqual(404);
   });
-  
 });
 
 describe('POST SKUitems', () =>{
@@ -111,6 +110,17 @@ describe ('PUT SKUitems', () =>{
       "DateOfStock" : "2021-07-03",
       "Available" : 1
     });
+  });
+
+  test('Modify SKUItem with wrong availability value', async() =>{
+    const target_RFID = "12345678901234567890123456711111";
+    const newParams = {
+      "newRFID" : "9999999999999999999",
+      "newAvailable" : 2,     //wrong availability value
+      "newDateOfStock" : "2021/05/09"
+    }
+    let res = await SKU_itemservice.updateSKUItem(target_RFID,newParams);
+    expect(res).toBe(422);
   });
 });
 
