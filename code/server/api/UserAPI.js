@@ -53,7 +53,7 @@ router.post('/api/newUser', async (req,res) => {
       return res.status(422).end('Inserted type does not match any valid type or password is too short')
     }
     else{
-      return res.status(200).end("User inserted!");
+      return res.status(201).end("User inserted!");
     }
     
   } catch (err) {
