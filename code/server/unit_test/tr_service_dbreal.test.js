@@ -32,11 +32,11 @@ describe("Test Result", () => {
   
 
 
-    async function testTestResult(RFid, TRid) {
+    async function testTestResult(rfid, id) {
         test('get Test Result', async () => {        
-            let res = await TestResultService.getTestResult(RFid, TRid);
+            let res = await TestResultService.getTestResult(rfid, id);
             expect(res[0]).toEqual({
-                id: TRid,
+                id: id,
                 idTestDescriptor:1,
                 Date:"2021/11/28",
                 Result: 1

@@ -18,19 +18,19 @@ setTestResult = async (tr) => {
     return result;
 }
 
-modifyTestResult = async (TRid, RFid, newIdTestDescriptor, newDate, newResult) => {
-    const result = await this.dao.modifyTR(TRid, RFid, newIdTestDescriptor, newDate, newResult);
+modifyTestResult = async (id, rfid, newIdTestDescriptor, newDate, newResult) => {
+    const result = await this.dao.modifyTR(id, rfid, newIdTestDescriptor, newDate, newResult);
     return result;
 }
 
-deleteTestResult = async (TRid, RFid) => {
-    const result = await this.dao.delete_test_result(TRid, RFid);
+deleteTestResult = async (id, rfid) => {
+    const result = await this.dao.delete_test_result(id, rfid);
     return result;
 }
 
 
-getTestResult = async (RFid, TRid) => {
-    const result = await this.dao.get_TR(RFid, TRid);
+getTestResult = async (rfid, id) => {
+    const result = await this.dao.get_TR(rfid, id);
     return result;
 }
 
