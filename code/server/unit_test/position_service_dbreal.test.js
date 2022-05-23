@@ -7,7 +7,7 @@ const Position = require('../Position');
 describe('get Positions', ()=>{
     beforeEach(async ()=>{
         await dao.delete_position_data();
-        await dao.create_position_table();
+        // await dao.create_position_table();
         await dao.store_position(new Position({
             positionID:"800234543412",
             aisleID: "8002",

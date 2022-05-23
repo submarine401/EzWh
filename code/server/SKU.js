@@ -5,17 +5,17 @@ const positionDao = require("./modules/PositionDao");
 class SKU{
 
     
-    constructor(id, description, weight, volume, note, price, availableQuantity, position, test_descriptors){
+    constructor(id, description, weight, volume, notes, price, availableQuantity, position, testDescriptors){
 
         this.id = id;
         this.description = description;
         this.weight = weight;
         this.volume = volume;
-        this.note = note;
+        this.notes = notes;
         this.price = price;
         this.availableQuantity = availableQuantity;
         this.position = position;
-        this.test_descriptors = test_descriptors? test_descriptors:[];
+        this.testDescriptors = testDescriptors? testDescriptors:[];
 
     }
 
@@ -51,7 +51,7 @@ class SKU{
         this.description = newValues.newDescription;
         this.weight = newValues.newWeight;
         this.volume = newValues.newVolume;
-        this.note = newValues.newNotes;
+        this.notes = newValues.newNotes;
         this.price = newValues.newPrice;
         this.availableQuantity = newValues.newAvailableQuantity;
 
