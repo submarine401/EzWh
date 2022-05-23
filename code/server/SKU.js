@@ -1,5 +1,6 @@
 'use strict';
 const skuDao = require("./modules/SkuDao");
+const positionDao = require("./modules/PositionDao");
 
 class SKU{
 

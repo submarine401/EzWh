@@ -7,6 +7,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.insert_return_order_table = (ro)=>
     {
         return new Promise ((resolve,reject)=>{
+            if( ro !== undefined){
             let prods = [];
             ro.products.map((x)=>{
                 prods.push(JSON.stringify(x))
@@ -28,6 +29,11 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 }
 
             });
+        }
+        else 
+        {
+            resolve(-1)
+        }
         });
     }
 
@@ -45,4 +51,72 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     
     }
 
- 
+    exports.delete_all_return_order = ()=>{
+        return new Promise ((resolve,reject)=>{
+            const sql = 'DELETE FROM returnorder';
+            db.run(sql,[],(err)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve("Return Order table is empty");
+            });
+        });
+    
+    }
+
+    exports.get_all_RO = ()=>{
+        return new Promise((resolve,reject)=>{
+           
+                        const sql = "SELECT * FROM returnorder ";
+                    db.all(sql,(err,rows)=>{
+                        if(err){
+                            reject(err); 
+                            return;
+                            }
+                        const internalorders = rows.map((ro)=>(
+                        {
+                            id : ro.id,
+                            returnDate : ro.date,
+                            products : JSON.parse(ro.products),
+                            restockOrderId : ro.restockorderid,
+                          
+                        }));
+                        resolve(internalorders);
+                    });
+                
+            });
+    }
+    
+    exports.get_all_RO_by_id = (id)=>{
+        return new Promise((resolve,reject)=>{
+            if(id >=1){
+                        const sql = "SELECT * FROM returnorder where id = ? ";
+                    db.all(sql,[id],(err,rows)=>{
+                        if(err){
+                            reject(err); 
+                            return;
+                            }
+                        const internalorders = rows.map((ro)=>(
+                        {
+                            id : ro.id,
+                            returnDate : ro.date,
+                            products : JSON.parse(ro.products),
+                            restockOrderId : ro.restockorderid,
+                          
+                        }));
+                        if(internalorders.length ===0)
+                            resolve(0)
+                        else
+                            resolve(internalorders);
+                    
+                    });
+
+                }
+                else 
+                resolve(-1)
+                
+                
+            });
+    }
+    

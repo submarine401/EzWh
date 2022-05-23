@@ -70,7 +70,7 @@ router.get('/api/items',async (req,res)=>{
         if(id >0)
         {
   
-          const results = await dataInterface.get_item_by_id(id).then((suc)=> {if(suc!==0) return itemservice.modifyItem(id,i); else return suc }, (error)=> {return 0;});
+          const results = await itemservice.getItembyId(id).then((suc)=> {if(suc!==0) return itemservice.modifyItem(id,i); else return suc }, (error)=> {return 0;});
           
           if(results !== 0 )
           return res.status(200).json(results);
@@ -116,8 +116,9 @@ router.get('/api/items',async (req,res)=>{
       {     
   
         const id = req.params.id
-        if( id > 0 )
+        if( id >=1    )
         {
+        
         const results = await itemservice.getItembyId(id);
         if(results !==0)
         return res.status(200).json(results);

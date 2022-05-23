@@ -15,14 +15,17 @@ class ReturnOrderservice {
         const result = await this.dao.delete_return_order(roi);
         return result;
     }
-
+    deleteAllReturnOrder = async () => {
+        const result = await this.dao.delete_all_return_order();
+        return result;
+    }
     getAllReturnOrders = async () => {
-        const result = await dataInterface.get_all_items();
+        const result = await this.dao.get_all_RO();
         return result;
     }
 
     getReturnOrderById = async (id) => {
-        const result = await dataInterface.get_all_RO_by_id(id);
+        const result = await this.dao.get_all_RO_by_id(id);
         return result;
     }
 
