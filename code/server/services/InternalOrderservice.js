@@ -27,17 +27,17 @@ class InternalOrderservice {
     }
 
     getAllInternalOrder = async (id) => {
-        const result = await dataInterface.get_internalOrders(id);
+        const result = await this.dao.get_internalOrders(id);
         return result;
     }
 
     getAccepedInternalOrders = async () => {
-        const result = await dataInterface.get_acceped_internalOrders();
+        const result = await this.dao.get_acceped_internalOrders();
         return result;
     }
 
     getIssuedInternalOrders = async () => {
-        const result = await dataInterface.get_issued_internalOrders();
+        const result = await this.dao.get_issued_internalOrders();
         return result;
     }
 

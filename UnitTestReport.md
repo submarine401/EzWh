@@ -118,13 +118,26 @@ Modifies given id of item with fields in the newItem object and returns the mess
 | FALSE    | TRUE            | TRUE                  | Valid           | it should resolve the array of all suppliers' items | testupdateItem |
 
 
+### Class **_InternalOrderDao_** - method **get_item_by_id(id)**
+
+# please do not write here
+
+### Class **_RestockorderDao_** - method **get_item_by_id(id)**
+
+# please do not write here
+
+### Class **_REturnOrderDao_** - method **get_item_by_id(id)**
+
+# please do not write here
+
+
 # White Box Unit Tests
 
 ### Test cases definition
 
     <Report here all the created Jest test cases, and the units/classes under test >
     <For traceability write the class and method name that contains the test case>
-
+## Test cases for Item
 | Unit name | Jest test case |     |
 | --------- | -------------- | --- |
 |test itemDao|get Item||
@@ -135,7 +148,36 @@ Modifies given id of item with fields in the newItem object and returns the mess
 |test itemDao|update Item||
 |test itemDao|update null Item||
 
-### Code coverage report
+## Test cases for Internal Orders
+| Unit name | Jest test case |     |
+| --------- | -------------- | --- |
+||||
+# please do not write here
+## Test cases for Internal Orders
+| Unit name | Jest test case |     |
+| --------- | -------------- | --- |
+||||
+# please do not write here
+## Test cases for Internal Orders
+| Unit name | Jest test case |     |
+| --------- | -------------- | --- |
+||||
+# please do not write here
+
+### Code coverage report for Item
 ![screenshot1](./Covrage%20screenshots/item1.jpg)
 ![screenshot2](./Covrage%20screenshots/item2.jpg)
 ![screenshot3](./Covrage%20screenshots/item3.jpg)
+
+### Code coverage report for Item
+![screenshot1](./Covrage%20screenshots/item1.jpg)
+![screenshot2](./
+# please do not write here
+### Code coverage report for Item
+![screenshot1](./Covrage%20screenshots/item1.jpg)
+![screenshot2](./
+# please do not write here
+### Code coverage report for Item
+![screenshot1](./Covrage%20screenshots/item1.jpg)
+![screenshot2](./
+# please do not write here

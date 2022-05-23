@@ -94,3 +94,105 @@ exports.delete_all_internal_order = ()=>{
     });
 
 }
+
+exports.get_internalOrders = (id)=>{
+    return new Promise((resolve,reject)=>{
+
+        if (id === undefined)
+            {
+                const sql = "SELECT * FROM internalorders";
+                db.all(sql,[],(err,rows)=>{
+                    if(err){
+                        reject(err); 
+                        return;
+                        }
+                    const internalorders = rows.map((io)=>(
+                    {
+                        id : io.id,
+                        date : io.date,
+                        state : io.state,
+                        customerid : io.customerid,
+                        products : JSON.parse(io.products)
+
+                        
+                    }));
+                    resolve(internalorders);
+                });
+            }
+        else
+            {
+
+                    const sql = "SELECT * FROM internalorders where id = ?";
+                    db.all(sql,[id],(err,rows)=>{
+                        if(err){
+                            reject(err); 
+                            return;
+                            }
+                        const internalorders = rows.map((io)=>(
+                        {
+                            id : io.id,
+                            date : io.date,
+                            state : io.state,
+                            customerid : io.customerid,
+                            products : JSON.parse(io.products)
+
+                            
+                        }));
+                        resolve(internalorders);
+                    });
+                
+            }
+
+    });
+}
+
+
+
+
+exports.get_acceped_internalOrders = ()=>{
+    return new Promise((resolve,reject)=>{
+       
+                    const sql = "SELECT * FROM internalorders where state = ?";
+                db.all(sql,["ACCEPTED"],(err,rows)=>{
+                    if(err){
+                        reject(err); 
+                        return;
+                        }
+                    const internalorders = rows.map((io)=>(
+                    {
+                        id : io.id,
+                        date : io.date,
+                        state : io.state,
+                        customerid : io.customerid,
+                        products : JSON.parse(io.products)
+
+                        
+                    }));
+                    resolve(internalorders);
+                });
+            
+        });
+    }
+
+    exports.get_issued_internalOrders = ()=>{
+        return new Promise((resolve,reject)=>{
+            
+                        const sql = "SELECT * FROM internalorders where state = ?";
+                    db.all(sql,["ISSUED"],(err,rows)=>{
+                        if(err){
+                            reject(err); 
+                            return;
+                            }
+                        const internalorders = rows.map((io)=>(
+                        {
+                            id : io.id,
+                            date : io.date,
+                            state : io.state,
+                            customerid : io.customerid,
+                            products : JSON.parse(io.products)
+                        }));
+                        resolve(internalorders);
+                    });
+                
+            });
+    }

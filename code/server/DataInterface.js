@@ -222,107 +222,107 @@ class DataInterface{
 
     // }
 //-------------------------------------------------------------------------------
-    get_internalOrders(id){
-        return new Promise((resolve,reject)=>{
+    // get_internalOrders(id){
+    //     return new Promise((resolve,reject)=>{
     
-            if (id === undefined)
-                {
-                    const sql = "SELECT * FROM internalorders";
-                    this.dbHelper.db.all(sql,[],(err,rows)=>{
-                        if(err){
-                            reject(err); 
-                            return;
-                            }
-                        const internalorders = rows.map((io)=>(
-                        {
-                            id : io.id,
-                            date : io.date,
-                            state : io.state,
-                            customerid : io.customerid,
-                            products : JSON.parse(io.products)
+    //         if (id === undefined)
+    //             {
+    //                 const sql = "SELECT * FROM internalorders";
+    //                 this.dbHelper.db.all(sql,[],(err,rows)=>{
+    //                     if(err){
+    //                         reject(err); 
+    //                         return;
+    //                         }
+    //                     const internalorders = rows.map((io)=>(
+    //                     {
+    //                         id : io.id,
+    //                         date : io.date,
+    //                         state : io.state,
+    //                         customerid : io.customerid,
+    //                         products : JSON.parse(io.products)
     
                             
-                        }));
-                        resolve(internalorders);
-                    });
-                }
-            else
-                {
+    //                     }));
+    //                     resolve(internalorders);
+    //                 });
+    //             }
+    //         else
+    //             {
     
-                        const sql = "SELECT * FROM internalorders where id = ?";
-                        this.dbHelper.db.all(sql,[id],(err,rows)=>{
-                            if(err){
-                                reject(err); 
-                                return;
-                                }
-                            const internalorders = rows.map((io)=>(
-                            {
-                                id : io.id,
-                                date : io.date,
-                                state : io.state,
-                                customerid : io.customerid,
-                                products : JSON.parse(io.products)
+    //                     const sql = "SELECT * FROM internalorders where id = ?";
+    //                     this.dbHelper.db.all(sql,[id],(err,rows)=>{
+    //                         if(err){
+    //                             reject(err); 
+    //                             return;
+    //                             }
+    //                         const internalorders = rows.map((io)=>(
+    //                         {
+    //                             id : io.id,
+    //                             date : io.date,
+    //                             state : io.state,
+    //                             customerid : io.customerid,
+    //                             products : JSON.parse(io.products)
     
                                 
-                            }));
-                            resolve(internalorders);
-                        });
+    //                         }));
+    //                         resolve(internalorders);
+    //                     });
                     
-                }
+    //             }
     
-        });
-    }
+    //     });
+    // }
 
 
 
 
-    get_acceped_internalOrders(){
-        return new Promise((resolve,reject)=>{
+    // get_acceped_internalOrders(){
+    //     return new Promise((resolve,reject)=>{
            
-                        const sql = "SELECT * FROM internalorders where state = ?";
-                    this.dbHelper.db.all(sql,["ACCEPTED"],(err,rows)=>{
-                        if(err){
-                            reject(err); 
-                            return;
-                            }
-                        const internalorders = rows.map((io)=>(
-                        {
-                            id : io.id,
-                            date : io.date,
-                            state : io.state,
-                            customerid : io.customerid,
-                            products : JSON.parse(io.products)
+    //                     const sql = "SELECT * FROM internalorders where state = ?";
+    //                 this.dbHelper.db.all(sql,["ACCEPTED"],(err,rows)=>{
+    //                     if(err){
+    //                         reject(err); 
+    //                         return;
+    //                         }
+    //                     const internalorders = rows.map((io)=>(
+    //                     {
+    //                         id : io.id,
+    //                         date : io.date,
+    //                         state : io.state,
+    //                         customerid : io.customerid,
+    //                         products : JSON.parse(io.products)
     
                             
-                        }));
-                        resolve(internalorders);
-                    });
+    //                     }));
+    //                     resolve(internalorders);
+    //                 });
                 
-            });
-        }
+    //         });
+    //     }
     
-        get_issued_internalOrders(){
-            return new Promise((resolve,reject)=>{
+    //     get_issued_internalOrders(){
+    //         return new Promise((resolve,reject)=>{
                 
-                            const sql = "SELECT * FROM internalorders where state = ?";
-                        this.dbHelper.db.all(sql,["ISSUED"],(err,rows)=>{
-                            if(err){
-                                reject(err); 
-                                return;
-                                }
-                            const internalorders = rows.map((io)=>(
-                            {
-                                id : io.id,
-                                date : io.date,
-                                state : io.state,
-                                customerid : io.customerid,
-                                products : JSON.parse(io.products)
-                            }));
-                            resolve(internalorders);
-                        });
+    //                         const sql = "SELECT * FROM internalorders where state = ?";
+    //                     this.dbHelper.db.all(sql,["ISSUED"],(err,rows)=>{
+    //                         if(err){
+    //                             reject(err); 
+    //                             return;
+    //                             }
+    //                         const internalorders = rows.map((io)=>(
+    //                         {
+    //                             id : io.id,
+    //                             date : io.date,
+    //                             state : io.state,
+    //                             customerid : io.customerid,
+    //                             products : JSON.parse(io.products)
+    //                         }));
+    //                         resolve(internalorders);
+    //                     });
                     
-                });
-        }
+    //             });
+    //     }
 //***************************************************************ITEM ************************* */
 
 // get_all_items(){
