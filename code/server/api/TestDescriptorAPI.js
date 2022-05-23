@@ -16,7 +16,7 @@ router.get('/api/testDescriptors', async (req, res)=>{
   try
     {     
       const result = await TestDescriptorService.getAllTestDescriptors();
-      console.log(result);
+
       return res.status(200).json(result); 
     }
   catch(err)
@@ -37,8 +37,6 @@ router.get('/api/testDescriptors/:id', async (req, res)=>{
       
       const t = await TestDescriptorService.getTestDescriptorsById(id);
      
-      console.log( t);
-
       if(t.length === 0){ 
         return res.status(404).end();
       } else {

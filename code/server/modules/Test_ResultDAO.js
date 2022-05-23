@@ -1,4 +1,3 @@
-'use strict'
 sqlite = require('sqlite3')
 
 const db = new sqlite.Database('EZWHDB.db', (err) => {
@@ -7,7 +6,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.create_test_result_table = () => {
         return new Promise((resolve,reject)=>{
-        const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, TDid integer, date text,result boolean)';
+        const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, idTestDescriptor integer, date text,result boolean)';
          db.run(sql, (err)=>{
             if(err){
                 reject(err);
@@ -19,7 +18,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.insert_into_test_Result_table = (tr)  => {
     return new Promise ((resolve,reject)=>{ 
-        const sql = 'INSERT INTO testresults (rfid, TDid, date, result) VALUES(?,?,?,?)';
+        const sql = 'INSERT INTO testresults (rfid, idTestDescriptor, date, result) VALUES(?,?,?,?)';
         db.run(sql,[tr.rfid, tr.idTestDescriptor , tr.Date, tr.Result], (err)=>{
             if(err)
             {
@@ -38,7 +37,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.modifyTR = (TRid, RFid, newIdTestDescriptor, newDate, newResult) => {  //MODIFIED (there isn't RFid in the design)
 
     return new Promise ((resolve,reject)=>{
-        const sql = 'UPDATE testresults SET TDid = ? , date = ? , result = ? WHERE TRid = ? AND RFid = ?'; 
+        const sql = 'UPDATE testresults SET idTestDescriptor = ? , date = ? , result = ? WHERE TRid = ? AND RFid = ?'; 
       db.run(sql,[newIdTestDescriptor,newDate,newResult, TRid,  RFid], (err)=>{ 
             if(err)
             {
@@ -74,7 +73,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         if(TRid===undefined){
                   const sql = "SELECT * FROM testresults WHERE RFid = ?  ";
                   db.all(sql,[RFid],(err,rows)=>{
-                     console.log(rows.length)
+
                       if(err){
                           reject(err); 
                           return;
@@ -87,7 +86,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                        const  testresults = rows.map((tr)=>(
                       {
                         id : tr.TRid,
-                        idTestDescriptor : tr.TDid,
+                        idTestDescriptor : tr.idTestDescriptor,
                         Date : tr.date,
                         Result : tr.result 
                         
@@ -107,7 +106,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                       const testresults = rows.map((tr)=>(
                       {
                         id : tr.TRid,
-                        idTestDescriptor : tr.TDid,
+                        idTestDescriptor : tr.idTestDescriptor,
                         Date : tr.date,
                         Result : tr.result 
                         
@@ -118,6 +117,22 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
  
               }
           });
+
+          
+    exports.deleteTestResultData = () => {
+        return new Promise((resolve, reject) => {
+          const sql = 'DROP TABLE IF EXISTS testresult';
+          db.run(sql, [], function (err) {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(true);
+          })
+        })
+      };
+      
+  
     
 }
 

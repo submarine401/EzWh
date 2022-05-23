@@ -15,7 +15,6 @@ exports.create_test_descriptor_table =  () => {
             return
         }
         resolve("testdescriptors Table -> OK");
-        console.log("created")
     });
  });
 }
@@ -35,7 +34,7 @@ exports.create_test_descriptor_table =  () => {
                else
                {
                    resolve("new test descriptor is inserted");
-     console.log(td)
+
                }
 
            });
@@ -57,7 +56,6 @@ exports.create_test_descriptor_table =  () => {
                }
                else
                {
-                   console.log(td.newIdSKU);
                    resolve(`Test Descriptor with id ${id} is updated`);
                }
 
@@ -107,14 +105,12 @@ exports.create_test_descriptor_table =  () => {
         return new Promise((resolve,reject)=>{
         
             const sql = "SELECT * FROM testdescriptors where id = ?";
-            console.log(id)
-            
+
                 db.all(sql,[id],(err,rows)=>{
                         if(err){
                             reject(err); 
                             return;
                             }
-                            console.log(rows)
                         const testdescriptors = rows.map((t)=>(
                         {
                         id : t.id,
@@ -123,7 +119,6 @@ exports.create_test_descriptor_table =  () => {
                         idSKU : t.idSKU
                         
                 }));
-                console.log(testdescriptors)
                 resolve(testdescriptors);
             });
                 

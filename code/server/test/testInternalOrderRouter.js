@@ -7,12 +7,12 @@ const app = require('../server');
 var agent = chai.request.agent(app);
 
 const IO = {
-                
     "issueDate":"2021/11/29 09:33",
     "products": [{"SKUId":12,"description":"a product","price":10.99,"qty":3},
                 {"SKUId":180,"description":"another product","price":11.99,"qty":3}],
     "customerId" : '1'
 }
+
 const IO2 = {
                 
     "issueDate":"2021/07/29 09:33",
@@ -23,25 +23,16 @@ const IO2 = {
 
         describe('test Intrenal order apis', () => {
 
-            
-
             beforeEach(async () => {
                 await agent.delete('/api/allIO');
             })
-         
-
-
-            
-            
+   
             newInternalOrder(201,IO)
             newInternalOrder(422)
             getInternalOrderById(200,1,IO);
             getInternalOrderById(404,2,IO2);
             deleteInternalOrder(204,1);
-          
 
-
-        
         });
         
 function getInternalOrderById(expectedHTTPStatus, id,IO) {
@@ -66,8 +57,7 @@ function getInternalOrderById(expectedHTTPStatus, id,IO) {
                             r.body[0]["customerid"].should.equal(IO.customerId);
                             r.body[0]["products"][0].should.equal(JSON.stringify(IO.products[0]));
                             done();
-                        }
-                    else{
+                        }else{
                         agent.get("/api/internalOrders/" + id)
                         .then((res)=> {                     
                             res.should.have.status(expectedHTTPStatus);
@@ -75,9 +65,7 @@ function getInternalOrderById(expectedHTTPStatus, id,IO) {
                         }).catch((err)=>{
                             done(err);
                         })
-                        }
-                    }
-                    
+                     }}            
                     ).catch((err)=>{
                         done(err);
                     })

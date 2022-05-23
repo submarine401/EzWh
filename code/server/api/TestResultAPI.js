@@ -57,7 +57,6 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         
         
         const t = await TestResultService.getTestResult(rfid, id);
-        console.log(t);
 
         if(t.length===0) {
           return res.status(404).json({error: "No test result associated to id or no sku item associated to rfid"});
@@ -92,15 +91,11 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
           typeof newTR.Result !== 'boolean' ){
         return res.status(422).json({error : "Unprocessable Entity"});
       }
-  
-      //console.log("--"+s)
+
       const s = await SKU_item_service.search_by_RFID(newTR.rfid);
       
-      //console.log("+++"+s)
 
       const td = await test_DescriptorService.getTestDescriptorsById(newTR.idTestDescriptor);
-//console.log(td)
-
 
       if(s === 404 || td.length === 0){
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
@@ -137,7 +132,6 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
           const s = await SKU_item_service.search_by_RFID(rfid);
           const tr = await TestResultService.getTestResult(rfid, id);
 
-console.log(tr)
             if(s === 404 || t.length === 0 || tr.length === 0 ){
                   return res.status(404).json({error:
                      "No sku item associated to rfid or no test descriptor associated to newIdTestDescriptor or no test result associated to id"});

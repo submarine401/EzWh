@@ -9,14 +9,12 @@ constructor(dao){
 
 createTestDescriptorTable = async () => {
     const result = await this.dao.create_test_descriptor_table();
-    console.log("cre")
     return result;
 }
 
 setTestDescriptor = async (td) => {
     const result = await this.dao.insert_into_test_Descriptor_table(td);
-    console.log("insert")
-    console.log(td)
+
     return result;
 }
 
@@ -39,9 +37,6 @@ getAllTestDescriptors = async () => {
 
 getTestDescriptorsById = async (id) => {
     const result = await this.dao.get_TD_by_id(id);
-
-    console.log(id)
-    console.log(result)
     return result;
 }
 

@@ -44,7 +44,6 @@ describe("Test Descriptor", () => {
     async function testTestDescriptor(id,testDescriptor) {
         test('get Test Descriptor', async () => {        
             let res = await TestDescriptorService.getTestDescriptorsById(id);
-            console.log(res)
             expect(res[0]).toEqual({
                     id : id,
                     name : testDescriptor.name,
