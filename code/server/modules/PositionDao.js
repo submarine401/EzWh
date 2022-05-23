@@ -20,16 +20,16 @@ exports.create_position_table = () => {
     });
 }
 
-exports.delete_position_table = () => {
+exports.delete_position_data = () => {
     return new Promise((resolve, reject) => {
 
-        const sql_query = 'DROP TABLE IF EXISTS position'
+        const sql_query = 'DELETE FROM position'
         db.run(sql_query, function (err) {
             if (err) {
                 reject(err);
                 return;
             }
-            resolve("Position Table -> DELETED");
+            resolve(true);
         });
     });
 }
@@ -93,7 +93,7 @@ exports.update_position = (id, pos) => {
                            WHERE positionID = ?';
 
         const params = [
-            pos.id, pos.aisle, pos.row, pos.col, pos.maxWeight,
+            pos.positionID, pos.aisleID, pos.row, pos.col, pos.maxWeight,
             pos.maxVolume, pos.occupiedWeight, pos.occupiedVolume,
             id
         ]

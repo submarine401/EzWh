@@ -9,7 +9,7 @@ describe('get Positions', ()=>{
         dao.load_positions.mockReset();
         dao.load_positions.mockReturnValueOnce(
             [
-                {
+                new Position({
                     positionID:"800234543412",
                     aisleID: "8002",
                     row: "3454",
@@ -18,8 +18,8 @@ describe('get Positions', ()=>{
                     maxVolume: 1000,
                     occupiedWeight: 300,
                     occupiedVolume:150
-                },
-                {
+                }),
+                new Position({
                     positionID:"801234543412",
                     aisleID: "8012",
                     row: "3454",
@@ -28,9 +28,8 @@ describe('get Positions', ()=>{
                     maxVolume: 1000,
                     occupiedWeight: 300,
                     occupiedVolume:150
-                }
+                })
             ]
-        
         );
     });
 
@@ -89,9 +88,9 @@ describe("add position", () => {
         expect(dao.store_position.mock.calls[0][0].maxWeight).toBe(pos["maxWeight"]);
         //first call, sixth property of passed object
         expect(dao.store_position.mock.calls[0][0].maxVolume).toBe(pos["maxVolume"]);
-        //first call, sixth property of passed object
+        //first call, seventh property of passed object
         expect(dao.store_position.mock.calls[0][0].occupiedWeight).toBe(0);
-        //first call, sixth property of passed object
+        //first call, eighth property of passed object
         expect(dao.store_position.mock.calls[0][0].occupiedVolume).toBe(0);
     });
 

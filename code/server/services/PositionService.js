@@ -4,6 +4,7 @@ class PositionService{
 
     constructor(dao){
         this.dao = dao;
+        this.dao.create_position_table();
     }
 
     async get_all_position(){
@@ -108,6 +109,14 @@ class PositionService{
         this.dao.delete_position(id);
         
 
+    }
+
+    async deleteAll() {
+        const res = await this.dao.delete_position_data();
+        if (res !== true) {
+            return false;
+        } 
+        return true;
     }
 
 }
