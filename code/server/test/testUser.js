@@ -33,6 +33,24 @@ describe('test POST newUser API', () =>{
   post_user(422,'Carlo','Verdi','Carlo@ezwh.com','abc','deliveryEmployee');
 });
 
+describe('test PUT user API', () =>{
+  put_user(200,'supplier1@ezwh.com','supplier','clerk');   //all data are consistent
+  put_user(404,'qualityEmployee1@ezwh.com','customer','clerk'); //correct username but wrong type
+  put_user(422,'qualityEmployee1@ezwh.com',undefined,'clerk'); //undefined oldType, failed validation
+  put_user(422,'qualityEmployee1@ezwh.com','qualityEmployee',undefined); //correct username but wrong type
+  put_user(404,'helloooooo@ezwh.com','customer','clerk'); //user does not exist
+  put_user(422,'manager1@ezwh.com','manager','supplier'); //trying to modify manager rights
+  put_user(422,'qualityEmployee1@ezwh.com','customer','somethingstrange'); //unexpected type
+  put_user(422,'qualityEmployee1@ezwh.com','qualityEmployee','qualityEmployee'); //oldType = newType
+});
+
+describe('test DELETE user API', () =>{
+  deleteUser(204,'deliveryEmployee1@ezwh.com','deliveryEmployee');
+  deleteUser(422,'clerk1@ezwh.com','deliveryEmployee');  //correct username but wrong type
+  deleteUser(422,'qualityEmployee1@ezwh.com','hellooooooo'); //unexpected type
+});
+
+
 
 function post_user(expectedHTTPStatus, name,surname,username,password,type){
   it('Creating a new user', function(done){
@@ -43,6 +61,8 @@ function post_user(expectedHTTPStatus, name,surname,username,password,type){
       .then(function(result){
         result.should.have.status(expectedHTTPStatus);
         done();
+      }).catch(function(err){
+        done(err);
       });
     }
     else{ //send the post request but without content
@@ -52,5 +72,43 @@ function post_user(expectedHTTPStatus, name,surname,username,password,type){
         done();
       });
     }
+  });
+}
+
+function deleteUser(expectedHTTPStatus,username,type){
+  it('Deleting a user', (done) =>{
+    if(username !== undefined && type!==undefined){
+      agent.delete('/api/users/'+username+'/'+type)
+      .then(function(result){
+        result.should.have.status(expectedHTTPStatus);
+        done();
+      }).catch(function(err){
+        done(err);
+      });
+      
+    }else{
+      
+      agent.delete('/api/users/'+username+'/'+type)
+      .then(function(result){
+        result.should.have.status(expectedHTTPStatus);
+        done();
+      }).catch(function(err){
+        done(err);
+      });
+    }
+  });
+}
+
+function put_user(expectedHTTPStatus,username,oldParam,newParam){
+  it('Modifying user rights', (done) =>{
+    let obj = {oldType : oldParam, newType : newParam};
+    agent.put('/api/users/' + username)
+    .send(obj)
+    .then(function(result){
+      result.should.have.status(expectedHTTPStatus);
+      done();
+    }).catch(function(err){
+      done(err);
+    });
   });
 }
