@@ -39,18 +39,6 @@ describe('Get methods', () =>{
 
 describe('POST methods', ()=>{
   beforeEach(async() =>{
-    /*await dao.newUser({
-      {
-        "username":"Gabriele@ezwh.com",
-        "name":"Gabriele",
-        "surname" : "DiBa",
-        "password" : "GabrieleDiBa",
-        "type" : "clerk"
-      }
-    });*/
-    
-    await dao.deleteUserData();
-    
   });
   
   test('POST newUser correct', async() =>{
@@ -62,7 +50,8 @@ describe('POST methods', ()=>{
       "password" : "helloeveryone",
       "type" : "deliveryEmployee"
     });
-    expect(res).toEqual(201);
+    console.log(res);
+    expect(res).toBe(200);
   });
   
   test('POST USER WITH SHORT PASSWORD', async() =>{
@@ -93,16 +82,26 @@ describe('POST methods', ()=>{
 
 describe('DELETE methods', () =>{
   test('DELETE a normal user (NO MANAGER)', async() =>{
-    let res = await user_service.delete_user('clerk1@ezwh.com','clerk');
+    const user = 'clerk1@ezwh.com';
+    const type = 'clerk';
+    let res = await user_service.delete_user(user,type);
     expect(res).toEqual(204);
   });
+  
+  test('DELETE with wrong parameters (unexisting user)', async() =>{
+    const user = 'deliveryEmployee1@ezwh.com';
+    const type = 'customer';
+    let res = await user_service.delete_user(user,type);
+    expect(res).toEqual(422);
+  });
+  
 });
 
 describe('PUT methods', () =>{
   
-  const user='supplier1@ezwh.com'
+  const user='deliveryEmployee1@ezwh.com'
   const obj =  {
-        "oldType" : "supplier",
+        "oldType" : "deliveryEmployee",
         "newType" : "clerk"
     }
   

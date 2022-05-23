@@ -41,11 +41,9 @@ router.post('/api/newUser', async (req,res) => {
     }
     
     const check_username = await userService.get_users_no_manager();
-    console.log(check_username);
     const res_check_username = check_username.filter(users => {
       return users.email == new_u.username;
     });
-    console.log(res_check_username);
     
     if(res_check_username.length !== 0){
       return res.status(409).end("User already existent!");

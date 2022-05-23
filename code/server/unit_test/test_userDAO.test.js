@@ -7,16 +7,15 @@ const dao = require('../modules/mock_userDAO');
      dao.newUser.mockReset();
    });
   
-   describe('POST newUser', () =>{
      test('Post correct version', async() =>{
        const newUserData = {
-         username:"Giovanni1@ezwh.com",
-         name:"Giovanni",
-         surname : "ciao",
-         password : "testpassword",
-         type : "deliveryEmployee"
+         "username":"Giovanni1@ezwh.com",
+         "name":"Giovanni",
+         "surname" : "ciao",
+         "password" : "testpassword",
+         "type" : "deliveryEmployee"
        }
-       let res = user_service.setUser(newUserData);
+       let res = await user_service.setUser(newUserData);
        expect(res).toBe(200);
      });
     
@@ -44,5 +43,3 @@ describe('GET list of suppliers', () => {
   });
   
 });
-
- });

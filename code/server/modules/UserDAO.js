@@ -42,7 +42,7 @@
         return;
         }
         else{
-          resolve(201);
+          resolve(200);
         }
       });
       
@@ -103,14 +103,11 @@
       const sql_query = 'UPDATE users set type = ? WHERE username = ?'
       
       //check if username exists
-      db.all(sql_query,[u_new_type,username], function(err,rows){
+      db.run(sql_query,[u_new_type,username], function(err){
       
         if(err){
           reject(err);
           return;
-        }
-        if(rows.length===0){
-          resolve(422);
         }
         else{
           resolve(200);
@@ -129,7 +126,6 @@
         return;
       }
       const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
-      console.log(username);
       db.all(sql_query1,[username, type], function(err,rows) {
         if(err){
           reject(err);
