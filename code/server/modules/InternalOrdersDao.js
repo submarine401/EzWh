@@ -20,8 +20,8 @@ exports.insert_internal_order = (nio)=>{
         const sql = 'INSERT INTO internalorders (date,state,customerId,products) VALUES(?,?,?,?)';
         db.run(sql,[nio.issueDate,"ISSUED",nio.customerId,g],(err)=>{
             if(err){
-                reject(err);
-                return;
+                // reject(err);
+                // return;
             }
             resolve("Inserted new IO successfully");
 
@@ -45,8 +45,8 @@ exports.modify_internal_order = (id,io)=>{
             const sql = 'UPDATE internalorders SET state = ? WHERE id = ?';
             db.run(sql,[io.newState,id],(err)=>{
                 if(err){
-                    reject(err);
-                    return;
+                    // reject(err);
+                    // return;
                 }
                 resolve(`IO with id ${id} is updated`);
             });
@@ -66,8 +66,8 @@ exports.modify_internal_order = (id,io)=>{
                     const g = JSON.stringify(prods);            
             db.run(sql,[io.newState,g,id],(err)=>{
                 if(err){
-                    reject(err);
-                    return;
+                    // reject(err);
+                    // return;
                 }
                 resolve(`IO with id ${id} is updated`);
             });
