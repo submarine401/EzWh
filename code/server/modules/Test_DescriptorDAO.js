@@ -12,7 +12,7 @@ exports.create_test_descriptor_table =  () => {
      db.run(sql, (err)=>{
         if(err){
             reject(err);
-            return
+            return;
         }
         resolve("testdescriptors Table -> OK");
     });
@@ -79,9 +79,8 @@ exports.create_test_descriptor_table =  () => {
 
    exports.get_TD = ()=>{ 
     return new Promise((resolve,reject)=>{
-       
-                    const sql = "SELECT * FROM testdescriptors ";
-                      db.all(sql,(err,rows)=>{
+        const sql = "SELECT * FROM testdescriptors ";
+            db.all(sql,(err,rows)=>{
                     if(err){
                         reject(err); 
                         return;

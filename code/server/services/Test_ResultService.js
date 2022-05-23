@@ -14,7 +14,7 @@ createTestResultTable = async () => {
 }
 
 setTestResult = async (tr) => {
-    const result = await this.dao.insert_into_test_Result_table(tr);
+    const result = await this.dao.insert_into_test_result_table(tr);
     return result;
 }
 

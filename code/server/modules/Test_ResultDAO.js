@@ -6,19 +6,21 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.create_test_result_table = () => {
         return new Promise((resolve,reject)=>{
-        const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, idTestDescriptor integer, date text,result boolean)';
+        const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, idTestDescriptor integer, Date text,Result boolean)';
          db.run(sql, (err)=>{
             if(err){
                 reject(err);
                 return}
+                console.log("ok")
             resolve("testresults Table -> OK");
+      
         });
      });
     }
 
-    exports.insert_into_test_Result_table = (tr)  => {
+    exports.insert_into_test_result_table = (tr)  => {
     return new Promise ((resolve,reject)=>{ 
-        const sql = 'INSERT INTO testresults (rfid, idTestDescriptor, date, result) VALUES(?,?,?,?)';
+        const sql = 'INSERT INTO testresults (rfid, idTestDescriptor, Date, Result) VALUES(?,?,?,?)';
         db.run(sql,[tr.rfid, tr.idTestDescriptor , tr.Date, tr.Result], (err)=>{
             if(err)
             {
@@ -27,6 +29,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
             }
             else
             {
+                console.log(tr.Result)
                 resolve("new test result is inserted");
             }
 
@@ -37,7 +40,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.modifyTR = (TRid, RFid, newIdTestDescriptor, newDate, newResult) => {  //MODIFIED (there isn't RFid in the design)
 
     return new Promise ((resolve,reject)=>{
-        const sql = 'UPDATE testresults SET idTestDescriptor = ? , date = ? , result = ? WHERE TRid = ? AND RFid = ?'; 
+        const sql = 'UPDATE testresults SET idTestDescriptor = ? , Date = ? , Result = ? WHERE TRid = ? AND RFid = ?'; 
       db.run(sql,[newIdTestDescriptor,newDate,newResult, TRid,  RFid], (err)=>{ 
             if(err)
             {
@@ -82,13 +85,12 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                               return;
                           }else{
                     
-                        
                        const  testresults = rows.map((tr)=>(
                       {
                         id : tr.TRid,
                         idTestDescriptor : tr.idTestDescriptor,
-                        Date : tr.date,
-                        Result : tr.result 
+                        Date : tr.Date,
+                        Result : tr.Result 
                         
                       })); 
     
@@ -107,16 +109,18 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                       {
                         id : tr.TRid,
                         idTestDescriptor : tr.idTestDescriptor,
-                        Date : tr.date,
-                        Result : tr.result 
+                        Date : tr.Date,
+                        Result : tr.Result 
                         
                        }));
+                       console.log(rows)
                       resolve(testresults);
                     
                   });
  
               }
           });
+}
 
           
     exports.deleteTestResultData = () => {
@@ -133,7 +137,3 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
       };
       
   
-    
-}
-
-
