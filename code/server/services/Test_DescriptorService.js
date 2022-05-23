@@ -3,7 +3,7 @@ class Test_DescriptorService {
 
 constructor(dao){
     this.dao= dao;
-    this.createTestDescriptorTable();
+    // this.createTestDescriptorTable();
 }
 
 
