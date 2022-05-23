@@ -50,11 +50,11 @@ class DBhelper {
         //     //console.error(error);
         // });
         //create SKU table 
-        this.create_sku_table().then(function(response) {
-            //console.log(response);
-        }, function(error) {
-            //console.error(error);
-        });
+        // this.create_sku_table().then(function(response) {
+        //     //console.log(response);
+        // }, function(error) {
+        //     //console.error(error);
+        // });
         // create test descriptor table 
         this.create_test_descriptor_table().then(function(response) {
             //console.log(response);
@@ -145,20 +145,20 @@ class DBhelper {
 
 
     
-    create_sku_table() {
-        return new Promise((resolve, reject) => {
+    // create_sku_table() {
+    //     return new Promise((resolve, reject) => {
 
-            // position id is TEXT because it is too big for an integer
-            const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, note TEXT, price REAL, availableQuantity INTEGER, positionID TEXT);"; 
-            this.db.run(sql_query, function (err) {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve("SKU Table -> OK");
-            });
-        });
-    }
+    //         // position id is TEXT because it is too big for an integer
+    //         const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, notes TEXT, price REAL, availableQuantity INTEGER, positionID TEXT);"; 
+    //         this.db.run(sql_query, function (err) {
+    //             if (err) {
+    //                 reject(err);
+    //                 return;
+    //             }
+    //             resolve("SKU Table -> OK");
+    //         });
+    //     });
+    // }
 
 
     // load_SKUs() {
@@ -209,7 +209,7 @@ class DBhelper {
                 
 
     //             try {
-    //                 const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID)  \
+    //                 const sql = 'INSERT INTO sku (description, weight, volume, notes, price, availableQuantity, positionID)  \
     //                             VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
     //                 const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
     //                                 sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/];
@@ -234,11 +234,11 @@ class DBhelper {
     //     return new Promise((resolve, reject) => {
 
     //         const sql_query = 'UPDATE sku \
-    //                            SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? \
+    //                            SET  description = ? , weight = ? , volume = ? , notes = ? , price = ? , availableQuantity = ? , positionID = ? \
     //                            WHERE id = ?'; 
 
     //         const params = [
-    //             sku.description, sku.weight, sku.volume, sku.note, sku.price, 
+    //             sku.description, sku.weight, sku.volume, sku.notes, sku.price, 
     //             sku.availableQuantity, sku.position?sku.position.id:undefined,
     //             id
     //         ] 

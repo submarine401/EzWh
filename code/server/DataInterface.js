@@ -49,11 +49,11 @@ class DataInterface{
 
     //     const ret = skus.map( (sku) => {
                     
-    //         const test_descriptors = all_test_descriptors.filter(td => td.idSKU === sku.id).map(td => td.id);
+    //         const testDescriptors = all_test_descriptors.filter(td => td.idSKU === sku.id).map(td => td.id);
 
     //         const position = sku.positionID?positions.find(pos => pos.id === sku.positionID):undefined;
             
-    //         return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.availableQuantity, position, test_descriptors);
+    //         return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.notes, sku.price, sku.availableQuantity, position, testDescriptors);
     //     });
 
     //     return ret;

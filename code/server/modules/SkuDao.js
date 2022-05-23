@@ -50,7 +50,7 @@ exports.store_SKU= (sku) => {
             
 
             try {
-                const sql = 'INSERT INTO sku (description, weight, volume, note, price, availableQuantity, positionID)  \
+                const sql = 'INSERT INTO sku (description, weight, volume, notes, price, availableQuantity, positionID)  \
                             VALUES  ( ?, ?, ?, ?, ?, ?, ?);'
                 const params = [ sku.description, sku.weight, sku.volume, sku.notes, sku.price,  
                                 sku.availableQuantity, sku.position === undefined?undefined:sku.position /*.id*/];
@@ -75,11 +75,11 @@ exports.update_SKU = (id, sku) => {
     return new Promise((resolve, reject) => {
 
         const sql_query = 'UPDATE sku \
-                           SET  description = ? , weight = ? , volume = ? , note = ? , price = ? , availableQuantity = ? , positionID = ? \
+                           SET  description = ? , weight = ? , volume = ? , notes = ? , price = ? , availableQuantity = ? , positionID = ? \
                            WHERE id = ?'; 
 
         const params = [
-            sku.description, sku.weight, sku.volume, sku.note, sku.price, 
+            sku.description, sku.weight, sku.volume, sku.notes, sku.price, 
             sku.availableQuantity, sku.position?sku.position.id:undefined,
             id
         ] 
@@ -111,6 +111,21 @@ exports.delete_SKU = (id) => {
             }
 
             resolve();
+        });
+    });
+}
+
+exports.create_sku_table = () => {
+    return new Promise((resolve, reject) => {
+
+        // position id is TEXT because it is too big for an integer
+        const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, notes TEXT, price REAL, availableQuantity INTEGER, positionID TEXT);"; 
+        this.db.run(sql_query, function (err) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve("SKU Table -> OK");
         });
     });
 }
