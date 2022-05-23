@@ -100,7 +100,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.get_all_available_SKUItem = function(skuID){
       return new Promise((resolve,reject) => {
         const sql_query = 'SELECT * FROM skuitem where availability = ? AND SKUid = ?';
-        db.all(sql_query,["1",skuID], function(err,rows){
+        db.all(sql_query,[1,skuID], function(err,rows){
           if(err){
             reject(err);
             return;
