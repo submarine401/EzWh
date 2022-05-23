@@ -7,11 +7,19 @@ const dataInterface = require('../DataInterface');
 describe('get Items', ()=>{
     beforeEach(()=>{
         dao.get_all_items.mockReset();
+        dao.get_all_items.mockReturnValueOnce({
+            id : 1,
+            description : "a new item",
+            price : 10.99,
+            skuid : 9,
+            supplierid : 2
+                    
+        });
     });
 
     test('get Items', async () => {
         let res = await itemService.getAllItems();
-        expect(res[0]).toEqual({
+        expect(res).toEqual({
                 id : 1,
                 description : "a new item",
                 price : 10.99,

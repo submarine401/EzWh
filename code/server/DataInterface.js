@@ -325,58 +325,58 @@ class DataInterface{
         }
 //***************************************************************ITEM ************************* */
 
-get_all_items(){
-    return new Promise((resolve,reject)=>{
+// get_all_items(){
+//     return new Promise((resolve,reject)=>{
        
-                    const sql = "SELECT * FROM item ";
-                this.dbHelper.db.all(sql,(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                    const internalorders = rows.map((i)=>(
-                    {
-                        id : i.id,
-                        description : i.description,
-                        price : i.price,
-                        skuid : i.skuid,
-                        supplierid : i.supplierid
-                    }));
-                    resolve(internalorders);
-                });
+//                     const sql = "SELECT * FROM item ";
+//                 this.dbHelper.db.all(sql,(err,rows)=>{
+//                     if(err){
+//                         reject(err); 
+//                         return;
+//                         }
+//                     const internalorders = rows.map((i)=>(
+//                     {
+//                         id : i.id,
+//                         description : i.description,
+//                         price : i.price,
+//                         skuid : i.skuid,
+//                         supplierid : i.supplierid
+//                     }));
+//                     resolve(internalorders);
+//                 });
             
-        });
-}
+//         });
+// }
 
 
-get_item_by_id(id){
-    return new Promise((resolve,reject)=>{
+// get_item_by_id(id){
+//     return new Promise((resolve,reject)=>{
        
-                    const sql = "SELECT * FROM item where id = ?";
-                this.dbHelper.db.all(sql,[id],(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                    else{
-                    const internalorders = rows.map((i)=>(
-                    {
-                        id : i.id,
-                        description : i.description,
-                        price : i.price,
-                        skuid : i.skuid,
-                        supplierid : i.supplierid
-                    }));
-                    if(internalorders.length === 0)
-                        resolve(0);
-                    else
-                        resolve(internalorders);
+//                     const sql = "SELECT * FROM item where id = ?";
+//                 this.dbHelper.db.all(sql,[id],(err,rows)=>{
+//                     if(err){
+//                         reject(err); 
+//                         return;
+//                         }
+//                     else{
+//                     const internalorders = rows.map((i)=>(
+//                     {
+//                         id : i.id,
+//                         description : i.description,
+//                         price : i.price,
+//                         skuid : i.skuid,
+//                         supplierid : i.supplierid
+//                     }));
+//                     if(internalorders.length === 0)
+//                         resolve(0);
+//                     else
+//                         resolve(internalorders);
 
-                }
-                });
+//                 }
+//                 });
             
-        });
-}
+//         });
+// }
 
 
 get_all_RO(){

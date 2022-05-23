@@ -28,12 +28,12 @@ class Itemservice {
     }
 
     getAllItems = async () => {
-        const result = await dataInterface.get_all_items();
+        const result = await this.dao.get_all_items();
         return result;
     }
 
     getItembyId = async (id) => {
-        const result = await dataInterface.get_item_by_id(id);
+        const result = await this.dao.get_item_by_id(id);
         return result;
     }
 }
