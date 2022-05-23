@@ -41,7 +41,7 @@ describe("restock order", () => {
         }
 
         testRSO(1,IO1);
-        testRSO(2,IO2);
+       // testRSO(2,IO2);
 
 
     async function testRSO(i,rso) {

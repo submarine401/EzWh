@@ -90,6 +90,16 @@ router.post('/api/returnOrder',async (req,res)=>{
       return res.status(503).end();
     }
   });
+  router.delete('/api/allRO',async (req,res)=>{
+    try{
+        const results = await returnOrderservice.deleteAllReturnOrder();
+    }
+    catch(err)
+    {
+      return res.status(503).end();
+    }
+  });
+  
   /* allReturnOrder
   GET ALL RO
   */

@@ -379,54 +379,54 @@ class DataInterface{
 // }
 
 
-get_all_RO(){
-    return new Promise((resolve,reject)=>{
+// get_all_RO(){
+//     return new Promise((resolve,reject)=>{
        
-                    const sql = "SELECT * FROM returnorder ";
-                this.dbHelper.db.all(sql,(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                    const internalorders = rows.map((ro)=>(
-                    {
-                        id : ro.id,
-                        returnDate : ro.date,
-                        products : JSON.parse(ro.products),
-                        restockOrderId : ro.restockorderid,
+//                     const sql = "SELECT * FROM returnorder ";
+//                 this.dbHelper.db.all(sql,(err,rows)=>{
+//                     if(err){
+//                         reject(err); 
+//                         return;
+//                         }
+//                     const internalorders = rows.map((ro)=>(
+//                     {
+//                         id : ro.id,
+//                         returnDate : ro.date,
+//                         products : JSON.parse(ro.products),
+//                         restockOrderId : ro.restockorderid,
                       
-                    }));
-                    resolve(internalorders);
-                });
+//                     }));
+//                     resolve(internalorders);
+//                 });
             
-        });
-}
+//         });
+// }
 
-get_all_RO_by_id(id){
-    return new Promise((resolve,reject)=>{
+// get_all_RO_by_id(id){
+//     return new Promise((resolve,reject)=>{
        
-                    const sql = "SELECT * FROM returnorder where id = ? ";
-                this.dbHelper.db.all(sql,[id],(err,rows)=>{
-                    if(err){
-                        reject(err); 
-                        return;
-                        }
-                    const internalorders = rows.map((ro)=>(
-                    {
-                        id : ro.id,
-                        returnDate : ro.date,
-                        products : JSON.parse(ro.products),
-                        restockOrderId : ro.restockorderid,
+//                     const sql = "SELECT * FROM returnorder where id = ? ";
+//                 this.dbHelper.db.all(sql,[id],(err,rows)=>{
+//                     if(err){
+//                         reject(err); 
+//                         return;
+//                         }
+//                     const internalorders = rows.map((ro)=>(
+//                     {
+//                         id : ro.id,
+//                         returnDate : ro.date,
+//                         products : JSON.parse(ro.products),
+//                         restockOrderId : ro.restockorderid,
                       
-                    }));
-                    if(internalorders.length ===0)
-                        resolve(0)
-                    else
-                        resolve(internalorders);
-                });
+//                     }));
+//                     if(internalorders.length ===0)
+//                         resolve(0)
+//                     else
+//                         resolve(internalorders);
+//                 });
             
-        });
-}
+//         });
+// }
 
 get_restock_order_by_id(id)
 {

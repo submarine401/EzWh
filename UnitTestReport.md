@@ -224,9 +224,72 @@ Modifies given id of item with fields in the newItem object and returns the mess
 
 # please do not write here
 
-### Class **_REturnOrderDao_** - method **get_item_by_id(id)**
+### Class **_ReturnOrderDao_** - method **get_all_RO_by_id(id)**
 
-# please do not write here
+    In this method we check whether specific return order by given id is onside the database or not, if exists the returned value is corresponding return order and success status, othewise it will return zero to API layer which means thers is not corrspondance to given id, and prints: "no return order associated to id"
+
+**Criteria**
+
+| Criteria        | Description                                   |
+| --------------- | --------------------------------------------- |
+| EMPTY_DB        | There is not any stored return order in database.                     |
+| RO_EXISTANCE    | If there is an RO with the given id     |
+| ID_TYPE_CORRECT | If the type of the id param is correct or not |
+
+**Predicates**
+
+| Criteria        | Predicate  |
+| --------------- | ---------- |
+| DB_EMPTY        | True/False |
+| RO_EXISTANCE  | True/False |
+| ID_TYPE_CORRECT | True/False |
+
+**Boundaries**:
+
+| Criteria        | Boundary values |
+| --------------- | :-------------: |
+| DB_EMPTY        |       N/A       |
+| RO_EXISTANCE  |       N/A       |
+| ID_TYPE_CORRECT |       N/A       |
+
+**Combination of predicates**:
+
+| EMPTY_DB | RO_EXISTANCE | ID_TYPE_CORRECT | Valid / Invalid | Description of the test case             | Jest test case     |
+| -------- | ------------ | --------------- | --------------- | ---------------------------------------- | ------------------ |
+| TRUE     |              |                 | Valid           | If the db is empty, return 'no return order associated to id'     | testgetRONotexisted |
+| FALSE    | FALSE        | TRUE            | Valid           | If the RO is not inserted, returns '0'  | testgetRONotexisted |
+| FALSE    | TRUE         | TRUE            | Valid           | Return the RO related to given id  | testgetRO |
+| \*       | \*           | FALSE           | Invalid         | If the passed id is less than one      | testgetROWithIdlessthanOne |
+
+### **Class ItemDAO - method insert_return_order_table(RO)**
+
+Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: int) into the database.
+
+**Criteria for method insert_return_order_table :**
+
+| Criteria             | Description                               |
+| -------------------- | ----------------------------------------- |
+| VALID_RO_TYPE      | If the RO attributes have invalid attributes. |
+
+**Predicates for method insert_into_item_table:**
+
+| Criteria             | Predicate  |
+| -------------------- | ---------- |
+| VALID_RO_TYPE      | True/False |
+
+**Boundaries**:
+
+| Criteria             | Boundary values |
+| -------------------- | --------------- |
+| VALID_RO_TYPE      | null            |
+
+**Combination of predicates**:
+
+|  | VALID_RO_TYPE     | Valid / Invalid | Description of the test case           | Jest test case       |
+| -------------------- | ------------------- | --------------- | -------------------------------------- | -------------------- |
+|                 | TRUE                | Valid           | The RO is correctly saved in the db  | testsetRO |
+|                 | FALSE (null)        | Invalid         | The RO is not saved, returns -1 | testsetEmptyRO |
+
 
 
 # White Box Unit Tests
@@ -263,11 +326,14 @@ Modifies given id of item with fields in the newItem object and returns the mess
 | --------- | -------------- | --- |
 ||||
 # please do not write here
-## Test cases for Internal Orders
+## Test cases for Return Orders
 | Unit name | Jest test case |     |
 | --------- | -------------- | --- |
-||||
-# please do not write here
+|test return order|get retun order||
+|test return order|get not existed RO||
+|test return order|get wrong id type for RO ||
+|test return order|set empty RO||
+|test return order|set RO||
 
 ### Code coverage report for Item
 ![screenshot1](./Covrage%20screenshots/item1.jpg)
@@ -281,9 +347,13 @@ Modifies given id of item with fields in the newItem object and returns the mess
 # please do not write here
 ### Code coverage report for Item
 ![screenshot1](./Covrage%20screenshots/item1.jpg)
-![screenshot2](./
-# please do not write here
-### Code coverage report for Item
-![screenshot1](./Covrage%20screenshots/item1.jpg)
-![screenshot2](./
+
+
+### Code coverage report for Retun order
+![screenshot1](./Covrage%20screenshots/RO1.jpg)
+![screenshot1](./Covrage%20screenshots/RO2.jpg)
+![screenshot1](./Covrage%20screenshots/RO3.jpg)
+![screenshot1](./Covrage%20screenshots/RO4.jpg)
+![screenshot1](./Covrage%20screenshots/RO5.jpg)
+
 # please do not write here

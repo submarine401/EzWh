@@ -2,7 +2,7 @@ const InternalOrderservice = require('../services/InternalOrderservice');
 const dao = require('../modules/InternalOrdersDao')
 const internalOrderservice = new InternalOrderservice(dao);
 
-describe("internal order", () => {
+describe("test internal order", () => {
     beforeEach(async () => {
         await dao.delete_all_internal_order();
        
