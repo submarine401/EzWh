@@ -4,6 +4,7 @@ class PositionService{
 
     constructor(dao){
         this.dao = dao;
+        this.dao.create_position_table();
     }
 
     async get_all_position(){
@@ -19,7 +20,7 @@ class PositionService{
 
             const positions = await this.get_all_position();
 
-            const pos = positions.find(p => p.id === posData.positionID);
+            const pos = positions.find(p => p.positionID === posData.positionID);
 
             if(pos !== undefined){
                 console.log('already existing position');
@@ -43,7 +44,7 @@ class PositionService{
         // console.log(positions);
         // console.log(id);
 
-        const pos = positions.find(p => p.id === id);
+        const pos = positions.find(p => p.positionID === id);
 
         if(pos === undefined){
             console.log('no matching pos');
@@ -53,14 +54,12 @@ class PositionService{
         const newID = newValues.newAisleID + newValues.newRow + newValues.newCol
 
         if(id !== newID){
-            const posNewId = positions.find(p => p.id === newID);
+            const posNewId = positions.find(p => p.positionID === newID);
             if(posNewId !== undefined){
                 console.log('new ID alredy taken');
                 throw 'taken ID';
             }
         }
-
-        console.log(pos);
 
         pos.modifyPosition(newValues);
 
@@ -72,7 +71,7 @@ class PositionService{
 
         const positions = await this.get_all_position();
 
-        const pos = positions.find(p => p.id === oldID);
+        const pos = positions.find(p => p.positionID === oldID);
 
         if(pos === undefined){
             console.log('no matching pos');
@@ -81,7 +80,7 @@ class PositionService{
 
         if(newID !== oldID){
 
-            const posNewId = positions.find(p => p.id === newID);
+            const posNewId = positions.find(p => p.positionID === newID);
             if(posNewId !== undefined){
                 console.log('new ID alredy taken');
                 throw 'taken ID';
@@ -100,7 +99,7 @@ class PositionService{
         console.log('delete position' + id);
         const positions = await this.get_all_position();
 
-        const pos = positions.find(p => p.id === id);
+        const pos = positions.find(p => p.positionID === id);
 
         if(pos === undefined){
             console.log('no matching pos');
@@ -110,6 +109,14 @@ class PositionService{
         this.dao.delete_position(id);
         
 
+    }
+
+    async deleteAll() {
+        const res = await this.dao.delete_position_data();
+        if (res !== true) {
+            return false;
+        } 
+        return true;
     }
 
 }

@@ -41,11 +41,9 @@ router.post('/api/newUser', async (req,res) => {
     }
     
     const check_username = await userService.get_users_no_manager();
-    console.log(check_username);
     const res_check_username = check_username.filter(users => {
       return users.email == new_u.username;
     });
-    console.log(res_check_username);
     
     if(res_check_username.length !== 0){
       return res.status(409).end("User already existent!");
@@ -55,7 +53,7 @@ router.post('/api/newUser', async (req,res) => {
       return res.status(422).end('Inserted type does not match any valid type or password is too short')
     }
     else{
-      return res.status(200).end("User inserted!");
+      return res.status(201).end("User inserted!");
     }
     
   } catch (err) {
@@ -82,20 +80,19 @@ router.put('/api/users/:username', async (req,res) =>{
       return res.status(422).end();
     }
     
-    const check_type = await userService.getUsers();
+    const check_type = await userService.get_users_no_manager();
     const res_check_type = check_type.filter(function(users){
-      return (users.type == body.oldType && users.username == username);
+      return (users.type === body.oldType && users.email === username);
     });
     if(res_check_type.length === 0){
       return res.status(404).end("Wrong username or OldType");
     }
-    
     const result = await userService.modify_user(username,body.newType);
     if(result === 200){
       return res.status(200).end();
     }
     else{
-      return res.status(503).end();
+      return res.status(422).end();
     }
       
   } catch (err) {
@@ -108,13 +105,14 @@ router.put('/api/users/:username', async (req,res) =>{
 router.delete('/api/users/:username/:type', async (req,res) => {
   const type = req.params.type;
   const username = req.params.username
-  console.log(username);
   try {
     const result = await userService.delete_user(username,type);
     if(result === 422){
       return res.status(422).end("Failed to validate username or type!");
     }
-    return res.status(204).end();
+    else{
+      return res.status(204).end();
+    }
     
   } catch (err) {
     console.log(err);

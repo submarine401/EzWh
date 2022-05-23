@@ -3,10 +3,18 @@ class Test_DescriptorService {
 
 constructor(dao){
     this.dao= dao;
+    this.createTestDescriptorTable();
+}
+
+
+createTestDescriptorTable = async () => {
+    const result = await this.dao.create_test_descriptor_table();
+    return result;
 }
 
 setTestDescriptor = async (td) => {
     const result = await this.dao.insert_into_test_Descriptor_table(td);
+
     return result;
 }
 
@@ -16,6 +24,7 @@ modifyTestDescriptor = async (td, id) => {
 }
 
 deleteTestDescriptor = async (id) => {
+
     const result = await this.dao.delete_test_descriptor(id);
     return result;
 }

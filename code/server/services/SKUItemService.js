@@ -26,9 +26,14 @@ class SKUItemService{
     return result;
   }
   
-  newSKUItem = async function(SKU_item_info){
-    this.dao.create_SKUItem(SKU_item_info);
-    return;
+  newSKUItem = function(SKU_item_info){
+    const result = this.dao.create_SKUItem(SKU_item_info);
+    return result;
+  }
+  
+  updateSKUItem = async function(rfid,newParams){
+    const result = this.dao.update_SKUItem(rfid,newParams);
+    return result;
   }
   
 }

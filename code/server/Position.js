@@ -5,8 +5,8 @@ class Position{
     
     constructor(newPosition){
 
-        this.id = newPosition.positionID;
-        this.aisle = newPosition.aisleID;
+        this.positionID = newPosition.positionID;
+        this.aisleID = newPosition.aisleID;
         this.row = newPosition.row;
         this.col = newPosition.col;
         this.maxWeight = newPosition.maxWeight;
@@ -18,10 +18,10 @@ class Position{
 
     modifyPosition(newValues){
 
-        this.aisle = newValues.newAisleID;
+        this.aisleID = newValues.newAisleID;
         this.row = newValues.newRow;
         this.col = newValues.newCol;
-        this.id = this.aisle + this.row + this.col;
+        this.positionID = this.aisleID + this.row + this.col;
         this.maxWeight = newValues.newMaxWeight;
         this.maxVolume = newValues.newMaxVolume;
         this.occupiedWeight = newValues.newOccupiedWeight;
@@ -30,10 +30,10 @@ class Position{
 
     modifyPositionID(newPid){
         
-        this.aisle = newPid.substr(0, 4);
+        this.aisleID = newPid.substr(0, 4);
         this.row = newPid.substr(4, 4);
         this.col = newPid.substr(8, 4);
-        this.id = this.aisle + this.row + this.col;
+        this.positionID = this.aisleID + this.row + this.col;
     }
 
     increase_free_space(freed_weight, freed_volume){

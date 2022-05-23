@@ -2,14 +2,14 @@ const PositionService = require('../services/PositionService');
 const dao = require('../modules/PositionDaoMock');
 const positionService = new PositionService(dao);
 const Position = require('../Position');
-//const dataInterface = require('../DataInterface');
-//test case definition 
+
+
 describe('get Positions', ()=>{
     beforeEach(()=>{
         dao.load_positions.mockReset();
         dao.load_positions.mockReturnValueOnce(
             [
-                {
+                new Position({
                     positionID:"800234543412",
                     aisleID: "8002",
                     row: "3454",
@@ -18,8 +18,8 @@ describe('get Positions', ()=>{
                     maxVolume: 1000,
                     occupiedWeight: 300,
                     occupiedVolume:150
-                },
-                {
+                }),
+                new Position({
                     positionID:"801234543412",
                     aisleID: "8012",
                     row: "3454",
@@ -28,9 +28,8 @@ describe('get Positions', ()=>{
                     maxVolume: 1000,
                     occupiedWeight: 300,
                     occupiedVolume:150
-                }
+                })
             ]
-        
         );
     });
 
@@ -78,9 +77,9 @@ describe("add position", () => {
         await positionService.create_Position (pos);
 
         //first call, first property of passed object
-        expect(dao.store_position.mock.calls[0][0].id).toBe(pos["positionID"]);
+        expect(dao.store_position.mock.calls[0][0].positionID).toBe(pos["positionID"]);
         //first call, second property of passed object
-        expect(dao.store_position.mock.calls[0][0].aisle).toBe(pos["aisleID"]);
+        expect(dao.store_position.mock.calls[0][0].aisleID).toBe(pos["aisleID"]);
         //first call, third property of passed object
         expect(dao.store_position.mock.calls[0][0].row).toBe(pos["row"]);
         //first call, fourth property of passed object
@@ -89,9 +88,9 @@ describe("add position", () => {
         expect(dao.store_position.mock.calls[0][0].maxWeight).toBe(pos["maxWeight"]);
         //first call, sixth property of passed object
         expect(dao.store_position.mock.calls[0][0].maxVolume).toBe(pos["maxVolume"]);
-        //first call, sixth property of passed object
+        //first call, seventh property of passed object
         expect(dao.store_position.mock.calls[0][0].occupiedWeight).toBe(0);
-        //first call, sixth property of passed object
+        //first call, eighth property of passed object
         expect(dao.store_position.mock.calls[0][0].occupiedVolume).toBe(0);
     });
 
@@ -144,8 +143,8 @@ describe("modify position", () => {
         await positionService.modifyPosition (newValues, id);
 
         expect(dao.update_position.mock.calls[0][0]).toBe(id);
-        expect(dao.update_position.mock.calls[0][1].id).toBe(newValues["newAisleID"]+newValues["newRow"]+newValues["newCol"]);
-        expect(dao.update_position.mock.calls[0][1].aisle).toBe(newValues["newAisleID"]);
+        expect(dao.update_position.mock.calls[0][1].positionID).toBe(newValues["newAisleID"]+newValues["newRow"]+newValues["newCol"]);
+        expect(dao.update_position.mock.calls[0][1].aisleID).toBe(newValues["newAisleID"]);
         expect(dao.update_position.mock.calls[0][1].row).toBe(newValues["newRow"]);
         expect(dao.update_position.mock.calls[0][1].col).toBe(newValues["newCol"]);
         expect(dao.update_position.mock.calls[0][1].maxWeight).toBe(newValues["newMaxWeight"]);
@@ -165,8 +164,8 @@ describe("modify position", () => {
         await positionService.modifyPositionID(newID, oldID);
 
         expect(dao.update_position.mock.calls[0][0]).toBe(oldID);
-        expect(dao.update_position.mock.calls[0][1].id).toBe(newID);
-        expect(dao.update_position.mock.calls[0][1].aisle).toBe(aisle);
+        expect(dao.update_position.mock.calls[0][1].positionID).toBe(newID);
+        expect(dao.update_position.mock.calls[0][1].aisleID).toBe(aisle);
         expect(dao.update_position.mock.calls[0][1].row).toBe(row);
         expect(dao.update_position.mock.calls[0][1].col).toBe(col);
     });

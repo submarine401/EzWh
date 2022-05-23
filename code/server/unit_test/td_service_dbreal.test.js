@@ -7,17 +7,17 @@ describe("Test Descriptor", () => {
     beforeEach(async () => {
         await dao.deleteTestDescriptorData();
 
+        await dao.create_test_descriptor_table();
+
         await dao.insert_into_test_Descriptor_table({
-            "id":1,
-            "name":"test descriptor 1",
-            "procedureDescription": "This test is described by...",
-            "idSKU" :1
+            name :"test descriptor 1",
+            procedureDescription : "This test is described by...",
+            idSKU :1
         });
         await dao.insert_into_test_Descriptor_table({
-            "id":2,
-            "name":"test descriptor 2",
-            "procedureDescription": "This test is described by...",
-            "idSKU" :2
+            name :"test descriptor 2",
+            procedureDescription : "This test is described by...",
+            idSKU :2
 
         });
     });
@@ -42,7 +42,7 @@ describe("Test Descriptor", () => {
 
 
     async function testTestDescriptor(id,testDescriptor) {
-        test('get Test Descriptor', async () => {
+        test('get Test Descriptor', async () => {        
             let res = await TestDescriptorService.getTestDescriptorsById(id);
             expect(res[0]).toEqual({
                     id : id,
@@ -50,10 +50,10 @@ describe("Test Descriptor", () => {
                     procedureDescription : testDescriptor.procedureDescription,
                     idSKU : testDescriptor.idSKU
                 });
+              
         });
     }
     
     
-
 });
 
