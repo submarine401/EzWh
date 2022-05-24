@@ -1,4 +1,4 @@
-exports.newUser=jest.fn();
+exports.setUser=jest.fn();
 exports.get_all_suppliers=jest.fn();
 exports.getUsers_except_manager=jest.fn();
 exports.modify_user_rights=jest.fn();

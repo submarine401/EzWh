@@ -12,7 +12,8 @@ exports.insert_into_item_table = (i)=>{
                 db.run(sql,[i.description,i.price,i.SKUId,i.supplierId], (err)=>{
                     if(err)
                     {
-                      
+                      reject(err)
+                      return;
                     }
                     else
                     {    
@@ -37,7 +38,8 @@ exports.modify_item = (id,i)=>{
             db.run(sql,[i.newDescription,i.newPrice,id], (err)=>{
                 if(err)
                 {
-                   
+                    reject(err)
+                    return;
                 }
                 else
                 {
@@ -60,7 +62,8 @@ exports.get_all_items= ()=>{
                     const sql = "SELECT * FROM item ";
                 db.all(sql,(err,rows)=>{
                     if(err){
-                        
+                        reject(err)
+                      return;
                         }
                     const internalorders = rows.map((i)=>(
                     {
@@ -83,7 +86,8 @@ exports.get_item_by_id = (id)=>{
                     const sql = "SELECT * FROM item where id = ?";
                 db.all(sql,[id],(err,rows)=>{
                     if(err){
-                        
+                        reject(err)
+                      return;
                         }
                     else{
                     const internalorders = rows.map((i)=>(
@@ -115,7 +119,8 @@ exports.delete_item = (iid)=>{
         const sql = 'DELETE FROM item WHERE id = ?';
         db.run(sql,[iid],(err)=>{
             if(err){
-              
+                reject(err)
+                return;
             }
             resolve(`Item with id ${iid} is deleted`);
         });
@@ -128,7 +133,8 @@ exports.deleteItemData = () => {
       const sql = 'DELETE FROM item';
       db.run(sql, [], function (err) {
         if (err) {
-        
+            reject(err)
+                      return;
         }
         resolve(true);
       })
