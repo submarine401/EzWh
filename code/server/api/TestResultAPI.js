@@ -177,6 +177,25 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
     }
   
   });
+
+  
+router.delete('/api/allTR',async (req,res)=>{
+  try{
+  
+  
+  const results = await Test_ResultService.deleteTestResultData();
+  if (results) {
+  return res.status(200).json(results);
+   } else {
+    return res.status(422).json({error : "Not found"});
+    }
+  } 
+  catch(err)
+  {
+    console.log(err);
+    return res.status(503).end();
+  }
+});
   
   
   module.exports = router;

@@ -33,6 +33,7 @@ deleteTestDescriptor = async (id) => {
 }
 
 
+
 getAllTestDescriptors = async () => {
     const result = await this.dao.get_TD();
     return result;
@@ -43,6 +44,11 @@ getTestDescriptorsById = async (id) => {
     return result;
 }
 
+
+deleteAllTestDescriptors = async () => {
+    const result = await this.dao.deleteTestDescriptorData();
+    return result;
+}
 
 }
 

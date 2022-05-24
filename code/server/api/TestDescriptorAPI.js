@@ -148,5 +148,22 @@ router.delete('/api/testDescriptor/:id', async (req, res)=>{
 
 });
 
+router.delete('/api/allTD',async (req,res)=>{
+  try{
+  
+  
+  const results = await Test_DescriptorService.deleteTestDescriptorData();
+  if (results) {
+  return res.status(200).json(results);
+   } else {
+    return res.status(422).json({error : "Not found"});
+    }
+  } 
+  catch(err)
+  {
+    console.log(err);
+    return res.status(503).end();
+  }
+});
 
 module.exports = router;
