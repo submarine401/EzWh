@@ -34,7 +34,7 @@ exports.load_SKU = (id) => {
                 reject(err); 
                 return;
             }
-            resolve(rows);
+            resolve(rows[0]);
         });
     });
 }
@@ -77,7 +77,7 @@ exports.update_SKU = (id, sku) => {
 
         const params = [
             sku.description, sku.weight, sku.volume, sku.notes, sku.price, 
-            sku.availableQuantity, sku.position?sku.position.id:undefined,
+            sku.availableQuantity, sku.position?sku.position.positionID:undefined,
             id
         ] 
         db.run(sql_query, params, (err)=>{

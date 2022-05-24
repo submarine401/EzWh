@@ -137,7 +137,7 @@ router.post('/api/managerSessions',async(req,res) =>{
     if(result === 401){
       return res.status(401).end();
     }
-    else if(result === 422){
+    else if(result === 422 || body.type !=='manager'){
       return res.status(422).end('Failed body validation!');
     }
     else{
@@ -149,5 +149,99 @@ router.post('/api/managerSessions',async(req,res) =>{
   } 
 });
 
+router.post('/api/customerSessions',async(req,res) =>{
+  const body = req.body;
+  try {
+    const result = await userService.check_passw(body.username,body.password,body.type);
+    if(result === 401){
+      return res.status(401).end();
+    }
+    else if(result === 422 || body.type !=='customer'){
+      return res.status(422).end('Failed body validation!');
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).end();
+  } 
+});
+
+router.post('/api/supplierSessions',async(req,res) =>{
+  const body = req.body;
+  try {
+    const result = await userService.check_passw(body.username,body.password,body.type);
+    if(result === 401){
+      return res.status(401).end();
+    }
+    else if(result === 422 || body.type !=='supplier'){
+      return res.status(422).end('Failed body validation!');
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).end();
+  } 
+});
+
+router.post('/api/clerkSessions',async(req,res) =>{
+  const body = req.body;
+  try {
+    const result = await userService.check_passw(body.username,body.password,body.type);
+    if(result === 401){
+      return res.status(401).end();
+    }
+    else if(result === 422 || body.type !=='clerk'){
+      return res.status(422).end('Failed body validation!');
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).end();
+  } 
+});
+
+router.post('/api/qualityEmployeeSessions',async(req,res) =>{
+  const body = req.body;
+  try {
+    const result = await userService.check_passw(body.username,body.password,body.type);
+    if(result === 401){
+      return res.status(401).end();
+    }
+    else if(result === 422 || body.type !=='qualityEmployee'){
+      return res.status(422).end('Failed body validation!');
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).end();
+  } 
+});
+
+router.post('/api/deliveryEmployeeSessions',async(req,res) =>{
+  const body = req.body;
+  try {
+    const result = await userService.check_passw(body.username,body.password,body.type);
+    if(result === 401){
+      return res.status(401).end();
+    }
+    else if(result === 422 || body.type !=='deliveryEmployee'){
+      return res.status(422).end('Failed body validation!');
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).end();
+  } 
+});
 
 module.exports = router;

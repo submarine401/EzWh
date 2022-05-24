@@ -85,7 +85,6 @@ exports.store_position = (position) => {
 
 exports.update_position = (id, pos) => {
     return new Promise((resolve, reject) => {
-
         const sql_query = 'UPDATE position \
                            SET  positionID = ?, aisleID = ?, row = ?, col = ?, maxWeight = ?, maxVolume = ?, occupiedWeight = ?, occupiedVolume = ? \
                            WHERE positionID = ?';
@@ -95,13 +94,11 @@ exports.update_position = (id, pos) => {
             pos.maxVolume, pos.occupiedWeight, pos.occupiedVolume,
             id
         ]
-        db.run(sql_query, params, (err)=>{
-
+        db.run(sql_query, params, function(err) {
             if(err){
                 reject(err); 
                 return;
             }
-
             resolve();
         });
     });

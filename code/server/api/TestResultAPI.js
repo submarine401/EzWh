@@ -92,7 +92,7 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
         return res.status(422).json({error : "Unprocessable Entity"});
       }
 
-      const s = await SKU_item_service.search_by_rfid(newTR.rfid);
+      const s = await SKU_item_service.search_by_RFID(newTR.rfid);
       
 
       const td = await test_DescriptorService.getTestDescriptorsById(newTR.idTestDescriptor);
@@ -182,8 +182,8 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 router.delete('/api/allTR',async (req,res)=>{
   try{
   
-  
-  const results = await Test_ResultService.deleteTestResultData();
+
+  const results = await TestResultService.deleteAllTestResult();
   if (results) {
   return res.status(200).json(results);
    } else {

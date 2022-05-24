@@ -15,6 +15,8 @@ const TestDescriptor1 = {
 }
 
 
+
+
 const TestDescriptor2 = {
     id : 2,
     name : "test descriptor 2",
@@ -68,7 +70,7 @@ function newTestDescriptor(expectedHTTPStatus, TestDescriptor1) {
                 .send(TestDescriptor1)
                 .then(function (res) {
                     res.should.have.status(expectedHTTPStatus);
-                    res.body.should.equal({ success: 'Created' });
+                    res.body.succes.should.equal('Created');
                     done();
                 }).catch((err)=>{
                     done(err);

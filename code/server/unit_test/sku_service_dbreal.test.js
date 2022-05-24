@@ -137,33 +137,37 @@ describe('get sku', ()=>{
 
     
 
-/* describe("add position", () => {
+describe("add sku", () => {
     beforeEach(async () => {
-        await dao.delete_position_data();
-        await dao.create_position_table();
+        await dao.delete_sku_data();///making it drop table
+        await dao.create_sku_table(); ////temporary
+        await td_dao.deleteTestDescriptorData();
+        await td_dao.create_test_descriptor_table();
+        await positionDao.delete_position_data();
     })
-    test('add position', async () => {
-        const pos =  {
-            "positionID":"800234543412",
-            "aisleID": "8002",
-            "row": "3454",
-            "col": "3412",
-            "maxWeight": 1000,
-            "maxVolume": 1000
+    test('add sku', async () => {
+        const sku =  {
+            "description" : "a new sku",
+            "weight" : 100,
+            "volume" : 50,
+            "notes" : "first SKU",
+            "price" : 10.99,
+            "availableQuantity" : 50
         };
+        const expectedId = 1;
 
-        await positionService.create_Position (pos);
+        await skuService.create_SKU(sku);
 
-        let res = await dao.load_positions();
+        let res = await dao.load_SKU(expectedId);
 
-        expect(res[0].positionID).toBe(pos["positionID"]);
-        expect(res[0].aisleID).toBe(pos["aisleID"]);
-        expect(res[0].row).toBe(pos["row"]);
-        expect(res[0].col).toBe(pos["col"]);
-        expect(res[0].maxWeight).toBe(pos["maxWeight"]);
-        expect(res[0].maxVolume).toBe(pos["maxVolume"]);
-        expect(res[0].occupiedWeight).toBe(0);
-        expect(res[0].occupiedVolume).toBe(0);
+        expect(res.id).toBe(expectedId);
+        expect(res.description).toBe(sku.description);
+        expect(res.weight).toBe(sku.weight);
+        expect(res.volume).toBe(sku.volume);
+        expect(res.notes).toBe(sku.notes);
+        expect(res.price).toBe(sku.price);
+        expect(res.availableQuantity).toBe(sku.availableQuantity);
+        expect(res.position).toBe(null);
     });
 
 });
@@ -171,91 +175,194 @@ describe('get sku', ()=>{
 
 describe("modify position", () => {
     beforeEach(async () => {
-        await dao.delete_position_data();
-        await dao.create_position_table();
-        // await dao.store_position(new Position({
-        //     positionID:"800234543412",
-        //     aisleID: "8002",
-        //     row: "3454",
-        //     col: "3412",
-        //     maxWeight: 1000,
-        //     maxVolume: 1000,
-        //     occupiedWeight: 300,
-        //     occupiedVolume:150
-        // }));
-        await dao.store_position(new Position({
-            positionID:"801234543412",
-            aisleID: "8012",
+        await dao.delete_sku_data();///making it drop table
+        await dao.create_sku_table(); ////temporary
+        await dao.store_SKU(new SKU(1, "a new sku", 10, 5, "first SKU", 10.99, 5 ));
+        await dao.store_SKU(new SKU(2, "another sku", 11, 6, "second SKU", 10.99, 7, 
+                                    new Position({
+                                        positionID:"800234543412",
+                                        aisleID: "8002",
+                                        row: "3454",
+                                        col: "3412",
+                                        maxWeight: 1000,
+                                        maxVolume: 1000,
+                                        occupiedWeight: 77,
+                                        occupiedVolume: 42
+                                    })));
+
+        await positionDao.delete_position_data();
+        await positionDao.store_position(new Position({
+            positionID:"800234543412",
+            aisleID: "8002",
             row: "3454",
             col: "3412",
             maxWeight: 1000,
             maxVolume: 1000,
-            occupiedWeight: 300,
-            occupiedVolume:150
+            occupiedWeight: 77,
+            occupiedVolume: 42
         }));
-    })
-    
+        await positionDao.store_position(new Position({
+            positionID:"801234523412",
+            aisleID: "8012",
+            row: "3452",
+            col: "3412",
+            maxWeight: 1000,
+            maxVolume: 1000,
+            occupiedWeight: 0,
+            occupiedVolume: 0
+        }));
 
-    test('modify position', async () => {
+        await td_dao.deleteTestDescriptorData();
+        await td_dao.create_test_descriptor_table();
+        await td_dao.insert_into_test_Descriptor_table({
+            name :"test descriptor 1",
+            procedureDescription : "This test is described by...",
+            idSKU : 2
+        });
+    })
+
+    test('modify sku no position', async () => {
         const newValues =  {
-            "newAisleID": "8003",
-            "newRow": "3454",
-            "newCol": "3412",
-            "newMaxWeight": 1200,
-            "newMaxVolume": 600,
-            "newOccupiedWeight": 200,
-            "newOccupiedVolume":100
+            "newDescription" : "a new sku",
+            "newWeight" : 100,
+            "newVolume" : 50,
+            "newNotes" : "first SKU",
+            "newPrice" : 10.99,
+            "newAvailableQuantity" : 50
         };
 
-        const id = "801234543412";
+        const id = 1;
 
+        await skuService.modify_SKU(newValues, id);
 
-        await positionService.modifyPosition (newValues, id);
+        let res = await dao.load_SKU(id);
 
-        let res = await dao.load_positions();
+        expect(res.id).toBe(id);
+        expect(res.description).toBe(newValues.newDescription);
+        expect(res.weight).toBe(newValues.newWeight);
+        expect(res.volume).toBe(newValues.newVolume);
+        expect(res.notes).toBe(newValues.newNotes);
+        expect(res.price).toBe(newValues.newPrice);
+        expect(res.availableQuantity).toBe(newValues.newAvailableQuantity);
+        expect(res.position).toBe(null);
 
+    });
 
-        expect(res[0].positionID).toBe(newValues["newAisleID"]+newValues["newRow"]+newValues["newCol"]);
-        expect(res[0].aisleID).toBe(newValues["newAisleID"]);
-        expect(res[0].row).toBe(newValues["newRow"]);
-        expect(res[0].col).toBe(newValues["newCol"]);
-        expect(res[0].maxWeight).toBe(newValues["newMaxWeight"]);
-        expect(res[0].maxVolume).toBe(newValues["newMaxVolume"]);
-        expect(res[0].occupiedWeight).toBe(newValues["newOccupiedWeight"]);
-        expect(res[0].occupiedVolume).toBe(newValues["newOccupiedVolume"]);
+    test('modify sku with position', async () => {
+        const newValues =  {
+            "newDescription" : "a new sku",
+            "newWeight" : 10,
+            "newVolume" : 5,
+            "newNotes" : "first SKU",
+            "newPrice" : 10.99,
+            "newAvailableQuantity" : 5
+        };
+
+        const expectedPos = {
+            positionID:"800234543412",
+            aisleID: "8002",
+            row: "3454",
+            col: "3412",
+            maxWeight: 1000,
+            maxVolume: 1000,
+            occupiedWeight: 50,
+            occupiedVolume: 25
+        }
+
+        const skuID = 2;
+
+        await skuService.modify_SKU(newValues, skuID);
+
+        let res = await dao.load_SKU(skuID);
+
+        expect(res.id).toBe(skuID);
+        expect(res.description).toBe(newValues.newDescription);
+        expect(res.weight).toBe(newValues.newWeight);
+        expect(res.volume).toBe(newValues.newVolume);
+        expect(res.notes).toBe(newValues.newNotes);
+        expect(res.price).toBe(newValues.newPrice);
+        expect(res.availableQuantity).toBe(newValues.newAvailableQuantity);
+        expect(res.position).toBe(expectedPos.positionID);
+
+        const pos = await positionDao.load_positions();
+        
+        expect(pos.find(p => p.positionID === expectedPos.positionID)).toEqual(expectedPos);
+
     });
     
-    
-    test('modify position id', async () => {
+   
+    test('add position to sku', async () => {
         
-        const oldID = "801234543412";
-        const newID = "803334543412";
-        const aisle = "8033", row = "3454", col = "3412";
+        const skuID = 1;
+        const expectedPos = new Position({
+            positionID:"801234523412",
+            aisleID: "8012",
+            row: "3452",
+            col: "3412",
+            maxWeight: 1000,
+            maxVolume: 1000,
+            occupiedWeight: 50,
+            occupiedVolume: 25
+        });
 
+        await skuService.add_modify_SKU_position(skuID, expectedPos.positionID);
 
-        await positionService.modifyPositionID(newID, oldID);
+        const res = await dao.load_SKU(skuID);
 
-        let res = await dao.load_positions();
+        expect(res.position).toBe(expectedPos.positionID);
 
-        expect(res[0].positionID).toBe(newID);
-        expect(res[0].aisleID).toBe(aisle);
-        expect(res[0].row).toBe(row);
-        expect(res[0].col).toBe(col);
-        expect(res[0].maxWeight).toBe(1000);
-        expect(res[0].maxVolume).toBe(1000);
-        expect(res[0].occupiedWeight).toBe(300);
-        expect(res[0].occupiedVolume).toBe(150);
+        const pos = await positionDao.load_positions();
+        
+        expect(pos.find(p => p.positionID === expectedPos.positionID)).toEqual(expectedPos);
     });
 
-    test('delete position', async () => {
+    test('change position of sku', async () => {
         
-        const id = "801234543412";
+        const skuID = 2;
+        const expectedNewPos = new Position({
+            positionID:"801234523412",
+            aisleID: "8012",
+            row: "3452",
+            col: "3412",
+            maxWeight: 1000,
+            maxVolume: 1000,
+            occupiedWeight: 77,
+            occupiedVolume: 42
+        });
+
+        const expectedOldPos = new Position({
+            positionID:"800234543412",
+            aisleID: "8002",
+            row: "3454",
+            col: "3412",
+            maxWeight: 1000,
+            maxVolume: 1000,
+            occupiedWeight: 0,
+            occupiedVolume: 0
+        });
+
+        await skuService.add_modify_SKU_position(skuID, expectedNewPos.positionID);
+
+        const res = await dao.load_SKU(skuID);
+
+        expect(res.position).toBe(expectedNewPos.positionID);
+
+        const pos = await positionDao.load_positions();
         
-        await positionService.delete_position(id);
+        expect(pos.find(p => p.positionID === expectedNewPos.positionID)).toEqual(expectedNewPos);
 
-        let res = await dao.load_positions();
-
-        expect(res.length).toBe(0);
+        expect(pos.find(p => p.positionID === expectedOldPos.positionID)).toEqual(expectedOldPos);
     });
 
-}); */
+    test('delete sku', async () => {
+        
+        const id = 1;
+        
+        await skuService.delete_SKU(id);
+
+        let res = await dao.load_SKU(1);
+
+        expect(res).toBe(undefined);
+    });
+
+});

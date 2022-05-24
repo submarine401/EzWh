@@ -39,7 +39,8 @@ class SKU{
             // console.log(this.volume*this.availableQuantity + '\t' + newFullVol + '\t' + volDiff);
 
             this.position.decrease_free_space(weightDiff, volDiff);
-            positionDao.update_position(this.position.id, this.position);
+
+            positionDao.update_position(this.position.positionID, this.position);
             
         }
 
@@ -56,8 +57,8 @@ class SKU{
     }
 
     async add_modify_SKU_position(newPos){
-        
-        if(this.position && this.position.id === newPos.positionID) return;
+
+        if(this.position && this.position.positionID === newPos.positionID) return;
 
         const fullWeight = this.weight*this.availableQuantity;
         const fullVol = this.volume*this.availableQuantity;
@@ -72,12 +73,14 @@ class SKU{
         if(this.position) {
             this.position.increase_free_space(fullWeight, fullVol);
             
-            await positionDao.update_position(this.position.id, this.position);
+            await positionDao.update_position(this.position.positionID, this.position);
         }
 
         newPos.decrease_free_space(fullWeight, fullVol);
         
-        await positionDao.update_position(newPos.id, newPos);
+        await positionDao.update_position(newPos.positionID, newPos);
+
+        console.log(await positionDao.load_positions());
 
         this.position = newPos;
 

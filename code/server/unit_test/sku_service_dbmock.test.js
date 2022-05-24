@@ -206,7 +206,7 @@ describe("modify sku", () => {
     })
     
 
-    test('modify inexistent position', async () => {
+    test('modify inexistent sku', async () => {
         const newValues =  {
             "newDescription" : "a new sku",
             "newWeight" : 100,
