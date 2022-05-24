@@ -36,7 +36,6 @@ exports.delete_position_data = () => {
 
 
 exports.load_positions = () => {
-    console.log('loading position');
 
     return new Promise((resolve, reject) => {
 
@@ -59,8 +58,7 @@ exports.load_positions = () => {
 exports.store_position = (position) => {
 
     try {
-        console.log('DB store');
-
+        
         return new Promise((resolve, reject) => {
 
             try {

@@ -1,4 +1,3 @@
-const skuDao = require('../modules/SkuDao');
 const SKU = require('../SKU');
 
 const db = require('../modules/PositionDao');
@@ -9,7 +8,16 @@ const db_td = require('../modules/Test_DescriptorDAO');
 const Test_DescriptorService = require('../services/Test_DescriptorService');
 const test_DescriptorService = new Test_DescriptorService(db_td)
 
+const db_skuItem = require('../modules/SKUItemDAO');
+const SkuItemService = require('../services/SKUItemService');
+const skuItemService = new SkuItemService(db_skuItem);
+
 class SkuService{
+
+    constructor(dao){
+        this.dao = dao;
+        this.dao.create_sku_table();
+    }
 
     async create_SKU(skuData){
 
@@ -17,7 +25,7 @@ class SkuService{
 
             skuData.position = undefined;
 
-            await this.skuDao.store_SKU(skuData);
+            await this.dao.store_SKU(skuData);
 
         }  catch(err) {
           throw(err);
@@ -26,7 +34,7 @@ class SkuService{
 
     
     async return_SKU(){
-        const skus = await skuDao.load_SKUs();
+        const skus = await this.dao.load_SKUs();
 
         const positions = await positionService.get_all_position();
 
@@ -34,11 +42,11 @@ class SkuService{
 
         const ret = skus.map( (sku) => {
                     
-            const test_descriptors = all_test_descriptors.filter(td => td.idSKU === sku.id).map(td => td.id);
+            const testDescriptors = all_test_descriptors.filter(td => td.idSKU === sku.id).map(td => td.id);
 
-            const position = sku.positionID?positions.find(pos => pos.id === sku.positionID):undefined;
+            const position = sku.position?positions.find(pos => pos.positionID === sku.position):undefined;
             
-            return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.note, sku.price, sku.availableQuantity, position, test_descriptors);
+            return new SKU(sku.id, sku.description, sku.weight, sku.volume, sku.notes, sku.price, sku.availableQuantity, position, testDescriptors);
         });
 
         return ret;
@@ -62,7 +70,7 @@ class SkuService{
         const sku = await this.get_SKU(id);
         
         if(sku !== undefined){
-            this.skuDao.delete_SKU(id);
+            this.dao.delete_SKU(id);
         } else {
             console.log('sku not found');
             throw 'not found';
@@ -106,9 +114,9 @@ class SkuService{
             console.log(sku.id);
             console.log('pos ' + positionID);
 
-            const positions = await this.get_all_position();
+            const positions = await positionService.get_all_position();
 
-            const newPos = positions.find(pos => pos.id === positionID);
+            const newPos = positions.find(pos => pos.positionID === positionID);
 
             if(newPos === undefined){
                 console.log('no matching pos');

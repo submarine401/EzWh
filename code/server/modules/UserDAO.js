@@ -1,9 +1,20 @@
 'use strict'
   const dayjs = require('dayjs');
-  const sqlite = require ('sqlite3')
+  const sqlite = require ('sqlite3');
+  const Crypto = require('crypto-js');
+  const passphrase = "securepasswords";
   const db = new sqlite.Database('EZWHDB.db', (err) => {
   if (err) throw err;
   });
+  
+  function encryptPassword(password) {
+    return Crypto.AES.encrypt(password,passphrase).toString();
+  }
+  
+  function decryptPassword(clear_password,password) {
+    let dec = Crypto.AES.decrypt(password,passphrase).toString(Crypto.enc.Utf8);
+    return dec === clear_password;
+  }
   
   exports.newUser = function(u){
     return new Promise((resolve,reject) => {
@@ -19,7 +30,7 @@
         return;
       }
       
-      function caesarEncr(password,key){
+      /*function caesarEncr(password,key){
         let enc = '';
         let result = []
         for (let i = 0; i<password.length; i++){
@@ -29,7 +40,8 @@
         return enc;
       }
       
-      let enc_password  = caesarEncr(u.password,1);
+      let enc_password  = caesarEncr(u.password,1);*/
+      let enc_password = encryptPassword(u.password);
       
       const sql_query2 = 'INSERT INTO users(username, password, name, surname, type) VALUES (?, ?, ?, ?, ?)';
       //insert into 'users' table the parameters defining in the following constant
@@ -46,6 +58,52 @@
         }
       });
       
+    });
+  }
+  
+  exports.checkPassword = async function(username,password,type){
+    return new Promise ((resolve,reject) =>{
+      if(username === undefined || password === undefined || type !== 'manager'){
+        resolve(422);
+        return;
+      }
+      const sql_query1 = "SELECT password FROM users WHERE username = ? AND type = ?";
+      const sql_query2 = "SELECT id,username,name FROM users WHERE password = ? AND type = ?";
+      const params = [username,type];
+      db.all(sql_query1, params, function(err,rows){
+        if(err){
+          reject(err);
+          return;
+        }
+        if(rows.length === 0){    //user has not been found
+          resolve(404);
+          return;
+        }
+        //check if password matches with the encrypted password
+        if(decryptPassword(password,rows[0]["password"]) || password === rows[0]["password"]){
+          //extract user infos from DB
+          db.all(sql_query2,[password,type],function(err,rows){
+            if(err){
+              reject(err);
+              return;
+            }
+            if(rows.length===0){
+              resolve(404);
+              return;
+            }
+            let user_info = rows.map((u) =>({
+              id : u.id,
+              email : u.username,
+              name : u.name
+            }));
+            resolve(user_info);
+            return;
+          });
+        }else{
+          resolve(401); //unauthorized
+          return;
+        }
+      })  
     });
   }
   
@@ -149,13 +207,13 @@
   
   exports.deleteUserData = () => {
       return new Promise((resolve, reject) => {
-        const sql = 'DELETE FROM users';
-        db.run(sql, [], function (err) {
+        const sql = 'DELETE FROM users WHERE password != ?';
+        db.run(sql, ["testpassword"], function (err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve(true);
+          resolve(204);
         })
       })
     };

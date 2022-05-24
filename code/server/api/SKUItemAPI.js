@@ -2,9 +2,12 @@
 
 const express = require('express');
 const db = require('../modules/SKUItemDAO');
+const dao_sku = require('../modules/SkuDao')
 const dataInterface = require('../DataInterface');
 const SKUItemService = require ('../services/SKUItemService')
 const SKU_item_service = new SKUItemService(db);
+const SkuService = require('../services/SkuService');
+const SKU_service = new SkuService(dao_sku);
 
 let router = express.Router();
 
@@ -16,12 +19,12 @@ router.post('/api/skuitem',async(req,res) => {
     }
     
     //check if SKUId corresponds to a real SKU
-    const check_SKUid = await dataInterface.get_SKU(body.SKUId);
+    const check_SKUid = await SKU_service.get_SKU(body.SKUId);
     if(check_SKUid === undefined){
       return res.status(404).end('no SKU associated to SKUId');
     }
     
-    const result = await SKU_item_service.create_SKUItem(body);
+    const result = await SKU_item_service.newSKUItem(body);
     return res.status(201).end(('SKUItem correctly created'));
     
   } catch (err) {
@@ -38,13 +41,12 @@ router.put('/api/skuitems/:rfid', async (req,res) => {
       return res.status(422).end();
     }
     
-    const check_RFID = await SKU_item_service.get_SKUItem_by_RFID(target_RFID);
+    const check_RFID = await SKU_item_service.search_by_RFID(target_RFID);
     if (check_RFID === 404){  //No SKUItem correspondant to that ID
       return res.status(404).end();
     }
     
-    const result = await SKU_item_service.update_SKUItem(target_RFID,body);
-    console.log(result);
+    const result = await SKU_item_service.updateSKUItem(target_RFID,body);
     if(result === 422){
       return res.status(422).end();
     }
@@ -59,7 +61,7 @@ router.put('/api/skuitems/:rfid', async (req,res) => {
 
 router.get('/api/skuitems', async(req,res) =>{
   try {
-    const result = await SKU_item_service.get_all_SKUItem();
+    const result = await SKU_item_service.get_list_SKUItem();
     return res.status(200).json(result);
   } catch (err) {
     console.log(err);
@@ -73,7 +75,7 @@ router.get('/api/skuitems/sku/:id', async(req,res) =>{
     if(id === undefined){
       return res.status(422).end('Validation of ID failed');
     }
-    const result = await SKU_item_service.get_all_available_SKUItem(id);
+    const result = await SKU_item_service.available_SKUItem(id);
     if (result === 404){
       return res.status(404).end('No SKU associated to SKUId');
     }
@@ -91,7 +93,7 @@ router.get('/api/skuitems/:rfid', async(req,res) =>{
     if(!req.params.rfid){
       return res.status(422).end();
     }
-    const result = await SKU_item_service.get_SKUItem_by_RFID(req.params.rfid);
+    const result = await SKU_item_service.search_by_RFID(req.params.rfid);
     if(result === 404){
       return res.status(404).end('no SKUItem associated to RFID');
     }
@@ -107,14 +109,12 @@ router.get('/api/skuitems/:rfid', async(req,res) =>{
 
 router.delete('/api/skuitems/:rfid',async(req,res) =>{
   try {
-    console.log("ciao");
-    console.log(typeof req.params.rfid)
-    const check_rfid = await SKU_item_service.get_SKUItem_by_RFID(req.params.rfid);
+    const check_rfid = await SKU_item_service.search_by_RFID(req.params.rfid);
     if(check_rfid === 404){  //no sku item with the target RFID
       return res.status(422).end('Validation of RFID failed!');
     }
     
-    const result = await SKU_item_service.deleteSKUItem(req.params.rfid);
+    const result = await SKU_item_service.delete_SKUItem(req.params.rfid);
     if(result === 204){
       return res.status(204).end();
     }
@@ -124,6 +124,16 @@ router.delete('/api/skuitems/:rfid',async(req,res) =>{
     return res.status(503).end();
   }
 });
+
+router.delete('/api/allskuitems/',async(req,res) =>{
+  try {
+    const result = await SKU_item_service.delete_all();
+    return res.status(204).end();
+  } catch (err) {
+    console.log(err);
+    return res.status(503).end();
+  }
+})
 
 
 module.exports = router;

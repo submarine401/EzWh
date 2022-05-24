@@ -5,17 +5,17 @@ const positionDao = require("./modules/PositionDao");
 class SKU{
 
     
-    constructor(id, description, weight, volume, note, price, availableQuantity, position, test_descriptors){
+    constructor(id, description, weight, volume, notes, price, availableQuantity, position, testDescriptors){
 
         this.id = id;
         this.description = description;
         this.weight = weight;
         this.volume = volume;
-        this.note = note;
+        this.notes = notes;
         this.price = price;
         this.availableQuantity = availableQuantity;
         this.position = position;
-        this.test_descriptors = test_descriptors? test_descriptors:[];
+        this.testDescriptors = testDescriptors? testDescriptors:[];
 
     }
 
@@ -23,10 +23,6 @@ class SKU{
 
         if(this.position){
             
-            console.log('aaaa');
-            console.log(this.position);
-            console.log(newValues);
-
             const newFullWeight = newValues.newWeight*newValues.newAvailableQuantity;
             const newFullVol = newValues.newVolume*newValues.newAvailableQuantity;
 
@@ -51,7 +47,7 @@ class SKU{
         this.description = newValues.newDescription;
         this.weight = newValues.newWeight;
         this.volume = newValues.newVolume;
-        this.note = newValues.newNotes;
+        this.notes = newValues.newNotes;
         this.price = newValues.newPrice;
         this.availableQuantity = newValues.newAvailableQuantity;
 
@@ -75,12 +71,12 @@ class SKU{
 
         if(this.position) {
             this.position.increase_free_space(fullWeight, fullVol);
-            console.log(this.position);
+            
             await positionDao.update_position(this.position.id, this.position);
         }
 
         newPos.decrease_free_space(fullWeight, fullVol);
-        console.log(newPos);
+        
         await positionDao.update_position(newPos.id, newPos);
 
         this.position = newPos;

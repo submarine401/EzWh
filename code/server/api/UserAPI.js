@@ -120,4 +120,34 @@ router.delete('/api/users/:username/:type', async (req,res) => {
   }
 });
 
+router.delete('/api/allusers', async (req,res) => {
+  try {
+    const result = await userService.delete_all();
+    return res.status(204).end();
+  } catch (err) {
+    console.log(err);
+    return res.status(503).end();
+  }
+});
+
+router.post('/api/managerSessions',async(req,res) =>{
+  const body = req.body;
+  try {
+    const result = await userService.check_passw(body.username,body.password,body.type);
+    if(result === 401){
+      return res.status(401).end();
+    }
+    else if(result === 422){
+      return res.status(422).end('Failed body validation!');
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).end();
+  } 
+});
+
+
 module.exports = router;

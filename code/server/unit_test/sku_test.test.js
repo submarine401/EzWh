@@ -1,25 +1,25 @@
-const dao = require('../modules/PositionDao');
+const dao = require('../modules/SkuDao');
 const SKU = require('../SKU');
 const Position = require('../Position');
 
 describe('sku test', ()=>{
-    // beforeEach( ()=>{
+    beforeEach( ()=>{
+        dao.create_sku_table();
         
-        
-    // });
+    });
 
     test('modify sku', async () => {
-        const sku = new SKU(1, 'a sku', 10, 10, 'note', 3.5, 10);
+        const sku = new SKU(1, 'a sku', 10, 10, 'notes', 3.5, 10);
         expect(sku).toEqual({
             id : 1,
             description : 'a sku',
             weight : 10,
             volume : 10,
-            note : 'note',
+            notes : 'notes',
             price : 3.5,
             availableQuantity : 10,
             position : undefined,
-            test_descriptors : []
+            testDescriptors : []
         });
         newValues = {
             "newDescription" : "a new sku",
@@ -36,11 +36,11 @@ describe('sku test', ()=>{
             description : 'a new sku',
             weight : 100,
             volume : 50,
-            note : 'first SKU',
+            notes : 'first SKU',
             price : 10.99,
             availableQuantity : 5,
             position : undefined,
-            test_descriptors : []
+            testDescriptors : []
         });
 
         const pos = new Position({
@@ -70,11 +70,11 @@ describe('sku test', ()=>{
             description : 'a new sku',
             weight : 100,
             volume : 50,
-            note : 'first SKU',
+            notes : 'first SKU',
             price : 10.99,
             availableQuantity : 5,
             position : pos,
-            test_descriptors : []
+            testDescriptors : []
         });
 
         newValues1 = {
@@ -104,11 +104,11 @@ describe('sku test', ()=>{
             description : 'a new sku',
             weight : 10,
             volume : 5,
-            note : 'first SKU',
+            notes : 'first SKU',
             price : 10.99,
             availableQuantity : 5,
             position : pos,
-            test_descriptors : []
+            testDescriptors : []
         });
 
         const newPos = new Position({
@@ -149,11 +149,11 @@ describe('sku test', ()=>{
             description : 'a new sku',
             weight : 10,
             volume : 5,
-            note : 'first SKU',
+            notes : 'first SKU',
             price : 10.99,
             availableQuantity : 5,
             position : newPos,
-            test_descriptors : []
+            testDescriptors : []
         });
     });
 });

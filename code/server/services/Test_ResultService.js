@@ -4,7 +4,7 @@ class Test_ResultService {
 
 constructor(dao){
     this.dao= dao;
-    this.createTestResultTable();
+    // this.createTestResultTable();
 }
 
 
@@ -14,23 +14,30 @@ createTestResultTable = async () => {
 }
 
 setTestResult = async (tr) => {
-    const result = await this.dao.insert_into_test_Result_table(tr);
+
+    const result = await this.dao.insert_into_test_result_table(tr);
     return result;
 }
 
-modifyTestResult = async (TRid, RFid, newIdTestDescriptor, newDate, newResult) => {
-    const result = await this.dao.modifyTR(TRid, RFid, newIdTestDescriptor, newDate, newResult);
+modifyTestResult = async (id, rfid, newIdTestDescriptor, newDate, newResult) => {
+    const result = await this.dao.modifyTR(id, rfid, newIdTestDescriptor, newDate, newResult);
     return result;
 }
 
-deleteTestResult = async (TRid, RFid) => {
-    const result = await this.dao.delete_test_result(TRid, RFid);
+deleteTestResult = async (id, rfid) => {
+    const result = await this.dao.delete_test_result(id, rfid);
     return result;
 }
 
 
-getTestResult = async (RFid, TRid) => {
-    const result = await this.dao.get_TR(RFid, TRid);
+getTestResult = async (rfid, id) => {
+    const result = await this.dao.get_TR(rfid, id);
+
+    return result;
+}
+
+deleteAllTestResult = async () => {
+    const result = await this.dao.deleteTestResultData();
     return result;
 }
 
