@@ -1,11 +1,24 @@
 const UserService = require ('../services/UserService');
 const dao = require('../modules/UserDAO');
 const user_service = new UserService(dao);
+describe("CHECK PASSWORD TEST",()=>{
+  test('checking password correctness',async()=>{
+    let res = await user_service.check_passw('supplier1@ezwh.com','testpassword','supplier');
+    expect(res).toEqual({
+      id : 5,
+      username : 'supplier1@ezwh.com',
+      name : 'name'
+    });
+  });
+  
+  test('checking password of a user with unexisting type', async() =>{
+    let res = await user_service.check_passw('supplier1@ezwh.com','testpassword','somethingstrange');
+    expect(res).toEqual(422);
+  });
+  
+});
 
 describe('Get methods', () =>{
-  beforeEach(async() =>{
-    
-  });
     
   test('GET SUPPLIERS', async() =>{
     let res = await user_service.getSuppliers();
@@ -38,8 +51,6 @@ describe('Get methods', () =>{
 });
 
 describe('POST methods', ()=>{
-  beforeEach(async() =>{
-  });
   
   test('POST newUser correct', async() =>{
     let res = await user_service.setUser(
@@ -80,6 +91,20 @@ describe('POST methods', ()=>{
   
 });
 
+describe('PUT methods', () =>{
+  
+  const user='deliveryEmployee1@ezwh.com'
+  const obj =  {
+        "oldType" : "deliveryEmployee",
+        "newType" : "clerk"
+    }
+  
+  test('MODIFY  a normal user', async() =>{
+    let res = await user_service.modify_user(user,obj.newType);
+    expect(res).toEqual(200);
+  });
+});
+
 describe('DELETE methods', () =>{
   test('DELETE a normal user (NO MANAGER)', async() =>{
     const user = 'clerk1@ezwh.com';
@@ -94,19 +119,18 @@ describe('DELETE methods', () =>{
     let res = await user_service.delete_user(user,type);
     expect(res).toEqual(422);
   });
-  
 });
 
-describe('PUT methods', () =>{
-  
-  const user='deliveryEmployee1@ezwh.com'
-  const obj =  {
-        "oldType" : "deliveryEmployee",
-        "newType" : "clerk"
-    }
-  
-  test('MODIFY  a normal user', async() =>{
-    let res = await user_service.modify_user(user,obj.newType);
-    expect(res).toEqual(200);
+test('DELETE with unexisting type', async() =>{
+  const user = 'deliveryEmployee1@ezwh.com';
+  const type = 'somethingstrange';
+  let res = await user_service.delete_user(user,type);
+  expect(res).toEqual(422);
+});
+
+describe("DELETE all users", () =>{
+  test('Delete all users',async() =>{
+    let res = await user_service.delete_all();
+    expect(res).toEqual(204);
   });
 });

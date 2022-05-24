@@ -2,6 +2,58 @@ const SKUItemService = require('../services/SKUItemService');
 const dao = require('../modules/SKUItemDAO');
 const SKU_itemservice = new SKUItemService(dao);
 
+describe('POST SKUitems', () =>{
+  beforeAll(async function(){
+    const res = await SKU_itemservice.delete_all();
+  });
+  test('Create SKUItem', async() =>{
+    const SKU_item_info = {
+      "RFID" : "1111122222223333344444",
+      "SKUId" : 9,
+      "DateOfStock": "2022/03/23"
+    }
+    let res = await SKU_itemservice.newSKUItem(SKU_item_info);
+    res = await SKU_itemservice.search_by_RFID("1111122222223333344444");
+    expect(res).toEqual({
+      "RFID" : "1111122222223333344444",
+      "SKUId" : 9,
+      "DateOfStock" : "2022-03-23",
+      "Available" : 0
+    });
+  });
+});
+
+describe ('PUT SKUitems', () =>{
+  test('Modify SKUItem', async() =>{
+    const target_RFID = "1111122222223333344444"
+    const newParams = {
+      "newRFID" : "9999999999999999999",
+      "newAvailable" : 1,
+      "newDateOfStock" : "2021/07/03"
+    }
+    let res = await SKU_itemservice.updateSKUItem(target_RFID,newParams);
+    //check if item has been correctly updated
+    res = await SKU_itemservice.search_by_RFID("9999999999999999999");
+    expect(res).toEqual({
+      "RFID" : "9999999999999999999",
+      "SKUId" : 9,
+      "DateOfStock" : "2021-07-03",
+      "Available" : 1
+    });
+  });
+
+  test('Modify SKUItem with wrong availability value', async() =>{
+    const target_RFID = "12345678901234567890123456711111";
+    const newParams = {
+      "newRFID" : "9999999999999999999",
+      "newAvailable" : 2,     //wrong availability value
+      "newDateOfStock" : "2021/05/09"
+    }
+    let res = await SKU_itemservice.updateSKUItem(target_RFID,newParams);
+    expect(res).toBe(422);
+  });
+});
+
 describe('GET all SKUItems', () =>{
   beforeAll(() =>{
     //create two skuitems to test them later
@@ -72,55 +124,6 @@ describe('GET all SKUItems', () =>{
     ];
     let res = await SKU_itemservice.available_SKUItem(SKUID)
     expect(res).toEqual(404);
-  });
-});
-
-describe('POST SKUitems', () =>{
-  test('Create SKUItem', async() =>{
-    const SKU_item_info = {
-      "RFID" : "1111122222223333344444",
-      "SKUId" : 9,
-      "DateOfStock": "2022/03/23"
-    }
-    let res = await SKU_itemservice.newSKUItem(SKU_item_info);
-    res = await SKU_itemservice.search_by_RFID("1111122222223333344444");
-    expect(res).toEqual({
-      "RFID" : "1111122222223333344444",
-      "SKUId" : 9,
-      "DateOfStock" : "2022-03-23",
-      "Available" : 0
-    });
-  });
-});
-
-describe ('PUT SKUitems', () =>{
-  test('Modify SKUItem', async() =>{
-    const target_RFID = "1111122222223333344444"
-    const newParams = {
-      "newRFID" : "9999999999999999999",
-      "newAvailable" : 1,
-      "newDateOfStock" : "2021/07/03"
-    }
-    let res = await SKU_itemservice.updateSKUItem(target_RFID,newParams);
-    //check if item has been correctly updated
-    res = await SKU_itemservice.search_by_RFID("9999999999999999999");
-    expect(res).toEqual({
-      "RFID" : "9999999999999999999",
-      "SKUId" : 9,
-      "DateOfStock" : "2021-07-03",
-      "Available" : 1
-    });
-  });
-
-  test('Modify SKUItem with wrong availability value', async() =>{
-    const target_RFID = "12345678901234567890123456711111";
-    const newParams = {
-      "newRFID" : "9999999999999999999",
-      "newAvailable" : 2,     //wrong availability value
-      "newDateOfStock" : "2021/05/09"
-    }
-    let res = await SKU_itemservice.updateSKUItem(target_RFID,newParams);
-    expect(res).toBe(422);
   });
 });
 
