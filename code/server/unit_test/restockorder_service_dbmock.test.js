@@ -7,22 +7,23 @@ describe('get restock orders', ()=>{
     beforeEach(()=>{
         dao.get_all_restock_order.mockReset();
         dao.get_all_restock_order.mockReturnValueOnce({
-            "issueDate":"2021/11/29 09:33",
-            "products": [{"SKUId":12,"description":"a product","price":10.99,"qty":30},
-                        {"SKUId":180,"description":"another product","price":11.99,"qty":20}],
-            "supplierId" : 1
+            id: 1,
+            issueate: "2021/11/29 09:33",
+            supplierId: 1,
+            state: "ISSUED",
+            transportNote: ""
 
         });
     });
 
     test('get restock order', async () => {
         let res = await restockOrderservice.getAllRestockOrders();
-        expect(res[0]).toEqual({
-        "id": 1,
-        "issueate": "2021/11/29 09:33",
-        "supplierId": 1,
-        "state": "ISSUED",
-        "transportNote": ""
+        expect(res).toEqual({
+        id: 1,
+        issueate: "2021/11/29 09:33",
+        supplierId: 1,
+        state: "ISSUED",
+        transportNote: ""
         });
     });
 });

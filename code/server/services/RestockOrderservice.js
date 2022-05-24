@@ -41,21 +41,21 @@ class RestockOrderservice {
     }
     
     getAllRestockOrders = async () => {
-        const result = await dataInterface.get_all_restock_order();
+        const result = await this.dao.get_all_restock_order();
         return result;
     }
     getRestockOrderById = async (id) => {
-        const result = await dataInterface.get_restock_order_by_id(id);
+        const result = await this.dao.get_restock_order_by_id(id);
         return result;
     }
     
     getIssuedRestockOrder = async () => {
-        const result = await dataInterface.get_issued_restock_order();
+        const result = await this.dao.get_issued_restock_order();
         return result;
     }
     
     getRejectedSkuItemsOfRestockOrder = async (skurfid) => {
-        const result = await dataInterface.get_rejected_skuitems_of_restockOrder(skurfid);
+        const result = await this.dao.get_rejected_skuitems_of_restockOrder(skurfid);
         return result;
     }
 
