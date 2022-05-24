@@ -2,9 +2,11 @@
 
 const express = require('express');
 const SKU = require('../SKU');
-const skuService = require('../services/SkuService');
+const SkuService = require('../services/SkuService');
 
 let router = express.Router();
+const dao = require('../modules/PositionDao')
+const skuService = new SkuService(dao);
 
 router.post('/api/sku', async (req,res)=>{
     try{
@@ -183,6 +185,15 @@ router.delete('/api/skus/:id', (req, res)=>{
       return res.status(503).end();
     }
   
+});
+
+router.delete('/api/skus/deleteAll', async (req, res)=>{
+  const result = await skuService.deleteAll();
+  var httpStatusCode = 204;
+  if (!result) {
+    httpStatusCode = 500;
+  }
+  res.status(httpStatusCode).end();
 });
 
 module.exports = router;
