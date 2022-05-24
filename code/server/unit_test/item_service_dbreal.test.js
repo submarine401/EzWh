@@ -112,3 +112,14 @@ describe("test itemDao", () => {
 
 });
 
+describe('GET ITEMS', ()=>{
+  test('Get all items', async() =>{
+    const res = await itemService.getAllItems();
+    expect(Array.isArray(res)).toBe(true);
+    res.forEach(element => {
+      expect(typeof(element)).toBe("object");
+    })
+  });
+  
+  
+});

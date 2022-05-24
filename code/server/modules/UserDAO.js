@@ -62,8 +62,9 @@
   }
   
   exports.checkPassword = async function(username,password,type){
+    const user_list = ['supplier','deliveryEmployee','clerk','manager','customer','qualityEmployee'];
     return new Promise ((resolve,reject) =>{
-      if(username === undefined || password === undefined || type !== 'manager'){
+      if(username === undefined || password === undefined || user_list.find(t => type ===t)!==type){
         resolve(422);
         return;
       }
@@ -82,7 +83,7 @@
         //check if password matches with the encrypted password
         if(decryptPassword(password,rows[0]["password"]) || password === rows[0]["password"]){
           //extract user infos from DB
-          db.all(sql_query2,[password,type],function(err,rows){
+          db.get(sql_query2,[password,type],function(err,row){
             if(err){
               reject(err);
               return;
@@ -91,12 +92,7 @@
               resolve(404);
               return;
             }
-            let user_info = rows.map((u) =>({
-              id : u.id,
-              email : u.username,
-              name : u.name
-            }));
-            resolve(user_info);
+            resolve(row);
             return;
           });
         }else{
@@ -212,8 +208,9 @@
           if (err) {
             reject(err);
             return;
+          }else{
+            resolve(204);
           }
-          resolve(204);
-        })
-      })
+        });
+      });
     };
