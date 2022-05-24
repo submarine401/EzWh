@@ -12,8 +12,8 @@ describe('POST SKUITEMS',() =>{
   before(async function(){
     await agent.delete('/api/allskuitems/');
   });
-  post_SKUItem(201,"777777",1,"2021/03/19");
-  post_SKUItem(201,"12345678",1,"2020/05/11");
+  post_SKUItem(201,"777777",2,"2021/03/19");
+  post_SKUItem(201,"12345678",2,"2020/05/11");
   post_SKUItem(201,"9876543210",2,"2022/10/01");
   post_SKUItem(404,"777777",78,"2021/03/19"); //unexistent SKU
   post_SKUItem(422,9,"2021/03/19");   //missing one parameter
@@ -22,8 +22,8 @@ describe('POST SKUITEMS',() =>{
 describe('PUT SKUITEMS',function(){
   put_skuitem(200,"777777","123456789000000000",1,"2020/11/11");
   put_skuitem(200,"12345678","1111222233334444",0,"2020/05/11");
-  put_skuitem(404,"10101010","123456789000000000",1,"2020/11/11"); //unexistent RFID in DB
-  put_skuitem(422,"123456789000000000","1234",4,"2020/11/11");  //wrong value of available
+  put_skuitem(404,"10101010","76754890",1,"2020/11/11"); //unexistent RFID in DB
+  put_skuitem(422,"9876543210","1234",4,"2020/11/11");  //wrong value of available
 });
 
 describe('GET SKUITEM BY ID',() =>{
@@ -102,7 +102,9 @@ function post_SKUItem(expectedHTTPStatus,rfid,skuid,dateOfStock){
       .then(function(result){
         result.should.have.status(expectedHTTPStatus);
         done();
-      });
+      }).catch(function(err){
+        done(err);
+      })
     }
   });
 }
@@ -143,14 +145,7 @@ function put_skuitem(expectedHTTPStatus,rfid,newrfid,newAvailable,newDateOfStock
       .send(obj)
       .then(function(result){
         result.should.have.status(expectedHTTPStatus);
-        agent.get('/api/skuitems/'+newrfid)
-        .then(function(res){
-          res.should.have.status(expectedHTTPStatus);
-          res.body.RFID.should.equal(newrfid);
-          res.body.Available.should.equal(newAvailable);
-          res.body.DateOfStock.should.equal(dayjs(newDateOfStock).format('YYYY-MM-DD'));
-          done();
-        }).catch(function(e){done(e);})
+        done();
       }).catch(function(err){
         done(err);
       });
