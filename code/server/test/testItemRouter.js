@@ -15,22 +15,26 @@ var agent = chai.request.agent(app);
             //     await agent.delete('/api/allUsers');
             // })
             
-            const item = {
-            "description" : "a new item",
-            "price" : 10.99,
-            "SKUId" : 9,
-            "supplierId" : 2
-        }
+            const item = 
+            {
+                "id" : 12,
+                "description" : "a new item",
+                "price" : 10.99,
+                "SKUId" : 1,
+                "supplierId" : 2
+            }
+        
 
-
-            deleteItem(204,13);
-            deleteItem(422);
             newItem(201,item)
             newItem(422)
+            newItemWithIntegrationOfSkuId(404,item)
             getItemById(200,8,item);
-            getItemById(404,1,item);
+            getItemById(404,600,item);
+            deleteItem(204,13);
+            deleteItem(422);
+           
         
-        });
+        // });
         
 function getItemById(expectedHTTPStatus, id,item) {
     it('getting Item data from the system',  (done)=> {
@@ -67,11 +71,11 @@ function getItemById(expectedHTTPStatus, id,item) {
 }
 
 function newItem(expectedHTTPStatus, item) {
-    it('adding a new item', function (done) {
+    it('adding a new item',  (done)=> {
         if (item !== undefined) {
             agent.post('/api/item')
                 .send(item)
-                .then(function (res) {
+                .then( (res)=> {
                     res.should.have.status(expectedHTTPStatus);
                     res.body.should.equal("new item is inserted");
                     done();
@@ -91,6 +95,39 @@ function newItem(expectedHTTPStatus, item) {
     });
 }
 
+function newItemWithIntegrationOfSkuId(expectedHTTPStatus, item) {
+    it('adding a new item with integeration test',  (done)=> {
+        if (item !== undefined) {
+            agent.get("/api/skus/" + item.SKUId)
+            .then((res)=> {                     
+                if(res.status ===200){
+            agent.post('/api/item')
+                .send(item)
+                .then( (res)=> {
+                    res.should.have.status(expectedHTTPStatus);
+                    res.body.should.equal("new item is inserted");
+                    done();
+                }).catch((err)=>{done(err);})
+            }
+            else{
+                agent.get("/api/skus/" + item.SKUId)
+                .then( (res)=> {                     
+                    res.should.have.status(expectedHTTPStatus);
+                    done();
+                }).catch((err)=>{done(err);})
+
+            }
+        })
+        } else {
+            agent.post('/api/item') //we are not sending any data
+                .then( (res)=> {                     
+                    res.should.have.status(expectedHTTPStatus);
+                    done();
+                }).catch((err)=>{done(err);})
+        }
+
+    });
+}
 
 
 function  deleteItem(expectedHTTPStatus, id) {
@@ -119,3 +156,4 @@ function  deleteItem(expectedHTTPStatus, id) {
 }
 
 
+});

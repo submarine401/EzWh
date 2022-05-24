@@ -8,7 +8,18 @@ Version:
 
 - [Dependency graph](#dependency graph)
 
-- [Integration approach](#integration)
+- [Integration and API Test Report](#integration-and-api-test-report)
+- [Contents](#contents)
+- [Dependency graph](#dependency-graph)
+- [Integration approach](#integration-approach)
+- [Integration Tests](#integration-tests)
+  - [Step 1](#step-1)
+  - [Step 2](#step-2)
+- [API testing - Scenarios](#api-testing---scenarios)
+  - [Scenario UCx.y](#scenario-ucxy)
+- [Coverage of Scenarios and FR](#coverage-of-scenarios-and-fr)
+- [Coverage of Non Functional Requirements](#coverage-of-non-functional-requirements)
+    - [](#)
 
 - [Tests](#tests)
 
@@ -22,6 +33,9 @@ Version:
 # Dependency graph 
 
      <report the here the dependency graph of the classes in EzWH, using plantuml or other tool>
+
+![dependency1](../EzWh/dependency%20graph/dependencies1.jpg)
+
      
 # Integration approach
 
@@ -40,21 +54,14 @@ Version:
 ## Step 1
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
+|ItemDao.js|None|adding a new item|
+|skuDao.js|None|get sku by id|
 ||||
-
 
 ## Step 2
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
-||||
-
-
-## Step n 
-
-   
-| Classes  | mock up used |Jest test cases |
-|--|--|--|
-||||
+|ItemDao.js && skuDao.js ||adding a new item with integeration test'|
 
 
 
