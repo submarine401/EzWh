@@ -220,10 +220,107 @@ Modifies given id of item with fields in the newItem object and returns the mess
 | FALSE    | TRUE            | TRUE                  | Valid           | it should resolve a message which says give IO id is updated  | testupdateIO |
 
 
-### Class **_RestockorderDao_** - method **get_item_by_id(id)**
+### Class **_RestockorderDao_** - method get_restock_order_by_id(id)
 
-# please do not write here
+    In this method we check whether specific RSO by given id is onside the database or not, if exists the returned value is corresponding RSO and success status, othewise it will return zero to  API layer which means thers is not corrspondance to given id, and prints: "no RSO associated to id"
 
+**Criteria**
+
+| Criteria        | Description                                   |
+| --------------- | --------------------------------------------- |
+| EMPTY_DB        | There is not any stored item in database.                     |
+| RSO_EXISTANCE    | If there is an RSO with the given id     |
+| ID_TYPE_CORRECT | If the type of the id param is correct or not |
+
+**Predicates**
+
+| Criteria        | Predicate  |
+| --------------- | ---------- |
+| DB_EMPTY        | True/False |
+| RSO_EXISTANCE  | True/False |
+| ID_TYPE_CORRECT | True/False |
+
+**Boundaries**:
+
+| Criteria        | Boundary values |
+| --------------- | :-------------: |
+| DB_EMPTY        |       N/A       |
+| RSO_EXISTANCE  |       N/A       |
+| ID_TYPE_CORRECT |       N/A       |
+
+**Combination of predicates**:
+
+| EMPTY_DB | RSO_EXISTANCE | ID_TYPE_CORRECT | Valid / Invalid | Description of the test case             | Jest test case     |
+| -------- | ------------ | --------------- | --------------- | ---------------------------------------- | ------------------ |
+| TRUE     |              |                 | Valid           | If the db is empty, return 'no RSO associated to id'     | testgetRSONotexisted |
+| FALSE    | FALSE        | TRUE            | Valid           | If the RSO is not inserted, returns '0'  | testgetRSONotexisted |
+| FALSE    | TRUE         | TRUE            | Valid           | Return the RSO related to given id  | testRSO |
+| \*       | \*           | FALSE           | Invalid         | If the passed id is less than one      | testgetRSOWithIdlessthanOne |
+
+### **Class ItemDAO - method insert_restock_order_table(RSO)**
+
+Save an RSO (id: int, issueDate: str, products: JSON, description: ste, supplierId: int, state = "ISSUED" ) into the database.
+
+
+**Criteria for method insert_restock_order_table:**
+
+| Criteria             | Description                               |
+| -------------------- | ----------------------------------------- |
+| VALID_RSO_TYPE      | If the RSO attributes have invalid attributes. |
+
+**Predicates for method insert_restock_order_table:**
+
+| Criteria             | Predicate  |
+| -------------------- | ---------- |
+| VALID_RSO_TYPE      | True/False |
+
+**Boundaries**:
+
+| Criteria             | Boundary values |
+| -------------------- | --------------- |
+| VALID_RSO_TYPE      | null            |
+
+**Combination of predicates**:
+
+|  | VALID_RSO_TYPE     | Valid / Invalid | Description of the test case           | Jest test case       |
+| -------------------- | ------------------- | --------------- | -------------------------------------- | -------------------- |
+|                 | TRUE                | Valid           | The RSO is correctly saved in the db  | testsetRSO |
+|                 | FALSE (null)        | Invalid         | The RSO is not saved, returns -1 | testsetEmptyRSO |
+
+
+### Class **_ItemDao_** - method **modify_restock_order_table(id,newRSO)_**
+Modifies given id of RSO with fields in the newRSO object and returns the message which says: `RSO with given id is updated`
+
+**Criteria for method modify_restock_order_table:**
+
+| Criteria              | Description                                        |
+| --------------------- | -------------------------------------------------- |
+| EMPTY_DB              |                                                    |
+| RSO_EXISTANCE       | Wheter RSO with the given id exists or not|
+| VALID_NEW_RSO_TYPE | Wheter the newRSO attributes are valid or not|
+
+**Predicates for method modify_restock_order_table:**
+
+| Criteria              | Predicate  |
+| --------------------- | ---------- |
+| EMPTY_DB              | True/False |
+| RSO_EXISTANCE        | True/False |
+| VALID_NEW_RSO_TYPE   | True/False |
+
+**Boundaries**:
+
+| Criteria              | Boundary values |
+| --------------------- | --------------- |
+| VALID_NEW_RSO_TYPE | null            |
+
+**Combination of predicates**:
+
+| EMPTY_DB | RSO_EXISTANCE | VALID_RSO_TYPE | Valid / Invalid | Description of the test case                        | Jest test case              |
+| -------- | --------------- | --------------------- | --------------- | --------------------------------------------------- | --------------------------- |
+| FALSE        | TRUE              | null                  | Invalid         | it should return -1                        | testupdateNullRSO |
+| FALSE    | TRUE            | TRUE                  | Valid           | it should resolve a message which says give RSO id is updated | testupdateTPNRSO |
+
+ 
 ### Class **_ReturnOrderDao_** - method **get_all_RO_by_id(id)**
 
     In this method we check whether specific return order by given id is onside the database or not, if exists the returned value is corresponding return order and success status, othewise it will return zero to API layer which means thers is not corrspondance to given id, and prints: "no return order associated to id"
@@ -324,7 +421,14 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 ## Test cases for Internal Orders
 | Unit name | Jest test case |     |
 | --------- | -------------- | --- |
-||||
+|test restock order|get restock order||
+|test restock order|get not existed RSO||
+|test restock order|get RSO with id less than one||
+|test restock order|set empty RSO||
+|test restock order|test set empty RSO||
+|test restock order|update trasportnote of RSO||
+|test restock order|update state of RSO||
+|test restock order|update null RSO||
 # please do not write here
 ## Test cases for Return Orders
 | Unit name | Jest test case |     |
@@ -346,7 +450,10 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 ![screenshot1](./Covrage%20screenshots/IO3.jpg)
 # please do not write here
 ### Code coverage report for Item
-![screenshot1](./Covrage%20screenshots/item1.jpg)
+![screenshot1](./Covrage%20screenshots/RSO1.jpg)
+![screenshot1](./Covrage%20screenshots/RSO2.jpg)
+![screenshot1](./Covrage%20screenshots/RSO3.jpg)
+![screenshot1](./Covrage%20screenshots/RSO4.jpg)
 
 
 ### Code coverage report for Retun order

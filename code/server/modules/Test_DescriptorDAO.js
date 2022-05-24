@@ -47,6 +47,7 @@ exports.create_test_descriptor_table =  () => {
    exports.modify_test_descriptor = (td, id) => {
 
        return new Promise ((resolve,reject)=>{
+           
            const sql = 'UPDATE testdescriptors SET name = ? , procedureDescription = ?, idSKU = ?  WHERE id = ?';
            db.run(sql,[td.newName,td.newProcedureDescription,td.newIdSKU,id], (err)=>{ 
                if(err)
@@ -55,7 +56,7 @@ exports.create_test_descriptor_table =  () => {
                    return;
                }
                else
-               {
+               {  
                    resolve(`Test Descriptor with id ${id} is updated`);
                }
 
@@ -93,7 +94,6 @@ exports.create_test_descriptor_table =  () => {
                         idSKU : t.idSKU
                         
                     })); 
-                    console.log(testdescriptors)
                     resolve(testdescriptors);
                 });
             

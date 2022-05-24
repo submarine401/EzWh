@@ -14,7 +14,7 @@ createTestResultTable = async () => {
 }
 
 setTestResult = async (tr) => {
-    console.log(tr)
+
     const result = await this.dao.insert_into_test_result_table(tr);
     return result;
 }
@@ -33,6 +33,11 @@ deleteTestResult = async (id, rfid) => {
 getTestResult = async (rfid, id) => {
     const result = await this.dao.get_TR(rfid, id);
 
+    return result;
+}
+
+deleteAllTestResult = async () => {
+    const result = await this.dao.deleteTestResultData();
     return result;
 }
 

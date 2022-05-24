@@ -36,6 +36,11 @@ class SKUItemService{
     return result;
   }
   
+  delete_all = async function(){
+    const result = this.dao.delete_all_SKUItem();
+    return result;
+  }
+  
 }
 
 module.exports = SKUItemService;

@@ -14,12 +14,13 @@ createTestDescriptorTable = async () => {
 
 setTestDescriptor = async (td) => {
     const result = await this.dao.insert_into_test_Descriptor_table(td);
-
     return result;
 }
 
 modifyTestDescriptor = async (td, id) => {
     const result = await this.dao.modify_test_descriptor(td, id);
+
+
     return result;
 }
 
@@ -28,6 +29,7 @@ deleteTestDescriptor = async (id) => {
     const result = await this.dao.delete_test_descriptor(id);
     return result;
 }
+
 
 
 getAllTestDescriptors = async () => {
@@ -40,6 +42,11 @@ getTestDescriptorsById = async (id) => {
     return result;
 }
 
+
+deleteAllTestDescriptors = async () => {
+    const result = await this.dao.deleteTestDescriptorData();
+    return result;
+}
 
 }
 

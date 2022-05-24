@@ -67,7 +67,7 @@ describe("test return order", () => {
     } 
 
     async function testgetROWithIdlessthanOne(i) {
-        test('get not existed Item', async () => {
+        test('get wrong id type for RO ', async () => {
             let res = await returnOrderservice.getReturnOrderById(i);
             expect(res).toEqual(-1);
         });

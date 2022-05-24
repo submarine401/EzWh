@@ -7,6 +7,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.insert_restock_order_table = (rso)=>
     {
         return new Promise ((resolve,reject)=>{
+            if(rso !== undefined){
             let prods = [];
             rso.products.map((x)=>{
                 prods.push(JSON.stringify(x))
@@ -27,6 +28,11 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 }
 
             });
+        }
+        else 
+        {
+            resolve(-1)
+        }
         });
     }
 
@@ -34,6 +40,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.modify_restock_order_table = (id,rso)=>{
 
         return new Promise ((resolve,reject)=>{
+            if(rso !== undefined){
             const sql = 'UPDATE restockorder SET state = ? WHERE id = ?';
             db.run(sql,[rso.newState,id], (err)=>{
                 if(err)
@@ -48,6 +55,11 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 }
 
             });
+        }
+        else
+        {
+            resolve(-1)
+        }
         });
     }
     
@@ -154,3 +166,167 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
             });
         
         }
+
+        exports.get_restock_order_by_id = (id)=>
+        {
+            return new Promise ((resolve,reject)=>{
+                if(id >=1){
+                const sql = "SELECT * FROM restockorder where id = ?";
+                db.all(sql,[id],(err,rows)=>{
+                    if(err)
+                    {
+                        reject(err);
+                        return;
+                    }
+                    else
+                    {
+                        if(rows.length === 0)
+                            resolve(0);
+                        else
+                        {
+                            const resul = rows.map((rso)=>({
+                                id : rso.id,
+                                issueate : rso.issueate,
+                                products : rso.products,
+                                supplierId : rso.supplierId,
+                                skuItems : rso.skuItems,
+                                state : rso.state,
+                                transportNote : rso.transportNote
+                            }));
+
+                            resolve(resul);
+                        }
+                    }
+                });
+            }
+            else
+            {
+                resolve(-1)
+            }
+            });
+        }
+
+
+exports.get_rejected_skuitems_of_restockOrder = (rfids)=>{
+    return new Promise((resolve,rejecte)=>{
+        //console.log(rfids.rfid)
+        //console.log("///")
+        const sql = "SELECT result FROM testresults WHERE RFid = ?";
+        db.all(sql,[rfids.rfid], (err,rows)=>{
+            if(err){
+                rejecte(err);
+                return;
+                }
+            else
+            {
+               const result  = rows.map((x)=>({res:x.result}))
+               if(!result[0].res)
+                resolve(rfids);
+                else
+                resolve(0)
+            }
+        } )
+    });
+}
+
+
+
+
+exports.get_restock_order_items = (rso)=>
+{
+    // let rfids = []
+    // const r = JSON.parse(rso[0].skuItems)
+    // r.forEach((x)=>rfids.push(JSON.parse(x).rfid))
+    // console.log(rfids);
+
+
+    return new Promise ((resolve,reject)=>{
+        const sql = "SELECT * FROM restockorder where id = ?";
+        db.all(sql,[rso.id],(err,rows)=>{
+            if(err)
+            {
+                reject(err);
+                return;
+            }
+            else
+            {
+                if(rows.length === 0)
+                    resolve(0);
+                else
+                {
+                    const RSOI = rows.map((ro)=>(
+                        {
+                            RestokOrtedItems : skuItems
+                        }));
+                    resolve(RSOI);
+                }
+            }
+        });
+    });
+}
+
+exports.get_all_restock_order = ()=>
+{
+    return new Promise ((resolve,reject)=>{
+        const sql = "SELECT * FROM restockorder";
+        db.all(sql,[],(err,rows)=>{
+            if(err)
+            {
+                reject(err);
+                return;
+            }
+            else
+            {
+
+                let p = []
+                let orgObject = {};
+                const resul = rows.map((ro)=>{
+                  if (ro.state === 'ISSUED')
+                  orgObject  = { id : ro.id,
+                    issueate : ro.issueate,
+                    supplierId : ro.supplierId,
+                    state : ro.state,
+                    transportNote : ro.transportNote}
+                  else
+                  {
+                  orgObject ={ id : ro.id,
+                        issueate : ro.issueate,
+                        products : ro.products,
+                        supplierId : ro.supplierId,
+                        skuItems : ro.skuItems,
+                        state : ro.state,
+                        transportNote : ro.transportNote}
+                  }
+                  p.push(orgObject);
+
+                    });
+                    
+                
+                if(p.length === 0)
+                    resolve(0);
+                    resolve(p);   
+            }
+        });
+    });
+}
+
+exports.get_issued_restock_order = ()=>
+{
+    return new Promise ((resolve,reject)=>{
+        const sql = "SELECT * FROM restockorder where state = ?";
+        db.all(sql,["ISSUED"],(err,rows)=>{
+            if(err)
+            {
+                reject(err);
+                return;
+            }
+            else
+            {
+                if(rows.length === 0)
+                    resolve(0);
+                else
+                    resolve(rows);
+            }
+        });
+    });
+}
