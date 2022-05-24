@@ -137,37 +137,3 @@ function getPositions(expectedHTTPStatus, expectedBody) {
             })
     });
 }
-
-/* function getItemById(expectedHTTPStatus, id,item) {
-    it('getting Item data from the system',  (done)=> {
-        agent.post('/api/item')
-            .send(item)
-            .then( (res)=> {
-                res.should.have.status(201);
-                res.body.should.equal("new item is inserted");
-                agent.get("/api/items/" + id)
-                    .then( (r)=> {
-                     if(r.status !== 404){   
-                            r.should.have.status(expectedHTTPStatus);
-                            r.body[0]["id"].should.equal(id);
-                            r.body[0]['description'].should.equal(item.description);
-                            r.body[0]['price'].should.equal(item.price);
-                            r.body[0]["skuid"].should.equal(item.SKUId);
-                            r.body[0]["supplierid"].should.equal(item.supplierId);
-                            done();
-                        }
-                    else{
-                        agent.get("/api/items/" + id)
-                        .then((res)=> {                     
-                            res.should.have.status(expectedHTTPStatus);
-                            done();
-                        })
-                        }
-                    }
-                    
-                    ).catch((err)=>{
-                        done(err);
-                    })
-            });
-    });
-} */
