@@ -37,12 +37,12 @@ describe('test test Descriptor apis', () => {
 });
 
 function getTestDescriptorsById(expectedHTTPStatus, id,TestDescriptor1) {
-    it('getting Internl order data from the system',  (done)=> {
+    it('getting Test Descriptor data from the system',  (done)=> {
         agent.post('/api/testDescriptor')
             .send(TestDescriptor1)
             .then( (res)=> {
                 res.should.have.status(201);
-                res.body.should.equal("Inserted new Test Descriptor successfully");
+                res.body.should.equal({ success: 'Created' });
                 agent.get("/api/testDescriptors/" + id)
                     .then( (r)=> {
                             r.should.have.status(expectedHTTPStatus);
@@ -68,7 +68,7 @@ function newTestDescriptor(expectedHTTPStatus, TestDescriptor1) {
                 .send(TestDescriptor1)
                 .then(function (res) {
                     res.should.have.status(expectedHTTPStatus);
-                    res.body.should.equal("Inserted new Test Descriptor successfully");
+                    res.body.should.equal({ success: 'Created' });
                     done();
                 }).catch((err)=>{
                     done(err);
