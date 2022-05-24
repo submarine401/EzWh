@@ -114,5 +114,8 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 
 | Non Functional Requirement | Test name |
 | -------------------------- | --------- |
-|                            |           |
+|                     NFR2   |     get Item      |
+|                     NFR2   |     get internal order'      |
+|                     NFR2   |     get restock order    |
+|                     NFR2   |     get retun order     |
 
