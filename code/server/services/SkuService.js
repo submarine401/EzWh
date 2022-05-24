@@ -36,8 +36,6 @@ class SkuService{
     async return_SKU(){
         const skus = await this.dao.load_SKUs();
 
-        console.log(typeof this.dao);
-
         const positions = await positionService.get_all_position();
 
         const all_test_descriptors = await test_DescriptorService.getAllTestDescriptors();
