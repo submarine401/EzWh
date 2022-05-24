@@ -130,5 +130,24 @@ router.delete('/api/allusers', async (req,res) => {
   }
 });
 
+router.post('/api/managerSessions',async(req,res) =>{
+  const body = req.body;
+  try {
+    const result = await userService.check_passw(body.username,body.password,body.type);
+    if(result === 401){
+      return res.status(401).end();
+    }
+    else if(result === 422){
+      return res.status(422).end('Failed body validation!');
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).end();
+  } 
+});
+
 
 module.exports = router;

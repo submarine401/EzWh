@@ -7,13 +7,13 @@
   if (err) throw err;
   });
   
-  encryptPassword = function(password){
-    return this.Crypto.AES.encrypt(password,this.passphrase).toString();
+  function encryptPassword(password) {
+    return Crypto.AES.encrypt(password,passphrase).toString();
   }
   
-  decryptPassword = function(clear_password,password){
-    let dec = this.Crypto.AES.decrypt(password,this.passphrase).toString(this.Crypto.enc.Utf8);
-    return dec ===clear_password;
+  function decryptPassword(clear_password,password) {
+    let dec = Crypto.AES.decrypt(password,passphrase).toString(Crypto.enc.Utf8);
+    return dec === clear_password;
   }
   
   exports.newUser = function(u){
@@ -63,7 +63,7 @@
   
   exports.checkPassword = async function(username,password,type){
     return new Promise ((resolve,reject) =>{
-      if(username === undefined || password === undefined || type === undefined){
+      if(username === undefined || password === undefined){
         resolve(422);
       }
       const sql_query1 = "SELECT password FROM users WHERE username = ? and type = ?";
@@ -77,11 +77,10 @@
         if(rows.length === 0){    //user has not been found
           resolve(404);
         }
-        
         //check if password matches with the encrypted password
-        if(this.decryptPassword(password,rows[0]["password"])){
+        if(decryptPassword(password,rows[0]["password"])){
           //extract user infos from DB
-          db.all(sql_query2,password,function(err,rows){
+          db.all(sql_query2,[password],function(err,rows){
             if(err){
               reject(err);
               return;
@@ -89,6 +88,12 @@
             if(rows.length===0){
               resolve(404);
             }
+            let user_info = rows.map((u) =>({
+              id : u.id,
+              email : u.username,
+              name : u.name
+            }));
+            resolve(user_info);
           });
         }else{
           resolve(401); //unauthorized

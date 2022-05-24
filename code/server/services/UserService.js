@@ -4,8 +4,13 @@ class UserService{
   constructor(dao){
     this.dao = dao;
   }
-  
+    
   //FUNCTIONS (integration with USER DAO)
+  check_passw = async function(username,password,type){
+    const result = await this.dao.checkPassword(username,password,type);
+    return result;
+  }
+  
   getSuppliers = async function(){
     const supplier_list = await this.dao.get_all_suppliers();
     return supplier_list;
