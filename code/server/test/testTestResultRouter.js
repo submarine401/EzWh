@@ -39,7 +39,7 @@ describe('test test result apis', () => {
 });
 
 function getTestResultsById(expectedHTTPStatus, id, rfid, TestResult1) {
-    it('getting Internl order data from the system',  (done)=> {
+    it('getting test result data from the system',  (done)=> {
         agent.post('/api/skuitems/testResult')
             .send(TestResult1)
             .then( (res)=> {
