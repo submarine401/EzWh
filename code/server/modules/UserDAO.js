@@ -63,11 +63,12 @@
   
   exports.checkPassword = async function(username,password,type){
     return new Promise ((resolve,reject) =>{
-      if(username === undefined || password === undefined){
+      if(username === undefined || password === undefined || type !== 'manager'){
         resolve(422);
+        return;
       }
-      const sql_query1 = "SELECT password FROM users WHERE username = ? and type = ?";
-      const sql_query2 = "SELECT id,username,name FROM users WHERE password = ?";
+      const sql_query1 = "SELECT password FROM users WHERE username = ? AND type = ?";
+      const sql_query2 = "SELECT id,username,name FROM users WHERE password = ? AND type = ?";
       const params = [username,type];
       db.all(sql_query1, params, function(err,rows){
         if(err){
@@ -76,17 +77,19 @@
         }
         if(rows.length === 0){    //user has not been found
           resolve(404);
+          return;
         }
         //check if password matches with the encrypted password
-        if(decryptPassword(password,rows[0]["password"])){
+        if(decryptPassword(password,rows[0]["password"]) || password === rows[0]["password"]){
           //extract user infos from DB
-          db.all(sql_query2,[password],function(err,rows){
+          db.all(sql_query2,[password,type],function(err,rows){
             if(err){
               reject(err);
               return;
             }
             if(rows.length===0){
               resolve(404);
+              return;
             }
             let user_info = rows.map((u) =>({
               id : u.id,
@@ -94,9 +97,11 @@
               name : u.name
             }));
             resolve(user_info);
+            return;
           });
         }else{
           resolve(401); //unauthorized
+          return;
         }
       })  
     });
