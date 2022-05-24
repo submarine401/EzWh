@@ -58,16 +58,14 @@ router.get('/api/skus/:id', (req, res)=>{
       if( id > 0 && typeof Number(id) === 'number') {
   
         skuService.get_SKU(id).then(ret => {
-          console.log('returned');
-          console.log(ret);
-          if(ret.position){
-            ret.position = ret.position.positionID;
-          } else {
-            ret.position = null;
-          }
           if(ret === undefined){
             return res.status(404).end();
           } else {
+            if(ret.position){
+              ret.position = ret.position.positionID;
+            } else {
+              ret.position = null;
+            }
             return res.status(200).json(ret);
           }
         });
