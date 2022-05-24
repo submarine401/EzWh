@@ -120,8 +120,6 @@ describe("set test result", () => {
             
             let res =  await TestResultService.modifyTestResult(id, rfid, newTr.newIdTestDescriptor, newTr.newDate, newTr.newResult);
       
-            console.log(dao.modifyTR.mock.calls[1])
-        
         expect(dao.modifyTR.mock.calls[1][2]).toBe(newTr.newIdTestDescriptor);
     
         expect(dao.modifyTR.mock.calls[1][3]).toBe(newTr.newDate);

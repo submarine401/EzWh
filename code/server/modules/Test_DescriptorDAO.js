@@ -94,7 +94,6 @@ exports.create_test_descriptor_table =  () => {
                         idSKU : t.idSKU
                         
                     })); 
-                    console.log(testdescriptors)
                     resolve(testdescriptors);
                 });
             

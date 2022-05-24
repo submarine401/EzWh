@@ -30,7 +30,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
             }
             else
             {
-                console.log(tr)
                 resolve("new test result is inserted");
             }
 
@@ -73,8 +72,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     
     exports.get_TR = (rfid, id) => { 
       return new Promise((resolve,reject)=>{
-        console.log(rfid+id)
-    
+   
         if(id===undefined){
                   const sql = "SELECT * FROM testresults WHERE rfid = ?  ";
                   db.all(sql,[rfid],(err,rows)=>{
@@ -115,7 +113,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                         Result : tr.Result 
                         
                        }));
-                       console.log(testresults)
                       resolve(testresults);
                     
                   });

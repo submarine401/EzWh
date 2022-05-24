@@ -118,8 +118,7 @@ describe("set test descriptor", () => {
     
             let res = await TestDescriptorService.modifyTestDescriptor(newTd, id);
       
-            console.log(dao.modify_test_descriptor.mock.calls)
-        
+          
         expect(dao.modify_test_descriptor.mock.calls[1][0].newName).toBe(newTd.newName);
     
         expect(dao.modify_test_descriptor.mock.calls[1][0].newProcedureDescription).toBe(newTd.newProcedureDescription);

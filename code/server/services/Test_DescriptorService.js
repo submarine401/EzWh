@@ -19,8 +19,6 @@ setTestDescriptor = async (td) => {
 
 modifyTestDescriptor = async (td, id) => {
     const result = await this.dao.modify_test_descriptor(td, id);
-    console.log(td)
-    console.log(id)
 
 
     return result;
