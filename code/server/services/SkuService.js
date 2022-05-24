@@ -133,7 +133,8 @@ class SkuService{
     async deleteAll() {
         const res = await this.dao.delete_sku_data();
         const res1 = await this.dao.create_sku_table();
-        if (res && res1) {
+
+        if (!res || !res1) {
             return false;
         } 
         return true;

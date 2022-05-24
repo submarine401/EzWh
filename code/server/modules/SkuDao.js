@@ -122,7 +122,7 @@ exports.create_sku_table = () => {
                 reject(err);
                 return;
             }
-            resolve("SKU Table -> OK");
+            resolve(true);
         });
     });
 }
