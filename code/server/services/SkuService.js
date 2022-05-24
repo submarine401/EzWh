@@ -61,7 +61,7 @@ class SkuService{
     async delete_SKU(id){
         console.log('delete SKU ' + id);
 
-        const skuItems = await this.get_all_SKUItem();
+        const skuItems = await skuItemService.get_list_SKUItem();
         if(skuItems.find(si => si.SKUid === id)){
             console.log('sku has skuItems');
             throw 'cannot delete';
@@ -110,13 +110,11 @@ class SkuService{
                 throw 'not found';
             }
 
-            console.log('modifying ');
-            console.log(sku.id);
-            console.log('pos ' + positionID);
-
             const positions = await positionService.get_all_position();
 
             const newPos = positions.find(pos => pos.positionID === positionID);
+
+            console.log(newPos);
 
             if(newPos === undefined){
                 console.log('no matching pos');
@@ -124,6 +122,8 @@ class SkuService{
             }
 
             await sku.add_modify_SKU_position(newPos);
+
+            console.log(sku);
 
         }  catch(err) {
           throw(err);

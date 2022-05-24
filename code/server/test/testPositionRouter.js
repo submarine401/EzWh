@@ -138,7 +138,7 @@ function getPositions(expectedHTTPStatus, expectedBody) {
     });
 }
 
-function getItemById(expectedHTTPStatus, id,item) {
+/* function getItemById(expectedHTTPStatus, id,item) {
     it('getting Item data from the system',  (done)=> {
         agent.post('/api/item')
             .send(item)
@@ -170,4 +170,4 @@ function getItemById(expectedHTTPStatus, id,item) {
                     })
             });
     });
-}
+} */
