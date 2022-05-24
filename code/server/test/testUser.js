@@ -11,6 +11,9 @@ describe('test POST newUser API', () =>{
     await agent.delete('/api/allusers')
   });
   post_user(201,'alex','jump','alexj@ezwh.com','abcdefghilmn','customer');
+  post_user(201,'user','user','user2@ezwh.com','aaaaaaaaaaaaaa','manager');
+  post_user(201,'user','user','user3@ezwh.com','bbbbbbbbbbbbbb','qualityEmployee');
+  post_user(201,'user','user','user4@ezwh.com','cccccccccccccc','clerk');
   post_user(409,'Riccardo','Rossi','alexj@ezwh.com','password_di_prova','customer');
   post_user(422,'Luca','Bianchi',undefined,'ssssssssssss','clerk');
   post_user(422,'Carlo','Verdi','Carlo@ezwh.com','abc','deliveryEmployee');
@@ -25,6 +28,15 @@ describe('test PUT user API', () =>{
   put_user(422,'manager1@ezwh.com','manager','supplier'); //trying to modify manager rights
   put_user(422,'qualityEmployee1@ezwh.com','customer','somethingstrange'); //unexpected type
   put_user(422,'qualityEmployee1@ezwh.com','qualityEmployee','qualityEmployee'); //oldType = newType
+});
+
+describe('Test Sessions',() =>{
+  Sessions(200,'managerSessions','manager1@ezwh.com','testpassword');
+  Sessions(200,'supplierSessions','supplier1@ezwh.com','testpassword');
+  Sessions(200,'deliveryEmployeeSessions','deliveryEmployee1@ezwh.com','testpassword');
+  Sessions(200,'qualityEmployeeSessions','qualityEmployee1@ezwh.com','testpassword');
+  Sessions(200,'managerSessions','user2@ezwh.com','aaaaaaaaaaaaaa');
+
 });
 
 describe ('get suppliers', () =>{
@@ -113,5 +125,32 @@ function put_user(expectedHTTPStatus,username,oldParam,newParam){
     }).catch(function(err){
       done(err);
     });
+  });
+}
+
+function Sessions(expectedHTTPStatus,sessionType,user,password){
+  it('Checking infos', (done) =>{
+    const obj = {
+      username : user,
+      password : password
+    }
+    if(user !== undefined && password !==undefined){
+      agent.post('/api/'+sessionType)
+      .send(obj)
+      .then(function(result){
+        result.should.have.status(expectedHTTPStatus);
+        done();
+      }).catch(function(err){
+        done(err);
+      });
+    }else{
+      agent.post('/api/'+sessionType) //do not send the object
+      .then(function(result){
+        result.should.have.status(expectedHTTPStatus);
+        done();
+      }).catch(function(err){
+        done(err);
+      });
+    }
   });
 }
