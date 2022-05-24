@@ -56,17 +56,17 @@ class DBhelper {
         //     //console.error(error);
         // });
         // create test descriptor table 
-        // this.create_test_descriptor_table().then(function(response) {
-        //     //console.log(response);
-        // }, function(error) {
-        //     //console.error( error);
-        // });
-        //   // create test result table 
-        //   this.create_test_result_table().then(function(response) {
-        //     //console.log(response);
-        // }, function(error) {
-        //     //console.error( error);
-        // });
+        this.create_test_descriptor_table().then(function(response) {
+            //console.log(response);
+        }, function(error) {
+            //console.error( error);
+        });
+          // create test result table 
+          this.create_test_result_table().then(function(response) {
+            //console.log(response);
+        }, function(error) {
+            //console.error( error);
+        });
         //create SKUItem table
         this.create_SKUItem_table().then(function(response){
          // console.log(response);
@@ -473,34 +473,34 @@ class DBhelper {
 /*
 *****************************************************CREATE TEST DESCRIPTOR TABLE********************************************
 */
-//  create_test_descriptor_table (){
-//      return new Promise((resolve,reject)=>{
-//      const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (id integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
-//      this.db.run(sql, (err)=>{
-//          if(err){
-//              reject(err);
-//              return
-//          }
-//          resolve("testdescriptors Table -> OK");
-//      });
-//   });
-//  }
+ create_test_descriptor_table (){
+     return new Promise((resolve,reject)=>{
+     const sql = 'CREATE TABLE IF NOT EXISTS testdescriptors (id integer PRIMARY KEY AUTOINCREMENT,name text,procedure_description text, idSKU integer)';
+     this.db.run(sql, (err)=>{
+         if(err){
+             reject(err);
+             return
+         }
+         resolve("testdescriptors Table -> OK");
+     });
+  });
+ }
 
 
 /*
 *****************************************************CREATE TEST RESULT TABLE********************************************
 */
-//  create_test_result_table (){
-//      return new Promise((resolve,reject)=>{
-//      const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, idTestDescriptor integer, date text,result boolean)';
-//      this.db.run(sql, (err)=>{
-//          if(err){
-//              reject(err);
-//              return}
-//          resolve("testresults Table -> OK");
-//      });
-//   });
-//  }
+ create_test_result_table (){
+     return new Promise((resolve,reject)=>{
+     const sql = 'CREATE TABLE IF NOT EXISTS testresults (TRid integer PRIMARY KEY AUTOINCREMENT, RFid text, idTestDescriptor integer, date text,result boolean)';
+     this.db.run(sql, (err)=>{
+         if(err){
+             reject(err);
+             return}
+         resolve("testresults Table -> OK");
+     });
+  });
+ }
 
 
 //**************************************************RSO Table****************************************************
