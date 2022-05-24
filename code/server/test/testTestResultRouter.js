@@ -43,8 +43,8 @@ function getTestResultsById(expectedHTTPStatus, id, rfid, TestResult1) {
         agent.post('/api/skuitems/testResult')
             .send(TestResult1)
             .then( (res)=> {
-                res.should.have.status(201);
-                res.body.should.equal("Inserted new Test result successfully");
+                res.should.have.status(expectedHTTPStatus);
+                res.body.succes.should.equal('Created');
                 agent.get("api/skuitems/"+ rfid+ "/testResults/" + id)
                     .then( (r)=> {
                             r.should.have.status(expectedHTTPStatus);
@@ -70,7 +70,7 @@ function newTestResult(expectedHTTPStatus, TestResult1) {
                 .send(TestResult1)
                 .then(function (res) {
                     res.should.have.status(expectedHTTPStatus);
-                    res.body.should.equal("Inserted new Test Result successfully");
+                    res.body.succes.should.equal('Created');
                     done();
                 }).catch((err)=>{
                     done(err);

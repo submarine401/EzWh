@@ -152,7 +152,7 @@ router.delete('/api/allTD',async (req,res)=>{
   try{
   
   
-  const results = await Test_DescriptorService.deleteTestDescriptorData();
+  const results = await TestDescriptorService.deleteAllTestDescriptors();
   if (results) {
   return res.status(200).json(results);
    } else {
