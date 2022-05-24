@@ -48,14 +48,11 @@ describe("set test descriptor", () => {
 
         let res = await TestDescriptorService.setTestDescriptor(TestDescriptor);
      
-    //  //mi dice        TypeError: Cannot read properties of undefined (reading 'mock') e non capisco cosa cazo significaaaa
-    //     expect(dao.insert_test_descriptor_table.mock.calls[0][0].name).toBe(TestDescriptor.name);
-    //     //first call, second parameter passed
-    //     expect(dao.insert_test_descriptor_table.mock.calls[0][0].procedureDescription).toBe(TestDescriptor.procedureDescription);
-    //     //first call, third parameter passed
-    //     expect(dao.insert_test_descriptor_table.mock.calls[0][0].idSKU).toBe(TestDescriptor.idSKU);
+         expect(dao.insert_into_test_Descriptor_table.mock.calls[0][0].name).toBe(TestDescriptor.name);
+         //first call, second parameter passed
+         expect(dao.insert_into_test_Descriptor_table.mock.calls[0][0].procedureDescription).toBe(TestDescriptor.procedureDescription);
+         //first call, third parameter passed
+         expect(dao.insert_into_test_Descriptor_table.mock.calls[0][0].idSKU).toBe(TestDescriptor.idSKU);
     });
 
 });
-
-

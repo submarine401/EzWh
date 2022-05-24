@@ -33,6 +33,13 @@ describe('POST SKUITEMS',() =>{
   post_SKUItem(422,9,"2021/03/19");   //missing one parameter
 });
 
+describe('PUT SKUITEMS',() =>{
+  put_skuitem(200,"12345678901234567890123456711111","123456789000000000",1,"2020/11/11");
+  put_skuitem(404,"10101010","123456789000000000",1,"2020/11/11"); //unexistent RFID in DB
+  put_skuitem(422,"123456789000000000","1234",4,"2020/11/11");  //wrong value of available
+
+});
+
 describe("DELETE SKUITEMS",() =>{
   //delete_SKUi(204,"3333333333333333");
   delete_SKUi(204,"777777");
@@ -94,7 +101,7 @@ function post_SKUItem(expectedHTTPStatus,rfid,skuid,dateOfStock){
 }
 
 function delete_SKUi(expectedHTTPStatus,rfid){
-  it('Deleteing SKUItems',(done) =>{
+  it('Deleting SKUItems',(done) =>{
     if(rfid !== undefined){
       agent.delete('/api/skuitems/'+rfid)
       .then(function(result){
@@ -106,11 +113,44 @@ function delete_SKUi(expectedHTTPStatus,rfid){
         })
       });
     }else{
-      agent.delete('/api/skuitems/'+undefined)
+      agent.delete('/api/skuitems/'+rfid)
       .then(function(result){
         result.should.have.status(expectedHTTPStatus);
         done();
       }).catch(function(err){done(err)});
+    }
+  });
+}
+
+function put_skuitem(expectedHTTPStatus,rfid,newrfid,newAvailable,newDateOfStock){
+  it('Modify field of SKUItem (RFID, availability, date of stock)',(done) =>{
+    const obj = {
+      newRFID : newrfid,
+      newAvailable : newAvailable,
+      newDateOfStock : newDateOfStock
+    }
+    if(rfid !== undefined){ //send the object
+      agent.put('/api/skuitems/'+rfid)
+      .send(obj)
+      .then(function(result){
+        result.should.have.status(expectedHTTPStatus);
+        agent.get('/api/skuitems/'+newrfid)
+        .then(function(res){
+          res.should.have.status(expectedHTTPStatus);
+          res.body.RFID.should.equal(newrfid);
+          res.body.Available.should.equal(newAvailable);
+          res.body.DateOfStock.should.equal(newDateOfStock);
+          done();
+        });
+      }).catch(function(err){
+        done(err);
+      });
+    }else{  //do not send the object
+      agent.put('/api/skuitems/'+undefined)
+      .then(function(result){
+        result.should.have.status(expectedHTTPStatus);
+        done();
+      })
     }
   });
 }

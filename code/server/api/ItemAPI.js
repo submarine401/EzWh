@@ -3,10 +3,11 @@ const express = require('express');
 const I = require('../Item');
 const db = require('../modules/ItemDao');
 const Itemservice = require('../services/Itemservice')
+const db_SKU = require('../modules/SkuDao')
 const itemservice = new Itemservice(db);
 
 const SkuService = require('../services/SkuService')
-const skuService = new SkuService(db);
+const skuService = new SkuService(db_SKU);
 
 const dataInterface = require('../DataInterface');
 

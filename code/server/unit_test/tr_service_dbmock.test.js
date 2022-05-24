@@ -42,16 +42,14 @@ describe("set test result", () => {
  //  // mi dice   TypeError: this.dao.insert_into_test_result_table is not a function
     //  //e infatti se faccio i console.log vedo che mi va sul trService ma non mi va su trDAO e non se sa perchè
    
-   //     let res = await TestResultService.setTestResult(TestResult);
-
-     
-    //     expect(dao.insert_test_result_table.mock.calls[0][0].rfid).toBe(TestResult.rfid);
+        let res = await TestResultService.setTestResult(TestResult);
+         expect(dao.insert_into_test_result_table.mock.calls[0][0].rfid).toBe(TestResult.rfid);
     //     //first call, second parameter passed
-    //     expect(dao.insert_test_resultr_table.mock.calls[0][0].idTestDescriptor).toBe(TestResult.idTestDescriptor);
+         expect(dao.insert_into_test_result_table.mock.calls[0][0].idTestDescriptor).toBe(TestResult.idTestDescriptor);
     //     //first call, third parameter passed
-    //     expect(dao.insert_test_result_table.mock.calls[0][0].Date).toBe(TestResult.Date);
+         expect(dao.insert_into_test_result_table.mock.calls[0][0].Date).toBe(TestResult.Date);
     //      //first call, fourth parameter passed
-    //      expect(dao.insert_test_result_table.mock.calls[0][0].Result).toBe(TestResult.Result);
+          expect(dao.insert_into_test_result_table.mock.calls[0][0].Result).toBe(TestResult.Result);
    
    
      });

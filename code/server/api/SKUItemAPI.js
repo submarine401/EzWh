@@ -2,11 +2,12 @@
 
 const express = require('express');
 const db = require('../modules/SKUItemDAO');
+const dao_sku = require('../modules/SkuDao')
 const dataInterface = require('../DataInterface');
 const SKUItemService = require ('../services/SKUItemService')
 const SKU_item_service = new SKUItemService(db);
 const SkuService = require('../services/SkuService');
-const SKU_service = new SkuService;
+const SKU_service = new SkuService(dao_sku);
 
 let router = express.Router();
 
@@ -46,7 +47,6 @@ router.put('/api/skuitems/:rfid', async (req,res) => {
     }
     
     const result = await SKU_item_service.update_SKUItem(target_RFID,body);
-    console.log(result);
     if(result === 422){
       return res.status(422).end();
     }
