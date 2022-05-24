@@ -1,12 +1,12 @@
-const dao = require('../modules/PositionDao');
+const dao = require('../modules/SkuDao');
 const SKU = require('../SKU');
 const Position = require('../Position');
 
 describe('sku test', ()=>{
-    // beforeEach( ()=>{
+    beforeEach( ()=>{
+        dao.create_sku_table();
         
-        
-    // });
+    });
 
     test('modify sku', async () => {
         const sku = new SKU(1, 'a sku', 10, 10, 'notes', 3.5, 10);

@@ -32,6 +32,11 @@ class UserService{
       return result;
   }
   
+  delete_all = async function(){
+    const result = await this.dao.deleteUserData();
+    return result;
+  }
+  
 }
 
 module.exports = UserService;

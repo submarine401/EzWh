@@ -34,7 +34,6 @@ describe('get sku', ()=>{
                 }
             ]
         );
-        dao.load_SKU.mockReset();
         await positionDao.delete_position_data();
         await positionDao.store_position(new Position({
             positionID:"800234543412",

@@ -120,4 +120,15 @@ router.delete('/api/users/:username/:type', async (req,res) => {
   }
 });
 
+router.delete('/api/allusers', async (req,res) => {
+  try {
+    const result = await userService.delete_all();
+    return res.status(204).end();
+  } catch (err) {
+    console.log(err);
+    return res.status(503).end();
+  }
+});
+
+
 module.exports = router;

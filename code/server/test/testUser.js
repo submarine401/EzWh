@@ -6,6 +6,27 @@ chai.should();
 const app = require('../server');
 var agent = chai.request.agent(app);
 
+describe('test POST newUser API', () =>{
+  before(async function(){
+    await agent.delete('/api/allusers')
+  });
+  post_user(201,'alex','jump','alexj@ezwh.com','abcdefghilmn','customer');
+  post_user(409,'Riccardo','Rossi','alexj@ezwh.com','password_di_prova','customer');
+  post_user(422,'Luca','Bianchi',undefined,'ssssssssssss','clerk');
+  post_user(422,'Carlo','Verdi','Carlo@ezwh.com','abc','deliveryEmployee');
+});
+
+describe('test PUT user API', () =>{
+  put_user(200,'supplier1@ezwh.com','supplier','clerk');   //all data are consistent
+  put_user(404,'qualityEmployee1@ezwh.com','customer','clerk'); //correct username but wrong type
+  put_user(422,'qualityEmployee1@ezwh.com',undefined,'clerk'); //undefined oldType, failed validation
+  put_user(422,'qualityEmployee1@ezwh.com','qualityEmployee',undefined); //correct username but wrong type
+  put_user(404,'helloooooo@ezwh.com','customer','clerk'); //user does not exist
+  put_user(422,'manager1@ezwh.com','manager','supplier'); //trying to modify manager rights
+  put_user(422,'qualityEmployee1@ezwh.com','customer','somethingstrange'); //unexpected type
+  put_user(422,'qualityEmployee1@ezwh.com','qualityEmployee','qualityEmployee'); //oldType = newType
+});
+
 describe ('get suppliers', () =>{
   it('getting list of suppliers',function(done){
     agent.get('/api/suppliers')
@@ -24,24 +45,6 @@ describe ('get users except managers/admins', () =>{
       done();
     });
   });
-});
-
-describe('test POST newUser API', () =>{
-  post_user(201,'alex','jump','alexj@ezwh.com','abcdefghilmn','customer');
-  post_user(409,'Riccardo','Rossi','alexj@ezwh.com','password_di_prova','customer');
-  post_user(422,'Luca','Bianchi',undefined,'ssssssssssss','clerk');
-  post_user(422,'Carlo','Verdi','Carlo@ezwh.com','abc','deliveryEmployee');
-});
-
-describe('test PUT user API', () =>{
-  put_user(200,'supplier1@ezwh.com','supplier','clerk');   //all data are consistent
-  put_user(404,'qualityEmployee1@ezwh.com','customer','clerk'); //correct username but wrong type
-  put_user(422,'qualityEmployee1@ezwh.com',undefined,'clerk'); //undefined oldType, failed validation
-  put_user(422,'qualityEmployee1@ezwh.com','qualityEmployee',undefined); //correct username but wrong type
-  put_user(404,'helloooooo@ezwh.com','customer','clerk'); //user does not exist
-  put_user(422,'manager1@ezwh.com','manager','supplier'); //trying to modify manager rights
-  put_user(422,'qualityEmployee1@ezwh.com','customer','somethingstrange'); //unexpected type
-  put_user(422,'qualityEmployee1@ezwh.com','qualityEmployee','qualityEmployee'); //oldType = newType
 });
 
 describe('test DELETE user API', () =>{

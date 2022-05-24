@@ -1,13 +1,31 @@
-const PositionService = require('../services/PositionService');
-const dao = require('../modules/PositionDao');
-const positionService = new PositionService(dao);
+const SkuService = require('../services/SkuService');
+const dao = require('../modules/SkuDao');
+const positionDao = require('../modules/PositionDao');
+const td_dao = require('../modules/Test_DescriptorDAO');
+const skuService = new SkuService(dao);
 const Position = require('../Position');
+const SKU = require('../SKU');
 
 
-describe('get Positions', ()=>{
+describe('get sku', ()=>{
     beforeEach(async ()=>{
-        await dao.delete_position_data();
-        await dao.store_position(new Position({
+        await dao.delete_sku_data();///making it drop table
+        await dao.create_sku_table(); ////temporary
+        await dao.store_SKU(new SKU(1, "a new sku", 10, 5, "first SKU", 10.99, 5 ));
+        await dao.store_SKU(new SKU(2, "another sku", 11, 6, "second SKU", 10.99, 7, 
+                            new Position({
+                                positionID:"801234523412",
+                                aisleID: "8012",
+                                row: "3452",
+                                col: "3412",
+                                maxWeight: 1000,
+                                maxVolume: 1000,
+                                occupiedWeight: 300,
+                                occupiedVolume:150
+                            })));
+
+        await positionDao.delete_position_data();
+        await positionDao.store_position(new Position({
             positionID:"800234543412",
             aisleID: "8002",
             row: "3454",
@@ -17,51 +35,109 @@ describe('get Positions', ()=>{
             occupiedWeight: 300,
             occupiedVolume:150
         }));
-        await dao.store_position(new Position({
-            positionID:"801234543412",
+        await positionDao.store_position(new Position({
+            positionID:"801234523412",
             aisleID: "8012",
-            row: "3454",
+            row: "3452",
             col: "3412",
             maxWeight: 1000,
             maxVolume: 1000,
             occupiedWeight: 300,
             occupiedVolume:150
         }));
-        
+
+        await td_dao.deleteTestDescriptorData();
+        await td_dao.create_test_descriptor_table();
+        await td_dao.insert_into_test_Descriptor_table({
+            name :"test descriptor 1",
+            procedureDescription : "This test is described by...",
+            idSKU : 2
+        });
     });
 
-    test('get Positions', async () => {
-        let res = await positionService.get_all_position();
-        expect(res[0]).toEqual({
-            positionID:"800234543412",
-            aisleID: "8002",
-            row: "3454",
-            col: "3412",
-            maxWeight: 1000,
-            maxVolume: 1000,
-            occupiedWeight: 300,
-            occupiedVolume:150
+    test('get all sku', async () => {
+        let res = await skuService.return_SKU();
+        expect(res).toEqual([
+            {
+                id:1,
+                description : "a new sku",
+                weight : 10,
+                volume : 5,
+                notes : "first SKU",
+                position : undefined,
+                availableQuantity : 5,
+                price : 10.99,
+                testDescriptors : []
+            },
+            {
+                id:2,
+                description : "another sku",
+                weight : 11,
+                volume : 6,
+                notes : "second SKU",
+                position : {
+                    positionID:"801234523412",
+                    aisleID: "8012",
+                    row: "3452",
+                    col: "3412",
+                    maxWeight: 1000,
+                    maxVolume: 1000,
+                    occupiedWeight: 300,
+                    occupiedVolume:150
+                },
+                availableQuantity : 7,
+                price : 10.99,
+                testDescriptors : [1]
+            }
+        ]);
+    });
+
+    test('get sku 1', async () => {
+        let id = 1;
+        let res = await skuService.get_SKU(id); 
+        expect(res).toEqual( {
+            id:1,
+            description : "a new sku",
+            weight : 10,
+            volume : 5,
+            notes : "first SKU",
+            position : undefined,
+            availableQuantity : 5,
+            price : 10.99,
+            testDescriptors : []
         });
-        expect(res[1]).toEqual({
-            positionID:"801234543412",
-            aisleID: "8012",
-            row: "3454",
-            col: "3412",
-            maxWeight: 1000,
-            maxVolume: 1000,
-            occupiedWeight: 300,
-            occupiedVolume:150
+    });
+
+    test('get sku 2', async () => {
+        let id = 2;
+        let res = await skuService.get_SKU(id); 
+        
+        expect(res).toEqual({
+            id:2,
+            description : "another sku",
+            weight : 11,
+            volume : 6,
+            notes : "second SKU",
+            position : {
+                positionID:"801234523412",
+                aisleID: "8012",
+                row: "3452",
+                col: "3412",
+                maxWeight: 1000,
+                maxVolume: 1000,
+                occupiedWeight: 300,
+                occupiedVolume:150
+            },
+            availableQuantity : 7,
+            price : 10.99,
+            testDescriptors : [1]
         });
     });
 });
-//     testItem(1,item1);
-//     testItem(2,item2);
-//     async function testItem(i,item) {
-//         test('get Item', async () => {});
-//         });
-//     }
 
-describe("add position", () => {
+    
+
+/* describe("add position", () => {
     beforeEach(async () => {
         await dao.delete_position_data();
         await dao.create_position_table();
@@ -182,4 +258,4 @@ describe("modify position", () => {
         expect(res.length).toBe(0);
     });
 
-});
+}); */

@@ -45,7 +45,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                                   SKU_item_data.RFID,
                                   SKU_item_data.DateOfStock);
           const result = await this.store_SKUItem(newSKUItem);
-          console.log(result);
           return result;
       } 
       catch(err) {
@@ -65,7 +64,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
             resolve(404);
             return;
           }
-          console.log(rows);
           const target = {
             RFID : rows.RFID,
             SKUId : rows.SKUid,
@@ -125,6 +123,19 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         }
         const sql_query = 'DELETE FROM skuitem WHERE RFID = ?';
         db.run(sql_query,[rfid], function(err){
+          if(err){
+            reject(err);
+          }else{
+            resolve(204);
+          }
+        });
+      });
+    }
+    
+    exports.delete_all_SKUItem = function(){
+      return new Promise((resolve,reject) =>{
+        const sql_query = 'DELETE FROM skuitem';
+        db.run(sql_query,[], function(err){
           if(err){
             reject(err);
           }else{

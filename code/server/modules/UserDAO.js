@@ -149,13 +149,13 @@
   
   exports.deleteUserData = () => {
       return new Promise((resolve, reject) => {
-        const sql = 'DELETE FROM users';
-        db.run(sql, [], function (err) {
+        const sql = 'DELETE FROM users WHERE password != ?';
+        db.run(sql, ["testpassword"], function (err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve(true);
+          resolve(204);
         })
       })
     };

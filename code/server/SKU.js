@@ -23,10 +23,6 @@ class SKU{
 
         if(this.position){
             
-            console.log('aaaa');
-            console.log(this.position);
-            console.log(newValues);
-
             const newFullWeight = newValues.newWeight*newValues.newAvailableQuantity;
             const newFullVol = newValues.newVolume*newValues.newAvailableQuantity;
 
@@ -75,12 +71,12 @@ class SKU{
 
         if(this.position) {
             this.position.increase_free_space(fullWeight, fullVol);
-            console.log(this.position);
+            
             await positionDao.update_position(this.position.id, this.position);
         }
 
         newPos.decrease_free_space(fullWeight, fullVol);
-        console.log(newPos);
+        
         await positionDao.update_position(newPos.id, newPos);
 
         this.position = newPos;
