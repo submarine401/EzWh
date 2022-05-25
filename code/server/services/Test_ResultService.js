@@ -38,6 +38,8 @@ getTestResult = async (rfid, id) => {
 
 deleteAllTestResult = async () => {
     const result = await this.dao.deleteTestResultData();
+    await this.dao.create_test_result_table();
+    
     return result;
 }
 }

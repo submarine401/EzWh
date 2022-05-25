@@ -22,6 +22,12 @@ const TestResult1 = {
     Result: false
     }
 
+    const TestDescriptor1 = {
+        id : 1,
+        name : "test descriptor 1",
+        procedureDescription : "This test is described by...",
+        idSKU :1
+    }
 
 
 describe('test test result apis', () => {
@@ -29,15 +35,27 @@ describe('test test result apis', () => {
     beforeEach(async () => {
         await agent.delete('/api/allTR');
     })
-
+    newTestDescriptor(TestDescriptor1)
     newTestResult(201,TestResult1)
     newTestResult(422)
     getTestResultsById(200,1,"12345678901234567890123456789016",TestResult1);
     getTestResultsById(404,2,"12345678123456789016",TestResult2);
+   // deleteTestResult(204,1, "12345678901234567890123456789016");
     deleteTestResult(422);
 
 });
 
+
+function newTestDescriptor(expectedHTTPStatus, TestDescriptor1) {
+    it('adding a new test descriptor ', function (done) {
+            agent.post('/api/testDescriptor')
+                .send(TestDescriptor1)
+                .then(function (res) {
+                       done();
+                })
+            })
+        };
+        
 function getTestResultsById(expectedHTTPStatus, id, rfid, TestResult1) {
     it('getting test result data from the system',  (done)=> {
         agent.post('/api/skuitems/testResult')
