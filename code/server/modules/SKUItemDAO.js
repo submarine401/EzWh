@@ -71,6 +71,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
             DateOfStock : rows.dateOfStock
           }
           resolve(target);
+          return;
         });
       });
     }

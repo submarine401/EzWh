@@ -37,12 +37,14 @@ router.put('/api/skuitems/:rfid', async (req,res) => {
   try {
     const target_RFID = req.params.rfid;
     const body = req.body;
-    if (target_RFID === undefined || !(body.hasOwnProperty('newRFID') && body.hasOwnProperty('newAvailable') && body.hasOwnProperty('newDateOfStock'))){   //validation of RFID failed
-      return res.status(422).end();
+    if(body.newRFID === undefined || body.newDateOfStock === undefined || body.newAvailable === undefined){
+      return res.status(422).end('Failed body validation');
     }
-    
+    if (target_RFID === undefined || !(body.hasOwnProperty('newRFID') && body.hasOwnProperty('newAvailable') && body.hasOwnProperty('newDateOfStock'))){   //validation of RFID failed
+      return res.status(422).end('Failed body validation');
+    }
     const check_RFID = await SKU_item_service.search_by_RFID(target_RFID);
-    if (check_RFID === 404){  //No SKUItem correspondant to that ID
+    if (check_RFID === 404){  //No SKUItem correspondant to that RFID
       return res.status(404).end();
     }
     
