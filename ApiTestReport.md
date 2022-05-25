@@ -82,6 +82,7 @@ Version:
 |Test_DescriptorService.js && tdDAO.js|None|get Test Descriptor|
 |Test_ResultService.js && trDAO.js|None|Get Test Result|
 |InternalOrderservice.js && InternalOrderDaoMock.js|none|get internal order, get not existed IO, set IO, set empty IO, update IO, update null IO|
+|SKUItemService.js && SKUItemDAO.js|none|POST SKUITEMS, PUT SKUITEMS, GET SKUITEM BY ID, GET SKUITEMS, DELETE SKUITEMS|
 
 ## Step 3
 | Classes  | mock up used |Jest test cases |
@@ -90,6 +91,11 @@ Version:
 |PositionApi.js && PositionService.js && Position.js && PositionDao.js|None|get positions, add position, modify position, delete position|
 |InternalOrderAPI.js && InternalOrderservice.js && InternalOrderDaoMock.js|none|getting Internl order data from the system, adding a new internal order, Deleting internal order|
 |ItemAPI.js && ItemService.js && ItemDao.js|None|getting Item data from the system, adding a new item, adding a new item with integeration test, Deleting item|
+|RestockOrdersAPI.js && RestockOrdersService.js && RestockOrdersDao.js|none | getting restockorder data from the system, adding a new restock order, Deleting restock order|
+|ReturnOrdersAPI.js && ReturnOrdersService.js && ReturnOrdersDao.js|None|getting Return order data from the system, add Return order data to the system, Deleting Return Order|
+|TestDescriptorApi.js && Test_DescriptorService.js && tdDAO.js|None|modify test descriptor, getting Test Descriptor data from the system, adding a new test descriptor, Deleting test descriptor|
+|TestResultApi.js && Test_ResultService.js && trDAO.js|None|getting test result data from the system, adding a new test Result, Deleting test Result|
+|UserAPI.js && UserService.js && userDAO.js|None|TEST SESSIONS, test PUT user API,  get suppliers, get users except managers/admins, test DELETE user API|
 
 
 ## Step 4
@@ -123,7 +129,7 @@ Version:
 |3|new price is inserted|
 
 ## Scenario UC6-1
-[//]: <> (?? INTERNAL ORDER ///////////////this won't render/////////////////////)
+
 | Scenario |  name |
 | ------------- |:-------------:| 
 |  Precondition     |there is at least one SKU in products |
@@ -170,7 +176,7 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 |UC2| FR3.1|`test Position API` >  create new position, modify position, modify position id, delete position, get positions|   
 |UC4|FR1.5| `test newUser API` > Authorize access to functions to specific actors according to access rights|  
 |UC4|FR1.2|`test DELETE user API` > Delete a user|
-||FR1.3   |get users except managers/admins` > Search for all users(except for managers)           
+||FR1.3   |`get users except managers/admins` > Search for all users(except for managers)           
 |UC5|FR5|`test Restockorder apis` > getting restockorder data from the system, adding a new restock order, Deleting restock order|
 |UC5.2.1|FR5|`test test Result apis` > getting test results for each sku item|  
 |UC5.3|FR5|`test test Result apis` > getting test results for each sku item| 
