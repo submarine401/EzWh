@@ -3,6 +3,7 @@ class InternalOrderservice {
 
     constructor(dao) {
         this.dao = dao;
+        this.dao.create_internal_orders_table();
     }
 
     setInternalOrder = async (nio) => {
