@@ -43,12 +43,14 @@ Version:
      
 # Integration approach
     
-    The integration approach followed by our group was to test classes in a bottom up
-    approach. In detail, the procedure is described by the following steps.
+    The integration approach followed by our group was to test modules and services in a bottom up approach. In detail, the procedure is described by the following steps.
     Step1: DAO classes (including functions which perform query to the database) were
     tested independently during unit testing.
     Step2: DAO classes have been linked to service classes, most of which contain
     functions which use DAO's functions and implement some small, intermediate logic;
+    In some cases, DAO classes show some dependency (for example: SKUitems are dependant
+    from SKUs, which are linked to Items); during stage 2 these dependencies were tested to
+    ensure consistency.
     Step3: API classes were linked to service classes and tested at API level.
     
 
@@ -61,9 +63,17 @@ Version:
 ## Step 1
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
-|ItemDao.js|None|adding a new item|
-|skuDao.js|None|get sku by id|
-||||
+|ItemDao.js|ItemDaoMock.js|adding a new item, get item by ID (three tests: existent ID, unexistent ID and ID < 0), update item, update NULL item, Get all items|
+|skuDao.js|SkuDaoMock.js|get sku by id|
+|SKUItemDAO.js|none|Create SKUItem, Modify SKUItem, Modify SKUItem with wrong availability value, get array of SKUItem, get SKUItem by SKUID with available = 1, Get SKUItem by RFID, Get SKUItem - unexistent RFID, GET SKUItem by SKUId with available = 1 - unexistent SKUid|
+|UserDAO.js|mock_userDAO.js||
+|PositionDao.js|PositionDaoMock.js||
+|RestockOrdersDao.js|RestockOrdersDaoMock.js||
+|ReturnOrdersDao.js|ReturnOrdersDaoMock.js||
+|Test_DescriptorDAO.js|none|   |
+|Test_ResultDAO.js|none|   |
+
+
 
 ## Step 2
 | Classes  | mock up used |Jest test cases |
