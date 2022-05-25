@@ -1,6 +1,5 @@
 'use strict'
 const express = require('express');
-const dataInterface = require('../DataInterface');
 const db = require('../modules/InternalOrdersDao');
 const InternalOrderservice = require('../services/InternalOrderservice')
 const internalOrderservice = new InternalOrderservice(db);

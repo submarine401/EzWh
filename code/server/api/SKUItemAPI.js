@@ -3,7 +3,6 @@
 const express = require('express');
 const db = require('../modules/SKUItemDAO');
 const dao_sku = require('../modules/SkuDao')
-const dataInterface = require('../DataInterface');
 const SKUItemService = require ('../services/SKUItemService')
 const SKU_item_service = new SKUItemService(db);
 const SkuService = require('../services/SkuService');
