@@ -130,7 +130,7 @@ exports.create_test_descriptor_table =  () => {
 
     exports.deleteTestDescriptorData = () => {
         return new Promise((resolve, reject) => {
-          const sql = 'DROP TABLE IF EXISTS testdescriptors';
+          const sql = 'DROP TABLE testdescriptors';
           db.run(sql, [], function (err) {
             if (err) {
               reject(err);

@@ -1,9 +1,9 @@
-const dataInterface = require('../DataInterface');
 class InternalOrderservice {
     dao;
 
     constructor(dao) {
         this.dao = dao;
+        this.dao.create_internal_orders_table();
     }
 
     setInternalOrder = async (nio) => {

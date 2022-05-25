@@ -40,7 +40,5 @@ deleteAllTestResult = async () => {
     const result = await this.dao.deleteTestResultData();
     return result;
 }
-
 }
-
 module.exports = Test_ResultService;

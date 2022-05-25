@@ -45,6 +45,7 @@ getTestDescriptorsById = async (id) => {
 
 deleteAllTestDescriptors = async () => {
     const result = await this.dao.deleteTestDescriptorData();
+    await this.dao.create_test_descriptor_table();
     return result;
 }
 

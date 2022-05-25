@@ -5,7 +5,6 @@ const express = require('express');
 //const ReturnOrder = require('./ReturnOrder');
 //const Restockorder = require('./Restockorder');
 //const SKU = require('./SKU');
-const dataInterface = require('./DataInterface');
 const UserAPI = require('./api/UserAPI');
 const SKUapi = require('./api/SKUapi');
 const PositionApi = require('./api/PositionApi');
