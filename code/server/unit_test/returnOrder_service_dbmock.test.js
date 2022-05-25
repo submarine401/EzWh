@@ -1,7 +1,6 @@
 const ReturnOrderservice = require('../services/ReturnOrderservice');
 const dao = require('../modules/ReturnOrdersDaoMock')
 const returnOrderservice = new ReturnOrderservice(dao);
-const dataInterface = require('../DataInterface');
 
 //test case defenition 
 describe('get retun orders', ()=>{
