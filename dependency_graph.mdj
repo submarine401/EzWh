@@ -8256,32 +8256,6 @@
 							"target": {
 								"$ref": "AAAAAAGA+g2f9RGb5bU="
 							}
-						},
-						{
-							"_type": "UMLDependency",
-							"_id": "AAAAAAGA+g4U9BH5vjo=",
-							"_parent": {
-								"$ref": "AAAAAAGA+gxKPxBiMdE="
-							},
-							"source": {
-								"$ref": "AAAAAAGA+gxKPxBiMdE="
-							},
-							"target": {
-								"$ref": "AAAAAAGA+g35sRHbggs="
-							}
-						},
-						{
-							"_type": "UMLDependency",
-							"_id": "AAAAAAGA+g58AxIr92M=",
-							"_parent": {
-								"$ref": "AAAAAAGA+gxKPxBiMdE="
-							},
-							"source": {
-								"$ref": "AAAAAAGA+gxKPxBiMdE="
-							},
-							"target": {
-								"$ref": "AAAAAAGA+g5gFRIN/XU="
-							}
 						}
 					]
 				},
@@ -8402,22 +8376,6 @@
 							}
 						}
 					]
-				},
-				{
-					"_type": "UMLCollaboration",
-					"_id": "AAAAAAGA+g35sRHbggs=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "DBHelper.js"
-				},
-				{
-					"_type": "UMLCollaboration",
-					"_id": "AAAAAAGA+g5gFRIN/XU=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "DataInterface.js"
 				},
 				{
 					"_type": "UMLCollaboration",
