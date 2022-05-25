@@ -23,6 +23,12 @@ const TestDescriptor2 = {
     procedureDescription : "This test is described by...",
     idSKU : 2
 }
+const newValues = {
+    newName:"test descriptor 1",
+    newProcedureDescription:"This test is described by...",
+    newIdSKU :1
+}
+
 const sku = {
     "description" : "a new sku",
     "weight" : 100,
@@ -34,39 +40,69 @@ const sku = {
 
 describe('test test Descriptor apis', () => {
 
-    beforeEach(async () => {
-        await agent.delete('/api/allTD');
-    })
+    // beforeEach(async () => {
+    //     await agent.delete('/api/allTD');
+    // })
 
-    deleteAllData();
-    createSku(sku);
+
+
+    deleteAllData(204);
+    createSku(sku, 201);
     newTestDescriptor(201,TestDescriptor1);
     newTestDescriptor(422);
     getTestDescriptorsById(200,1,TestDescriptor1);
     getTestDescriptorsById(404,3,TestDescriptor2);
-   // deleteTestDescriptor(204,1);
+    modifyTestDescriptor(1, newValues, 200);
+   deleteTestDescriptor(204,1);
     deleteTestDescriptor(422);
 
 });
 
 
-function deleteAllData() {
+
+function deleteAllData(expectedHTTPStatus) {
     it('Deleting data', function (done) {
         agent.delete('/api/deleteAllSkus')
             .then(function (res) {
+                res.should.have.status(expectedHTTPStatus);
                 done();
-            })
+            }).catch((err)=>{
+                console.log(err);
+                done(err);
+            });
     });
 } 
-function createSku(sku) {
+
+function createSku(sku, expectedHTTPStatus) {
     it('create new sku', function(done) {
         
         agent.post('/api/sku')
             .send(sku)
             .then((res) => {
+                res.should.have.status(expectedHTTPStatus);
                 done();
-            });
+            }).catch((err)=>{
+                console.log(err);
+                done(err);
+            })
     });
+}
+
+function modifyTestDescriptor(id, newValues, expectedHTTPStatus) {
+    it('modify test descriptor', function(done) {
+        agent.post('/api/testDescriptor')
+        .send(TestDescriptor1)
+        .then( (res)=> {
+        agent.put('/api/testDescriptor/' + id)
+            .send(newValues)
+            .then((res) => {
+                res.should.have.status(expectedHTTPStatus);
+                done();
+            }).catch((err)=>{
+                done(err);
+            })
+    })
+});
 }
 
 function getTestDescriptorsById(expectedHTTPStatus, id,TestDescriptor1) {
