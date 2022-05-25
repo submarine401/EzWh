@@ -32,6 +32,7 @@ describe('get test descriptor', ()=>{
         idSKU :2
         }]);
     });
+    
  });
 
 describe("set test descriptor", () => {
@@ -87,6 +88,7 @@ describe("set test descriptor", () => {
             const id = 3;
     
             try{
+
                 await TestDescriptorService.modifyTestDescriptor(newTd, id);
             } catch(err){
                 expect(err).toBe('not found');

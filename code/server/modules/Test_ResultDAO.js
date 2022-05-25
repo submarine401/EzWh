@@ -20,6 +20,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.insert_into_test_result_table = (tr)  => {
     return new Promise ((resolve,reject)=>{ 
+        console.log(tr)
         const sql = 'INSERT INTO testresults (rfid, idTestDescriptor, Date, Result) VALUES(?,?,?,?)';
         db.run(sql,[tr.rfid, tr.idTestDescriptor , tr.Date, tr.Result], (err)=>{
             if(err)
@@ -64,7 +65,10 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 reject(err);
                 return;
             }
-            resolve(`Test Result with id ${id} is deleted`);
+            if(typeof rfid === 'undefined'){
+                resolve(404);
+              } else {
+                resolve(`Test Result with id ${id} is deleted`);}
         });
     });
 
@@ -72,6 +76,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     
     exports.get_TR = (rfid, id) => { 
       return new Promise((resolve,reject)=>{
+          console.log(rfid+id)
    
         if(id===undefined){
                   const sql = "SELECT * FROM testresults WHERE rfid = ?  ";

@@ -13,11 +13,24 @@ describe('get test result', ()=>{
         });
     });
 
-    test('get test result', async () => {
+    test('get test result by rfid', async () => {
 
         const rfid = "12345678901234567890123456789016";
        
-        let res = await TestResultService.getTestResult(rfid);
+        let res = await TestResultService.getTestResult(rfid, undefined);
+        expect(res).toEqual({
+            id: 1,
+            idTestDescriptor:1,
+            Date:"2021/11/28",
+            Result: 1
+        });
+    });
+    test('get test result ', async () => {
+
+        const rfid = "12345678901234567890123456789016";
+        const id = 1;
+       
+        let res = await TestResultService.getTestResult(rfid, id);
         expect(res).toEqual({
             id: 1,
             idTestDescriptor:1,
@@ -96,7 +109,8 @@ describe("set test result", () => {
     describe("modify test result", () => {
         beforeEach(() => {
             dao.get_TR.mockReset();
-            dao.get_TR.mockReturnValueOnce( [{id: 1,
+            dao.get_TR.mockReturnValueOnce( [
+                {id: 1,
                 idTestDescriptor:1,
                 Date:"2021/11/28",
                 Result: 1},
@@ -131,3 +145,6 @@ describe("set test result", () => {
 
 
  });
+
+
+ 
