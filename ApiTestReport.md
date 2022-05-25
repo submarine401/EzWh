@@ -37,6 +37,8 @@ Version:
      <report the here the dependency graph of the classes in EzWH, using plantuml or other tool>
 
 ![dependency1](../EzWh/dependency%20graph/dependencies1.jpg)
+![dependency_graph](/dependency_graph/dependency_graph.jpg)
+
 
      
 # Integration approach
