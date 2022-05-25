@@ -34,7 +34,7 @@ describe('test test result apis', () => {
     newTestResult(422)
     getTestResultsById(200,1,"12345678901234567890123456789016",TestResult1);
     getTestResultsById(404,2,"12345678123456789016",TestResult2);
-    deleteTestResult(204,1, "12345678901234567890123456789016");
+    deleteTestResult(422);
 
 });
 

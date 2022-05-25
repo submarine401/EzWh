@@ -36,7 +36,8 @@ router.get('/api/testDescriptors/:id', async (req, res)=>{
     if( id > 0  && typeof Number(id) === 'number') {
       
       const t = await TestDescriptorService.getTestDescriptorsById(id);
-     
+     console.log("aaaaa")
+     console.log(t)
       if(t.length === 0){ 
         return res.status(404).end();
       } else {
