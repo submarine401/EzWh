@@ -101,6 +101,9 @@ class SkuService{
 
     async add_modify_SKU_position(skuID, positionID){
 
+        console.log(await this.return_SKU());
+        console.log(await positionService.get_all_position());
+        
         try{
 
             const sku = await this.get_SKU(skuID);

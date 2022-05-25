@@ -36,7 +36,6 @@ Version:
 
      <report the here the dependency graph of the classes in EzWH, using plantuml or other tool>
 
-![dependency1](/dependency_graph/dependencies1.jpg)
 ![dependency_graph](/dependency_graph/dependency_graph_1.jpg)
 
 
@@ -63,13 +62,14 @@ Version:
 |--|--|--|
 |PositionService.js && Position.js|PositionDaoMock.js|get positions, add position, modify position|
 |SKU.js|None|create sku, modify sku without position, add position to sku, modify sku with position, modify position of sku|
-|ItemService.js|ItemDaoMock.js|adding a new item, get item by ID (three tests: existent ID, unexistent ID and ID < 0), update item, update NULL item, Get all items|
+|ItemService.js|ItemDaoMock.js|get Items, setitem|
 |SKUItemService.js && SKUItemDAO.js|none|Create SKUItem, Modify SKUItem, Modify SKUItem with wrong availability value, get array of SKUItem, get SKUItem by SKUID with available = 1, Get SKUItem by RFID, Get SKUItem - unexistent RFID, GET SKUItem by SKUId with available = 1 - unexistent SKUid|
 |UserService.js|mock_userDAO.js|check password, checking password of a user with unexisting type, Get suppliers, get users except managers, Post newUser correct version, Post user with short password (less than 8 characters), post user with unexpected type,modify a normal user, Delete a normal user (NO MANAGER), delete unexisting user, delete with unexisting type, delete all users|
 |RestockOrdersService.js|RestockOrdersDaoMock.js|(NOTE: "RSO" stands for Restock Order). Get restock order, get not existent RSO, get RSO with ID less than one, set empty Restock Order, test set empty RSO, update transportnote of RSO, update state of RSO, update null RSO,delete restock order by ID|
 |ReturnOrdersService.js|ReturnOrdersDaoMock.js|(NOTE: "RO" stands for "Return Order"). Get return order, get not existent RO, get wrong id type for RO, set empty RO, set RO|
 |Test_DescriptorService.js|mock_tdDAO.js|get Test Descriptor|
 |Test_ResultService.js|mock_trDAO.js|Get Test Result|
+|InternalOrderservice.js|InternalOrderDaoMock.js|get internal order, set internal order|
 
 
 
@@ -84,12 +84,15 @@ Version:
 |ReturnOrdersService.js && ReturnOrdersDao.js|None|(NOTE: "RO" stands for "Return Order"). Get return order, get not existent RO, get wrong id type for RO, set empty RO, set RO|
 |Test_DescriptorService.js && tdDAO.js|None|get Test Descriptor|
 |Test_ResultService.js && trDAO.js|None|Get Test Result|
+|InternalOrderservice.js && InternalOrderDaoMock.js|none|get internal order, get not existed IO, set IO, set empty IO, update IO, update null IO|
 
 ## Step 3
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
 |SkuService.js && <br>SKU.js &&<br> PositionService.js && <br>Position.js && <br>PositionDao.js && TestDescriptorDAO.js| SkuDaoMock.js | get sku, add sku, modify sku|
 |PositionApi.js && PositionService.js && Position.js && PositionDao.js|None|get positions, add position, modify position, delete position|
+|InternalOrderAPI.js && InternalOrderservice.js && InternalOrderDaoMock.js|none|getting Internl order data from the system, adding a new internal order, Deleting internal order|
+|ItemAPI.js && ItemService.js && ItemDao.js|None|getting Item data from the system, adding a new item, adding a new item with integeration test, Deleting item|
 
 
 ## Step 4
