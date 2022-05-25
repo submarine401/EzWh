@@ -40,12 +40,9 @@ const sku = {
 
 describe('test test Descriptor apis', () => {
 
-    // beforeEach(async () => {
-    //     await agent.delete('/api/allTD');
-    // })
 
 
-
+    deleteAllTDData(204);
     deleteAllData(204);
     createSku(sku, 201);
     newTestDescriptor(201,TestDescriptor1);
@@ -58,6 +55,20 @@ describe('test test Descriptor apis', () => {
 
 });
 
+
+
+function deleteAllTDData(expectedHTTPStatus) {
+    it('Deleting data', function (done) {
+        agent.delete('/api/allTD')
+            .then(function (res) {
+                res.should.have.status(expectedHTTPStatus);
+                done();
+            }).catch((err)=>{
+                console.log(err);
+                done(err);
+            });
+    });
+} 
 
 
 function deleteAllData(expectedHTTPStatus) {

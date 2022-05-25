@@ -94,9 +94,11 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
       const s = await SKU_item_service.search_by_RFID(newTR.rfid);
       
-
       const td = await test_DescriptorService.getTestDescriptorsById(newTR.idTestDescriptor);
 
+      
+console.log(s)
+console.log(td)
       if(s === 404 || td.length === 0){
         return res.status(404).json({error: "No sku item associated to rfid or no test descriptor associated to idTestDescriptor"});
       }
@@ -186,7 +188,7 @@ router.delete('/api/allTR',async (req,res)=>{
 
   const results = await TestResultService.deleteAllTestResult();
   if (results) {
-  return res.status(200).json(results);
+  return res.status(204).json(results);
    } else {
     return res.status(422).json({error : "Not found"});
     }
