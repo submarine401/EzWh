@@ -64,10 +64,10 @@ Version:
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
 |ItemDao.js|ItemDaoMock.js|adding a new item, get item by ID (three tests: existent ID, unexistent ID and ID < 0), update item, update NULL item, Get all items|
-|skuDao.js|SkuDaoMock.js|get sku by id|
+|skuDao.js|SkuDaoMock.js|get sku by id,modify SKU, modify SKU position|
 |SKUItemDAO.js|none|Create SKUItem, Modify SKUItem, Modify SKUItem with wrong availability value, get array of SKUItem, get SKUItem by SKUID with available = 1, Get SKUItem by RFID, Get SKUItem - unexistent RFID, GET SKUItem by SKUId with available = 1 - unexistent SKUid|
-|UserDAO.js|mock_userDAO.js||
-|PositionDao.js|PositionDaoMock.js||
+|UserDAO.js|mock_userDAO.js|check password, checking password of a user with unexisting type, Get suppliers, get users except managers, Post newUser correct version, Post user with short password (less than 8 characters), post user with unexpected type,modify a normal user, Delete a normal user (NO MANAGER), delete unexisting user, delete with unexisting type, delete all users|
+|PositionDao.js|PositionDaoMock.js|get Positions, add position, modify position, modify position id, delete position|
 |RestockOrdersDao.js|RestockOrdersDaoMock.js||
 |ReturnOrdersDao.js|ReturnOrdersDaoMock.js||
 |Test_DescriptorDAO.js|none|   |
