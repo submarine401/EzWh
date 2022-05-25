@@ -71,8 +71,10 @@ exports.create_test_descriptor_table =  () => {
                if(err){
                    reject(err);
                    return;
-               }
-               resolve(`Test descriptor with id ${id} is deleted`);
+               } if(typeof id === 'undefined'){
+                resolve(404);
+              } else {
+               resolve(`Test descriptor with id ${id} is deleted`);}
            });
        });
    

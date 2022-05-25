@@ -33,8 +33,11 @@ describe("Test Result", () => {
 
 
     async function testTestResult(rfid, id) {
-        test('get Test Result', async () => {        
+        test('get Test Result', async () => {   
+            console.log(rfid + id)
+                 
             let res = await TestResultService.getTestResult(rfid, id);
+            console.log(res)
             expect(res[0]).toEqual({
                 id: id,
                 idTestDescriptor:1,
@@ -47,4 +50,34 @@ describe("Test Result", () => {
     
     
 });
+
+
+
+describe('delete Test Result', () =>{
+    test("delete Test Result in the database", async() =>{
+      const rfid = "12345678901234567890123456789016";
+      const id= 1;
+      let res = await TestResultService.deleteTestResult(id,rfid);
+      //check if item has been correctly deleted
+      res = await TestResultService.getTestResult(rfid, id);
+      expect(res).toEqual([]);
+    });
+    
+    test("delete no parameters passed", async() =>{
+      let res = await TestResultService.deleteTestResult(undefined);
+      expect(res).toBe(404);
+    });
+    
+  });
+  
+  describe('create table Test result', () =>{
+    test("create test result table ", async() =>{
+       
+            let res = await TestResultService.createTestResultTable();
+            
+            expect(res).toEqual("testresults Table -> OK");
+          });
+  });
+
+
 

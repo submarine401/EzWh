@@ -57,3 +57,31 @@ describe("Test Descriptor", () => {
     
 });
 
+
+describe('delete Test descriptor', () =>{
+    test("delete Test descriptor in the database", async() =>{
+     const id= 1;
+      let res = await TestDescriptorService.deleteTestDescriptor(id);
+      //check if item has been correctly deleted
+      res = await TestDescriptorService.getTestDescriptorsById(id);
+      expect(res).toEqual([]);
+    });
+    
+    test("delete no parameters passed", async() =>{
+      let res = await TestDescriptorService.deleteTestDescriptor(undefined);
+      expect(res).toBe(404);
+    });
+    
+  });
+
+  describe('create table Test descriptor', () =>{
+    test("create test descriptor table ", async() =>{
+       
+            let res = await TestDescriptorService.createTestDescriptorTable();
+            
+            expect(res).toEqual("testdescriptors Table -> OK");
+          });
+  });
+
+
+  
