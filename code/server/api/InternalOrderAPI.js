@@ -1,6 +1,5 @@
 'use strict'
 const express = require('express');
-const IO = require('../InternalOrder');
 const dataInterface = require('../DataInterface');
 const db = require('../modules/InternalOrdersDao');
 const InternalOrderservice = require('../services/InternalOrderservice')
@@ -24,8 +23,12 @@ router.get('/api/internalOrders/:id',async (req,res)=>{
   
               if (results.length ===0)
                 return res.status(404).json("no internal order associated to id"); 
-              else
+              else{
+              if(results===0)
+              return res.status(404).json("no internal order associated to id"); 
+                else
                 return res.status(200).json(results); 
+              }
             } 
       }
     catch(err)

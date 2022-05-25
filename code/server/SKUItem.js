@@ -1,6 +1,5 @@
 'use strict';
 
-//const DBhelper = require("./DBhelper");
 
 class SKUItem{
   dayjs = require('dayjs');

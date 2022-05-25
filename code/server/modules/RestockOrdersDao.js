@@ -310,6 +310,18 @@ exports.get_all_restock_order = ()=>
     });
 }
 
+exports.create_restock_order_table = function(){
+    return new Promise((resolve,reject)=>{
+        const sql = 'CREATE TABLE IF NOT EXISTS restockorder (id integer PRIMARY KEY,issueate text,products text, supplierId integer, skuItems text,state text,transportNote text )';
+    db.run(sql, (err)=>{
+        if(err){
+            reject(err);
+            return}
+        resolve("RSO Table -> OK");
+    });
+    });
+}
+
 exports.get_issued_restock_order = ()=>
 {
     return new Promise ((resolve,reject)=>{

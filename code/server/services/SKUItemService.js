@@ -3,6 +3,7 @@ class SKUItemService{
   
   constructor(dao){
     this.dao = dao;
+    this.dao.create_SKUItem_table();
   }
   
   //FUNCTIONS (integration with skuitem services)

@@ -7,7 +7,7 @@ const app = require('../server');
 var agent = chai.request.agent(app);
 
  
-describe('test Position apis', () => {
+describe('test Position API', () => {
     // beforeEach(async () => {
     //     await agent.delete('/api/allUsers');
     // })

@@ -417,7 +417,6 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 |test internal order|testupdateIO||
 |test internal order|testupdateNullIO||
 
-# please do not write here
 ## Test cases for Internal Orders
 | Unit name | Jest test case |     |
 | --------- | -------------- | --- |
@@ -429,7 +428,7 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 |test restock order|update trasportnote of RSO||
 |test restock order|update state of RSO||
 |test restock order|update null RSO||
-# please do not write here
+
 ## Test cases for Return Orders
 | Unit name | Jest test case |     |
 | --------- | -------------- | --- |
@@ -439,28 +438,17 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 |test return order|set empty RO||
 |test return order|set RO||
 
-### Code coverage report for Item
-![screenshot1](./Covrage%20screenshots/item1.jpg)
-![screenshot2](./Covrage%20screenshots/item2.jpg)
-![screenshot3](./Covrage%20screenshots/item3.jpg)
-
-### Code coverage report for Internal orders
-![screenshot1](./Covrage%20screenshots/IO1.jpg)
-![screenshot1](./Covrage%20screenshots/IO2.jpg)
-![screenshot1](./Covrage%20screenshots/IO3.jpg)
-# please do not write here
-### Code coverage report for Item
-![screenshot1](./Covrage%20screenshots/RSO1.jpg)
-![screenshot1](./Covrage%20screenshots/RSO2.jpg)
-![screenshot1](./Covrage%20screenshots/RSO3.jpg)
-![screenshot1](./Covrage%20screenshots/RSO4.jpg)
+### Code coverage report
+![Full_code_coverage](./Covrage_screenshots/Total_test_coverage.png)
 
 
-### Code coverage report for Retun order
-![screenshot1](./Covrage%20screenshots/RO1.jpg)
-![screenshot1](./Covrage%20screenshots/RO2.jpg)
-![screenshot1](./Covrage%20screenshots/RO3.jpg)
-![screenshot1](./Covrage%20screenshots/RO4.jpg)
-![screenshot1](./Covrage%20screenshots/RO5.jpg)
 
-# please do not write here
+
+## Test cases for SKU
+| Unit name | Jest test case |     |
+| --------- | -------------- | --- |
+|Sku |create sku||
+|Sku |modify sku without position||
+|Sku |add position to sku||
+|Sku |modify sku with position||
+|Sku |modify position of sku||

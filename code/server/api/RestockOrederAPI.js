@@ -1,6 +1,5 @@
 'use strict'
 const express = require('express');
-const RSO = require('../Restockorder');
 const dataInterface = require('../DataInterface');
 const db = require('../modules/RestockOrdersDao');
 const RestockOrderservice = require('../services/RestockOrderservice')

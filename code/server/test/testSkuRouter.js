@@ -7,7 +7,7 @@ const app = require('../server');
 var agent = chai.request.agent(app);
 
  
-describe('test SKU apis', () => {
+describe('test SKU API', () => {
     // beforeEach(async () => {
     //     await agent.delete('/api/allUsers');
     // })
@@ -49,11 +49,15 @@ describe('test SKU apis', () => {
         "testDescriptors" : []
     });
 
-    createPosition(position, 201);
+    createPosition(position);
 
     modifySku(1, newValues, 200);
+    modifySku(2, newValues, 404);
     modifySkuPosition(1, position["positionID"], 200);
+    modifySkuPosition(2, position["positionID"], 404);
+    modifySkuPosition(1, "111122223333", 404);
     deleteSku(1, 204);
+    deleteSku(1, 422);
     // modifySku(position["positionID"], newValues, 404);
     // modifySkuID(position["positionID"], newID, 404);
     // deleteSku(newID["newPositionID"], 422);
@@ -92,7 +96,6 @@ function getSku(expectedHTTPStatus, id, expectedBody) {
     it('get sku', function(done) {
         agent.get('/api/skus/' + id)
             .then((res) => {
-                console.log(res.body);
                 res.should.have.status(expectedHTTPStatus);
                 res.body.id.should.equal(expectedBody.id);
                 res.body.description.should.equal(expectedBody.description);
@@ -151,17 +154,7 @@ function deleteSku(id, expectedHTTPStatus) {
     });
 }
 
-function createPosition(position, expectedHTTPStatus) {
-    it('create new position', function(done) {
-        
-        agent.post('/api/position')
-            .send(position)
-            .then((res) => {
-                res.should.have.status(expectedHTTPStatus);
-                done();
-            }).catch((err)=>{
-                done(err);
-            })
-    });
+function createPosition(position) {
+    agent.post('/api/position').send(position);
 }
 

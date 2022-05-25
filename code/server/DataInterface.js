@@ -1,4 +1,3 @@
-const dbHelper = require('./DBhelper');
 const Position = require('./Position');
 const SKU = require('./SKU');
 const SKUItem = require('./SKUItem');
@@ -9,19 +8,7 @@ class DataInterface{
     //users = [];
     
     constructor(){
-
-        this.dbHelper = dbHelper;
-        
-        //console.log(dbHelper);
-        //this.users = this.dbHelper.load_users();
-
-        if(this.users === undefined) this.users = [];
-        
-        //this.users = this.dbHelper.load_users();
-
-        //if(this.users === undefined) this.users = [];
-
-        
+        if(this.users === undefined) this.users = [];  
     }
 
     //+************************************ SKU ****************************************

@@ -37,7 +37,7 @@ Version:
      <report the here the dependency graph of the classes in EzWH, using plantuml or other tool>
 
 ![dependency1](/dependency_graph/dependencies1.jpg)
-![dependency_graph](/dependency_graph/dependency_graph.jpg)
+![dependency_graph](/dependency_graph/dependency_graph_1.jpg)
 
 
      
@@ -61,22 +61,46 @@ Version:
 ## Step 1
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
-|ItemDao.js|ItemDaoMock.js|adding a new item, get item by ID (three tests: existent ID, unexistent ID and ID < 0), update item, update NULL item, Get all items|
-|skuDao.js|SkuDaoMock.js|get sku by id,modify SKU, modify SKU position|
-|SKUItemDAO.js|none|Create SKUItem, Modify SKUItem, Modify SKUItem with wrong availability value, get array of SKUItem, get SKUItem by SKUID with available = 1, Get SKUItem by RFID, Get SKUItem - unexistent RFID, GET SKUItem by SKUId with available = 1 - unexistent SKUid|
-|UserDAO.js|mock_userDAO.js|check password, checking password of a user with unexisting type, Get suppliers, get users except managers, Post newUser correct version, Post user with short password (less than 8 characters), post user with unexpected type,modify a normal user, Delete a normal user (NO MANAGER), delete unexisting user, delete with unexisting type, delete all users|
-|PositionDao.js|PositionDaoMock.js|get Positions, add position, modify position, modify position id, delete position|
-|RestockOrdersDao.js|RestockOrdersDaoMock.js|(NOTE: "RSO" stands for Restock Order). Get restock order, get not existent RSO, get RSO with ID less than one, set empty Restock Order, test set empty RSO, update transportnote of RSO, update state of RSO, update null RSO,delete restock order by ID|
-|ReturnOrdersDao.js|ReturnOrdersDaoMock.js|(NOTE: "RO" stands for "Return Order"). Get return order, get not existent RO, get wrong id type for RO, set empty RO, set RO|
-|Test_DescriptorDAO.js|none|get Test Descriptor|
-|Test_ResultDAO.js|none|Get Test Result|
+|PositionService.js && Position.js|PositionDaoMock.js|get positions, add position, modify position|
+|SKU.js|None|create sku, modify sku without position, add position to sku, modify sku with position, modify position of sku|
+|ItemService.js|ItemDaoMock.js|adding a new item, get item by ID (three tests: existent ID, unexistent ID and ID < 0), update item, update NULL item, Get all items|
+|SKUItemService.js && SKUItemDAO.js|none|Create SKUItem, Modify SKUItem, Modify SKUItem with wrong availability value, get array of SKUItem, get SKUItem by SKUID with available = 1, Get SKUItem by RFID, Get SKUItem - unexistent RFID, GET SKUItem by SKUId with available = 1 - unexistent SKUid|
+|UserService.js|mock_userDAO.js|check password, checking password of a user with unexisting type, Get suppliers, get users except managers, Post newUser correct version, Post user with short password (less than 8 characters), post user with unexpected type,modify a normal user, Delete a normal user (NO MANAGER), delete unexisting user, delete with unexisting type, delete all users|
+|RestockOrdersService.js|RestockOrdersDaoMock.js|(NOTE: "RSO" stands for Restock Order). Get restock order, get not existent RSO, get RSO with ID less than one, set empty Restock Order, test set empty RSO, update transportnote of RSO, update state of RSO, update null RSO,delete restock order by ID|
+|ReturnOrdersService.js|ReturnOrdersDaoMock.js|(NOTE: "RO" stands for "Return Order"). Get return order, get not existent RO, get wrong id type for RO, set empty RO, set RO|
+|Test_DescriptorService.js|mock_tdDAO.js|get Test Descriptor|
+|Test_ResultService.js|mock_trDAO.js|Get Test Result|
 
 
 
 ## Step 2
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
-|ItemDao.js && skuDao.js ||adding a new item with integeration test'|
+|ItemDao.js && skuDao.js |None|adding a new item with integeration test'|
+|PositionService.js && Position.js && PositionDao.js|None|get positions, add position, modify position, delete position|
+|ItemService.js && ItemDao.js|None|adding a new item, get item by ID (three tests: existent ID, unexistent ID and ID < 0), update item, update NULL item, Get all items|
+|UserService.js && userDAO.js|None|check password, checking password of a user with unexisting type, Get suppliers, get users except managers, Post newUser correct version, Post user with short password (less than 8 characters), post user with unexpected type,modify a normal user, Delete a normal user (NO MANAGER), delete unexisting user, delete with unexisting type, delete all users|
+|RestockOrdersService.js && RestockOrdersDao.js|None|(NOTE: "RSO" stands for Restock Order). Get restock order, get not existent RSO, get RSO with ID less than one, set empty Restock Order, test set empty RSO, update transportnote of RSO, update state of RSO, update null RSO,delete restock order by ID|
+|ReturnOrdersService.js && ReturnOrdersDao.js|None|(NOTE: "RO" stands for "Return Order"). Get return order, get not existent RO, get wrong id type for RO, set empty RO, set RO|
+|Test_DescriptorService.js && tdDAO.js|None|get Test Descriptor|
+|Test_ResultService.js && trDAO.js|None|Get Test Result|
+
+## Step 3
+| Classes  | mock up used |Jest test cases |
+|--|--|--|
+|SkuService.js && <br>SKU.js &&<br> PositionService.js && <br>Position.js && <br>PositionDao.js && TestDescriptorDAO.js| SkuDaoMock.js | get sku, add sku, modify sku|
+|PositionApi.js && PositionService.js && Position.js && PositionDao.js|None|get positions, add position, modify position, delete position|
+
+
+## Step 4
+| Classes  | mock up used |Jest test cases |
+|--|--|--|
+|SkuService.js && <br>SkuDao.js && <br>SKU.js &&<br> PositionService.js && <br>Position.js && <br>PositionDao.js && TestDescriptorDAO.js|None|get sku, add sku, modify sku, delete sku|
+
+## Step 5
+| Classes  | mock up used |Jest test cases |
+|--|--|--|
+|SKUapi.js && <br>SkuService.js && <br>SkuDao.js && <br>SKU.js &&<br> PositionService.js && <br>Position.js && <br>PositionDao.js && TestDescriptorDAO.js|None|get sku, add sku, modify sku, delete sku|
 
 
 
@@ -99,7 +123,7 @@ Version:
 |3|new price is inserted|
 
 ## Scenario UC6-1
-?? internal order
+[//]: <> (?? INTERNAL ORDER ///////////////this won't render/////////////////////)
 | Scenario |  name |
 | ------------- |:-------------:| 
 |  Precondition     |there is at least one SKU in products |
@@ -120,6 +144,16 @@ Version:
 |  2     |records every item in the system with a new RFID|
 |3|new price is inserted|
 
+## Scenario 4-1
+
+| Scenario |  Create users and define rights |
+| ------------- |:-------------:| 
+|  Precondition     | Manager M exists and is logged in |
+|  Post condition     | Account X is created  |
+| Step#        | Description  |
+|  1  | M defines the credentials of the new Account X  |  
+|  2  | A selects the access rights for the new account X |
+| 3 | M confirms the inserted data  |
 
 # Coverage of Scenarios and FR
 
@@ -133,10 +167,12 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 | Scenario ID | Functional Requirements covered | Mocha  Test(s) | 
 | ----------- | ------------------------------- | ----------- | 
 |UC11-1|FR7|`test Item apis` >  adding a new item, Deleting item|             
-|UC9-1|FR6|`test Intrenal order apis` > adding a new internal order, Deleting internal order,|             
+|UC9-1|FR6|`test Internal order apis` > adding a new internal order, Deleting internal order,|             
 |UC5|FR5|`test Restockorder apis` > getting restockorder data from the system, adding a new restock order, Deleting restock order|             
-||||             
-||||             
+|UC4|FR1.5| `test newUser API` > Authorize access to functions to specific actors according to access rights|     
+|UC4|FR1.2|`test DELETE user API` > Delete a user|
+|UC2| FR3.1|`test Position API` >  create new position, modify position, modify position id, delete position, get positions|
+|UC1 | FR2 | `test SKU API` > create new sku, modify sku, modify sku position, delete sku, get sku |
          
 
 

@@ -30,10 +30,10 @@ const IO2 = {
             newInternalOrder(201,IO)
             newInternalOrder(422)
             getInternalOrderById(200,1,IO);
-            getInternalOrderById(404,2,IO2);
+            getInternalOrderById(404,100,IO2);
             deleteInternalOrder(204,1);
 
-        });
+    
         
 function getInternalOrderById(expectedHTTPStatus, id,IO) {
     it('getting Internl order data from the system',  (done)=> {
@@ -76,11 +76,11 @@ function getInternalOrderById(expectedHTTPStatus, id,IO) {
 }
 
 function newInternalOrder(expectedHTTPStatus, IO) {
-    it('adding a new internal order ', function (done) {
+    it('adding a new internal order ',  (done)=> {
         if (IO !== undefined) {
             agent.post('/api/internalOrders')
                 .send(IO)
-                .then(function (res) {
+                .then( (res) =>{
                     res.should.have.status(expectedHTTPStatus);
                     res.body.should.equal("Inserted new IO successfully");
                     done();
@@ -103,7 +103,7 @@ function newInternalOrder(expectedHTTPStatus, IO) {
 
 
 function  deleteInternalOrder(expectedHTTPStatus, id) {
-    it('Deleting item', function (done) {
+    it('Deleting internal order', function (done) {
         if(id >0){
         agent.delete('/api/internalOrders/'+id)
             .then( (res)=> {
@@ -126,5 +126,5 @@ function  deleteInternalOrder(expectedHTTPStatus, id) {
         }
     });
 }
-
+});
 

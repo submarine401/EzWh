@@ -8,7 +8,7 @@ describe('sku test', ()=>{
         
     });
 
-    test('modify sku', async () => {
+    test('create sku', async () => {
         const sku = new SKU(1, 'a sku', 10, 10, 'notes', 3.5, 10);
         expect(sku).toEqual({
             id : 1,
@@ -21,6 +21,10 @@ describe('sku test', ()=>{
             position : undefined,
             testDescriptors : []
         });
+    });
+
+    test('modify sku without position', async () => {
+        const sku = new SKU(1, 'a sku', 10, 10, 'notes', 3.5, 10);
         newValues = {
             "newDescription" : "a new sku",
             "newWeight" : 100,
@@ -42,6 +46,10 @@ describe('sku test', ()=>{
             position : undefined,
             testDescriptors : []
         });
+    });
+
+    test('add position to sku', async () => {
+        const sku = new SKU(1, "a new sku", 100, 50, "first SKU", 10.99, 5);
 
         const pos = new Position({
             "positionID":"800234543412",
@@ -76,6 +84,22 @@ describe('sku test', ()=>{
             position : pos,
             testDescriptors : []
         });
+    });
+
+    test('modify sku with position', async () => {
+        
+        const pos = new Position({
+            "positionID":"800234543412",
+            "aisleID": "8002",
+            "row": "3454",
+            "col": "3412",
+            "maxWeight": 1000,
+            "maxVolume": 1000,
+            "occupiedWeight": 500,
+            "occupiedVolume":250
+        });
+
+        const sku = new SKU(1, "a new sku", 100, 50, "first SKU", 10.99, 5, pos);
 
         newValues1 = {
             "newDescription" : "a new sku",
@@ -110,6 +134,22 @@ describe('sku test', ()=>{
             position : pos,
             testDescriptors : []
         });
+    });
+
+    test('modify position of sku', async () => {
+        
+        const pos = new Position({
+            "positionID":"800234543412",
+            "aisleID": "8002",
+            "row": "3454",
+            "col": "3412",
+            "maxWeight": 1000,
+            "maxVolume": 1000,
+            "occupiedWeight": 50,
+            "occupiedVolume":25
+        });
+
+        const sku = new SKU(1, "a new sku", 10, 5, "first SKU", 10.99, 5, pos);
 
         const newPos = new Position({
             "positionID":"111122223333",

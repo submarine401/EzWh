@@ -33,7 +33,7 @@ describe('get Positions', ()=>{
         );
     });
 
-    test('get Positions', async () => {
+    test('get positions', async () => {
         let res = await positionService.get_all_position();
         expect(res[0]).toEqual({
             positionID:"800234543412",

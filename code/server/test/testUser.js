@@ -6,7 +6,7 @@ chai.should();
 const app = require('../server');
 var agent = chai.request.agent(app);
 
-describe('test POST newUser API', () =>{
+describe('test newUser API', () =>{
   before(async function(){
     await agent.delete('/api/allusers')
   });
