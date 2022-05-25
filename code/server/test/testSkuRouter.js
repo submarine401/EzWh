@@ -101,8 +101,8 @@ function getSku(expectedHTTPStatus, id, expectedBody) {
                 res.body.notes.should.equal(expectedBody.notes);
                 res.body.price.should.equal(expectedBody.price);
                 res.body.availableQuantity.should.equal(expectedBody.availableQuantity);
-                //expect(res.body.position).toBe(expectedBody.position); null doesn't have should, check tomorrow
-                //res.body.testDescriptors.should.be(expectedBody.testDescriptors); returns right but [] aparently is != []
+                chai.expect(res.body.position).to.be.null;
+                res.body.testDescriptors.should.deep.equal(expectedBody.testDescriptors);
                 done();
             }).catch((err)=>{
                 console.log(err);
