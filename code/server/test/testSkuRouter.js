@@ -49,8 +49,8 @@ describe('test SKU API', () => {
         "testDescriptors" : []
     });
 
-    createPosition(position);
-
+    createPosition(position, 201);
+    
     modifySku(1, newValues, 200);
     modifySku(2, newValues, 404);
     modifySkuPosition(1, position["positionID"], 200);
@@ -128,6 +128,7 @@ function modifySku(id, newValues, expectedHTTPStatus) {
 }
 
 function modifySkuPosition(skuID, positionID, expectedHTTPStatus){
+    
     it('modify sku position', function(done) {
         agent.put('/api/sku/' + skuID + '/position')
             .send({"position": positionID}
@@ -154,7 +155,17 @@ function deleteSku(id, expectedHTTPStatus) {
     });
 }
 
-function createPosition(position) {
-    agent.post('/api/position').send(position);
+function createPosition(position, expectedHTTPStatus) {
+    it('create new position', function(done) {
+        
+        agent.post('/api/position')
+            .send(position)
+            .then((res) => {
+                res.should.have.status(expectedHTTPStatus);
+                done();
+            }).catch((err)=>{
+                done(err);
+            })
+    });
 }
 
