@@ -4,6 +4,7 @@ class ReturnOrderservice {
 
     constructor(dao) {
         this.dao = dao;
+        this.dao.create_return_order_table();
     }
 
     setReturnOrder = async (ro) => {

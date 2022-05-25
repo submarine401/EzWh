@@ -1,12 +1,12 @@
 'use strict'
 const express = require('express');
-const RO = require('../ReturnOrder');
 const dataInterface = require('../DataInterface');
 const db = require('../modules/ReturnOrdersDao');
+const db_restock = require('../modules/RestockOrdersDao')
 const ReturnOrderservice = require('../services/ReturnOrderservice')
 const returnOrderservice = new ReturnOrderservice(db);
 const RestockOrderservice = require('../services/RestockOrderservice')
-const restockOrderservice = new RestockOrderservice(db);
+const restockOrderservice = new RestockOrderservice(db_restock);
 
 let router = express.Router();
 

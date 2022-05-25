@@ -4,6 +4,18 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     if (err) throw err;
     });
       
+exports.create_item_table = function() {
+    return new Promise((resolve, reject) => {
+        const sql = 'CREATE TABLE IF NOT EXISTS item (id integer PRIMARY KEY,description text,price integer, skuid integer, supplierid integer)';
+        db.run(sql, (err) => {
+            if (err) {
+                reject(err);
+                return
+            }
+            resolve("Item Table -> OK");
+        });
+    });
+}
 
 exports.insert_into_item_table = (i)=>{
     return new Promise ((resolve,reject)=>{

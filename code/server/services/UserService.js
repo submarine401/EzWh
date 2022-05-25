@@ -3,6 +3,7 @@ class UserService{
   
   constructor(dao){
     this.dao = dao;
+    this.dao.create_user_table();
   }
     
   //FUNCTIONS (integration with USER DAO)

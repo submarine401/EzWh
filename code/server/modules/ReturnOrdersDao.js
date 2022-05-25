@@ -3,6 +3,19 @@ sqlite = require('sqlite3');
 const db = new sqlite.Database('EZWHDB.db', (err) => {
     if (err) throw err;
     });
+    
+    exports.create_return_order_table = function() {
+        return new Promise((resolve, reject) => {
+            const sql = 'CREATE TABLE IF NOT EXISTS returnorder (id integer PRIMARY KEY,date text,products text, restockorderid integer )';
+            db.run(sql, (err) => {
+                if (err) {
+                    reject(err);
+                    return
+                }
+                resolve("Return-Order Table -> OK");
+            });
+        });
+    }
       
     exports.insert_return_order_table = (ro)=>
     {

@@ -1,6 +1,5 @@
 'use strict';
 const express = require('express');
-const db = require('./DBhelper');
 //const InternalOrder = require('./InternalOrder');
 //const Item = require('./Item');
 //const ReturnOrder = require('./ReturnOrder');
@@ -19,25 +18,6 @@ const InternalOrderAPI = require('./api/InternalOrderAPI');
 const TestDescriptorAPI = require('./api/TestDescriptorAPI');
 const TestResultAPI= require('./api/TestResultAPI');
 const SKUItemAPI = require('./api/SKUItemAPI');
-
-
-
-
-/*
-Connect to DB
-*/
-//const db = new DBhelper("EZWHDB"); --> connection moved in DBhelper.js
-/*
-Creating instances of classe which db connection is passed to each one
-*/
-//const dataInterface = new DataInterface(db);
-// const IO = new InternalOrder(db);
-// const I = new Item(db);
-// const RO = new ReturnOrder(db);
-// const RSO = new Restockorder(db);
-// const U = new User(db);
-// const TD = new Test_Descriptor(db);
-// const TR = new Test_Result(db);
 
 // init express
 const app = new express();

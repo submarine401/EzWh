@@ -4,7 +4,7 @@ class Test_ResultService {
 
 constructor(dao){
     this.dao= dao;
-    // this.createTestResultTable();
+    this.dao.create_test_result_table();
 }
 
 

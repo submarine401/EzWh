@@ -4,6 +4,7 @@ class Itemservice {
 
     constructor(dao) {
         this.dao = dao;
+        this.dao.create_item_table();
     }
 
 

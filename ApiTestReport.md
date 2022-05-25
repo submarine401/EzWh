@@ -138,6 +138,16 @@ Version:
 |  2     |records every item in the system with a new RFID|
 |3|new price is inserted|
 
+## Scenario 4-1
+
+| Scenario |  Create users and define rights |
+| ------------- |:-------------:| 
+|  Precondition     | Manager M exists and is logged in |
+|  Post condition     | Account X is created  |
+| Step#        | Description  |
+|  1  | M defines the credentials of the new Account X  |  
+|  2  | A selects the access rights for the new account X |
+| 3 | M confirms the inserted data  |
 
 # Coverage of Scenarios and FR
 
@@ -151,10 +161,10 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 | Scenario ID | Functional Requirements covered | Mocha  Test(s) | 
 | ----------- | ------------------------------- | ----------- | 
 |UC11-1|FR7|`test Item apis` >  adding a new item, Deleting item|             
-|UC9-1|FR6|`test Intrenal order apis` > adding a new internal order, Deleting internal order,|             
+|UC9-1|FR6|`test Internal order apis` > adding a new internal order, Deleting internal order,|             
 |UC5|FR5|`test Restockorder apis` > getting restockorder data from the system, adding a new restock order, Deleting restock order|             
-||||             
-||||             
+|UC4|FR1.5| `test newUser API` > Authorize access to functions to specific actors according to access rights|     
+|UC4|FR1.2|`test DELETE user API` > Delete a user|             
          
 
 

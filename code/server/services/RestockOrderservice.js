@@ -4,6 +4,7 @@ class RestockOrderservice {
 
     constructor(dao) {
         this.dao = dao;
+        this.dao.create_restock_order_table();
     }
 
     setRestockOrder = async (rso) => {

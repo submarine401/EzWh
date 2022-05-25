@@ -117,6 +117,19 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
       });
     }
     
+    exports.create_SKUItem_table = function(){
+        return new Promise((resolve,reject) =>{
+          const sql_query = ' CREATE TABLE IF NOT EXISTS skuitem (SKUItemID integer PRIMARY KEY, SKUid integer, RFID text, dateOfStock DATE, availability integer)';
+          db.run(sql_query, [], function(err){
+            if(err){
+              reject(err);
+              return;
+            }
+            resolve(true);
+          });
+        });
+      }
+    
     exports.deleteSKUItem = function(rfid){
       return new Promise((resolve,reject) =>{
         if(typeof rfid === 'undefined'){

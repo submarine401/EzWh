@@ -5,6 +5,19 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 if (err) throw err;
 });
 
+exports.create_internal_orders_table = function() {
+    return new Promise((resolve, reject) => {
+        const sql = 'CREATE TABLE IF NOT EXISTS internalorders (id integer PRIMARY KEY,date text,state text, customerid text, products text)';
+        db.run(sql, (err) => {
+            if (err) {
+                reject(err);
+                return
+            }
+            resolve("IO Table -> OK");
+        });
+    });
+}
+
 exports.insert_internal_order = (nio)=>{
     return new Promise ((resolve,reject)=>{
 

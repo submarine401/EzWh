@@ -12,7 +12,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 reject(err);
                 return}
                 console.log("ok")
-            resolve("testresults Table -> OK");
+            resolve(true);
       
         });
      });
