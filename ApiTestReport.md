@@ -43,11 +43,8 @@ Version:
 # Integration approach
     
     The integration approach followed by our group was to test modules and services in a bottom up approach. In detail, the procedure is described by the following steps.
-    Step1: DAO classes (including functions which perform query to the database) were
-    tested together with service classes, which include some additional logic to manage positions, quantities, volumes, prices.
-    In some cases, DAO classes show some dependency (for example: SKUitems are dependant
-    from SKUs, which are linked to Items); during stage 1 these dependencies were tested to
-    ensure consistency.
+    Step1: DAO classes (including functions which perform query to the database) were tested together with service classes, which include some additional logic to manage positions, quantities, volumes, prices.
+    In some cases, DAO classes show some dependency (for example: SKUitems are dependant from SKUs, which are linked to Items); during stage 1 these dependencies were tested to ensure consistency.
     Step2: API classes were linked to service classes and tested at API level.
     
 
@@ -64,11 +61,11 @@ Version:
 |SKU.js|None|create sku, modify sku without position, add position to sku, modify sku with position, modify position of sku|
 |ItemService.js|ItemDaoMock.js|get Items, setitem|
 |SKUItemService.js && SKUItemDAO.js|none|Create SKUItem, Modify SKUItem, Modify SKUItem with wrong availability value, get array of SKUItem, get SKUItem by SKUID with available = 1, Get SKUItem by RFID, Get SKUItem - unexistent RFID, GET SKUItem by SKUId with available = 1 - unexistent SKUid|
-|UserService.js|mock_userDAO.js|check password, checking password of a user with unexisting type, Get suppliers, get users except managers, Post newUser correct version, Post user with short password (less than 8 characters), post user with unexpected type,modify a normal user, Delete a normal user (NO MANAGER), delete unexisting user, delete with unexisting type, delete all users|
-|RestockOrdersService.js|RestockOrdersDaoMock.js|(NOTE: "RSO" stands for Restock Order). Get restock order, get not existent RSO, get RSO with ID less than one, set empty Restock Order, test set empty RSO, update transportnote of RSO, update state of RSO, update null RSO,delete restock order by ID|
-|ReturnOrdersService.js|ReturnOrdersDaoMock.js|(NOTE: "RO" stands for "Return Order"). Get return order, get not existent RO, get wrong id type for RO, set empty RO, set RO|
-|Test_DescriptorService.js|mock_tdDAO.js|get Test Descriptor|
-|Test_ResultService.js|mock_trDAO.js|Get Test Result|
+|UserService.js|mock_userDAO.js|POST Users, 'GET list of suppliers|
+|RestockOrdersService.js|RestockOrdersDaoMock.js|get restock orders, set restock orders|
+|ReturnOrdersService.js|ReturnOrdersDaoMock.js|get retun orders, set retun orders|
+|Test_DescriptorService.js|mock_tdDAO.js|get test descriptor, set test descriptor, modify inexistent test descriptor, modify test descriptor|
+|Test_ResultService.js|mock_trDAO.js|get test result, set test result, modify inexistent test result, modify test result|
 |InternalOrderservice.js|InternalOrderDaoMock.js|get internal order, set internal order|
 
 

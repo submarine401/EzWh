@@ -17,7 +17,7 @@ describe('get test descriptor', ()=>{
             }]);
     });
 
-    test('get test result', async () => {
+    test('get test descriptor', async () => {
         let res = await TestDescriptorService.getAllTestDescriptors();
         expect(res).toEqual([{
         id: 1,
