@@ -16,7 +16,9 @@ Version:
   - [Step 1](#step-1)
   - [Step 2](#step-2)
 - [API testing - Scenarios](#api-testing---scenarios)
-  - [Scenario UCx.y](#scenario-ucxy)
+  - [Scenario UC11-1](#scenario-uc11-1)
+  - [Scenario UC6-1](#scenario-uc6-1)
+  - [Scenario UC5-1](#scenario-uc5-1)
 - [Coverage of Scenarios and FR](#coverage-of-scenarios-and-fr)
 - [Coverage of Non Functional Requirements](#coverage-of-non-functional-requirements)
     - [](#)
@@ -72,16 +74,38 @@ Version:
 <If needed, define here additional scenarios for the application. Scenarios should be named
  referring the UC in the OfficialRequirements that they detail>
 
-## Scenario UCx.y
+## Scenario UC11-1
 
 | Scenario |  name |
 | ------------- |:-------------:| 
-|  Precondition     |  |
-|  Post condition     |   |
+|  Precondition     | Identifier of corresponding SKU exists in the DB |
+|  Post condition     | New Item is inserted  |
 | Step#        | Description  |
-|  1     |  ... |  
-|  2     |  ... |
+|  1     | new Item description is inserted  |  
+|  2     |   Identifier of corresponding SKU is inserted |
+|3|new price is inserted|
 
+## Scenario UC6-1
+?? internal order
+| Scenario |  name |
+| ------------- |:-------------:| 
+|  Precondition     |there is at least one SKU in products |
+|  Post condition     | New IO is inserted  |
+| Step#        | Description  |
+|  1     |  add all items to REO |  
+|  2     |  System provide RFID of SKU items that not passed quality tests|
+
+## Scenario UC5-1
+
+| Scenario |  name |
+| ------------- |:-------------:| 
+|  Precondition     |SKU S exists |
+||SKU position is valid|
+|  Post condition     |Each sku item has an RFID  |
+| Step#        | Description  |
+|  1     |  RO arrives to the shop |  
+|  2     |records every item in the system with a new RFID|
+|3|new price is inserted|
 
 
 # Coverage of Scenarios and FR
@@ -95,12 +119,12 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 
 | Scenario ID | Functional Requirements covered | Mocha  Test(s) | 
 | ----------- | ------------------------------- | ----------- | 
-|  ..         | FRx                             |             |             
-|  ..         | FRy                             |             |             
-| ...         |                                 |             |             
-| ...         |                                 |             |             
-| ...         |                                 |             |             
-| ...         |                                 |             |             
+|UC11-1|FR7|`test Item apis` >  adding a new item, Deleting item|             
+|UC9-1|FR6|`test Intrenal order apis` > adding a new internal order, Deleting internal order,|             
+|UC5|FR5|`test Restockorder apis` > getting restockorder data from the system, adding a new restock order, Deleting restock order|             
+||||             
+||||             
+         
 
 
 
@@ -116,6 +140,6 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 | -------------------------- | --------- |
 |                     NFR2   |     get Item      |
 |                     NFR2   |     get internal order'      |
-|                     NFR2   |     get restock order    |
+|                     NFR2   |     set restock order    |
 |                     NFR2   |     get retun order     |
 
