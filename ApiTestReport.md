@@ -169,13 +169,17 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 |UC11-1|FR7|`test Item apis` >  adding a new item, Deleting item|             
 |UC9-1|FR6|`test Internal order apis` > adding a new internal order, Deleting internal order,|             
 |UC5|FR5|`test Restockorder apis` > getting restockorder data from the system, adding a new restock order, Deleting restock order|             
+||UC4|FR1.2|`test DELETE user API` > Delete a user|
+||FR1.3   |get users except managers/admins` > Search for all users(except for managers) |
 |UC4|FR1.5| `test newUser API` > Authorize access to functions to specific actors according to access rights|     
-|UC4|FR1.2|`test DELETE user API` > Delete a user|
 |UC2| FR3.1|`test Position API` >  create new position, modify position, modify position id, delete position, get positions|
 |UC1 | FR2 | `test SKU API` > create new sku, modify sku, modify sku position, delete sku, get sku |
-|UC12.1 | FR3.2 | `'adding a new test descriptor '`Create test description|
-|UC12.2 | FR3.2 | `test SKU API`Update test description|
-|UC12.3 | FR3.2 | `Deleting test descriptor`Delete test description|
+|UC12.1 | FR3.2 | `adding a new test descriptor` > Create test description|
+|UC12.2 | FR3.2 | `test SKU API` > Update test description|
+|UC12.3 | FR3.2 | `Deleting test descriptor` > Delete test description|
+|   |FR5.8.1   |`POST SKUITEMS` > Create and tag a SKU item with an RFID |
+|   |FR5.8.3   |`POST SKUITEMS` > Store a SKU item |
+|   |FR6.10   |`DELETE SKUITEMS` > Remove SKU item from warehouse  |
 
 # Coverage of Non Functional Requirements
 
@@ -188,6 +192,6 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 | Non Functional Requirement | Test name |
 | -------------------------- | --------- |
 |                     NFR2   |     get Item      |
-|                     NFR2   |     get internal order'      |
+|                     NFR2   |     get internal order      |
 |                     NFR2   |     set restock order    |
 |                     NFR2   |     get retun order     |
