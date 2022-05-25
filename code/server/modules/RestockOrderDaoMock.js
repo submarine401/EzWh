@@ -7,3 +7,4 @@ exports.delete_all_restock_order = jest.fn();
 exports.get_issued_restock_order = jest.fn();
 exports.get_all_restock_order = jest.fn();
 exports.get_restock_order_items = jest.fn();
+exports.create_restock_order_table=jest.fn();

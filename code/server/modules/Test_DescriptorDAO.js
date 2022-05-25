@@ -14,7 +14,7 @@ exports.create_test_descriptor_table =  () => {
             reject(err);
             return;
         }
-        resolve(true);
+        resolve("testdescriptors Table -> OK");
     });
  });
 }

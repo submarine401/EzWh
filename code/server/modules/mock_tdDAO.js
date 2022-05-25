@@ -4,3 +4,4 @@ exports.delete_test_descriptor=jest.fn();
 exports.get_TD=jest.fn();
 exports.get_TD_by_id=jest.fn();
 exports.deleteTestDescriptorData= jest.fn();
+exports.create_test_descriptor_table=jest.fn();
