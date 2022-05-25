@@ -37,7 +37,11 @@ Version:
      <report the here the dependency graph of the classes in EzWH, using plantuml or other tool>
 
 ![dependency1](/dependency_graph/dependencies1.jpg)
+<<<<<<< Updated upstream
 ![dependency_graph](/dependency_graph/dependency_graph_1.jpg)
+=======
+![dependency_graph](/dependency_graph/dependency_graph_v2.jpg)
+>>>>>>> Stashed changes
 
 
      
