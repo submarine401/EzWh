@@ -417,7 +417,6 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 |test internal order|testupdateIO||
 |test internal order|testupdateNullIO||
 
-# please do not write here
 ## Test cases for Internal Orders
 | Unit name | Jest test case |     |
 | --------- | -------------- | --- |
@@ -429,7 +428,7 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 |test restock order|update trasportnote of RSO||
 |test restock order|update state of RSO||
 |test restock order|update null RSO||
-# please do not write here
+
 ## Test cases for Return Orders
 | Unit name | Jest test case |     |
 | --------- | -------------- | --- |
@@ -442,7 +441,6 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 ### Code coverage report
 ![Full_code_coverage](./Covrage_screenshots/Total_test_coverage.png)
 
-# please do not write here
 
 
 
