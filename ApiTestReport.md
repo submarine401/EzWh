@@ -47,7 +47,7 @@ Version:
     Step1: DAO classes (including functions which perform query to the database) were
     tested together with service classes, which include some additional logic to manage positions, quantities, volumes, prices.
     In some cases, DAO classes show some dependency (for example: SKUitems are dependant
-    from SKUs, which are linked to Items); during stage 2 these dependencies were tested to
+    from SKUs, which are linked to Items); during stage 1 these dependencies were tested to
     ensure consistency.
     Step2: API classes were linked to service classes and tested at API level.
     
@@ -66,7 +66,7 @@ Version:
 |SKUItemDAO.js|none|Create SKUItem, Modify SKUItem, Modify SKUItem with wrong availability value, get array of SKUItem, get SKUItem by SKUID with available = 1, Get SKUItem by RFID, Get SKUItem - unexistent RFID, GET SKUItem by SKUId with available = 1 - unexistent SKUid|
 |UserDAO.js|mock_userDAO.js|check password, checking password of a user with unexisting type, Get suppliers, get users except managers, Post newUser correct version, Post user with short password (less than 8 characters), post user with unexpected type,modify a normal user, Delete a normal user (NO MANAGER), delete unexisting user, delete with unexisting type, delete all users|
 |PositionDao.js|PositionDaoMock.js|get Positions, add position, modify position, modify position id, delete position|
-|RestockOrdersDao.js|RestockOrdersDaoMock.js|(NOTE: "RSO" stands for Restock Order). Get restock order, get not existent RSO, get RSO with ID less than one, set empty Restock Order, test set empty RSO, update transportnote of RSO, update state of RSO, update null RSO|
+|RestockOrdersDao.js|RestockOrdersDaoMock.js|(NOTE: "RSO" stands for Restock Order). Get restock order, get not existent RSO, get RSO with ID less than one, set empty Restock Order, test set empty RSO, update transportnote of RSO, update state of RSO, update null RSO,delete restock order by ID|
 |ReturnOrdersDao.js|ReturnOrdersDaoMock.js|(NOTE: "RO" stands for "Return Order"). Get return order, get not existent RO, get wrong id type for RO, set empty RO, set RO|
 |Test_DescriptorDAO.js|none|get Test Descriptor|
 |Test_ResultDAO.js|none|Get Test Result|
