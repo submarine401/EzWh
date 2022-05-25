@@ -12,9 +12,9 @@ describe('POST SKUITEMS',() =>{
   before(async function(){
     await agent.delete('/api/allskuitems/');
   });
-  post_SKUItem(201,"777777",2,"2021/03/19");
-  post_SKUItem(201,"12345678",2,"2020/05/11");
-  post_SKUItem(201,"9876543210",2,"2022/10/01");
+  post_SKUItem(201,"777777",1,"2021/03/19");
+  post_SKUItem(201,"12345678",1,"2020/05/11");
+  post_SKUItem(201,"9876543210",1,"2022/10/01");
   post_SKUItem(404,"777777",78,"2021/03/19"); //unexistent SKU
   post_SKUItem(422,9,"2021/03/19");   //missing one parameter
 });

@@ -6,34 +6,12 @@ chai.should();
 const app = require('../server');
 var agent = chai.request.agent(app);
 
-describe('TEST SESSIONS', () =>{
-  Sessions(200,'managerSessions','manager1@ezwh.com','testpassword','manager');
-  Sessions(422,'managerSessions','manager1@ezwh.com','testpassword','clerk'); //wrong type
-  Sessions(404,'managerSessions','manager1@ezwh.com','hellohellohello','manager'); //wrong password
-  
-  Sessions(200,'clerkSessions','clerk1@ezwh.com','testpassword','clerk');
-  Sessions(422,'clerkSessions','clerk1@ezwh.com','testpassword','customer'); //wrong type
-  Sessions(404,'clerkSessions','clerk1@ezwh.com','hellohellohello','clerk'); //wrong password
-  
-  Sessions(200,'deliveryEmployeeSessions','deliveryEmployee1@ezwh.com','testpassword','deliveryEmployee');
-  Sessions(422,'deliveryEmployeeSessions','deliveryEmployee1@ezwh.com','testpassword','clerk'); //wrong type
-  Sessions(404,'deliveryEmployeeSessions','deliveryEmployee1@ezwh.com','hellohellohello','deliveryEmployee'); //wrong password
-  
-  Sessions(200,'customerSessions','customer1@ezwh.com','testpassword','customer');
-  Sessions(422,'customerSessions','customer1@ezwh.com','testpassword','clerk'); //wrong type
-  Sessions(404,'customerSessions','customer1@ezwh.com','hellohellohello','customer'); //wrong password
-  
-  Sessions(200,'qualityEmployeeSessions','qualityEmployee1@ezwh.com','testpassword','qualityEmployee');
-  Sessions(422,'qualityEmployeeSessions','qualityEmployee1@ezwh.com','testpassword','clerk'); //wrong type
-  Sessions(404,'qualityEmployeeSessions','qualityEmployee1@ezwh.com','hellohellohello','qualityEmployee'); //wrong password
-});
-
 describe('test newUser API', () =>{
   before(async function(){
     await agent.delete('/api/allusers')
   });
   post_user(201,'alex','jump','alexj@ezwh.com','abcdefghilmn','customer');
-  post_user(201,'user','user','user2@ezwh.com','aaaaaaaaaaaaaa','manager');
+  post_user(422,'user','user','user2@ezwh.com','aaaaaaaaaaaaaa','manager');
   post_user(201,'user','user','user3@ezwh.com','bbbbbbbbbbbbbb','qualityEmployee');
   post_user(201,'user','user','user4@ezwh.com','cccccccccccccc','clerk');
   post_user(409,'Riccardo','Rossi','alexj@ezwh.com','password_di_prova','customer');
@@ -50,15 +28,6 @@ describe('test PUT user API', () =>{
   put_user(422,'manager1@ezwh.com','manager','supplier'); //trying to modify manager rights
   put_user(422,'qualityEmployee1@ezwh.com','customer','somethingstrange'); //unexpected type
   put_user(422,'qualityEmployee1@ezwh.com','qualityEmployee','qualityEmployee'); //oldType = newType
-});
-
-describe('Test Sessions',() =>{
-  Sessions(200,'managerSessions','manager1@ezwh.com','testpassword');
-  Sessions(200,'supplierSessions','supplier1@ezwh.com','testpassword');
-  Sessions(200,'deliveryEmployeeSessions','deliveryEmployee1@ezwh.com','testpassword');
-  Sessions(200,'qualityEmployeeSessions','qualityEmployee1@ezwh.com','testpassword');
-  Sessions(200,'managerSessions','user2@ezwh.com','aaaaaaaaaaaaaa');
-
 });
 
 describe ('get suppliers', () =>{
@@ -147,33 +116,5 @@ function put_user(expectedHTTPStatus,username,oldParam,newParam){
     }).catch(function(err){
       done(err);
     });
-  });
-}
-
-function Sessions(expectedHTTPStatus,sessionType,user,password,type){
-  it('Checking infos', (done) =>{
-    const obj = {
-      username : user,
-      password : password,
-      type:type
-    }
-    if(user !== undefined && password !==undefined){
-      agent.post('/api/'+sessionType)
-      .send(obj)
-      .then(function(result){
-        result.should.have.status(expectedHTTPStatus);
-        done();
-      }).catch(function(err){
-        done(err);
-      });
-    }else{
-      agent.post('/api/'+sessionType) //do not send the object
-      .then(function(result){
-        result.should.have.status(expectedHTTPStatus);
-        done();
-      }).catch(function(err){
-        done(err);
-      });
-    }
   });
 }
