@@ -173,7 +173,7 @@ describe("add sku", () => {
 });
 
 
-describe("modify position", () => {
+describe("modify sku", () => {
     beforeEach(async () => {
         await dao.delete_sku_data();///making it drop table
         await dao.create_sku_table(); ////temporary

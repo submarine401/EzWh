@@ -151,7 +151,7 @@ describe("add sku", () => {
         dao.load_SKUs.mockReset();
         dao.load_SKUs.mockReturnValueOnce([]);
     })
-    test('add position', async () => {
+    test('add sku', async () => {
         const sku =  {
             "description" : "a new sku",
             "weight" : 100,

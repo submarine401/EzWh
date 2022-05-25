@@ -464,3 +464,14 @@ Save an item (id: int, description: str, price: flaot, supplierId: int, idSku: i
 ![screenshot1](./Covrage%20screenshots/RO5.jpg)
 
 # please do not write here
+
+
+
+## Test cases for SKU
+| Unit name | Jest test case |     |
+| --------- | -------------- | --- |
+|Sku |create sku||
+|Sku |modify sku without position||
+|Sku |add position to sku||
+|Sku |modify sku with position||
+|Sku |modify position of sku||

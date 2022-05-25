@@ -58,12 +58,31 @@ Version:
 |--|--|--|
 |ItemDao.js|None|adding a new item|
 |skuDao.js|None|get sku by id|
-||||
+|PositionService.js && Position.js|PositionDaoMock.js|get positions, add position, modify position|
+|SKU.js|None|create sku, modify sku without position, add position to sku, modify sku with position, modify position of sku|
 
 ## Step 2
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
 |ItemDao.js && skuDao.js ||adding a new item with integeration test'|
+|PositionService.js && Position.js && PositionDao.js|None|get positions, add position, modify position, delete position|
+
+## Step 3
+| Classes  | mock up used |Jest test cases |
+|--|--|--|
+|SkuService.js && <br>SKU.js &&<br> PositionService.js && <br>Position.js && <br>PositionDao.js && TestDescriptorDAO.js| SkuDaoMock.js | get sku, add sku, modify sku|
+|PositionApi.js && PositionService.js && Position.js && PositionDao.js|None|get positions, add position, modify position, delete position|
+
+
+## Step 4
+| Classes  | mock up used |Jest test cases |
+|--|--|--|
+|SkuService.js && <br>SkuDao.js && <br>SKU.js &&<br> PositionService.js && <br>Position.js && <br>PositionDao.js && TestDescriptorDAO.js|None|get sku, add sku, modify sku, delete sku|
+
+## Step 5
+| Classes  | mock up used |Jest test cases |
+|--|--|--|
+|SKUapi.js && <br>SkuService.js && <br>SkuDao.js && <br>SKU.js &&<br> PositionService.js && <br>Position.js && <br>PositionDao.js && TestDescriptorDAO.js|None|get sku, add sku, modify sku, delete sku|
 
 
 

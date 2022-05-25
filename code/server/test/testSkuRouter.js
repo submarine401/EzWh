@@ -52,8 +52,12 @@ describe('test SKU apis', () => {
     createPosition(position, 201);
 
     modifySku(1, newValues, 200);
+    modifySku(2, newValues, 404);
     modifySkuPosition(1, position["positionID"], 200);
+    modifySkuPosition(2, position["positionID"], 404);
+    modifySkuPosition(1, "111122223333", 404);
     deleteSku(1, 204);
+    deleteSku(1, 422);
     // modifySku(position["positionID"], newValues, 404);
     // modifySkuID(position["positionID"], newID, 404);
     // deleteSku(newID["newPositionID"], 422);
@@ -92,7 +96,6 @@ function getSku(expectedHTTPStatus, id, expectedBody) {
     it('get sku', function(done) {
         agent.get('/api/skus/' + id)
             .then((res) => {
-                console.log(res.body);
                 res.should.have.status(expectedHTTPStatus);
                 res.body.id.should.equal(expectedBody.id);
                 res.body.description.should.equal(expectedBody.description);

@@ -4,7 +4,7 @@ const positionService = new PositionService(dao);
 const Position = require('../Position');
 
 
-describe('get Positions', ()=>{
+describe('get positions', ()=>{
     beforeEach(async ()=>{
         await dao.delete_position_data();
         await dao.store_position(new Position({
@@ -30,7 +30,7 @@ describe('get Positions', ()=>{
         
     });
 
-    test('get Positions', async () => {
+    test('get positions', async () => {
         let res = await positionService.get_all_position();
         expect(res[0]).toEqual({
             positionID:"800234543412",
@@ -54,12 +54,6 @@ describe('get Positions', ()=>{
         });
     });
 });
-//     testItem(1,item1);
-//     testItem(2,item2);
-//     async function testItem(i,item) {
-//         test('get Item', async () => {});
-//         });
-//     }
 
 describe("add position", () => {
     beforeEach(async () => {
@@ -97,16 +91,6 @@ describe("modify position", () => {
     beforeEach(async () => {
         await dao.delete_position_data();
         await dao.create_position_table();
-        // await dao.store_position(new Position({
-        //     positionID:"800234543412",
-        //     aisleID: "8002",
-        //     row: "3454",
-        //     col: "3412",
-        //     maxWeight: 1000,
-        //     maxVolume: 1000,
-        //     occupiedWeight: 300,
-        //     occupiedVolume:150
-        // }));
         await dao.store_position(new Position({
             positionID:"801234543412",
             aisleID: "8012",

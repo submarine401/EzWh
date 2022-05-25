@@ -42,7 +42,6 @@ router.get('/api/skus', (req, res)=>{
   
     skuService.return_SKU()
       .then(skus => {
-        console.log(skus);
         return res.status(200).json(skus);})
       .catch(err => {
       console.log(err);
