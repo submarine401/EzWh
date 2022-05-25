@@ -36,17 +36,20 @@ Version:
 
      <report the here the dependency graph of the classes in EzWH, using plantuml or other tool>
 
-![dependency1](../EzWh/dependency%20graph/dependencies1.jpg)
+![dependency1](/dependency_graph/dependencies1.jpg)
 ![dependency_graph](/dependency_graph/dependency_graph.jpg)
 
 
      
 # Integration approach
-
-    <Write here the integration sequence you adopted, in general terms (top down, bottom up, mixed) and as sequence
-    (ex: step1: class A, step 2: class A+B, step 3: class A+B+C, etc)> 
-    <Some steps may  correspond to unit testing (ex step1 in ex above), presented in other document UnitTestReport.md>
-    <One step will  correspond to API testing>
+    
+    The integration approach followed by our group was to test classes in a bottom up
+    approach. In detail, the procedure is described by the following steps.
+    Step1: DAO classes (including functions which perform query to the database) were
+    tested independently during unit testing.
+    Step2: DAO classes have been linked to service classes, most of which contain
+    functions which use DAO's functions and implement some small, intermediate logic;
+    Step3: API classes were linked to service classes and tested at API level.
     
 
 
@@ -144,4 +147,3 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 |                     NFR2   |     get internal order'      |
 |                     NFR2   |     set restock order    |
 |                     NFR2   |     get retun order     |
-
