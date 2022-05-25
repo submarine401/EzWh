@@ -1,7 +1,6 @@
 'use strict'
 
 const express = require ('express');
-const dataInterface = require ('../DataInterface');
 const dao = require('../modules/UserDAO');
 const UserService = require('../services/UserService');
 const userService = new UserService(dao);

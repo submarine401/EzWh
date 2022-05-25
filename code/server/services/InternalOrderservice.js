@@ -1,4 +1,3 @@
-const dataInterface = require('../DataInterface');
 class InternalOrderservice {
     dao;
 
