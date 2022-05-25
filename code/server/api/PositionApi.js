@@ -1,8 +1,6 @@
 'use strict'
 
 const express = require('express');
-const SKU = require('../SKU');
-const Position = require('../Position');
 const PositionService = require('../services/PositionService');
 
 let router = express.Router();

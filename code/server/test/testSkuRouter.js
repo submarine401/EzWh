@@ -7,7 +7,7 @@ const app = require('../server');
 var agent = chai.request.agent(app);
 
  
-describe('test SKU apis', () => {
+describe('test SKU API', () => {
     // beforeEach(async () => {
     //     await agent.delete('/api/allUsers');
     // })
@@ -49,7 +49,7 @@ describe('test SKU apis', () => {
         "testDescriptors" : []
     });
 
-    createPosition(position, 201);
+    createPosition(position);
 
     modifySku(1, newValues, 200);
     modifySku(2, newValues, 404);
@@ -154,17 +154,7 @@ function deleteSku(id, expectedHTTPStatus) {
     });
 }
 
-function createPosition(position, expectedHTTPStatus) {
-    it('create new position', function(done) {
-        
-        agent.post('/api/position')
-            .send(position)
-            .then((res) => {
-                res.should.have.status(expectedHTTPStatus);
-                done();
-            }).catch((err)=>{
-                done(err);
-            })
-    });
+function createPosition(position) {
+    agent.post('/api/position').send(position);
 }
 
