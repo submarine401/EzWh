@@ -169,7 +169,7 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 |UC11-1|FR7|`test Item apis` >  adding a new item, Deleting item|             
 |UC9-1|FR6|`test Internal order apis` > adding a new internal order, Deleting internal order,|             
 |UC5|FR5|`test Restockorder apis` > getting restockorder data from the system, adding a new restock order, Deleting restock order|             
-||UC4|FR1.2|`test DELETE user API` > Delete a user|
+|UC4|FR1.2|`test DELETE user API` > Delete a user|
 ||FR1.3   |get users except managers/admins` > Search for all users(except for managers) |
 |UC4|FR1.5| `test newUser API` > Authorize access to functions to specific actors according to access rights|     
 |UC2| FR3.1|`test Position API` >  create new position, modify position, modify position id, delete position, get positions|
