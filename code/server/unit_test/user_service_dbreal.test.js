@@ -2,7 +2,7 @@ const UserService = require ('../services/UserService');
 const dao = require('../modules/UserDAO');
 const user_service = new UserService(dao);
 describe("CHECK PASSWORD TEST",()=>{
-  test('checking password correctness',async()=>{
+  test('check password',async()=>{
     let res = await user_service.check_passw('supplier1@ezwh.com','testpassword','supplier');
     expect(res).toEqual({
       id : 5,
@@ -52,7 +52,7 @@ describe('Get methods', () =>{
 
 describe('POST methods', ()=>{
   
-  test('POST newUser correct', async() =>{
+  test('POST newUser correct version', async() =>{
     let res = await user_service.setUser(
       {
       "username":"Marco@ezwh.com",
@@ -113,7 +113,7 @@ describe('DELETE methods', () =>{
     expect(res).toEqual(204);
   });
   
-  test('DELETE with wrong parameters (unexisting user)', async() =>{
+  test('DELETE unexisting user', async() =>{
     const user = 'deliveryEmployee1@ezwh.com';
     const type = 'customer';
     let res = await user_service.delete_user(user,type);

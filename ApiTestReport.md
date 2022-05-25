@@ -36,15 +36,20 @@ Version:
 
      <report the here the dependency graph of the classes in EzWH, using plantuml or other tool>
 
-![dependency1](../EzWh/dependency%20graph/dependencies1.jpg)
+![dependency1](/dependency_graph/dependencies1.jpg)
+![dependency_graph](/dependency_graph/dependency_graph.jpg)
+
 
      
 # Integration approach
-
-    <Write here the integration sequence you adopted, in general terms (top down, bottom up, mixed) and as sequence
-    (ex: step1: class A, step 2: class A+B, step 3: class A+B+C, etc)> 
-    <Some steps may  correspond to unit testing (ex step1 in ex above), presented in other document UnitTestReport.md>
-    <One step will  correspond to API testing>
+    
+    The integration approach followed by our group was to test modules and services in a bottom up approach. In detail, the procedure is described by the following steps.
+    Step1: DAO classes (including functions which perform query to the database) were
+    tested together with service classes, which include some additional logic to manage positions, quantities, volumes, prices.
+    In some cases, DAO classes show some dependency (for example: SKUitems are dependant
+    from SKUs, which are linked to Items); during stage 1 these dependencies were tested to
+    ensure consistency.
+    Step2: API classes were linked to service classes and tested at API level.
     
 
 
@@ -56,10 +61,17 @@ Version:
 ## Step 1
 | Classes  | mock up used |Jest test cases |
 |--|--|--|
-|ItemDao.js|None|adding a new item|
-|skuDao.js|None|get sku by id|
 |PositionService.js && Position.js|PositionDaoMock.js|get positions, add position, modify position|
 |SKU.js|None|create sku, modify sku without position, add position to sku, modify sku with position, modify position of sku|
+|ItemService.js|ItemDaoMock.js|adding a new item, get item by ID (three tests: existent ID, unexistent ID and ID < 0), update item, update NULL item, Get all items|
+|SKUItemService.js|none|Create SKUItem, Modify SKUItem, Modify SKUItem with wrong availability value, get array of SKUItem, get SKUItem by SKUID with available = 1, Get SKUItem by RFID, Get SKUItem - unexistent RFID, GET SKUItem by SKUId with available = 1 - unexistent SKUid|
+|UserService.js|mock_userDAO.js|check password, checking password of a user with unexisting type, Get suppliers, get users except managers, Post newUser correct version, Post user with short password (less than 8 characters), post user with unexpected type,modify a normal user, Delete a normal user (NO MANAGER), delete unexisting user, delete with unexisting type, delete all users|
+|RestockOrdersService.js|RestockOrdersDaoMock.js|(NOTE: "RSO" stands for Restock Order). Get restock order, get not existent RSO, get RSO with ID less than one, set empty Restock Order, test set empty RSO, update transportnote of RSO, update state of RSO, update null RSO,delete restock order by ID|
+|ReturnOrdersService.js|ReturnOrdersDaoMock.js|(NOTE: "RO" stands for "Return Order"). Get return order, get not existent RO, get wrong id type for RO, set empty RO, set RO|
+|Test_DescriptorService.js|none|get Test Descriptor|
+|Test_ResultService.js|none|Get Test Result|
+
+
 
 ## Step 2
 | Classes  | mock up used |Jest test cases |
@@ -161,4 +173,3 @@ Report also for each of the scenarios the (one or more) API Mocha tests that cov
 |                     NFR2   |     get internal order'      |
 |                     NFR2   |     set restock order    |
 |                     NFR2   |     get retun order     |
-
