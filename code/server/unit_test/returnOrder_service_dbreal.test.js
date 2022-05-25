@@ -44,7 +44,7 @@ describe("test return order", () => {
     testgetROWithIdlessthanOne(0)
 
     async function testgetRO(i,RO) {
-        test('get retun order', async () => {
+        test('get return order', async () => {
             let res = await returnOrderservice.getReturnOrderById(i);
             prod = []
             RO.products.map((x)=>{prod.push(JSON.stringify(x))})
@@ -92,4 +92,3 @@ describe("test return order", () => {
         });
     }
 });
-
