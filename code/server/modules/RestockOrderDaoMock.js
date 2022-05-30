@@ -1,0 +1,10 @@
+exports.insert_restock_order_table = jest.fn();
+exports.modify_restock_order_table = jest.fn();
+exports.add_transportnote_to_restock_order_table = jest.fn();
+exports.add_skuitems_to_restock_order_table = jest.fn();
+exports.delete_restock_order = jest.fn();
+exports.delete_all_restock_order = jest.fn();
+exports.get_issued_restock_order = jest.fn();
+exports.get_all_restock_order = jest.fn();
+exports.get_restock_order_items = jest.fn();
+exports.create_restock_order_table=jest.fn();
