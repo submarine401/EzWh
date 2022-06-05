@@ -3,7 +3,7 @@
 
 class SKUItem{
   dayjs = require('dayjs');
-  const sqlite=require('sqlite3');
+   sqlite=require('sqlite3');
     constructor(id, RFID, dateOfStock){
         
         this.dbHelper = dbHelper;
