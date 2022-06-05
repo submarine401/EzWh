@@ -65,8 +65,8 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 reject(err);
                 return;
             }
-            if(typeof rfid === 'undefined'){
-                resolve(404);
+            if(typeof rfid === undefined){
+                resolve(422);
               } else {
                 resolve(`Test Result with id ${id} is deleted`);}
         });
@@ -77,16 +77,21 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.get_TR = (rfid, id) => { 
       return new Promise((resolve,reject)=>{
       
-        if(id===undefined){
-                  const sql = "SELECT * FROM testresults WHERE rfid = ?";
+        if(id===undefined ){
+                  const sql = "SELECT * FROM testresults WHERE rfid = ?  ";
                   db.all(sql,[rfid],(err,rows)=>{
+                        console.log(rfid)
+                        console.log(rows)
                       if(err){
-                        reject(err); 
-                        return;
-                      }else if(rows.length===0){
-                        resolve(404);
-                        return;
-                      }else{
+                          reject(err); 
+                          return;
+                          }else if(rfid===null){
+                            resolve(422)
+                            return;
+                          } else if(rows.length===0){
+                               resolve(404)
+                               return;
+                           }else{
                     
                         const  testresults = rows.map((tr)=>(
                           {
@@ -101,21 +106,26 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                   });
               }else{
                   const sql = "SELECT * FROM testresults where rfid = ? AND id = ?";
-                  db.all(sql,[rfid, id],(err,rows)=>{
+                  db.get(sql,[rfid, id],(err,rows)=>{
                   
-                      if(err ){
+                      if(err){
                         reject(err); 
                         return;
                       }
-                      const testresults = rows.map((tr)=>(
-                      {
-                        id : tr.id,
-                        idTestDescriptor : tr.idTestDescriptor,
-                        Date : tr.Date,
-                        Result : tr.Result 
-                       }));
-                       console.log(testresults);
+                      console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+                      console.log(rows)
+                      if(rows === undefined){
+                        resolve(404);
+                        return ;
+                      }else{
+                      const testresults ={
+                        id : rows.id,
+                        idTestDescriptor : rows.idTestDescriptor,
+                        Date : rows.Date,
+                        Result : rows.Result 
+                       };
                       resolve(testresults);
+                      }
                     
                   });
  
