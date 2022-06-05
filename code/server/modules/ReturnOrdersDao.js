@@ -110,19 +110,19 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         return new Promise((resolve,reject)=>{
             if(id >=1){
                         const sql = "SELECT * FROM returnorder where id = ? ";
-                    db.all(sql,[id],(err,rows)=>{
+                    db.get(sql,[id],(err,rows)=>{
                         if(err){
                             reject(err); 
                             return;
                             }
-                        const internalorders = rows.map((ro)=>(
+                        const internalorders =
                         {
-                            id : ro.id,
-                            returnDate : ro.date,
-                            products : JSON.parse(ro.products),
-                            restockOrderId : ro.restockorderid,
+                            id : rows.id,
+                            returnDate : rows.date,
+                            products : JSON.parse(rows.products),
+                            restockOrderId : rows.restockorderid,
                           
-                        }));
+                        };
                         if(internalorders.length ===0)
                             resolve(0)
                         else

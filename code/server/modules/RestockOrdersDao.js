@@ -41,24 +41,28 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
         return new Promise ((resolve,reject)=>{
             if(rso !== undefined){
+              if(rso.newState == null){
+                resolve (422);
+              }
             const sql = 'UPDATE restockorder SET state = ? WHERE id = ?';
             db.run(sql,[rso.newState,id], (err)=>{
                 if(err)
                 {
-                    reject(err);
-                    return;
+                  reject(err);
+                  return;
                 }
                 else
                 {
 
-                    resolve(`Restock order with id ${id} is updated`);
+                  resolve(`Restock order with id ${id} is updated`);
                 }
 
             });
         }
         else
         {
-            resolve(-1)
+          
+          resolve(-1);
         }
         });
     }
@@ -73,13 +77,12 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
             db.run(sql,[g,id], (err)=>{
                 if(err)
                 {
-                    reject(err);
-                    return;
+                  reject(err);
+                  return;
                 }
                 else
                 {
-
-                    resolve(`Restock order with id ${id} is updated`);
+                  resolve(`Restock order with id ${id} is updated`);
                 }
 
             });
@@ -172,7 +175,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
             return new Promise ((resolve,reject)=>{
                 if(id >=1){
                 const sql = "SELECT * FROM restockorder where id = ?";
-                db.all(sql,[id],(err,rows)=>{
+                db.get(sql,[id],(err,rows)=>{
                     if(err)
                     {
                         reject(err);
@@ -180,19 +183,26 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                     }
                     else
                     {
-                        if(rows.length === 0)
+                      console.log("ciao\n");
+                      console.log(rows)
+                        if(rows === undefined){
                             resolve(0);
+                            return;
+                        } else if(rows.state == null){
+                          resolve(422);
+                          return;
+                        }
                         else
                         {
-                            const resul = rows.map((rso)=>({
-                                id : rso.id,
-                                issueate : rso.issueate,
-                                products : rso.products,
-                                supplierId : rso.supplierId,
-                                skuItems : rso.skuItems,
-                                state : rso.state,
-                                transportNote : rso.transportNote
-                            }));
+                            const resul = {
+                                id : rows.id,
+                                issueate : rows.issueate,
+                                products : rows.products,
+                                supplierId : rows.supplierId,
+                                skuItems : rows.skuItems,
+                                state : rows.state,
+                                transportNote : rows.transportNote
+                            };
 
                             resolve(resul);
                         }
@@ -283,14 +293,14 @@ exports.get_all_restock_order = ()=>
                 const resul = rows.map((ro)=>{
                   if (ro.state === 'ISSUED')
                   orgObject  = { id : ro.id,
-                    issueate : ro.issueate,
+                    issueDate : ro.issueate,
                     supplierId : ro.supplierId,
                     state : ro.state,
                     transportNote : ro.transportNote}
                   else
                   {
                   orgObject ={ id : ro.id,
-                        issueate : ro.issueate,
+                        issueDate : ro.issueate,
                         products : ro.products,
                         supplierId : ro.supplierId,
                         skuItems : ro.skuItems,
