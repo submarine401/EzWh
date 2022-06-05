@@ -66,17 +66,15 @@ router.get('/api/items',async (req,res)=>{
         }
         
         const id = req.params.id
-        if(id >0)
+        if(id >= 0)
         {
   
           const results = await itemservice.getItembyId(id).then((suc)=> {if(suc!==0) return itemservice.modifyItem(id,i); else return suc }, (error)=> {return 0;});
-          
           if(results !== 0 )
-          return res.status(200).json(results);
+            return res.status(200).json(results);
           else
-          return res.status(404).json({error : "Item not existing)"});
+            return res.status(404).json({error : "Item not existing)"});
           
-  
         }
         else 
         {
@@ -95,10 +93,10 @@ router.get('/api/items',async (req,res)=>{
     try{
       const id = req.params.id
      
-      if( id > 0 ){
+      if( id >= 0 ){
         const results = await itemservice.deleteItem(id);
         
-    return res.status(204).json(results);
+        return res.status(204).json(results);
        
       }
       return res.status(422).json({error : "INVALID IO INPUT"});
@@ -116,14 +114,14 @@ router.get('/api/items',async (req,res)=>{
       {     
   
         const id = req.params.id
-        if( id >=1    )
+        if( id >= 1)
         {
         
-        const results = await itemservice.getItembyId(id);
-        if(results !==0)
-        return res.status(200).json(results);
-        else
-        return res.status(404).json("no item associated to id");
+          const results = await itemservice.getItembyId(id);
+          if(results !==0)
+            return res.status(200).json(results);
+          else
+            return res.status(404).json("no item associated to id");
         }
         else
         {

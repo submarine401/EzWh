@@ -110,16 +110,17 @@ exports.get_item_by_id = (id)=>{
                         skuid : i.skuid,
                         supplierid : i.supplierid
                     }));
-                    if(id>0)
+                    if(id >= 0)
                     {
-                    if(internalorders.length === 0)
+                      if(internalorders.length === 0)
                         resolve(0);
-                    else
+                      else{
                         resolve(internalorders);
+                      }
                     }
-                    else
-                    resolve(-1);
-
+                    else{
+                      resolve(-1);
+                    }
                 }
                 });
             

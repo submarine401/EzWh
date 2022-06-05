@@ -96,7 +96,7 @@
   exports.create_user_table = function() {
       let db_ref= this;
       return new Promise((resolve, reject) => {
-          const sql_query = 'CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, username text, password text, name text, surname text, type text);';
+          const sql_query = 'CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY, username text, password text, name text, surname text, type text);';
           const sql_query2 = 'INSERT INTO users (id, username, password, name, surname, type) VALUES (?, ?, ?, ?, ?, ?)';
           db.serialize(function(){
             db.run(sql_query, [], function (err) {
