@@ -89,42 +89,43 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         });
     }
 
-    exports.add_skuitems_to_restock_order_table = (id,rso,oldskuitems)=>{
+    exports.add_skuitems_to_restock_order_table = (id,rso)=>{
      
         // add skuitem
-        let prods = [];
-        rso.skuItems.map((x)=>{
-            prods.push(JSON.stringify(x))
-        });
-    
-            let old ;
-            let newskuitems ;
+        // let prods = [];
+        // rso.skuItems.map((x)=>{
+        //     prods.push(JSON.stringify(x))
+        // });
+        let g = JSON.stringify(rso.skuItems)
+            // let old ;
+            // let newskuitems ;
             
-            if(oldskuitems[0].skuItems !=="")
-            {
-                old = oldskuitems[0].skuItems;
-                old = JSON.parse(old)
-            }
+            // if(oldskuitems[0].skuItems !=="")
+            // {
+            //     old = oldskuitems[0].skuItems;
+            //     old = JSON.parse(old)
+            // }
             
             
             
             return new Promise ((resolve,reject)=>{
-                let pro = [];
-                rso.skuItems.map((x)=>{pro.push(JSON.stringify(x))});
-                let g ;
-                if(prods.length !== 0 )
-                {
+                // let pro = [];
+                // rso.skuItems.map((x)=>{pro.push(JSON.stringify(x))});
+                // let g ;
+                // if(prods.length !== 0 )
+                // {
                 
-                pro.forEach((x)=>{
-                    prods.push(x)
-                })
-                 g = JSON.stringify(prods)
-                }
-                else
-                {
-                 g = JSON.stringify(pro)
-                }
+                // pro.forEach((x)=>{
+                //     prods.push(x)
+                // })
+                //  g = JSON.stringify(prods)
+                // }
+                // else
+                // {
+                //  g = JSON.stringify(pro)
+                // }
     
+
                 const sql = 'UPDATE restockorder SET skuitems = ? WHERE id = ?';
                 
                 db.run(sql,[g,id], (err)=>{

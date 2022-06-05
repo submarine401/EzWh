@@ -184,10 +184,11 @@ function testEditRestockOrderSkuItems(agent, addskuitems, expCode){
             let thisskuitems = addskuitems;
             thisskuitems[0].SKUId = idsku[thisskuitems[0].SKUId];
             thisskuitems[1].SKUId = idsku[thisskuitems[1].SKUId];
+          
             console.log(thisskuitems);
             agent.get('/api/restockOrders')
             .then(function(res){
-                idsearch = res.body[0].id;
+                idsearch = res.body[0]["id"];
                 //console.log("this is skuitems ", thisskuitems);
                 agent.put('/api/restockOrder/'+idsearch+'/skuItems')
                 .send({"skuItems":thisskuitems})

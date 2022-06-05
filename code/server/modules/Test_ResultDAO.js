@@ -77,21 +77,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.get_TR = (rfid, id) => { 
       return new Promise((resolve,reject)=>{
       
-<<<<<<< HEAD
-        if(id===undefined ){
-                  const sql = "SELECT * FROM testresults WHERE rfid = ?  ";
-                  db.all(sql,[rfid],(err,rows)=>{
-                        console.log(rfid)
-                        console.log(rows)
-                      if(err){
-                          reject(err); 
-                          return;
-                          }else if(rows.length===0){
-                              console.log("aaaaaaaaaaaaaaaaaaaadkjanadbadbyvjhvhjvgtu")
-                              resolve(404);
-                              return;
-                          }else{
-=======
         if(id===undefined){
                   const sql = "SELECT * FROM testresults WHERE rfid = ?";
                   db.all(sql,[rfid],(err,rows)=>{
@@ -102,7 +87,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                         resolve(404);
                         return;
                       }else{
->>>>>>> a522033c98caab29d5ab06c08f48c46c03616d56
                     
                         const  testresults = rows.map((tr)=>(
                           {
@@ -130,12 +114,8 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                         Date : tr.Date,
                         Result : tr.Result 
                        }));
-<<<<<<< HEAD
-                      resolve(testresults[0]);
-=======
                        console.log(testresults);
                       resolve(testresults);
->>>>>>> a522033c98caab29d5ab06c08f48c46c03616d56
                     
                   });
  

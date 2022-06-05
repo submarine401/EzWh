@@ -108,13 +108,15 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     
     exports.get_all_RO_by_id = (id)=>{
         return new Promise((resolve,reject)=>{
-            if(id >=1){
+            if(id >=0){
                         const sql = "SELECT * FROM returnorder where id = ? ";
                     db.get(sql,[id],(err,rows)=>{
                         if(err){
                             reject(err); 
                             return;
                             }
+                        if(rows !== undefined)
+                        {
                         const internalorders =
                         {
                             id : rows.id,
@@ -123,10 +125,12 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                             restockOrderId : rows.restockorderid,
                           
                         };
-                        if(internalorders.length ===0)
-                            resolve(0)
+                        resolve(internalorders);
+                    }
+                        
+                        
                         else
-                            resolve(internalorders);
+                        resolve(0)   
                     
                     });
 

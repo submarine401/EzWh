@@ -124,7 +124,7 @@ router.post('/api/returnOrder',async (req,res)=>{
       {     
   
         const id = req.params.id
-        if( id > 0 )
+        if( id >= 0 )
         {
         const results = await returnOrderservice.getReturnOrderById(id);
         if(results !==0 )

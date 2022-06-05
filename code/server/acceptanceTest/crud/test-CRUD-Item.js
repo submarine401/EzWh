@@ -50,7 +50,7 @@ function testItemCRUD(){
         items.testPostNewItem(agent, myitems[0], 201);
         items.testPostNewItem(agent, myitemsnotfound, 404);
         items.testGetAllItems(agent, 1, 200);
-        items.testGetItem(agent, 0, myitems[0], 200);
+        items.testGetItem(agent, 1, myitems[0], 200);
         items.testGetItemnotfound(agent, null, 422);
         items.testGetItemnotfound(agent, 100000000, 404);
         items.testEditItem(agent, 0, 'desc0', 99.99, myedititem, 200);

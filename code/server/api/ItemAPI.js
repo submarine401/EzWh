@@ -5,7 +5,8 @@ const Itemservice = require('../services/Itemservice')
 const db_SKU = require('../modules/SkuDao')
 const itemservice = new Itemservice(db);
 
-const SkuService = require('../services/SkuService')
+const SkuService = require('../services/SkuService');
+const { ResultWithContext } = require('express-validator/src/chain');
 const skuService = new SkuService(db_SKU);
 
 
@@ -114,11 +115,11 @@ router.get('/api/items',async (req,res)=>{
       {     
   
         const id = req.params.id
-        if( id >= 1)
+        if( id >= 0)
         {
         
           const results = await itemservice.getItembyId(id);
-          if(results !==0)
+          if(results != -1)
             return res.status(200).json(results);
           else
             return res.status(404).json("no item associated to id");

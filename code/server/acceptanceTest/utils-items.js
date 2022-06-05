@@ -59,13 +59,16 @@ function testGetItem(agent,itemid, myexpitem, expCode){
                 let idskus = ids.getIdSku();
                 let idsupp = ids.getIdSuppliers();
                 assert.equal(r.status, expCode);
+                console.log(r)
+                console.log("=====================================================================================================================================================================")
+
                 if (r.status == 200) {
-                    r.body.should.be.a('object');
-                    r.body.id.should.equal(itemid);
-                    r.body.description.should.equal(myexpitem.description);
-                    r.body.price.should.equal(myexpitem.price);
-                    r.body.SKUId.should.equal(idskus[myexpitem.SKUId]);
-                    r.body.supplierId.should.equal(idsupp[myexpitem.supplierId]);
+                    r.body[0].should.be.a('object');
+                    r.body[0]["id"].should.equal(itemid);
+                    r.body[0]["description"].should.equal(myexpitem.description);
+                    r.body[0]["price"].should.equal(myexpitem.price);
+                    r.body[0]["skuid"].should.equal(idskus[myexpitem.SKUId]);
+                    r.body[0]["supplierid"].should.equal(idsupp[myexpitem.supplierId]);
                 }
                 done();
             }).catch(err => done(err));

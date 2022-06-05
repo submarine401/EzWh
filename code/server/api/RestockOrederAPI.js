@@ -111,18 +111,23 @@ router.post('/api/restockOrder',async (req,res)=>{
         
         const id = req.params.id
         
-        const myresult = await restockOrderservice.getRestockOrderById(id);
+     //   const myresult = await restockOrderservice.getRestockOrderById(id);
         
         
         if(myresult ===0)
           return res.status(404).json({error : "no restock order associated to id"});
         else
         {
-          const old_skuitem = myresult;
+          // const old_skuitem = myresult;
           
-          const results2  = await restockOrderservice.addSkuItemToRestockOrder(id,rso,old_skuitem);
+          // const results2  = await restockOrderservice.addSkuItemToRestockOrder(id,rso,old_skuitem);
+          
+          // return res.status(200).json(results2);
+
+           const results2  = await restockOrderservice.addSkuItemToRestockOrder(id,rso);
           
           return res.status(200).json(results2);
+
         }
         
   
