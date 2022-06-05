@@ -23,10 +23,14 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
     try{
       const rfid = req.params.rfid;
+      console.log(rfid)
+      
 
-      if( rfid > 0 && typeof rfid === 'string') {
+      if( typeof rfid === 'string') {
           
         const t = await TestResultService.getTestResult(rfid);
+        console.log("TTTTTTTTTT")
+        console.log(t)
           
         if(t === 404){
           return res.status(404).json({error: "No skuItem found for this rfid"});
@@ -51,14 +55,16 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
     try{
       const rfid = req.params.rfid;
       const id = req.params.id;
-
-      if( rfid > 0 && typeof rfid === 'string'
+      console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeereeeeeeeeeeee")
+console.log(rfid, id)
+      if( typeof rfid === 'string'
        && id > 0 && typeof Number(id) === 'number' ) {
         
         
         const t = await TestResultService.getTestResult(rfid, id);
-
-        if(t.length===0) {
+        console.log("look her3errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrre")
+console.log(t)
+        if(t === undefined ) {
           return res.status(404).json({error: "No test result associated to id or no sku item associated to rfid"});
         } else {
           return res.status(200).json(t); 
@@ -129,7 +135,7 @@ console.log(td)
         
 
         if(id >0 && typeof Number(id) === 'number' && 
-                    rfid >0 && typeof rfid === 'string'){   
+                    typeof rfid === 'string'){   
           const t = await test_DescriptorService.getTestDescriptorsById(p.newIdTestDescriptor);
           const s = await SKU_item_service.search_by_rfid(rfid);
           const tr = await TestResultService.getTestResult(rfid, id);
@@ -159,7 +165,7 @@ console.log(td)
         const rfid = req.params.rfid;
         const id = req.params.id;
       if( id > 0 && typeof Number(id) === 'number' && 
-      rfid >0 && typeof rfid === 'string') {
+           typeof rfid === 'string') {
 
         const t = await TestResultService.getTestResult(rfid, id);
   

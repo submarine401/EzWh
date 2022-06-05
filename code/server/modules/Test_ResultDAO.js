@@ -6,7 +6,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.create_test_result_table = () => {
         return new Promise((resolve,reject)=>{
-        const sql = 'CREATE TABLE IF NOT EXISTS testresults (id integer PRIMARY KEY AUTOINCREMENT, rfid text, idTestDescriptor integer, Date text,Result boolean)';
+        const sql = 'CREATE TABLE IF NOT EXISTS testresults (id integer PRIMARY KEY , rfid text, idTestDescriptor integer, Date text,Result boolean)';
          db.run(sql, (err)=>{
             if(err){
                 reject(err);
@@ -77,14 +77,16 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.get_TR = (rfid, id) => { 
       return new Promise((resolve,reject)=>{
       
-        if(id===undefined){
+        if(id===undefined ){
                   const sql = "SELECT * FROM testresults WHERE rfid = ?  ";
                   db.all(sql,[rfid],(err,rows)=>{
-
+                        console.log(rfid)
+                        console.log(rows)
                       if(err){
                           reject(err); 
                           return;
                           }else if(rows.length===0){
+                              console.log("aaaaaaaaaaaaaaaaaaaadkjanadbadbyvjhvhjvgtu")
                               resolve(404);
                               return;
                           }else{
@@ -117,7 +119,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                         Result : tr.Result 
                         
                        }));
-                      resolve(testresults);
+                      resolve(testresults[0]);
                     
                   });
  
