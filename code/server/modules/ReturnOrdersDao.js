@@ -20,6 +20,11 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.insert_return_order_table = (ro)=>
     {
         return new Promise ((resolve,reject)=>{
+            if(ro.returnDate === null || ro.products === null || ro.restockOrderId === null){
+              resolve(422);
+              return;
+            }
+          
             if( ro !== undefined){
             let prods = [];
             ro.products.map((x)=>{

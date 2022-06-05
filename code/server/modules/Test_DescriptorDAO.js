@@ -108,20 +108,25 @@ exports.create_test_descriptor_table =  () => {
         
             const sql = "SELECT * FROM testdescriptors where id = ?";
 
-                db.all(sql,[id],(err,rows)=>{
+                db.get(sql,[id],(err,row)=>{
                         if(err){
                             reject(err); 
                             return;
                             }
-                        const testdescriptors = rows.map((t)=>(
-                        {
-                        id : t.id,
-                        name : t.name,
-                        procedureDescription : t.procedureDescription,
-                        idSKU : t.idSKU
-                        
-                }));
-                resolve(testdescriptors);
+                        else if(row === undefined){
+                          resolve(404)
+                        }
+                        else{
+                          const testdescriptors =
+                          {
+                            id : row.id,
+                            name : row.name,
+                            procedureDescription : row.procedureDescription,
+                            idSKU : row.idSKU
+                          };
+                          resolve(testdescriptors);
+                        }
+                
             });
                 
         });
