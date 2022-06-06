@@ -65,8 +65,8 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                 reject(err);
                 return;
             }
-            if(typeof rfid === undefined){
-                resolve(422);
+            if(typeof rfid === 'undefined'){
+                resolve(404);
               } else {
                 resolve(`Test Result with id ${id} is deleted`);}
         });
@@ -85,13 +85,11 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                       if(err){
                           reject(err); 
                           return;
-                          }else if(rfid===null){
-                            resolve(422)
-                            return;
-                          } else if(rows.length===0){
-                               resolve(404)
-                               return;
-                           }else{
+                          }else if(rows.length===0){
+                              console.log("aaaaaaaaaaaaaaaaaaaadkjanadbadbyvjhvhjvgtu")
+                              resolve(404);
+                              return;
+                          }else{
                     
                         const  testresults = rows.map((tr)=>(
                           {
@@ -106,27 +104,20 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                   });
               }else{
                   const sql = "SELECT * FROM testresults where rfid = ? AND id = ?";
-                  db.get(sql,[rfid, id],(err,rows)=>{
+                  db.all(sql,[rfid, id],(err,rows)=>{
                   
-                      if(err){
+                      if(err ){
                         reject(err); 
                         return;
                       }
-                      console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-                      console.log(rows)
-                      if(rows === undefined){
-                        resolve(404);
-                        return ;
-                      }else{
-                      const testresults ={
-                        id : rows.id,
-                        idTestDescriptor : rows.idTestDescriptor,
-                        Date : rows.Date,
-                        Result : rows.Result 
-                       };
-                      resolve(testresults);
-                      }
-                    
+                      const testresults = rows.map((tr)=>(
+                      {
+                        id : tr.id,
+                        idTestDescriptor : tr.idTestDescriptor,
+                        Date : tr.Date,
+                        Result : tr.Result 
+                       }));
+                      resolve(testresults[0]);                    
                   });
  
               }
