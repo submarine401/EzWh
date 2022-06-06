@@ -63,7 +63,6 @@ function testGetTestResultByRFID(agent, expCode, rfid){
         it('Get all test results associated to a certain rfid', function(done){
             agent.get('/api/skuitems/'+rfid+'/testResults')
             .then(function(res){
-                console.log(res.body)
                 let all = [];
                 res.should.have.status(expCode);
                 res.body.should.be.a('array');
