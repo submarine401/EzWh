@@ -20,7 +20,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.insert_into_test_result_table = (tr)  => {
     return new Promise ((resolve,reject)=>{ 
-        console.log(tr)
         const sql = 'INSERT INTO testresults (rfid, idTestDescriptor, Date, Result) VALUES(?,?,?,?)';
         db.run(sql,[tr.rfid, tr.idTestDescriptor , tr.Date, tr.Result], (err)=>{
             if(err)
@@ -80,9 +79,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         if(id===undefined ){
                   const sql = "SELECT * FROM testresults WHERE rfid = ?  ";
                   db.all(sql,[rfid],(err,rows)=>{
-                   
-                        console.log(rfid)
-                        console.log(rows)
+                 
                       if(err){
                           reject(err); 
                           return;

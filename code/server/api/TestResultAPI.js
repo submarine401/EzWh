@@ -23,8 +23,6 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
 
     try{
       const rfid = req.params.rfid;
-      console.log(rfid)
-      
       if(rfid==="null"){
         return res.status(422).json({error : "Unprocessable Entity"});
      
