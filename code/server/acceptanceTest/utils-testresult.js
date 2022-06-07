@@ -64,9 +64,10 @@ function testGetTestResultByRFID(agent, expCode, rfid){
             agent.get('/api/skuitems/'+rfid+'/testResults')
             .then(function(res){
                 let all = [];
+                
+                console.log("all tr for rfid", res.body);
                 res.should.have.status(expCode);
                 res.body.should.be.a('array');
-                console.log("all tr for rfid", res.body);
                 for(let i=0; i<res.body.length; i++){
                     all[i] = res.body[i].id;
                 }

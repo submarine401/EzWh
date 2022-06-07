@@ -27,15 +27,19 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
       
       if(rfid==="null"){
         return res.status(422).json({error : "Unprocessable Entity"});
-        console.log(rfid)
+     
       }else if( typeof rfid === 'string' || rfid!==null ) {
+        
+        const s = await SKU_item_service.search_by_RFID(rfid);
+
         const t = await TestResultService.getTestResult(rfid);
-        console.log("TTTTTTTTTT")
-        console.log(t)
+
           
-        if(t === 404){
+        if(s === 404){
           return res.status(404).json({error: "No skuItem found for this rfid"});
-        } else {
+        } else if(t===404){
+          return res.status(200).json([]);
+        }else{
           return res.status(200).json(t);
         } 
       } else {
@@ -55,16 +59,14 @@ router.get('/api/skuitems/:rfid/testResults', async (req, res)=>{
     try{
       const rfid = req.params.rfid;
       const id = req.params.id;
-      console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeereeeeeeeeeeee")
-console.log(rfid, id)
+ 
       if( typeof rfid === 'string'
        && id > 0 && typeof Number(id) === 'number' ) {
         
         
         const t = await TestResultService.getTestResult(rfid, id);
-        console.log("look her3errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrre")
-console.log(t)
-        if(t === undefined ) {
+     
+        if(t === undefined) {
           return res.status(404).json({error: "No test result associated to id or no sku item associated to rfid"});
         } else {
           return res.status(200).json(t); 

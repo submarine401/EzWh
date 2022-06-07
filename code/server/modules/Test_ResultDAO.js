@@ -80,6 +80,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         if(id===undefined ){
                   const sql = "SELECT * FROM testresults WHERE rfid = ?  ";
                   db.all(sql,[rfid],(err,rows)=>{
+                   
                         console.log(rfid)
                         console.log(rows)
                       if(err){
