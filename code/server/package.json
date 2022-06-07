@@ -30,6 +30,10 @@
     "acceptanceTest": "npx mocha --spec acceptanceTest/testEzWhAPI.js --reporter mochawesome --timeout 10000 --exit",
     "TRTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-TestResult.js --reporter mochawesome --timeout 10000 --exit",
     "TDTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-TestDescriptor.js --reporter mochawesome --timeout 10000 --exit",
+    "ROTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-RestockOrder.js --reporter mochawesome --timeout 10000 --exit",
+    "UserTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-User.js --reporter mochawesome --timeout 10000 --exit",
+    "ItemTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-Item.js --reporter mochawesome --timeout 10000 --exit",
+    "SKUTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-SKUs.js --reporter mochawesome --timeout 10000 --exit",
     "totalcoverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha test --timeout 10000 --exit"
   },
   "name": "server",
