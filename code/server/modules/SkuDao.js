@@ -54,7 +54,9 @@ exports.store_SKU= (sku) => {
                 db.run(sql, params, (err)=>{
                     if(err){
                         reject(err);
-                        return}
+                        return
+                    }
+                console.log("Stored SKU")
                 resolve("Stored SKU");
                 });
 
