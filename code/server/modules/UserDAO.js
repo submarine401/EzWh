@@ -241,17 +241,6 @@
       //     return;
       //   }
       // });
-      const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
-      db.get(sql_query1,[username, type], function(err,rows) {
-        if(err){
-          reject(err);
-          return;
-        }
-        else if(rows === undefined){
-          resolve(422);
-          return;
-        }
-      });
       const sql_query2 = 'DELETE FROM users WHERE username= ? AND type = ?';
       db.run(sql_query2, [username, type], function(err) {
         if(err){
