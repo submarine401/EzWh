@@ -184,8 +184,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                     }
                     else
                     {
-                      console.log("ciao\n");
-                      console.log(rows)
                         if(rows === undefined){
                             resolve(0);
                             return;
@@ -220,8 +218,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
 exports.get_rejected_skuitems_of_restockOrder = (rfids)=>{
     return new Promise((resolve,rejecte)=>{
-        //console.log(rfids.rfid)
-        //console.log("///")
+    
         const sql = "SELECT result FROM testresults WHERE RFid = ?";
         db.all(sql,[rfids.rfid], (err,rows)=>{
             if(err){

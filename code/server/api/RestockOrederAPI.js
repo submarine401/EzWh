@@ -273,7 +273,7 @@ router.post('/api/restockOrder',async (req,res)=>{
           
           skuid_rfids.forEach(async(skurfid)=>{
           let result_rejected_items = await restockOrderservice.getRejectedSkuItemsOfRestockOrder(skurfid);
-          //console.log(result_rejected_items)
+        
           if(result_rejected_items !== 0)
             rejected.push(skurfid);
             console.log(rejected)

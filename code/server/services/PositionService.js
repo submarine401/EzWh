@@ -41,8 +41,6 @@ class PositionService{
 
         const positions = await this.get_all_position();
 
-        // console.log(positions);
-        // console.log(id);
 
         const pos = positions.find(p => p.positionID === id);
 

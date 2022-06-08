@@ -117,8 +117,6 @@ class SkuService{
 
             const newPos = positions.find(pos => pos.positionID === positionID);
 
-            console.log(newPos);
-
             if(newPos === undefined){
                 console.log('no matching pos');
                 throw 'not found';
@@ -126,7 +124,6 @@ class SkuService{
 
             await sku.add_modify_SKU_position(newPos);
 
-            console.log(sku);
 
         }  catch(err) {
           throw(err);
