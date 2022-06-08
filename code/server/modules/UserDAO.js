@@ -69,7 +69,6 @@
           resolve(404);
           return;
         }
-        console.log(rows[0]["password"])
         //check if password matches with the encrypted password
         if(decryptPassword(password,rows[0]["password"]) || password === rows[0]["password"]){
           //extract user infos from DB

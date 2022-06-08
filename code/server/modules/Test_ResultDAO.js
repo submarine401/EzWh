@@ -84,7 +84,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                           reject(err); 
                           return;
                           }else if(rows.length===0){
-                              console.log("aaaaaaaaaaaaaaaaaaaadkjanadbadbyvjhvhjvgtu")
                               resolve(404);
                               return;
                           }else{

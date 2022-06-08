@@ -57,9 +57,6 @@ function getRestockOrderId(expectedHTTPStatus, id,RSO) {
                             r.should.have.status(expectedHTTPStatus);
                             r.body[0]["id"].should.equal(id);
                             r.body[0]['issueate'].should.equal(RSO.issueDate);
-                                // console.log( a );
-                                // console.log("_+_+_+_")
-                                // console.log( b )
                             b.should.equal(a);
                             r.body[0]["supplierId"].should.equal(RSO.supplierId);
                             r.body[0]["skuItems"].should.equal("");

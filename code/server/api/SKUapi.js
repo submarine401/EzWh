@@ -177,8 +177,7 @@ router.delete('/api/skus/:id', (req, res)=>{
     try{     
   
       const id = Number(req.params.id);
-      console.log('sku api');
-      console.log(id);
+  
       if( id >= 0 && 
           id == id && //check for NaN
           typeof id === 'number') {

@@ -61,7 +61,6 @@ describe('POST methods', ()=>{
       "password" : "helloeveryone",
       "type" : "deliveryEmployee"
     });
-    console.log(res);
     expect(res).toBe(200);
   });
   
