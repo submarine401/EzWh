@@ -25,18 +25,10 @@
     "mochawesome-report-generator": "^6.2.0"
   },
   "scripts": {
-    "apiTest": "./node_modules/.bin/mocha test --timeout 10000 --exit",
+    "apiTest": "./node_modules/.bin/mocha test --timeout 30000 --exit",
     "test": "node_modules/.bin/jest --coverage",
     "acceptanceTest": "npx mocha --spec acceptanceTest/testEzWhAPI.js --reporter mochawesome --timeout 50000 --exit",
-    "TRTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-TestResult.js --reporter mochawesome --timeout 10000 --exit",
-    "TDTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-TestDescriptor.js --reporter mochawesome --timeout 10000 --exit",
-    "ROTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-RestockOrder.js --reporter mochawesome --timeout 10000 --exit",
-    "UserTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-User.js --reporter mochawesome --timeout 10000 --exit",
-    "ItemTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-Item.js --reporter mochawesome --timeout 10000 --exit",
-    "SKUTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-SKUs.js --reporter mochawesome --timeout 10000 --exit",
-    "IOTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-InternalOrder.js --reporter mochawesome --timeout 10000 --exit",
-    "itemTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-Item.js --reporter mochawesome --timeout 10000 --exit",
-    "totalcoverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha test --timeout 40000 --exit"
+    "totalcoverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha test --timeout 30000 --exit"
   },
   "name": "server",
   "description": "- Open a terminal\r - Open the code/server folder\r - Input ```npm install```\r - Input ```node server.js```\r - This message will be shown: Server listening at http://localhost:3001\r - Do not close the terminal window, otherwise the server will be shut down",
