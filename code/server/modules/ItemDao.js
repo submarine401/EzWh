@@ -20,8 +20,8 @@ exports.create_item_table = function() {
 exports.insert_into_item_table = (i)=>{
     return new Promise ((resolve,reject)=>{
         if (i !== undefined){
-                const sql = 'INSERT INTO item (description,price,skuid,supplierid) VALUES(?,?,?,?)';
-                db.run(sql,[i.description,i.price,i.SKUId,i.supplierId], (err)=>{
+                const sql = 'INSERT INTO item (id,description,price,skuid,supplierid) VALUES(?,?,?,?,?)';
+                db.run(sql,[i.id,i.description,i.price,i.SKUId,i.supplierId], (err)=>{
                     if(err)
                     {
                       reject(err)
@@ -104,18 +104,18 @@ exports.get_item_by_id = (id)=>{
                     else{
 
                     
-                    const internalorders = rows.map((i)=>(
+                    const items = rows.map((i)=>(
                     {
                         id : i.id,
                         description : i.description,
                         price : i.price,
-                        skuid : i.skuid,
-                        supplierid : i.supplierid
+                        SKUId : i.skuid,
+                        supplierId : i.supplierid
                     }));
 
                  
-                    if (internalorders.length > 0)
-                        resolve(internalorders);
+                    if (items.length > 0)
+                        resolve(items[0]);
                         else 
                         resolve(-1);
 
