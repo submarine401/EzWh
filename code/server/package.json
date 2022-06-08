@@ -27,7 +27,7 @@
   "scripts": {
     "apiTest": "mocha test --timeout 30000 --exit",
     "test": "node_modules/.bin/jest --coverage",
-    "acceptanceTest": "npx mocha --spec acceptanceTest/testEzWhAPI.js --reporter mochawesome --timeout 30000 --exit",
+    "acceptanceTest": "npx mocha --spec acceptanceTest/testEzWhAPI.js --reporter mochawesome --timeout 100000 --exit",
     "TRTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-TestResult.js --reporter mochawesome --timeout 10000 --exit",
     "TDTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-TestDescriptor.js --reporter mochawesome --timeout 10000 --exit",
     "ROTest": "npx mocha --spec acceptanceTest/crud/test-CRUD-RestockOrder.js --reporter mochawesome --timeout 10000 --exit",
