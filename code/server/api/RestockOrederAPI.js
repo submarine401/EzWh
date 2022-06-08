@@ -111,7 +111,7 @@ router.post('/api/restockOrder',async (req,res)=>{
         
         const id = req.params.id
         
-     //   const myresult = await restockOrderservice.getRestockOrderById(id);
+       const myresult = await restockOrderservice.getRestockOrderById(id);
         
         
         if(myresult ===0)
@@ -134,6 +134,8 @@ router.post('/api/restockOrder',async (req,res)=>{
       }
     catch(err)
     { 
+        console.log('api err log');
+        console.log(err);
         return res.status(500).json({error : err});;
     }
   });
