@@ -56,7 +56,6 @@ exports.store_SKU= (sku) => {
                         reject(err);
                         return
                     }
-                console.log("Stored SKU")
                 resolve("Stored SKU");
                 });
 
