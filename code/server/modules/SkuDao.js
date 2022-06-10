@@ -54,7 +54,8 @@ exports.store_SKU= (sku) => {
                 db.run(sql, params, (err)=>{
                     if(err){
                         reject(err);
-                        return}
+                        return
+                    }
                 resolve("Stored SKU");
                 });
 
@@ -116,7 +117,7 @@ exports.create_sku_table = () => {
     return new Promise((resolve, reject) => {
 
         // position id is TEXT because it is too big for an integer
-        const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, weight REAL, volume REAL, notes TEXT, price REAL, availableQuantity INTEGER, position TEXT);"; 
+        const sql_query = "CREATE TABLE IF NOT EXISTS sku (id INTEGER PRIMARY KEY, description TEXT, weight REAL, volume REAL, notes TEXT, price REAL, availableQuantity INTEGER, position TEXT);"; 
         db.run(sql_query, function (err) {
             if (err) {
                 reject(err);

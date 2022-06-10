@@ -49,7 +49,6 @@ describe("test return order", () => {
             prod = []
             RO.products.map((x)=>{prod.push(JSON.stringify(x))})
             f= JSON.stringify(prod)
-            console.log(res)
             expect(res[0]).toEqual({
                     id : i,
                     returnDate : RO.returnDate ,

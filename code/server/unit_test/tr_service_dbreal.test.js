@@ -34,10 +34,8 @@ describe("Test Result", () => {
 
     async function testTestResult(rfid, id) {
         test('get Test Result', async () => {   
-            console.log(rfid + id)
-                 
+
             let res = await TestResultService.getTestResult(rfid, id);
-            console.log(res)
             expect(res[0]).toEqual({
                 id: id,
                 idTestDescriptor:1,

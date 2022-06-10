@@ -20,6 +20,11 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.insert_return_order_table = (ro)=>
     {
         return new Promise ((resolve,reject)=>{
+            if(ro.returnDate === null || ro.products === null || ro.restockOrderId === null){
+              resolve(422);
+              return;
+            }
+          
             if( ro !== undefined){
             let prods = [];
             ro.products.map((x)=>{
@@ -103,25 +108,29 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     
     exports.get_all_RO_by_id = (id)=>{
         return new Promise((resolve,reject)=>{
-            if(id >=1){
+            if(id >=0){
                         const sql = "SELECT * FROM returnorder where id = ? ";
-                    db.all(sql,[id],(err,rows)=>{
+                    db.get(sql,[id],(err,rows)=>{
                         if(err){
                             reject(err); 
                             return;
                             }
-                        const internalorders = rows.map((ro)=>(
+                        if(rows !== undefined)
                         {
-                            id : ro.id,
-                            returnDate : ro.date,
-                            products : JSON.parse(ro.products),
-                            restockOrderId : ro.restockorderid,
+                        const internalorders =
+                        {
+                            id : rows.id,
+                            returnDate : rows.date,
+                            products : JSON.parse(rows.products),
+                            restockOrderId : rows.restockorderid,
                           
-                        }));
-                        if(internalorders.length ===0)
-                            resolve(0)
+                        };
+                        resolve(internalorders);
+                    }
+                        
+                        
                         else
-                            resolve(internalorders);
+                        resolve(0)   
                     
                     });
 
