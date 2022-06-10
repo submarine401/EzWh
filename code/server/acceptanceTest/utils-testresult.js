@@ -27,7 +27,7 @@ function testPostNewTestResult(agent, mytr, expCode){
         it('FR 3.2.1 -> Add a quality test', function(done){
             let idtds = ids.getIdTestDescriptor();
             let testResult = newTestResult(mytr.rfid, idtds[mytr.idTestDescriptor], mytr.Date, mytr.Result);
-          
+            //console.log(testResult);
             agent.post('/api/skuitems/testResult')
             .send(testResult)
             .then(function(res){
@@ -95,6 +95,7 @@ function testGetTestResultByRFIDandID(agent, expCode, rfid){
             agent.get('/api/skuitems/'+rfid+'/testResults')
             .then(function(res){
                 let trid = res.body[0].id;
+                //console.log(res.body[0]);
                 agent.get('/api/skuitems/'+rfid+'/testResults/'+trid)
                 .then(function(res2){
                     res2.should.have.status(expCode);
