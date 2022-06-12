@@ -92,7 +92,6 @@ describe('GET all SKUItems', () =>{
       "DateOfStock"
     ]
     let res = await SKU_itemservice.available_SKUItem(SKUID);
-    console.log(res);
     res.forEach(elem =>{
       expect(Object.keys(elem)).toEqual(keys);
     });

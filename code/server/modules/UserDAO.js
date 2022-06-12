@@ -69,7 +69,6 @@
           resolve(404);
           return;
         }
-        console.log(rows[0]["password"])
         //check if password matches with the encrypted password
         if(decryptPassword(password,rows[0]["password"]) || password === rows[0]["password"]){
           //extract user infos from DB
@@ -96,7 +95,7 @@
   exports.create_user_table = function() {
       let db_ref= this;
       return new Promise((resolve, reject) => {
-          const sql_query = 'CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, username text, password text, name text, surname text, type text);';
+          const sql_query = 'CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY, username text, password text, name text, surname text, type text);';
           const sql_query2 = 'INSERT INTO users (id, username, password, name, surname, type) VALUES (?, ?, ?, ?, ?, ?)';
           db.serialize(function(){
             db.run(sql_query, [], function (err) {
@@ -226,21 +225,22 @@
    exports.deleteUser = async function(username,type){
     return new Promise((resolve,reject) =>{
       const users_array = ['qualityEmployee','customer','supplier','deliveryEmployee','supplier','clerk'];
-      if(users_array.includes(type) === false){
+      if(users_array.includes(type) === false ||
+        !username.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)){
         resolve(422);
         return;
       }
-      const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
-      db.all(sql_query1,[username, type], function(err,rows) {
-        if(err){
-          reject(err);
-          return;
-        }
-        else if(rows.length === 0){
-          resolve(422);
-          return;
-        }
-      });
+      // const sql_query1 = 'SELECT * FROM users WHERE username= ? AND type = ?';
+      // db.all(sql_query1,[username, type], function(err,rows) {
+      //   if(err){
+      //     reject(err);
+      //     return;
+      //   }
+      //   else if(rows.length === 0){
+      //     resolve(422);
+      //     return;
+      //   }
+      // });
       const sql_query2 = 'DELETE FROM users WHERE username= ? AND type = ?';
       db.run(sql_query2, [username, type], function(err) {
         if(err){

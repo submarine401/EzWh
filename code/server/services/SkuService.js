@@ -61,20 +61,20 @@ class SkuService{
     async delete_SKU(id){
         console.log('delete SKU ' + id);
 
-        const skuItems = await skuItemService.get_list_SKUItem();
-        if(skuItems.find(si => si.SKUid === id)){
+        //const skuItems = await skuItemService.get_list_SKUItem();
+        /* if(skuItems.find(si => si.SKUid === id)){
             console.log('sku has skuItems');
             throw 'cannot delete';
-        }
+        } */
 
-        const sku = await this.get_SKU(id);
+        //const sku = await this.get_SKU(id);
         
-        if(sku !== undefined){
+        //if(sku !== undefined){
             this.dao.delete_SKU(id);
-        } else {
-            console.log('sku not found');
-            throw 'not found';
-        }
+        //} else {
+            //console.log('sku not found');
+            //throw 'not found';
+        //}
     }
 
     async modify_SKU(newValues, id){
@@ -117,8 +117,6 @@ class SkuService{
 
             const newPos = positions.find(pos => pos.positionID === positionID);
 
-            console.log(newPos);
-
             if(newPos === undefined){
                 console.log('no matching pos');
                 throw 'not found';
@@ -126,7 +124,6 @@ class SkuService{
 
             await sku.add_modify_SKU_position(newPos);
 
-            console.log(sku);
 
         }  catch(err) {
           throw(err);

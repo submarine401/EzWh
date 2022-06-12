@@ -21,10 +21,16 @@ router.post('/api/sku', async (req,res)=>{
           typeof newSku.volume !== 'number' || 
           typeof newSku.notes !== 'string' || 
           typeof newSku.price !== 'number' || 
-          typeof newSku.availableQuantity !== 'number' || 
+          typeof newSku.availableQuantity !== 'number' ||
+          newSku.description.length == 0 ||
+          newSku.notes.length == 0 ||
           newSku.weight <= 0 || 
           newSku.volume <= 0 || 
-          newSku.price <= 0){
+          newSku.price <= 0 ||
+          newSku.availableQuantity < 0 ||
+          !Number.isInteger(newSku.weight) ||
+          !Number.isInteger(newSku.volume) ||
+          !Number.isInteger(newSku.availableQuantity)){
         return res.status(422).json({error : "Unprocessable Entity"});
       }
       skuService.create_SKU(newSku);
@@ -53,8 +59,10 @@ router.get('/api/skus/:id', (req, res)=>{
   
     try{     
   
-      const id = req.params.id
-      if( id > 0 && typeof Number(id) === 'number') {
+      const id = Number(req.params.id);
+      if( id > 0 && 
+          id == id && //check for NaN
+          typeof id === 'number') {
   
         skuService.get_SKU(id).then(ret => {
           if(ret === undefined){
@@ -88,8 +96,8 @@ router.put('/api/sku/:id', (req, res)=>{
     if(Object.keys(req.body).length === 0){
       return res.status(422).end();
     }
-
     const newValues = req.body;
+    const id = Number(req.params.id);
     if( typeof newValues.newDescription !== 'string' || 
         typeof newValues.newWeight !== 'number' || 
         typeof newValues.newVolume !== 'number' || 
@@ -99,7 +107,12 @@ router.put('/api/sku/:id', (req, res)=>{
         newValues.newWeight <= 0 || 
         newValues.newVolume <= 0 || 
         newValues.newPrice  <= 0 ||
-        typeof Number(req.params.id) !== 'number'){
+        newValues.newAvailableQuantity < 0 ||
+        !Number.isInteger(newValues.newWeight) ||
+        !Number.isInteger(newValues.newVolume) ||
+        !Number.isInteger(newValues.newAvailableQuantity) ||
+        id != id || //check for NaN
+        typeof id !== 'number'){
 
       return res.status(422).end();
     }
@@ -131,10 +144,12 @@ router.put('/api/sku/:id/position', (req, res)=>{
       return res.status(422).end();
     }
 
-    const skuID = req.params.id;
-    const positionID = req.body.position
+    const skuID = Number(req.params.id);
+    const positionID = req.body.position;
     if( typeof positionID !== 'string' ||
-        positionID.length !== 12){
+        positionID.length !== 12 ||
+        skuID != skuID || //check for NaN
+        typeof skuID !== 'number'){
 
       return res.status(422).end();
     }
@@ -161,8 +176,11 @@ router.delete('/api/skus/:id', (req, res)=>{
   
     try{     
   
-      const id = req.params.id
-      if( id > 0 && typeof Number(id) === 'number') {
+      const id = Number(req.params.id);
+  
+      if( id >= 0 && 
+          id == id && //check for NaN
+          typeof id === 'number') {
         skuService.delete_SKU(id)
         .then(() => {return res.status(204).end();})
         .catch(err => {
@@ -171,7 +189,8 @@ router.delete('/api/skus/:id', (req, res)=>{
             return res.status(422).json({error : "SKU IS ASSOCIATED TO SKU ITEMS"});
 
           } else if (err === 'not found') {
-            return res.status(422).json({error : "NOT FOUND"});
+            return res.status(204).end();
+            //return res.status(422).json({error : "NOT FOUND"});
 
           }else {
             return res.status(503).end();

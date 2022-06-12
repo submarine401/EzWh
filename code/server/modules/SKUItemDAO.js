@@ -16,7 +16,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         
         try {
           const sql_query = 'INSERT OR REPLACE INTO skuitem (SKUid, RFID, dateOfStock, availability) VALUES (?, ?, ?, ?)';
-          const params = [skuItem.idSKU, skuItem.RFID, dayjs(skuItem.DateOfStock).format('YYYY-MM-DD'), skuItem.availability];
+          const params = [skuItem.idSKU, skuItem.RFID, dayjs(skuItem.DateOfStock).format('YYYY/MM/DD HH:mm'), skuItem.availability];
           db.run(sql_query,params,function(err){
             if(err){
               reject(err);
@@ -88,8 +88,8 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
           const skuItem_array = rows.map(skuI =>({
             SKUId : skuI.SKUid,
             RFID : skuI.RFID,
-            dateOfStock : skuI.dateOfStock,
-            availability : skuI.availability
+            DateOfStock : skuI.dateOfStock,
+            Available : skuI.availability
           }));
           resolve(skuItem_array);
         });
@@ -169,7 +169,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
         const sql_query = 'UPDATE skuitem SET RFID = ?, dateOfStock = ?, availability = ? WHERE RFID = ?';
         const params = [
           newValues.newRFID,
-          dayjs(newValues.newDateOfStock).format('YYYY-MM-DD'),
+          dayjs(newValues.newDateOfStock).format('YYYY/MM/DD HH:mm'),
           newValues.newAvailable,
           RFID
         ];

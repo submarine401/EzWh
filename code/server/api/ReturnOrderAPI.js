@@ -21,16 +21,19 @@ router.post('/api/returnOrder',async (req,res)=>{
       }
   
       const nro = req.body;
-      if( nro === undefined || nro.returnDate === undefined || nro.products === undefined || nro.restockOrderId === undefined ){
+      if( nro === undefined || nro.returnDate === undefined || nro.products === undefined || nro.restockOrderId === undefined){
         return res.status(422).json({error : "Unprocessable Entityy"});
       }
     
       const results = await restockOrderservice.getRestockOrderById(nro.restockOrderId).then( (suc)=>{  if(suc) return returnOrderservice.setReturnOrder(nro); else return suc;},  (err)=>{ console.log(err); });
-      if(results !==0)
-      return res.status(201).json(results);
-      else
-      return res.status(404).json({error : "no restock order associated to restockOrderId"});
-  
+      if(results === 422){
+        return res.status(422).end();
+      }
+      if(results !==0){
+        return res.status(201).json(results);
+      }else{
+        return res.status(404).json({error : "no restock order associated to restockOrderId"});
+      }
     
     }
     catch(err)
@@ -121,7 +124,7 @@ router.post('/api/returnOrder',async (req,res)=>{
       {     
   
         const id = req.params.id
-        if( id > 0 )
+        if( id >= 0 )
         {
         const results = await returnOrderservice.getReturnOrderById(id);
         if(results !==0 )

@@ -6,7 +6,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.create_test_result_table = () => {
         return new Promise((resolve,reject)=>{
-        const sql = 'CREATE TABLE IF NOT EXISTS testresults (id integer PRIMARY KEY AUTOINCREMENT, rfid text, idTestDescriptor integer, Date text,Result boolean)';
+        const sql = 'CREATE TABLE IF NOT EXISTS testresults (id integer PRIMARY KEY , rfid text, idTestDescriptor integer, Date text,Result boolean)';
          db.run(sql, (err)=>{
             if(err){
                 reject(err);
@@ -20,7 +20,6 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
 
     exports.insert_into_test_result_table = (tr)  => {
     return new Promise ((resolve,reject)=>{ 
-        console.log(tr)
         const sql = 'INSERT INTO testresults (rfid, idTestDescriptor, Date, Result) VALUES(?,?,?,?)';
         db.run(sql,[tr.rfid, tr.idTestDescriptor , tr.Date, tr.Result], (err)=>{
             if(err)
@@ -77,10 +76,10 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
     exports.get_TR = (rfid, id) => { 
       return new Promise((resolve,reject)=>{
       
-        if(id===undefined){
+        if(id===undefined ){
                   const sql = "SELECT * FROM testresults WHERE rfid = ?  ";
                   db.all(sql,[rfid],(err,rows)=>{
-
+                 
                       if(err){
                           reject(err); 
                           return;
@@ -89,14 +88,13 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                               return;
                           }else{
                     
-                       const  testresults = rows.map((tr)=>(
-                      {
-                        id : tr.id,
-                        idTestDescriptor : tr.idTestDescriptor,
-                        Date : tr.Date,
-                        Result : tr.Result 
-                        
-                      })); 
+                        const  testresults = rows.map((tr)=>(
+                          {
+                            id : tr.id,
+                            idTestDescriptor : tr.idTestDescriptor,
+                            Date : tr.Date,
+                            Result : tr.Result 
+                          })); 
     
                       resolve(testresults);
                     }
@@ -106,19 +104,17 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                   db.all(sql,[rfid, id],(err,rows)=>{
                   
                       if(err ){
-                          reject(err); 
-                          return;
-                        }
+                        reject(err); 
+                        return;
+                      }
                       const testresults = rows.map((tr)=>(
                       {
                         id : tr.id,
                         idTestDescriptor : tr.idTestDescriptor,
                         Date : tr.Date,
                         Result : tr.Result 
-                        
                        }));
-                      resolve(testresults);
-                    
+                      resolve(testresults[0]);                    
                   });
  
               }

@@ -36,9 +36,8 @@ router.get('/api/testDescriptors/:id', async (req, res)=>{
     if( id > 0  && typeof Number(id) === 'number') {
       
       const t = await TestDescriptorService.getTestDescriptorsById(id);
-     console.log("aaaaa")
-     console.log(t)
-      if(t.length === 0){ 
+  
+      if(t.length === 0 || t === 404){ 
         return res.status(404).end();
       } else {
         return res.status(200).json(t);
@@ -105,7 +104,7 @@ router.put('/api/testDescriptor/:id',async (req,res)=>{
         const t = await TestDescriptorService.getTestDescriptorsById(id);
      
         const s = await sku_Service.get_SKU(td.newIdSKU);
-          if(t.length === 0 || s === undefined){
+          if(t.length === 0 || t===404 || s === undefined){
                 return res.status(404).json({error: "No test descriptor associated id or no sku associated to IDSku"});
           }else{
               const results = await TestDescriptorService.modifyTestDescriptor(td, id);

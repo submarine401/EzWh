@@ -13,7 +13,8 @@ let router = express.Router();
 router.post('/api/skuitem',async(req,res) => {
   try {
     const body = req.body;
-    if(!(body.hasOwnProperty('RFID') && body.hasOwnProperty('SKUId') && body.hasOwnProperty('DateOfStock'))){
+    if(!(body.hasOwnProperty('RFID') && body.hasOwnProperty('SKUId') && body.hasOwnProperty('DateOfStock'))
+  || body.RFID === null || body.SKUId === null || body.DateOfStock === null){
       return res.status(422).end();
     }
     
@@ -36,7 +37,8 @@ router.put('/api/skuitems/:rfid', async (req,res) => {
   try {
     const target_RFID = req.params.rfid;
     const body = req.body;
-    if(body.newRFID === undefined || body.newDateOfStock === undefined || body.newAvailable === undefined){
+    if(body.newRFID === undefined || body.newDateOfStock === undefined || body.newAvailable === undefined 
+    || body.newRFID === null || body.newDateOfStock === null || body.newAvailable === null ){
       return res.status(422).end('Failed body validation');
     }
     if (target_RFID === undefined || !(body.hasOwnProperty('newRFID') && body.hasOwnProperty('newAvailable') && body.hasOwnProperty('newDateOfStock'))){   //validation of RFID failed
@@ -73,7 +75,7 @@ router.get('/api/skuitems', async(req,res) =>{
 router.get('/api/skuitems/sku/:id', async(req,res) =>{
   try {
     const id = req.params.id;
-    if(id === undefined){
+    if(id === undefined || id === "null"){
       return res.status(422).end('Validation of ID failed');
     }
     const result = await SKU_item_service.available_SKUItem(id);
@@ -91,7 +93,7 @@ router.get('/api/skuitems/sku/:id', async(req,res) =>{
 
 router.get('/api/skuitems/:rfid', async(req,res) =>{
   try{
-    if(!req.params.rfid){
+    if(!req.params.rfid || req.params.rfid === "null"){
       return res.status(422).end();
     }
     const result = await SKU_item_service.search_by_RFID(req.params.rfid);

@@ -53,9 +53,13 @@ router.post('/api/restockOrder',async (req,res)=>{
         else
         {
           const results2  = await restockOrderservice.modifyRestockOrder(id,rso);
-          return res.status(200).json(results2);
+          if(results2 === 422){
+            return res.status(422).end();
+          }
+          else{
+            return res.status(200).json(results2);
+          }
         }
-        // return res.status(200).json(results2);
   
       }
     catch(err)
@@ -76,8 +80,11 @@ router.post('/api/restockOrder',async (req,res)=>{
         
         const id = req.params.id
         const myresult = await restockOrderservice.getRestockOrderById(id)
-        if(myresult ===0)
+        if(myresult ===0){
           return res.status(404).json({error : "no restock order associated to id"});
+        } else if(myresult===422){
+          return res.status(422).end();
+        }
         else
         {
           const results2  = await restockOrderservice.addTransportNoteToRestockOrder(id,rso);
@@ -104,24 +111,31 @@ router.post('/api/restockOrder',async (req,res)=>{
         
         const id = req.params.id
         
-        const myresult = await restockOrderservice.getRestockOrderById(id);
+       const myresult = await restockOrderservice.getRestockOrderById(id);
         
         
         if(myresult ===0)
           return res.status(404).json({error : "no restock order associated to id"});
         else
         {
-          const old_skuitem = myresult;
+          // const old_skuitem = myresult;
           
-          const results2  = await restockOrderservice.addSkuItemToRestockOrder(id,rso,old_skuitem);
+          // const results2  = await restockOrderservice.addSkuItemToRestockOrder(id,rso,old_skuitem);
+          
+          // return res.status(200).json(results2);
+
+           const results2  = await restockOrderservice.addSkuItemToRestockOrder(id,rso);
           
           return res.status(200).json(results2);
+
         }
         
   
       }
     catch(err)
     { 
+        console.log('api err log');
+        console.log(err);
         return res.status(500).json({error : err});;
     }
   });
@@ -259,7 +273,7 @@ router.post('/api/restockOrder',async (req,res)=>{
           
           skuid_rfids.forEach(async(skurfid)=>{
           let result_rejected_items = await restockOrderservice.getRejectedSkuItemsOfRestockOrder(skurfid);
-          //console.log(result_rejected_items)
+        
           if(result_rejected_items !== 0)
             rejected.push(skurfid);
             console.log(rejected)
