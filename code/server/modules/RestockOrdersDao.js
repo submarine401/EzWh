@@ -196,7 +196,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                             const resul = {
                                 id : rows.id,
                                 issueate : rows.issueate,
-                                products : rows.products,
+                                products : {...rows.products,id : rows.id},
                                 supplierId : rows.supplierId,
                                 skuItems : rows.skuItems,
                                 state : rows.state,
@@ -299,7 +299,7 @@ exports.get_all_restock_order = ()=>
                   {
                   orgObject ={ id : ro.id,
                         issueDate : ro.issueate,
-                        products : ro.products,
+                        products : {...ro.products, id : ro.id},
                         supplierId : ro.supplierId,
                         skuItems : ro.skuItems,
                         state : ro.state,
