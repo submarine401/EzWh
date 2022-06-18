@@ -17,8 +17,8 @@ class Itemservice {
         return result;
     }
 
-    deleteItem = async (iid) => {
-        const result = await this.dao.delete_item(iid);
+    deleteItem = async (iid,suplierid) => {
+        const result = await this.dao.delete_item(iid,suplierid);
         return result;
     }
     
@@ -34,6 +34,10 @@ class Itemservice {
 
     getItembyId = async (id) => {
         const result = await this.dao.get_item_by_id(id);
+        return result;
+    }
+    getItembyIdAndSupplierId = async (id,supplierid) => {
+        const result = await this.dao.getItembyIdAndSupplierId(id,supplierid);
         return result;
     }
 }
