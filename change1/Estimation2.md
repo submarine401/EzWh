@@ -17,10 +17,10 @@ Report effort figures from the timesheet, compute size from the source code.
 ## New development (release 1  -- march 22 to may 25)
 | Measure| Value |
 |---|---|
-|effort E (report here effort in person hours, for all activities in the period, from your timesheet)  ||
-|size S (report here size in LOC of all code written, excluding test cases)  ||
-|productivity P = S/E ||
-|defects before release D_before (number of defects found and fixed before may 25) ||
+|effort E (report here effort in person hours, for all activities in the period, from your timesheet)  | 630 |
+|size S (report here size in LOC of all code written, excluding test cases)  |4800|
+|productivity P = S/E |7.6|
+|defects before release D_before (number of defects found and fixed before may 25) |70|
 
 
 
@@ -28,13 +28,13 @@ Report effort figures from the timesheet, compute size from the source code.
 
 | Measure | Value|
 |---|---|
-| effort for non-quality ENQ (effort for all activities in release 2, or effort to fix defects found when running official acceptance tests) ||
-| effort for non quality, relative = ENQ / E ||
-|defects after release D (number of defects found running official acceptance tests and  fixed in release 2) ||
-| defects before release vs defects after release = D/D_before ||
-|DD = defect density = D/S||
-|D_fix = average effort to fix a defect = ENQ / D ||
-|overall productivity OP = S/(E + ENQ)||
+| effort for non-quality ENQ (effort for all activities in release 2, or effort to fix defects found when running official acceptance tests) |300|
+| effort for non quality, relative = ENQ / E |0.47|
+|defects after release D (number of defects found running official acceptance tests and  fixed in release 2) |20|
+| defects before release vs defects after release = D/D_before |0.29|
+|DD = defect density = D/S|0.004|
+|D_fix = average effort to fix a defect = ENQ / D |15|
+|overall productivity OP = S/(E + ENQ)|5.16|
 
 ## Second estimation
 
@@ -42,10 +42,10 @@ Now it is possible to repeat the estimate using values from the past. We can als
 
 |             | Estimate                        |             
 | ----------- | ------------------------------- |  
-| NC =  Estimated number of classes to be developed                 |                         |             
-|  A = Estimated average size per class, in LOC                     |                            | 
-| S_e = Estimated size of project, in LOC (= NC * A)                  |                                |
-| E = Estimated effort, in person hours (here use overall productivity OP)  |                                  |   
-| C = Estimated cost, in euro (here use 1 person hour cost = 30 euro)                   |         | 
-| D_e = Estimated number of defects = DD * S_e||
-| Estimated effort for non quality = D_e * D_fix ||
+| NC =  Estimated number of classes to be developed                 | 25 //70|             
+|  A = Estimated average size per class, in LOC                     | 200 //165 | 
+| S_e = Estimated size of project, in LOC (= NC * A)                  |5000 //11550|
+| E = Estimated effort, in person hours (here use overall productivity OP)  |  2580  //59598       |   
+| C = Estimated cost, in euro (here use 1 person hour cost = 30 euro)                   |    77400   //1787940  | 
+| D_e = Estimated number of defects = DD * S_e|20 //46|
+| Estimated effort for non quality = D_e * D_fix |300  //693|
