@@ -299,11 +299,7 @@ exports.get_all_restock_order = ()=>
                   {
                   orgObject ={ id : ro.id,
                         issueDate : ro.issueate,
-<<<<<<< HEAD
-                        products : ro.products,
-=======
                         products : {...ro.products, id : ro.id},
->>>>>>> milestone6
                         supplierId : ro.supplierId,
                         skuItems : ro.skuItems,
                         state : ro.state,
