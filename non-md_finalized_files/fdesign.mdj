@@ -3184,7 +3184,7 @@
 											"top": 2637,
 											"width": 433.27197265625,
 											"height": 13,
-											"text": "+Boolean modify_position(Position)",
+											"text": "+Boolean modify_position(Position, positionID)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3201,7 +3201,7 @@
 											"top": 2652,
 											"width": 433.27197265625,
 											"height": 13,
-											"text": "+Boolean modifyPositionID(newPositionID, positionID)",
+											"text": "+Boolean modifyPositionID(newPositionID, oldpositionID)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -6804,7 +6804,7 @@
 											"font": "Arial;13;1",
 											"left": 565,
 											"top": 391,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "Test_Result"
 										},
@@ -6839,7 +6839,7 @@
 									"font": "Arial;13;0",
 									"left": 560,
 									"top": 384,
-									"width": 438.796875,
+									"width": 462.6767578125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGATaUV4LKWGUg="
@@ -6876,7 +6876,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 414,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+int id",
 											"horizontalAlignment": 0
@@ -6893,7 +6893,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 429,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+string rfid",
 											"horizontalAlignment": 0
@@ -6910,7 +6910,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 444,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+int idTestDescriptor",
 											"horizontalAlignment": 0
@@ -6927,7 +6927,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 459,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+string date",
 											"horizontalAlignment": 0
@@ -6944,7 +6944,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 474,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+boolean result",
 											"horizontalAlignment": 0
@@ -6953,7 +6953,7 @@
 									"font": "Arial;13;0",
 									"left": 560,
 									"top": 409,
-									"width": 438.796875,
+									"width": 462.6767578125,
 									"height": 83
 								},
 								{
@@ -6978,7 +6978,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 497,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+void createTestResultTable()",
 											"horizontalAlignment": 0
@@ -6995,9 +6995,9 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 512,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
-											"text": "+Boolean modifyTestResult(id, rfid, Test_Result)",
+											"text": "+Boolean modifyTestResult(id, rfid, newIdTestDescriptor, newDate, newResult)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7012,7 +7012,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 527,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+String setTestResult(Test_Result)",
 											"horizontalAlignment": 0
@@ -7029,7 +7029,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 542,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+Test_Result getTestResult(rfid, id)",
 											"horizontalAlignment": 0
@@ -7046,7 +7046,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 557,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+void deleteTestResult(id, rfid)",
 											"horizontalAlignment": 0
@@ -7063,7 +7063,7 @@
 											"font": "Arial;13;0",
 											"left": 565,
 											"top": 572,
-											"width": 428.796875,
+											"width": 452.6767578125,
 											"height": 13,
 											"text": "+void deleteAllTestResult()",
 											"horizontalAlignment": 0
@@ -7072,7 +7072,7 @@
 									"font": "Arial;13;0",
 									"left": 560,
 									"top": 492,
-									"width": 438.796875,
+									"width": 462.6767578125,
 									"height": 98
 								},
 								{
@@ -7112,7 +7112,7 @@
 							"containerChangeable": true,
 							"left": 560,
 							"top": 384,
-							"width": 438.796875,
+							"width": 462.6767578125,
 							"height": 206,
 							"nameCompartment": {
 								"$ref": "AAAAAAGATaUV4LKV1GU="
@@ -15280,7 +15280,7 @@
 											"top": 581,
 											"width": 311.0859375,
 											"height": 13,
-											"text": "+array[USER] getSuppliers()",
+											"text": "+array[User] getSuppliers()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -17549,7 +17549,15 @@
 									"_parent": {
 										"$ref": "AAAAAAGATWusPY+TKrA="
 									},
-									"name": "Position",
+									"name": "Position"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGBi1gXMk8CYjg=",
+									"_parent": {
+										"$ref": "AAAAAAGATWusPY+TKrA="
+									},
+									"name": "positionID",
 									"type": ""
 								}
 							]
@@ -17568,8 +17576,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGATW1h4+aG2ZQ="
 									},
-									"name": "newPositionID",
-									"type": ""
+									"name": "newPositionID"
 								},
 								{
 									"_type": "UMLParameter",
@@ -17577,8 +17584,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGATW1h4+aG2ZQ="
 									},
-									"name": "positionID",
-									"type": ""
+									"name": "oldpositionID"
 								}
 							]
 						},
@@ -18191,8 +18197,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGA/E7zA2HtREQ="
 									},
-									"name": "id",
-									"type": ""
+									"name": "id"
 								},
 								{
 									"_type": "UMLParameter",
@@ -18200,8 +18205,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGA/E7zA2HtREQ="
 									},
-									"name": "rfid",
-									"type": ""
+									"name": "rfid"
 								},
 								{
 									"_type": "UMLParameter",
@@ -18209,7 +18213,24 @@
 									"_parent": {
 										"$ref": "AAAAAAGA/E7zA2HtREQ="
 									},
-									"name": "Test_Result",
+									"name": "newIdTestDescriptor"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGBi1nIVnXWXIM=",
+									"_parent": {
+										"$ref": "AAAAAAGA/E7zA2HtREQ="
+									},
+									"name": "newDate",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGBi1nIV3XXnWA=",
+									"_parent": {
+										"$ref": "AAAAAAGA/E7zA2HtREQ="
+									},
+									"name": "newResult",
 									"type": ""
 								}
 							]
@@ -19628,7 +19649,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGATo9dKXbQdU4="
 							},
-							"name": "array[USER] getSuppliers"
+							"name": "array[User] getSuppliers"
 						},
 						{
 							"_type": "UMLOperation",
