@@ -41,12 +41,38 @@ exports.insert_into_item_table = (i)=>{
     });
 }
 
+// exports.modify_item = (id,i)=>{
+
+//     return new Promise ((resolve,reject)=>{
+//         if(i !== undefined)
+//         {
+//             const sql = 'UPDATE item SET description = ? , price = ? WHERE id = ?';
+//             db.run(sql,[i.newDescription,i.newPrice,id], (err)=>{
+//                 if(err)
+//                 {
+//                     reject(err)
+//                     return;
+//                 }
+//                 else
+//                 {
+
+//                     resolve(`Item with id ${id} is updated`);
+//                 }
+//             });
+//         }
+//         else
+//         {
+//             resolve(-1)
+//         }
+//     });
+// }
+
 exports.modify_item = (id,i)=>{
 
     return new Promise ((resolve,reject)=>{
         if(i !== undefined)
         {
-            const sql = 'UPDATE item SET description = ? , price = ? WHERE id = ?';
+            const sql = 'UPDATE item SET description = ?  , price = ?  WHERE id = ?';
             db.run(sql,[i.newDescription,i.newPrice,id], (err)=>{
                 if(err)
                 {
@@ -66,6 +92,9 @@ exports.modify_item = (id,i)=>{
         }
     });
 }
+
+
+
 
 
 exports.get_all_items= ()=>{
@@ -119,20 +148,49 @@ exports.get_item_by_id = (id)=>{
                         else 
                         resolve(-1);
 
-                
-               
-                  
-              
                 }//end else 
                 });
             
         });
 }
 
-exports.delete_item = (iid)=>{
+exports.getItembyIdAndSupplierId = (id,supplierid)=>{
+    return new Promise((resolve,reject)=>{
+
+                    const sql = "SELECT * FROM item where id = ? AND supplierid = ?";
+                db.all(sql,[id,supplierid],(err,rows)=>{
+                    if(err){
+                        reject(err)
+                      return;
+                        }
+                    else{
+
+                    
+                    const items = rows.map((i)=>(
+                    {
+                        id : i.id,
+                        description : i.description,
+                        price : i.price,
+                        SKUId : i.skuid,
+                        supplierId : i.supplierid
+                    }));
+
+                 
+                    if (items.length > 0)
+                        resolve(items[0]);
+                        else 
+                        resolve(-1);
+
+                }//end else 
+                });
+            
+        });
+}
+
+exports.delete_item = (iid,suplierid)=>{
     return new Promise ((resolve,reject)=>{
-        const sql = 'DELETE FROM item WHERE id = ?';
-        db.run(sql,[iid],(err)=>{
+        const sql = 'DELETE FROM item WHERE id = ? and supplierid = ?';
+        db.run(sql,[iid,suplierid],(err)=>{
             if(err){
                 reject(err)
                 return;

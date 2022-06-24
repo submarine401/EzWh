@@ -6,8 +6,7 @@ Date: 04 May 2022
 
 | Change | Description |
 |---|------|
-| <b>Fix issue</b> | NEW API: ITEM<br>GET<br>/api/items/:id/:supplierId (NEW API, instead of /api/items/:id)<br>PUT<br>/api/item/:id/:supplierId (NEW API, instead of /api/item/:id)<br>DELETE<br> /api/items/:id/:supplierId  (NEW API, instead of /api/items/:id) |
-|<b>Change1</b>| <b>Api that changes</b> <br> <b>RESTOCK ORDER</b> <br> GET <br> /api/restockOrders <br>  /api/restockOrdersIssued <br> /api/restockOrders/:id <br> /api/restockOrders/:id/returnItems <br> POST <br> /api/restockOrder <br> PUT <br> /api/restockOrder/:id/skuItems <br> <b>RETURN ORDER</b> <br> GET <br> /api/returnOrders <br> /api/returnOrders/:id <br> POST <br> /api/returnOrder <br>  |
+| <b>Fix issue</b> | NEW API: ITEM<br>GET<br>/api/items/:id/:supplierId (NEW API, instead of /api/items/:id)<br>PUT<br>/api/item/:id/:supplierId (NEW API, instead of /api/item/:id)<br>DELETE<br> /api/items/:id/:supplierId  (NEW API, instead of /api/items/:id) ||<b>Change1</b>| <b>Api that changes</b> <br> <b>RESTOCK ORDER</b> <br> GET <br> /api/restockOrders <br>  /api/restockOrdersIssued <br> /api/restockOrders/:id <br> /api/restockOrders/:id/returnItems <br> POST <br> /api/restockOrder <br> PUT <br> /api/restockOrder/:id/skuItems <br> <b>RETURN ORDER</b> <br> GET <br> /api/returnOrders <br> /api/returnOrders/:id <br> POST <br> /api/returnOrder <br>  |
 | issue 2 | fixed comment, 'delete a position receiving its positionId |
 | issue 11 | fixed POST /api/item,  now receives both SKU.id and Item.id |
 

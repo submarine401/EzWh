@@ -96,7 +96,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                         {
                             id : ro.id,
                             returnDate : ro.date,
-                            products : JSON.parse(ro.products),
+                            products : {...JSON.parse(ro.products),id : ro.id},
                             restockOrderId : ro.restockorderid,
                           
                         }));
@@ -121,7 +121,7 @@ const db = new sqlite.Database('EZWHDB.db', (err) => {
                         {
                             id : rows.id,
                             returnDate : rows.date,
-                            products : JSON.parse(rows.products),
+                            products : {...JSON.parse(rows.products),id : rows.id},
                             restockOrderId : rows.restockorderid,
                           
                         };
